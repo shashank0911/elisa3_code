@@ -1,0 +1,6 @@
+{
+  "1": {"address": "3738", "optitrack_id": 1, "pos":[0.178, 1.510], "orien":0.0},
+  "2": {"address": "3747", "optitrack_id": 1, "pos":[0.322, -0.318], "orien":0.0},
+  "3": {"address": "3753", "optitrack_id": 1, "pos":[-0.397, -0.083], "orien":0.0},
+  "4": {"address": "3764", "optitrack_id": 1, "pos":[-0.677, 1.353], "orien":0.0}
+}
