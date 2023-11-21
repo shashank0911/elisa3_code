@@ -26,9 +26,9 @@ T = 300
 
 offs = 10
 
-# f = './data/saved_data_t10_RUN_test.p'
+f = './data/saved_data_t10_RUN_test.p'
 # OWA_noreset_low_f_mr
-f = 'controller_py/src/data/data_ch6/saved_data_t0_RUN_test_OWA_noreset_low_mr.p'
+# f = 'controller_py/src/data/data_ch6/saved_data_t0_RUN_test_OWA_noreset_low_mr.p'
 # f = 'controller_py/src/data/data_ch7/etc_4_HC_circle_video.p'
 
 

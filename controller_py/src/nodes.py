@@ -10,6 +10,7 @@ import copy
 import pickle
 import math
 import typing
+import time
 
 from configuration import *
 from Kalman import *
@@ -90,7 +91,8 @@ class Camera:
         self.tag = tag   
         self.timer = 0.0
         self.listener_camera = rospy.Subscriber('Bebop{}/ground_pose'.format(self.tag + 1), Pose2D, self.listen_optitrack_callback)
-        self.listener_camera_timer = rospy.Subscriber('Bebop{}/pose'.format(self.tag + 1), Pose, self.listen_optitrack_timer_callback)
+        self.listener_camera_timer = rospy.Subscriber('Bebop{}/pose'.format(self.tag + 1), PoseStamped, self.listen_optitrack_timer_callback)
+        # print("Bebop ", tag+1, " info: ", self.listener_camera)
         
               
     # functions for subscribe callback    
@@ -98,6 +100,9 @@ class Camera:
         self.cam_x = optiMsg.x
         self.cam_y = optiMsg.y
         self.cam_phi = optiMsg.theta
+        # print("Tag = ",self.tag+1, " Cam X: ", self.cam_x)
+        # print("Tag = ",self.tag+1, " Cam Y: ", self.cam_y)
+        # print("Tag = ",self.tag+1, " Cam P: ", self.cam_phi)
         
     def listen_optitrack_timer_callback(self, optiMsg):
         self.timer = optiMsg.header.stamp.nsecs
@@ -388,6 +393,9 @@ class Node:
         self.cam_x = copy.deepcopy(Camera_marker.measurement_list[idx * 3 + 2])
         self.cam_y = copy.deepcopy(Camera_marker.measurement_list[idx * 3 + 4])
         self.cam_phi = self.odom_phi
+        # print("Tag = ",self.tag, " Cam X: ", self.cam_x)
+        # print("Tag = ",self.tag, " Cam Y: ", self.cam_y)
+        # print("Tag = ",self.tag, " Cam P: ", self.cam_phi)
         
         if(Camera_marker.number != Camera_marker.current_number):
             if(MIN_dist > 0.06):
@@ -659,13 +667,19 @@ class Node:
         
         # update the timer
         self.t += 1
+
+        start_time = time.time()
         
-        print(self.tag, rospy.get_time())
+        print("loop fn starting", self.tag, rospy.get_time())
+
+        end_time = time.time()
+        exec_time = end_time - start_time
+        rospy.loginfo(f"Loop {i + 1} Execution Time: {exec_time} seconds")
         
         # 1. take measurement from odom and cam odom_measurement and cam_measurement via sub
         [odom_measurement, cam_measurement, accel_measurement] = self.measurement_update(cameras, camera_maker)
         
-        print(self.tag, rospy.get_time())
+        print("msmt update", self.tag, rospy.get_time())
         
         # 2. estimated the position
         self.estimation = self.states_transform(self.estimation, self.input_v, self.input_omega)
@@ -673,7 +687,7 @@ class Node:
         # self.measurement_fusion(odom_measurement, accel_measurement, cam_measurement)
         self.measurement_fusion_OWA(odom_measurement, accel_measurement, cam_measurement)
         
-        print(self.tag, rospy.get_time())
+        print("msmt fusion", self.tag, rospy.get_time())
         
         disX = self.estimation[0] - self.estimation_prev[0]
         disY = self.estimation[0] - self.estimation_prev[1]
@@ -700,6 +714,8 @@ class Node:
         self.input_omega = omega
         
         # execution
+
+        print("Moving to compute move")
         
         self.compute_move(pol = np.array([step, omega]))
         

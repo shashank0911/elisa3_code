@@ -9,6 +9,7 @@ from std_msgs.msg import String
 # import string
 
 if __name__ == "__main__":
+    # Load data of robots 
     with open('mapper.json') as json_file:
         mapper = json.load(json_file)
     active_robots = list(mapper.keys())
@@ -43,13 +44,13 @@ if __name__ == "__main__":
     print("start reset")
     while(len(robots.camera_makers.measurement_list) == 0):
         rospy.sleep(0.05)
-    # print("awake from sleep")
+    print("awake from sleep")
     
     # Move Robots
     last_saved_time = 0
     step_size = 1.0
     theta = 0.0
-    for t in range(last_saved_time, 110):
+    for t in range(last_saved_time, 50):
         print('\n')
         print("t: ", t)
         print('\n')

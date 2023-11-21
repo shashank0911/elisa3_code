@@ -22,12 +22,12 @@ title_size = 16
 ticks_size = 12
 legend_size = 12
 
-robot_N = 8
+robot_N = 4
 T = 110
 
 offs = 0
 
-f = './data/saved_data_t10_RUN_test.p'
+f = './data/saved_data_t10_RUN_test_shash_2.p'
 
 # f = './data/data_ch7/saved_data_t0_RUN_test_OWA_noreset_low_mr.p'
 
@@ -46,8 +46,10 @@ if __name__ == "__main__":
         elif P == 2:
             b = pickle.load(fp, encoding='iso-8859-1')
     # print(b)
-    # print(b[0]['0']['full_camera'])
-    # camera_list = []
+    # print(f"Index {0}: {b[0]}")
+    # print(b[0].keys())
+    print(b[0]['2']['full_camera'])
+    camera_list = []
     
 
     plt.figure(figsize = (figsize_x, figsize_y), dpi = dpi_number)
