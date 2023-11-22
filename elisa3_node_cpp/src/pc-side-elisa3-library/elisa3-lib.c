@@ -1,6 +1,6 @@
 
 #include "elisa3-lib.h"
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     #include "windows.h"
 #endif
 
@@ -79,10 +79,6 @@
 int robotAddress[100];
 char leftSpeed[100];
 char rightSpeed[100];
-
-signed int xPos[100];
-signed int yPos[100];
-
 char redLed[100], greenLed[100], blueLed[100];
 unsigned int proxValue[100][8];
 unsigned int proxAmbientValue[100][8];
@@ -103,7 +99,7 @@ unsigned char sleepEnabledFlag[100];
 // Communication
 char RX_buffer[64]={0};         // Last packet received from base station
 char TX_buffer[64]={0};         // Next packet to send to base station
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
 DWORD commThreadId;
 HANDLE commThread;
 HANDLE mutexTx;
@@ -124,10 +120,9 @@ unsigned char stopTransmissionFlag = 0;
 unsigned int currNumRobots = 0;
 unsigned int currPacketId = 0;
 unsigned char usbCommOpenedFlag = 0;
-unsigned char payloadId = 0; // This is needed to differentiate the content of all packets sent to the robots, otherwise in case the payload is the same the packet isn't received by the robot.
 
 // functions declaration
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
 DWORD WINAPI CommThread( LPVOID lpParameter);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -173,7 +168,7 @@ void startCommunication(int *robotAddr, int numRobots) {
     openCommunication();
     TX_buffer[0]=0x27;
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     commThread = CreateThread(NULL, 0, CommThread, NULL, 0, &commThreadId);
     mutexTx = CreateMutex(NULL, FALSE, NULL);
     mutexRx = CreateMutex(NULL, FALSE, NULL);
@@ -204,7 +199,7 @@ void startCommunication(int *robotAddr, int numRobots) {
 void stopCommunication() {
     closeCommunication();
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     TerminateThread(commThread, 0);
     CloseHandle(commThread);
     CloseHandle(mutexTx);
@@ -224,7 +219,7 @@ void stopCommunication() {
 }
 
 void setMutexTx() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexTx, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -233,7 +228,7 @@ void setMutexTx() {
 }
 
 void freeMutexTx() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexTx);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -242,7 +237,7 @@ void freeMutexTx() {
 }
 
 void setMutexRx() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexRx, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -251,7 +246,7 @@ void setMutexRx() {
 }
 
 void freeMutexRx() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexRx);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -260,7 +255,7 @@ void freeMutexRx() {
 }
 
 void setMutexThread() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexThread, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -269,7 +264,7 @@ void setMutexThread() {
 }
 
 void freeMutexThread() {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexThread);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -331,57 +326,6 @@ void setRightSpeedForAll(char *value) {
     }
     freeMutexTx();
 }
-
-// SELF-MADE
-void setAllColors(int robotAddr, char red, char green, char blue) {
-    int id = getIdFromAddress(robotAddr);
-    unsigned char enableMut = checkConcurrency(id);
-    if(id>=0) {
-        if(enableMut) {
-            setMutexTx();
-        }
-        redLed[id] = red;
-        blueLed[id] = blue;
-        greenLed[id] = green;
-        if(enableMut) {
-            freeMutexTx();
-        }
-    }
-}
-
-void setXpos(int robotAddr, int value) {
-    int id = getIdFromAddress(robotAddr);
-    unsigned char enableMut = checkConcurrency(id);
-    if(id>=0) {
-        if(enableMut) {
-            setMutexTx();
-        }
-        xPos[id] = value;
-
-        if(enableMut) {
-            freeMutexTx();
-        }
-    }
-}
-
-void setYpos(int robotAddr, int value) {
-    int id = getIdFromAddress(robotAddr);
-    unsigned char enableMut = checkConcurrency(id);
-    if(id>=0) {
-        if(enableMut) {
-            setMutexTx();
-        }
-        yPos[id] = value;
-        if(enableMut) {
-            freeMutexTx();
-        }
-    }
-}
-
-// END SELF-MADE
-
-
-
 
 void setRed(int robotAddr, unsigned char value) {
     int id = getIdFromAddress(robotAddr);
@@ -722,9 +666,9 @@ void setRobotAddresses(int *robotAddr, int numRobots) {
     }
     freeMutexTx();
     for(i=0; i<numRobots; i+=4) {   // wait for correct data (data from current robots and not previous ones) received from all the robots
-        waitForUpdate(robotAddress[i], 100000);
+        waitForUpdate(i, 100000);
     }
-    waitForUpdate(robotAddress[numRobots-1], 100000); // if numRobots is a multiple of 8 then this call is useless...don't care
+    waitForUpdate(numRobots-1, 100000); // if numRobots is a multiple of 8 then this call is useless...don't care
     currNumRobots = numRobots;
 }
 
@@ -872,7 +816,7 @@ void getAllProximityFromAll(unsigned int proxArr[][8]) {
             proxArr[i][j] = proxValue[i][j];
         }
     }
-    freeMutexRx();    
+    freeMutexRx();
 }
 
 void getAllProximityAmbientFromAll(unsigned int proxArr[][8]) {
@@ -1421,7 +1365,7 @@ unsigned char sendMessageToRobot(int robotAddr, char red, char green, char blue,
 }
 
 unsigned char waitForUpdate(int robotAddr, unsigned long us) {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     SYSTEMTIME startTime;
     FILETIME startTimeF;
     ULONGLONG startTime64;
@@ -1442,7 +1386,7 @@ unsigned char waitForUpdate(int robotAddr, unsigned long us) {
     resetMessageIsSentFlag(robotAddr);
 
     while(messageIsSent(robotAddr)==0) {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
         GetSystemTime(&exitTime);
         SystemTimeToFileTime(&exitTime, &exitTimeF);
         exitTime64 = (((ULONGLONG) exitTimeF.dwHighDateTime) << 32) + exitTimeF.dwLowDateTime;
@@ -1466,14 +1410,12 @@ void transferData() {
 
     int err=0;
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexTx, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
     pthread_mutex_lock(&mutexTx);
 #endif
-
-    //printf("addresses: %d, %d, %d, %d\r\n", robotAddress[currPacketId*4+0], robotAddress[currPacketId*4+1], robotAddress[currPacketId*4+2], robotAddress[currPacketId*4+3]);
 
     // first robot
     if(sleepEnabledFlag[0] == 1) {
@@ -1485,7 +1427,6 @@ void transferData() {
         TX_buffer[(0*ROBOT_PACKET_SIZE)+6] = 0x00;                          // speed left (in percentage)
         TX_buffer[(0*ROBOT_PACKET_SIZE)+7] = 0x00;                          // small green leds
         TX_buffer[(0*ROBOT_PACKET_SIZE)+8] = 0x00;
-        TX_buffer[(0*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(0*ROBOT_PACKET_SIZE)+14] = (robotAddress[currPacketId*4+0]>>8)&0xFF;     // address of the robot
         TX_buffer[(0*ROBOT_PACKET_SIZE)+15] = robotAddress[currPacketId*4+0]&0xFF;
     } else {
@@ -1497,7 +1438,6 @@ void transferData() {
         TX_buffer[(0*ROBOT_PACKET_SIZE)+6] = speed(leftSpeed[currPacketId*4+0]);                     // speed left
         TX_buffer[(0*ROBOT_PACKET_SIZE)+7] = smallLeds[currPacketId*4+0];                   // small green leds
         TX_buffer[(0*ROBOT_PACKET_SIZE)+8] = flagsTX[currPacketId*4+0][1];
-        TX_buffer[(0*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(0*ROBOT_PACKET_SIZE)+14] = (robotAddress[currPacketId*4+0]>>8)&0xFF;     // address of the robot
         TX_buffer[(0*ROBOT_PACKET_SIZE)+15] = robotAddress[currPacketId*4+0]&0xFF;
     }
@@ -1512,7 +1452,6 @@ void transferData() {
         TX_buffer[(1*ROBOT_PACKET_SIZE)+6] = 0x00;                          // speed left (in percentage)
         TX_buffer[(1*ROBOT_PACKET_SIZE)+7] = 0x00;                          // small green leds
         TX_buffer[(1*ROBOT_PACKET_SIZE)+8] = 0x00;
-        TX_buffer[(1*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(1*ROBOT_PACKET_SIZE)+14] = ((robotAddress[currPacketId*4+1])>>8)&0xFF; // address of the robot
         TX_buffer[(1*ROBOT_PACKET_SIZE)+15] = (robotAddress[currPacketId*4+1])&0xFF;
     } else {
@@ -1524,7 +1463,6 @@ void transferData() {
         TX_buffer[(1*ROBOT_PACKET_SIZE)+6] = speed(leftSpeed[currPacketId*4+1]);                     // speed left
         TX_buffer[(1*ROBOT_PACKET_SIZE)+7] = smallLeds[currPacketId*4+1];                   // small green leds
         TX_buffer[(1*ROBOT_PACKET_SIZE)+8] = flagsTX[currPacketId*4+1][1];
-        TX_buffer[(1*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(1*ROBOT_PACKET_SIZE)+14] = (robotAddress[currPacketId*4+1]>>8)&0xFF;     // address of the robot
         TX_buffer[(1*ROBOT_PACKET_SIZE)+15] = robotAddress[currPacketId*4+1]&0xFF;
     }
@@ -1539,7 +1477,6 @@ void transferData() {
         TX_buffer[(2*ROBOT_PACKET_SIZE)+6] = 0x00;                          // speed left (in percentage)
         TX_buffer[(2*ROBOT_PACKET_SIZE)+7] = 0x00;                          // small green leds
         TX_buffer[(2*ROBOT_PACKET_SIZE)+8] = 0x00;
-        TX_buffer[(2*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(2*ROBOT_PACKET_SIZE)+14] = ((robotAddress[currPacketId*4+2])>>8)&0xFF; // address of the robot
         TX_buffer[(2*ROBOT_PACKET_SIZE)+15] = (robotAddress[currPacketId*4+2])&0xFF;
     } else {
@@ -1551,7 +1488,6 @@ void transferData() {
         TX_buffer[(2*ROBOT_PACKET_SIZE)+6] = speed(leftSpeed[currPacketId*4+2]);                     // speed left
         TX_buffer[(2*ROBOT_PACKET_SIZE)+7] = smallLeds[currPacketId*4+2];                   // small green leds
         TX_buffer[(2*ROBOT_PACKET_SIZE)+8] = flagsTX[currPacketId*4+2][1];
-        TX_buffer[(2*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(2*ROBOT_PACKET_SIZE)+14] = (robotAddress[currPacketId*4+2]>>8)&0xFF;     // address of the robot
         TX_buffer[(2*ROBOT_PACKET_SIZE)+15] = robotAddress[currPacketId*4+2]&0xFF;
     }
@@ -1566,7 +1502,6 @@ void transferData() {
         TX_buffer[(3*ROBOT_PACKET_SIZE)+6] = 0x00;                          // speed left (in percentage)
         TX_buffer[(3*ROBOT_PACKET_SIZE)+7] = 0x00;                          // small green leds
         TX_buffer[(3*ROBOT_PACKET_SIZE)+8] = 0x00;
-        TX_buffer[(3*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(3*ROBOT_PACKET_SIZE)+14] = ((robotAddress[currPacketId*4+3])>>8)&0xFF; // address of the robot
         TX_buffer[(3*ROBOT_PACKET_SIZE)+15] = (robotAddress[currPacketId*4+3])&0xFF;
     } else {
@@ -1578,12 +1513,11 @@ void transferData() {
         TX_buffer[(3*ROBOT_PACKET_SIZE)+6] = speed(leftSpeed[currPacketId*4+3]);                     // speed left
         TX_buffer[(3*ROBOT_PACKET_SIZE)+7] = smallLeds[currPacketId*4+3];                   // small green leds
         TX_buffer[(3*ROBOT_PACKET_SIZE)+8] = flagsTX[currPacketId*4+3][1];
-        TX_buffer[(3*ROBOT_PACKET_SIZE)+9] = payloadId;
         TX_buffer[(3*ROBOT_PACKET_SIZE)+14] = (robotAddress[currPacketId*4+3]>>8)&0xFF;     // address of the robot
         TX_buffer[(3*ROBOT_PACKET_SIZE)+15] = robotAddress[currPacketId*4+3]&0xFF;
     }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexTx);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -1596,7 +1530,7 @@ void transferData() {
         printf("send error!\n");
     }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexTx, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -1638,7 +1572,7 @@ void transferData() {
 	    flagsTX[currPacketId*4+3][1] &= ~(1<<0);
 	}
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexTx);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -1655,7 +1589,7 @@ void transferData() {
         printf("receive error!\n");
     }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     WaitForSingleObject(mutexRx, INFINITE);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -1685,12 +1619,12 @@ void transferData() {
         lastMessageSentFlag[currPacketId*4+3]=2;
     }
 
-    // the base-station returns these "error" codes:
+    // the base-station returns this "error" codes:
     // - 0 => transmission succeed (no ack received though)
     // - 1 => ack received (should not be returned because if the ack is received, then the payload is read)
     // - 2 => transfer failed
     if((int)((unsigned char)RX_buffer[0])<=2) { // if something goes wrong skip the data
-        //printf("transfer failed to robot %d (addr=%d)\n", currPacketId*4+0, robotAddress[currPacketId*4+0]);
+        //printf("transfer failed to robot %d (addr=%d)\n", 0, currAddress[0]);
         numOfErrors[currPacketId*4+0]++;
     } else {
         if(lastMessageSentFlag[currPacketId*4+0]==2) {
@@ -1711,7 +1645,6 @@ void transferData() {
                 proxValue[currPacketId*4+0][6] = ((signed int)RX_buffer[12]<<8)|(unsigned char)RX_buffer[11];
                 proxValue[currPacketId*4+0][7] = ((signed int)RX_buffer[14]<<8)|(unsigned char)RX_buffer[13];
                 flagsRX[currPacketId*4+0] = (unsigned char)RX_buffer[15];
-                //printf("prox[%d][0] = %d (%d, %d)\r\n", currPacketId*4+0, proxValue[currPacketId*4+0][0], RX_buffer[2], RX_buffer[1]);
                 break;
 
             case 4:
@@ -1758,7 +1691,7 @@ void transferData() {
     }
 
     if((int)((unsigned char)RX_buffer[16])<=2) { // if something goes wrong skip the data
-        //printf("transfer failed to robot %d (addr=%d)\n", currPacketId*4+1, robotAddress[currPacketId*4+1]);
+        //printf("transfer failed to robot %d (addr=%d)\n", 1, currAddress[1]);
         numOfErrors[currPacketId*4+1]++;
     } else {
         if(lastMessageSentFlag[currPacketId*4+1]==2) {
@@ -1820,7 +1753,7 @@ void transferData() {
     }
 
     if((int)((unsigned char)RX_buffer[32])<=2) { // if something goes wrong skip the data
-        //printf("transfer failed to robot %d (addr=%d)\n", currPacketId*4+2, robotAddress[currPacketId*4+2]);
+        //printf("transfer failed to robot %d (addr=%d)\n", 2, currAddress[2]);
         numOfErrors[currPacketId*4+2]++;
     } else {
         if(lastMessageSentFlag[currPacketId*4+2]==2) {
@@ -1882,7 +1815,7 @@ void transferData() {
     }
 
     if((int)((unsigned char)RX_buffer[48])<=2) { // if something goes wrong skip the data
-        //printf("transfer failed to robot %d (addr=%d)\n", currPacketId*4+3, robotAddress[currPacketId*4+3]);
+        //printf("transfer failed to robot %d (addr=%d)\n", 3, currAddress[3]);
         numOfErrors[currPacketId*4+3]++;
     } else {
         if(lastMessageSentFlag[currPacketId*4+3]==2) {
@@ -1943,7 +1876,7 @@ void transferData() {
         }
     }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     ReleaseMutex(mutexRx);
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -1952,7 +1885,7 @@ void transferData() {
 
 }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
 DWORD WINAPI CommThread( LPVOID lpParameter) {
     int i = 0;
 
@@ -1984,16 +1917,9 @@ DWORD WINAPI CommThread( LPVOID lpParameter) {
 
         transferData();
 
-        if(payloadId == 255) {
-            payloadId = 0;
-        } else {
-            payloadId++;
-        }
-
         currPacketId++;
-        if(currPacketId*4 >= currNumRobots) {
+        if(currPacketId>=(currNumRobots/4)) {
             currPacketId = 0;
-            numOfPackets++; // num packets sent to each robot
         }
 
         while(1) {
@@ -2008,6 +1934,8 @@ DWORD WINAPI CommThread( LPVOID lpParameter) {
                 break;
             }
         }
+
+        numOfPackets++;
 
         if(((currTimeRF64-exitTime64)/10000 > 5000)) { // 5 seconsd
             GetSystemTime(&exitTime);
@@ -2045,18 +1973,10 @@ void *CommThread(void *arg) {
 
         transferData();
 
-        if(payloadId == 255) {
-            payloadId = 0;
-        } else {
-            payloadId++;
-        }
-
         currPacketId++;
-        if(currPacketId*4 >= currNumRobots) {
+        if(currPacketId>=(currNumRobots/4)) {
             currPacketId = 0;
-            numOfPackets++; // num packets sent to each robot
         }
-        //printf("curr packet id = %d\r\n", currPacketId);
 
         while(1) {
             gettimeofday(&currTimeRF, NULL);
@@ -2066,6 +1986,8 @@ void *CommThread(void *arg) {
                 break;
             }
         }
+
+        numOfPackets++;
 
         if(((currTimeRF.tv_sec * 1000000 + currTimeRF.tv_usec)-(exitTime.tv_sec * 1000000 + exitTime.tv_usec) > 5000000)) { // 5 seconds
             gettimeofday(&exitTime, NULL);
@@ -2082,5 +2004,6 @@ void *CommThread(void *arg) {
 
 }
 #endif
+
 
 

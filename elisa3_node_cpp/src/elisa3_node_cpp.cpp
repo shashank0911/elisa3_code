@@ -1,38 +1,23 @@
+
 #include <sstream>
 #include <math.h>
 #include <time.h>
 #include <sys/time.h>
-// #include "elisa3-lib.h"
+#include "elisa3-lib.h"
 #include <ros/ros.h>
-#include "pc-side-elisa3-library/elisa3-lib.h"
 #include <sensor_msgs/Range.h>
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/Imu.h>
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Twist.h>
-#include <std_msgs/Bool.h>
-#include <std_msgs/Float64MultiArray.h>
 #include <tf/transform_broadcaster.h>
-#include <tf2_ros/transform_broadcaster.h>
-#include <tf2_ros/transform_listener.h>
-
 #include <visualization_msgs/Marker.h>
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
-//#include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
 #include <sensor_msgs/LaserScan.h>
 
-
-// for the camera
-#include <geometry_msgs/Pose2D.h>
-
-
-// #include "main_part.h"
-
-#include <string>
-
-#define DEBUG_ROS_PARAMS 1
+#define DEBUG_ROS_PARAMS 0
 #define DEBUG_UPDATE_SENSORS_DATA 0
 #define DEBUG_ODOMETRY 0
 #define DEBUG_ACCELEROMETER 0
@@ -45,550 +30,610 @@
 #define PROXIMITY 2
 #define MOTOR_POSITION 3
 
-#define ACTUATORS_NUM 8
+#define ACTUATORS_NUM 4
 #define MOTORS 0
 #define GREEN_LEDS 1
-#define RED_LEDS 2
-#define BLUE_LEDS 3
-#define GREEN_LEDS_MOVE 4
-#define RED_LEDS_MOVE 5
-#define BLUE_LEDS_MOVE 6
-#define GREEN_LEDS_RESET 7
+#define RGB_LED 2
+#define IR_TX 3
 
 #define WHEEL_DISTANCE 0.041		// Distance between wheels in meters (axis length).
 #define ROBOT_RADIUS 0.025			// meters.
 
-#define NUMBER_OF_DISTANCE_SENSORS 8
-#define SENSOR_VALUE_DETECTION_THRESHOLD 50
-
-#define COLLISION_VLT 5
-
-bool trigger_motive = false;
-
+int robotAddress[1];
 bool enabledSensors[SENSORS_NUM];
-bool changedActuators_0[ACTUATORS_NUM];
-bool changedActuators_1[ACTUATORS_NUM];
-double speedLeft = 0;
-double speedRight = 0;
+bool changedActuators[ACTUATORS_NUM];
+int speedLeft = 0, speedRight = 0;
 unsigned char ledNum = 0, ledState = 0;
-std::string baseTag;
-std::string nodeName;
+std::string elisa3Name;
+struct timeval currentTime2, lastTime2;
+struct timeval currentTime3, lastTime3;
+
+signed int accData[3];
+unsigned int floorData[4];
+unsigned int proxData[8];
+signed int robTheta=0, robXPos=0, robYPos=0;
 
 ros::Publisher proxPublisher[8];
 sensor_msgs::Range proxMsg[8];
 ros::Publisher laserPublisher;
 sensor_msgs::LaserScan laserMsg;
-
-ros::Publisher odomPublisher[100];
-
-ros::Publisher accelPublisher[100];
-
+ros::Publisher odomPublisher;
+nav_msgs::Odometry odomMsg;
+ros::Publisher accelPublisher;
+sensor_msgs::Imu accelMsg;
 ros::Publisher floorPublisher;
 visualization_msgs::Marker floorMsg;
 
-std::map<int, ros::Subscriber> VelSubscribers;
-
-std::map<int, ros::Subscriber> GreenLedSubscribers;
-std::map<int, ros::Subscriber> RedLedSubscribers;
-std::map<int, ros::Subscriber> BlueLedSubscribers;
-ros::Subscriber AllLedSubscriber;
-
-std::map<int, ros::Subscriber> TargetSubscribers;
-std::map<int, ros::Subscriber> ResetSubscribers;
-ros::Subscriber AllResetSubscriber;
-
-// std::map<int, ros::Subscriber> OptiSubscribers;
-std::map<int, ros::Subscriber> AutoMotiveSubscribers;
-ros::Subscriber AllAutoMotiveSubscriber;
-
-
-
-
-
-ros::Subscriber AllOptiSubscriber;
-
-class Camera{
-    public:
-    double cam_x = 0.0, cam_y = 0.0, cam_phi = 0.0;
-    int tag = 0;
-};
-
-std::map<int, Camera> cameras_dict;
-
-// void Camera::updateSensorData(){
-    
-// }
-
-// void Camera::updateRosInfo(){
-
-// }
-
-
-
-
-
-class Robot{
-	public:
-	double speedLeft, speedRight;
-	int greenLed =0, greenLed_move=0, greenLed_reset=0;
-    int redLed =0, redLed_move=0;
-    int blueLed =0, blueLed_move=0;
-	int count, address;
-
-	int auto_move_after_trigger = false;
-
-    int tag;
-    int timer = 0;
-
-	bool changedActuators[ACTUATORS_NUM];
-
-	int robTheta, robXPos, robYPos;
-
-	double xPos, yPos, zPos, theta;
-    double xPosc, yPosc, zPosc;
-	double robXPosPrev, robYPosPrev, robThetaPrev, robDeltaX, robDeltaY, robDeltaTheta;
-	double deltaXCorr, deltaYCorr;
-	double xPosCorr, yPosCorr;
-	double robDistTraveled, robDistTraveledPrev, robDeltaDistTraveled;
-
-    double accx_raw_measure = 0, accx_raw_measure_prev = 0, accx_filtered_prev = 0, accx_filtered = 0;
-
-	int trigger_delay = 0;
-    signed int accData[3];
-	double x_target, y_target;
-
-	nav_msgs::Odometry odomMsg;
-    sensor_msgs::Imu accelMsg;
-
-    double time_prev = 0.0;
-
-    geometry_msgs::TransformStamped odomTrans;
-    geometry_msgs::TransformStamped odomTransInit;
-
-    // Obstacle Avoidance
-    unsigned int proxData[8];
-
-    void updateSensorData();
-	void updateRosInfo();
-
-
-    void IIR_filter();
-
-	bool reset = false;
-};
-
-std::map<int, Robot> robots_dict;
-
-
-void Robot::updateSensorData() {
-    robXPos = getOdomXpos(address);
-    robYPos = getOdomYpos(address);
-    robTheta = getOdomTheta(address);
-
-// could add a filter there
-
-    accData[0] = getAccX(address);
-    accData[1] = getAccY(address);
-    accData[2] = getAccZ(address);
-
-    accx_raw_measure = accData[0];
-    
-    // std::cout << "[" << nodeName << "] " << "accData[0]: " << accData[0] << std::endl;
-//    getAllProximity(address, proxData);
-}
-
-void Robot::updateRosInfo() {
-    // Expressed in meters.
-    xPos = robXPos/ 1000.0;
-    yPos = robYPos/ 1000.0;
-    // Expressed in radiant.
-    theta = robTheta * M_PI / 180;
-    
-
-    // Publish message over ROS
-    odomMsg.header.stamp = ros::Time::now();
-    std::stringstream ss;
-    ss << "elisa3_robot_" << tag;
-    odomMsg.header.frame_id = ss.str();
-    std::stringstream ss2;
-    ss2 << "elisa3_robot_" << tag <<"/base_link";
-    odomMsg.child_frame_id = ss2.str();
-    odomMsg.pose.pose.position.x = xPos;
-    odomMsg.pose.pose.position.y = yPos;
-    odomMsg.pose.pose.position.z = 0;
-    // Since all odometry is 6DOF we'll need a quaternion created from yaw.
-    geometry_msgs::Quaternion odomQuat = tf::createQuaternionMsgFromYaw(theta);
-    odomMsg.pose.pose.orientation = odomQuat;
-
-
-    odomPublisher[tag].publish(odomMsg);
-
-    
-    // broadcast odom over tf
-    odomTrans.header.stamp = ros::Time::now();
-    odomTrans.transform.translation.x = xPos;
-    odomTrans.transform.translation.y = yPos;
-    odomTrans.transform.translation.z = 0.0;
-
-    odomMsg.twist.twist.linear.x = xPosc;
-    odomMsg.twist.twist.linear.y = yPosc;
-
-
-    // Since all odometry is 6DOF we'll need a quaternion created from yaw.
-    geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(theta);
-    odomTrans.transform.rotation = odomQuat_trans;
-
-    // broadcast odomInit over tf
-    odomTransInit.header.stamp = ros::Time::now();
-
-
-    // accel info
-
-    // low-pass filter first
-    IIR_filter();
-
-    std::stringstream ss3;
-    ss3 << "elisa3_robot_" << "/base_link";
-    accelMsg.header.frame_id = ss3.str();
-    accelMsg.header.stamp = ros::Time::now();   
-
-    
-    // time_prev = ros::Time::now();     
-    accelMsg.linear_acceleration.x = (accx_filtered)/64.0*9.81; // 1 g = 64, then transforms in m/s^2.
-    accelMsg.linear_acceleration.y = (accData[1])/64.0*9.81;
-    accelMsg.linear_acceleration.z = (accData[2])/64.0*9.81;
-    accelMsg.linear_acceleration_covariance[0] = 0.01;
-    accelMsg.linear_acceleration_covariance[1] = 0.0;
-    accelMsg.linear_acceleration_covariance[2] = 0.0;
-    accelMsg.linear_acceleration_covariance[3] = 0.0;
-    accelMsg.linear_acceleration_covariance[4] = 0.01;
-    accelMsg.linear_acceleration_covariance[5] = 0.0;
-    accelMsg.linear_acceleration_covariance[6] = 0.0;
-    accelMsg.linear_acceleration_covariance[7] = 0.0;
-    accelMsg.linear_acceleration_covariance[8] = 0.01;
-
-    accelMsg.angular_velocity.x = (accData[0])/64.0*9.81;
-    accelMsg.angular_velocity.y = (accData[1])/64.0*9.81;
-    accelMsg.angular_velocity.z = 0;
-    accelMsg.angular_velocity_covariance[0] = 0.01;
-    accelMsg.angular_velocity_covariance[1] = 0.0;
-    accelMsg.angular_velocity_covariance[2] = 0.0;
-    accelMsg.angular_velocity_covariance[3] = 0.0;
-    accelMsg.angular_velocity_covariance[4] = 0.01;
-    accelMsg.angular_velocity_covariance[5] = 0.0;
-    accelMsg.angular_velocity_covariance[6] = 0.0;
-    accelMsg.angular_velocity_covariance[7] = 0.0;
-    accelMsg.angular_velocity_covariance[8] = 0.01;
-    geometry_msgs::Quaternion odomQuat1 = tf::createQuaternionMsgFromYaw(0);
-    accelMsg.orientation = odomQuat1;
-    accelMsg.orientation_covariance[0] = 0.01;
-    accelMsg.orientation_covariance[1] = 0.0;
-    accelMsg.orientation_covariance[2] = 0.0;
-    accelMsg.orientation_covariance[3] = 0.0;
-    accelMsg.orientation_covariance[4] = 0.01;
-    accelMsg.orientation_covariance[5] = 0.0;
-    accelMsg.orientation_covariance[6] = 0.0;
-    accelMsg.orientation_covariance[7] = 0.0;
-    accelMsg.orientation_covariance[8] = 0.01;
-    accelPublisher[tag].publish(accelMsg);
-}
-
-void Robot::IIR_filter(){
-    
-    // C2 * y(n) = (c1 * y(n-1) + x(n) + x(n-1))
-    int c1 = 15, c2 = 17;
-
-    accx_filtered = c1 * accx_filtered_prev + accx_raw_measure + accx_raw_measure_prev;
-    accx_filtered = accx_filtered / c2;
-
-    accx_filtered_prev = accx_filtered;
-    accx_raw_measure_prev = accx_raw_measure;
-
-}
-
-
-void updateSensorsData() {
-	std::map<int, Robot>::iterator it;
-
-	for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-	    robots_dict[it->first].updateSensorData();
-	}
-}
-
-void updateRosInfo() {
-	static tf2_ros::TransformBroadcaster br;
-
-    std::map<int, Robot>::iterator it;
-	for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-        robots_dict[it->first].updateRosInfo();
-
-        br.sendTransform(robots_dict[it->first].odomTrans);
-        br.sendTransform(robots_dict[it->first].odomTransInit);
-	}
-}
-
-
-int getIdFromAddress(int address) {
-    std::map<int, Robot>::iterator it;
-    for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-        if(robots_dict[it->first].address == address) {
-            return int(it->first);
-        }
-    }
-    return -1;
-}
-
-void handlerAllOpti(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-    int nr_robots = int(msg->data[0]);
-    int tag = 0;
-    for(int i = 0; i < nr_robots; ++i){
-        tag = i;
-        cameras_dict[tag].cam_x = double(msg->data[i*3 + 1]);
-        cameras_dict[tag].cam_y = double(msg->data[i*3 + 2]);;
-        cameras_dict[tag].cam_phi = double(msg->data[i*3 + 3]);;
-    }
-
-}
-
-void handlerAllReset(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-    int nr_robots = int(msg->data[0]);
-//    std::cout << "[" << nodeName << "] " << "nr robots resetting: " << nr_robots << std::endl;
-    int tag;
-
-    XmlRpc::XmlRpcValue::iterator i;
-    for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg->data[i*5+1]));
-
-        double type;
-        type = double(msg->data[i*5+2]);
-
-        robots_dict[tag].odomTransInit.header.stamp = ros::Time::now();
-        if (type == 0){
-            robots_dict[tag].odomTransInit.transform.translation.x = double(msg->data[i*5+3]);
-            robots_dict[tag].odomTransInit.transform.translation.y = double(msg->data[i*5+4]);
-
-            robots_dict[tag].accelMsg.angular_velocity.x = double(msg->data[i*5+3]);
-            robots_dict[tag].accelMsg.angular_velocity.y = double(msg->data[i*5+4]);
-
-            robots_dict[tag].odomTransInit.transform.translation.z = 0.0;
-            geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(double(msg->data[i*5+5]));
-            robots_dict[tag].odomTransInit.transform.rotation = odomQuat_trans;
-
-            robots_dict[tag].changedActuators[GREEN_LEDS_RESET] = true;
-            if (robots_dict[tag].greenLed_reset ==101) {
-                robots_dict[tag].greenLed_reset = 102;
-            } else {
-                robots_dict[tag].greenLed_reset = 101;
-            }
-            robots_dict[tag].reset = true;
-        }
-    }
-}
-
-void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-    int nr_robots = int(msg->data[0]);
-//    std::cout << "[" << nodeName << "] " << "nr robots: " << nr_robots << std::endl;
-    int tag;
-
-    XmlRpc::XmlRpcValue::iterator i;
-    for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg->data[i*5+1]));
-
-        // PER ROBOT HANDLING
-        int turn_type = int(msg->data[i*5+2]);
-        int trans_type = int(msg->data[i*5+4]);
-        if (turn_type==0){
-            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+100.0));
-            // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-            if (prop_msg >= 175) {
-                prop_msg = 175;
-            }
-            robots_dict[tag].redLed_move = prop_msg;
-        } else if (turn_type==1){
-            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+175.0));
-            // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-            if (prop_msg >= 250) {
-                prop_msg = 250;
-            } else if (prop_msg == 175){
-                prop_msg = 100;
-            }
-            robots_dict[tag].redLed_move = prop_msg;
-        } else {
-            robots_dict[tag].redLed_move = 100;
-        }
-
-        if (trans_type==0){
-            int prop_msg = int(double(msg->data[i*5+5])*25 + 100);
-            if (prop_msg >= 175){
-                prop_msg = 175;
-            }
-            robots_dict[tag].blueLed_move = prop_msg;
-        } else {
-            int prop_msg = int(double(msg->data[i*5+5])*25 + 175);
-            if (prop_msg >= 250){
-                prop_msg = 250;
-            } else if (prop_msg = 175){
-                prop_msg = 100;
-            }
-            robots_dict[tag].blueLed_move = prop_msg;
-        }
-
-        if (robots_dict[tag].greenLed_move ==103) {
-            robots_dict[tag].greenLed_move = 104;
-        } else {
-            robots_dict[tag].greenLed_move = 103;
-        }
-        robots_dict[tag].changedActuators[GREEN_LEDS_MOVE] = true;
-        robots_dict[tag].changedActuators[RED_LEDS_MOVE] = true;
-        robots_dict[tag].changedActuators[BLUE_LEDS_MOVE] = true;
-    }
-}
-
-void handlerAllLeds(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-    int nr_robots;
-    nr_robots = int(msg->data[0]);
-    int tag;
-
-    XmlRpc::XmlRpcValue::iterator i;
-    for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg->data[i*4+1]));
-        robots_dict[tag].changedActuators[GREEN_LEDS] = true;
-        robots_dict[tag].changedActuators[RED_LEDS] = true;
-        robots_dict[tag].changedActuators[BLUE_LEDS] = true;
-        robots_dict[tag].greenLed = int(msg->data[i*4+2]);
-        robots_dict[tag].redLed = int(msg->data[i*4+3]);
-        robots_dict[tag].blueLed = int(msg->data[i*4+4]);
-    }
-}
-
-bool * get_sensors_condition(unsigned int proxData[8]){
-    static bool sensors_condition[NUMBER_OF_DISTANCE_SENSORS] = {false};
-
-    for (int i=0; i < NUMBER_OF_DISTANCE_SENSORS; i++){
-        if(proxData[i] > SENSOR_VALUE_DETECTION_THRESHOLD){
-            sensors_condition[i] = true;
-        } else {
-            sensors_condition[i] = false;
-        }
-    }
-    return sensors_condition;
-}
+ros::Subscriber cmdVelSubscriber;
+
+double xPos, yPos, theta;
+double robXPosPrev, robYPosPrev, robThetaPrev, robDeltaX, robDeltaY, robDeltaTheta;
+double deltaXCorr, deltaYCorr;
+double xPosCorr, yPosCorr;
+double robDistTraveled, robDistTraveledPrev, robDeltaDistTraveled;
+ros::Time currentTime, lastTime, currentTimeMap, lastTimeMap;
 
 void updateActuators() {
     
     char buff[6];
 
-	std::map<int, Robot>::iterator it;
+    if(changedActuators[MOTORS]) {
+        changedActuators[MOTORS] = false;
+				setLeftSpeed(robotAddress[0], speedLeft);
+				setRightSpeed(robotAddress[0], speedRight);
+    }
+    
+    if(changedActuators[GREEN_LEDS]) {
+        changedActuators[GREEN_LEDS] = false;
+    }
 
-	for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-	    bool *is_sensor_active = get_sensors_condition(robots_dict[it->first].proxData);
+}
 
-        if(robots_dict[it->first].changedActuators[MOTORS]){
-            robots_dict[it->first].changedActuators[MOTORS] = false;
-            setLeftSpeed(robots_dict[it->first].address, robots_dict[it->first].speedLeft);
-            setRightSpeed(robots_dict[it->first].address, robots_dict[it->first].speedRight);
+void updateSensorsData() {
+
+		if(enabledSensors[ACCELEROMETER]) {
+				accData[0] = getAccX(robotAddress[0]);
+				accData[1] = getAccY(robotAddress[0]);
+				accData[2] = getAccZ(robotAddress[0]);
+				if(DEBUG_UPDATE_SENSORS_DATA)std::cout << "[" << elisa3Name << "] " << "acc: " << accData[0] << "," << accData[1] << "," << accData[2] << std::endl;
 		}
 
-        if(robots_dict[it->first].changedActuators[BLUE_LEDS] and
-        robots_dict[it->first].changedActuators[RED_LEDS] and
-        robots_dict[it->first].changedActuators[GREEN_LEDS]) {
-            robots_dict[it->first].changedActuators[RED_LEDS] = false;
-            robots_dict[it->first].changedActuators[BLUE_LEDS] = false;
-            robots_dict[it->first].changedActuators[GREEN_LEDS] = false;
-            setAllColors(robots_dict[it->first].address, robots_dict[it->first].redLed,
-                         robots_dict[it->first].greenLed, robots_dict[it->first].blueLed);
-        }
+		if(enabledSensors[FLOOR]) {
+				getAllGround(robotAddress[0], floorData);
+				if(DEBUG_UPDATE_SENSORS_DATA)std::cout << "[" << elisa3Name << "] " << "floor: " << floorData[0] << "," << floorData[1] << "," << floorData[2] << "," << floorData[3] << std::endl;
+		}
 
+		if(enabledSensors[PROXIMITY]) {
+				getAllProximity(robotAddress[0], proxData);
+				if(DEBUG_UPDATE_SENSORS_DATA)std::cout << "[" << elisa3Name << "] " << "prox: " << proxData[0] << "," << proxData[1] << "," << proxData[2] << "," << proxData[3] << "," << proxData[4] << "," << proxData[5] << "," << proxData[6] << "," << proxData[7] << std::endl;
+		}
 
-        if(robots_dict[it->first].changedActuators[BLUE_LEDS_MOVE] and
-            robots_dict[it->first].changedActuators[RED_LEDS_MOVE] and
-            robots_dict[it->first].changedActuators[GREEN_LEDS_MOVE]) {
-            robots_dict[it->first].changedActuators[RED_LEDS_MOVE] = false;
-            robots_dict[it->first].changedActuators[BLUE_LEDS_MOVE] = false;
-            robots_dict[it->first].changedActuators[GREEN_LEDS_MOVE] = false;
-            setAllColors(robots_dict[it->first].address, robots_dict[it->first].redLed_move,
-                         robots_dict[it->first].greenLed_move, robots_dict[it->first].blueLed_move);
-
-            trigger_motive = true;
-
-        }
-
-        if(robots_dict[it->first].changedActuators[GREEN_LEDS_RESET]){
-            robots_dict[it->first].changedActuators[GREEN_LEDS_RESET] = false;
-            setGreen(robots_dict[it->first].address, robots_dict[it->first].greenLed_reset);
-        }
-        // std::cout << "speed: " << robots_dict[it->first].redLed_move << std::endl;
-        // std::cout << "speed: " << robots_dict[it->first].speedLeft << std::endl;
-        
-        if(robots_dict[it->first].redLed_move == 0){
-            setLeftSpeed(robots_dict[it->first].address, 0);
-            setRightSpeed(robots_dict[it->first].address, 0);
-
-        }
-        else{
-            setLeftSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
-            setRightSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
-
-        }
-
-        }
-
-
-
+		if(enabledSensors[MOTOR_POSITION]) {
+				robXPos = getOdomXpos(robotAddress[0]);
+        robYPos = getOdomYpos(robotAddress[0]);
+        robTheta = getOdomTheta(robotAddress[0]);
+				if(DEBUG_UPDATE_SENSORS_DATA)std::cout << "[" << elisa3Name << "] " << "position: " << robXPos << "," << robYPos << "," << robTheta << std::endl;
+		}
+    
 }
 
+double proxToMeters(int value) {
+		// Transform the analog value to a distance value in meters (given from field tests).
+		if(value <= 950) {
+				return (18.0/sqrt(value)+0.5)/100.0;
+		} else {
+				return (-0.0192*(value)+19.34)/100.0;
+		}
+}
 
-// void marix_multiply(double A){
-
-
+void updateRosInfo() {
+    static tf::TransformBroadcaster br;
     
-// }
+    int i = 0;
+    if(enabledSensors[PROXIMITY]) {
+				if(DEBUG_RANGE_SENSORS)std::cout << "[" << elisa3Name << "] " << "ranges: ";
+        for(i=0; i<8; i++) {
+            if(proxData[i] > 0) {
+								proxMsg[i].range = proxToMeters(proxData[i]);
+            } else {
+                proxMsg[i].range = proxMsg[i].max_range;
+            }
+            if(proxMsg[i].range > proxMsg[i].max_range) {
+                proxMsg[i].range = proxMsg[i].max_range;
+            }
+            if(proxMsg[i].range < proxMsg[i].min_range) {
+                proxMsg[i].range = proxMsg[i].min_range;
+            }
+            proxMsg[i].header.stamp = ros::Time::now();
+            proxPublisher[i].publish(proxMsg[i]);
 
+						if(DEBUG_RANGE_SENSORS)std::cout << proxMsg[i].range << ",";
+        }
 
-void main_fuc(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_dict){
-    
-    
-    
-    std::map<int, Robot>::iterator it;
-    for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-        std::cout << "[" << nodeName << "] " << robots_dict[it->first].tag << " accData[0]: " << robots_dict[it->first].accData[0] << std::endl;
-        // std::cout << robots_dict[it->first].xPos << std::endl;
+				if(DEBUG_RANGE_SENSORS)std::cout << std::endl;
 
-        // for each robot
-        // robots_dict[it->first].timer += 1;
-        // robots_dict[it->first].xPosc += robots_dict[it->first].accData[0]/64.0*9.81 * 0.001;
-        // robots_dict[it->first].yPosc += robots_dict[it->first].accData[1]/64.0*9.81 * 0.001;
-        // // if(robots_dict[it->first].tag == 0){
-        // //     std::cout << "[" << nodeName << "] " << "accData[0]: " << robots_dict[it->first].xPosc << std::endl;
-        // // }
-        // std::cout << "[" << nodeName << "] " << "accData[0]: " << robots_dict[it->first].xPosc << std::endl;
-        // if(robots_dict[it->first].tag == 1){
-        //     std::cout << ros::Time::now() << std::endl;
-        // }
+        // e-puck proximity positions (cm), x pointing forward, y pointing left
+        //							P0(2.4, 0.0)
+        //				P7(1.7, 1.7)		P1(1.7, -1.7)
+        //		P6(0.0, 2.4)        		P2(0.0, -2.4)
+        //				P5(-1.7, 1.7)		P3(-1.7, -1.7)
+				//							P4(-2.4, 0.0)
+        //
+        // e-puck proximity orentations (degrees)
+        //							P0(0)
+        //				P7(45)		P1(315)
+        //		P6(90)        		P2(270)
+        //				P5(135)		P3(225)
+				//							P4(180)
+        std::stringstream parent;
+        std::stringstream child;
+        tf::Transform transform;
+        tf::Quaternion q;
+        
+        transform.setOrigin( tf::Vector3(0.024, 0.0, 0.013) );        
+        q.setRPY(0, 0, 0);
+        transform.setRotation(q);        
+        parent << elisa3Name << "/base_prox0";
+        child << elisa3Name << "/base_link";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(0.017, -0.017, 0.013) );        
+        q.setRPY(0, 0, -0.7854);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox1";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(0.000, -0.024, 0.013) );        
+        q.setRPY(0, 0, -1.57075);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox2";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(-0.017, -0.017, 0.013) );        
+        q.setRPY(0, 0, -2.3561);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox3";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(-0.024, 0.000, 0.013) );        
+        q.setRPY(0, 0, -3.1415);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox4";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(-0.017, 0.017, 0.013) );        
+        q.setRPY(0, 0, 2.3561);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox5";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(0.000, 0.024, 0.013) );        
+        q.setRPY(0, 0, 1.57075);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox6";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        transform.setOrigin( tf::Vector3(0.017, 0.017, 0.013) );        
+        q.setRPY(0, 0, 0.7854);
+        transform.setRotation(q);
+        parent.str("");
+        parent << elisa3Name << "/base_prox7";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
         
 
-        // 1.take the measurement from the odom and cam
-
-        // 2.estimate the position
-
-        // 3.decide where to go
-
-        // 4.execution
+        currentTimeMap = ros::Time::now();
+        parent.str("");
+        parent << elisa3Name << "/base_laser";
+        //populate the LaserScan message
+        laserMsg.header.stamp = ros::Time::now();
+        laserMsg.header.frame_id = parent.str();
+        laserMsg.angle_min = -M_PI/2.0;
+        laserMsg.angle_max = M_PI/2.0;
+        laserMsg.angle_increment = M_PI/18.0; // 10 degrees.
+        //laserMsg.time_increment = (currentTimeMap-lastTimeMap).toSec()/180; //0.003; //(1 / laser_frequency) / (num_readings);
+        //laserMsg.scan_time = (currentTimeMap-lastTimeMap).toSec();
+        // The laser is placed in the center of the robot, but the proximity sensors are placed around the robot thus add "ROBOT_RADIUS" to get correct values.
+        laserMsg.range_min = 0.005+ROBOT_RADIUS; // 0.5 cm + ROBOT_RADIUS.
+        laserMsg.range_max = 0.05+ROBOT_RADIUS; // 5 cm + ROBOT_RADIUS. 
+        laserMsg.ranges.resize(19);
+        laserMsg.intensities.resize(19);
+        lastTimeMap = ros::Time::now();
         
-
+        // We use the information from the 6 proximity sensors on the front side of the robot to get 19 laser scan points. The interpolation used is the following:
+        // laser[0] at -90 degrees: P2
+        // laser[1] at -80 degrees: 4/5*P2 + 1/5*P1
+        // laser[2] at -70 degrees: 3/5*P2 + 2/5*P1
+        // laser[3] at -60 degrees: 2/5*P2 + 3/5*P1
+        // laser[4] at -50 degrees: 1/5*P2 + 4/5*P1
+        // laser[5] at -40 degrees: P1
+        // laser[6] at -30 degrees: 3/4*P1 + 1/4*P0
+        // laser[7] at -20 degrees: 2/4*P1 + 2/4*P0
+        // laser[8] at -10 degrees: 1/4*P1 + 3/4*P0
+        // laser[9] at 0 degrees: P0
+        // laser[10] at 10 degrees: 1/4*P7 + 3/4*P0
+        // laser[11] at 20 degrees: 2/4*P7 + 2/4*P0
+        // laser[12] at 30 degrees: 3/4*P7 + 1/4*P0
+        // laser[13] at 40 degrees: P7
+        // laser[14] at 50 degrees: 1/5*P6 + 4/5*P7
+        // laser[15] at 60 degrees: 2/5*P6 + 3/5*P7
+        // laser[16] at 70 degrees: 3/5*P6 + 2/5*P7
+        // laser[17] at 80 degrees: 4/5*P6 + 1/5*P7
+        // laser[18] at 90 degrees: P6
+        
+        float tempProx;
+        tempProx = proxData[2];
+        if(tempProx > 0) {   
+            laserMsg.ranges[0] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[0] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[0] = laserMsg.range_max;
+            laserMsg.intensities[0] = 0;
+        }
+  
+        tempProx = proxData[2]*4/5 + proxData[1]*1/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[1] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[1] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[1] = laserMsg.range_max;
+            laserMsg.intensities[1] = 0;
+        }
+        
+        tempProx = proxData[2]*3/5 + proxData[1]*2/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[2] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[2] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[2] = laserMsg.range_max;
+            laserMsg.intensities[2] = 0;
+        }
+        
+        tempProx = proxData[2]*2/5 + proxData[1]*3/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[3] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[3] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[3] = laserMsg.range_max;
+            laserMsg.intensities[3] = 0;
+        }        
+        
+        tempProx = proxData[2]*1/5 + proxData[1]*4/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[4] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[4] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[4] = laserMsg.range_max;
+            laserMsg.intensities[4] = 0;
+        }        
+        
+        tempProx = proxData[1];
+        if(tempProx > 0) {   
+            laserMsg.ranges[5] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[5] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[5] = laserMsg.range_max;
+            laserMsg.intensities[5] = 0;
+        }        
+        
+        tempProx = proxData[1]*3/4 + proxData[0]*1/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[6] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[6] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[6] = laserMsg.range_max;
+            laserMsg.intensities[6] = 0;
+        }        
+        
+        tempProx = proxData[1]*2/4 + proxData[0]*2/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[7] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[7] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[7] = laserMsg.range_max;
+            laserMsg.intensities[7] = 0;
+        }         
+        
+        tempProx = proxData[1]*1/4 + proxData[0]*3/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[8] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[8] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[8] = laserMsg.range_max;
+            laserMsg.intensities[8] = 0;
+        }         
+        
+        tempProx = proxData[0];
+        if(tempProx > 0) {   
+            laserMsg.ranges[9] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[9] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[9] = laserMsg.range_max;
+            laserMsg.intensities[9] = 0;
+        }         
+        
+        tempProx = proxData[7]*1/4 + proxData[0]*3/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[10] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[10] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[10] = laserMsg.range_max;
+            laserMsg.intensities[10] = 0;
+        }         
+        
+        tempProx = proxData[7]*2/4 + proxData[0]*2/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[11] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[11] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[11] = laserMsg.range_max;
+            laserMsg.intensities[11] = 0;
+        }         
+        
+        tempProx = proxData[7]*3/4 + proxData[0]*1/4;
+        if(tempProx > 0) {   
+            laserMsg.ranges[12] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[12] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[12] = laserMsg.range_max;
+            laserMsg.intensities[12] = 0;
+        }         
+        
+        tempProx = proxData[7];
+        if(tempProx > 0) {   
+            laserMsg.ranges[13] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[13] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[13] = laserMsg.range_max;
+            laserMsg.intensities[13] = 0;
+        }         
+        
+        tempProx = proxData[7]*4/5 + proxData[6]*1/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[14] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[14] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[14] = laserMsg.range_max;
+            laserMsg.intensities[14] = 0;
+        }   
+        
+        tempProx = proxData[7]*3/5 + proxData[6]*2/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[15] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[15] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[15] = laserMsg.range_max;
+            laserMsg.intensities[15] = 0;
+        }                      
+        
+        tempProx = proxData[7]*2/5 + proxData[6]*3/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[16] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[16] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[16] = laserMsg.range_max;
+            laserMsg.intensities[16] = 0;
+        }          
+        
+        tempProx = proxData[7]*1/5 + proxData[6]*4/5;
+        if(tempProx > 0) {   
+            laserMsg.ranges[17] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[17] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[17] = laserMsg.range_max;
+            laserMsg.intensities[17] = 0;
+        }          
+        
+        tempProx = proxData[6];
+        if(tempProx > 0) {   
+            laserMsg.ranges[18] = proxToMeters(tempProx)+ROBOT_RADIUS;
+            laserMsg.intensities[18] = tempProx; 
+        } else { // Sometimes the values could be negative due to the calibration, it means there is no obstacles.
+            laserMsg.ranges[18] = laserMsg.range_max;
+            laserMsg.intensities[18] = 0;
+        }          
+        
+        for(i=0; i<19; i++) {
+            if(laserMsg.ranges[i] > laserMsg.range_max) {
+                laserMsg.ranges[i] = laserMsg.range_max;
+            }
+            if(laserMsg.ranges[i] < laserMsg.range_min) {
+                laserMsg.ranges[i] = laserMsg.range_min;
+            }
+        }
+        
+        transform.setOrigin( tf::Vector3(0.0, 0.0, 0.034) );        
+        q.setRPY(0, 0, 0);
+        transform.setRotation(q);        
+        parent.str("");
+        child.str("");
+        parent << elisa3Name << "/base_laser";
+        child << elisa3Name << "/base_link";
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), child.str(), parent.str()));
+        
+        laserPublisher.publish(laserMsg);
+        
     }
-    // std::map<int, Camera>::iterator it1;
-    // for (it1 = cameras_dict.begin(); it1 != cameras_dict.end(); it1++){
-    //     std::cout << "[" << nodeName << "] " << "camera x: " << cameras_dict[it1->first].cam_x << std::endl;
-    // }
+    
+
+    if(enabledSensors[MOTOR_POSITION]) {
+        
+				robDeltaX = robXPos - robXPosPrev;
+				robDeltaY = robYPos - robYPosPrev;
+				robXPosPrev = robXPos;
+				robYPosPrev = robYPos;				
+				theta = robTheta*M_PI/180;    // Expressed in radiant.
+				// We noticed from field tests on a vertical wall that there is a difference in the measured distance between
+				// a route traveled toward bottom and a route traveled toward top. For this reason we adjust the distance 
+				// traveled based on the angle.
+				if(robTheta <= 180 && robTheta >= 0) {
+						robDistTraveled = sqrt(robDeltaX*robDeltaX + robDeltaY*robDeltaY);
+						deltaXCorr = robDistTraveled*2/3*cos(theta);	// 2/3 is the magical factor found from filed tests, probably you'll need to adapt it to your surface.
+						deltaYCorr = robDistTraveled*2/3*sin(theta);
+						if(DEBUG_ODOMETRY)std::cout << "[" << elisa3Name << "] " << "delta corr: " << deltaXCorr << ", " << deltaYCorr << std::endl;
+				} else {
+						deltaXCorr = robDeltaX;
+						deltaYCorr = robDeltaY;
+						if(DEBUG_ODOMETRY)std::cout << "[" << elisa3Name << "] " << "delta not corr: " << deltaXCorr << ", " << deltaYCorr << std::endl;
+				}
+				xPos += deltaXCorr/1000.0;	// Expressed in meters.
+				yPos += deltaYCorr/1000.0;	// Expressed in meters.
+
+				//xPos = robXPos/1000.0;   // Expressed in meters.
+        //yPos = robYPos/1000.0;   // Expressed in meters.
+        
+        if(DEBUG_ODOMETRY)std::cout << "[" << elisa3Name << "] " << "x, y, theta: " << xPos << ", " << yPos << ", " << theta << std::endl;
+        
+				robDeltaTheta = (robTheta - robThetaPrev)*M_PI/180;
+				robThetaPrev = robTheta;
+				robDeltaDistTraveled = (robDistTraveled - robDistTraveledPrev)/1000.0;
+				robDistTraveledPrev = robDistTraveled;
+
+        // Publish the odometry message over ROS.
+        odomMsg.header.stamp = ros::Time::now();
+        odomMsg.header.frame_id = "odom";
+        std::stringstream ss;
+        ss << elisa3Name << "/base_link";
+        odomMsg.child_frame_id = ss.str();
+        odomMsg.pose.pose.position.x = xPos;       
+        odomMsg.pose.pose.position.y = yPos;
+        odomMsg.pose.pose.position.z = 0;
+        // Since all odometry is 6DOF we'll need a quaternion created from yaw.
+        geometry_msgs::Quaternion odomQuat = tf::createQuaternionMsgFromYaw(theta);
+        odomMsg.pose.pose.orientation = odomQuat;
+        currentTime = ros::Time::now();
+        odomMsg.twist.twist.linear.x = robDeltaDistTraveled / ((currentTime-lastTime).toSec());   // "robDeltaDistTraveled" is the linear distance covered in meters from the last update (delta distance);
+                                                                                        // the time from the last update is measured in seconds thus to get m/s we multiply them.
+        odomMsg.twist.twist.angular.z = robDeltaTheta / ((currentTime-lastTime).toSec());  // "robDeltaTheta" is the angular distance covered in radiant from the last update (delta angle);
+                                                                                        // the time from the last update is measured in seconds thus to get rad/s we multiply them.
+        if(DEBUG_ODOMETRY)std::cout << "[" << elisa3Name << "] " << "time elapsed = " << (currentTime-lastTime).toSec() << " seconds" << std::endl;
+        lastTime = ros::Time::now();
+
+        odomPublisher.publish(odomMsg);
+        
+        // Publish the transform over tf.
+        geometry_msgs::TransformStamped odomTrans;
+        odomTrans.header.stamp = odomMsg.header.stamp;
+        odomTrans.header.frame_id = odomMsg.header.frame_id;
+        odomTrans.child_frame_id = odomMsg.child_frame_id;
+        odomTrans.transform.translation.x = xPos;
+        odomTrans.transform.translation.y = yPos;
+        odomTrans.transform.translation.z = 0.0;
+        odomTrans.transform.rotation = odomQuat;
+        br.sendTransform(odomTrans);
+    }
+    
+    if(enabledSensors[ACCELEROMETER]) {
+        std::stringstream ss;
+        ss << elisa3Name << "/base_link";
+        accelMsg.header.frame_id = ss.str();
+        accelMsg.header.stamp = ros::Time::now();            
+        accelMsg.linear_acceleration.x = (accData[0])/64.0*9.81; // 1 g = 64, then transforms in m/s^2.
+        accelMsg.linear_acceleration.y = (accData[1])/64.0*9.81;
+        accelMsg.linear_acceleration.z = (accData[2])/64.0*9.81;
+        accelMsg.linear_acceleration_covariance[0] = 0.01;
+        accelMsg.linear_acceleration_covariance[1] = 0.0;
+        accelMsg.linear_acceleration_covariance[2] = 0.0;
+        accelMsg.linear_acceleration_covariance[3] = 0.0;
+        accelMsg.linear_acceleration_covariance[4] = 0.01;
+        accelMsg.linear_acceleration_covariance[5] = 0.0;
+        accelMsg.linear_acceleration_covariance[6] = 0.0;
+        accelMsg.linear_acceleration_covariance[7] = 0.0;
+        accelMsg.linear_acceleration_covariance[8] = 0.01;
+        if(DEBUG_ACCELEROMETER)std::cout << "[" << elisa3Name << "] " << "accel raw: " << accData[0] << ", " << accData[1] << ", " << accData[2] << std::endl;
+        if(DEBUG_ACCELEROMETER)std::cout << "[" << elisa3Name << "] " << "accel (m/s2): " << ((accData[0])/64.0*9.81) << ", " << ((accData[1])/64.0*9.81) << ", " << ((accData[2]+64.0)/64.0*9.81) << std::endl;
+        accelMsg.angular_velocity.x = 0;
+        accelMsg.angular_velocity.y = 0;
+        accelMsg.angular_velocity.z = 0;
+        accelMsg.angular_velocity_covariance[0] = 0.01;
+        accelMsg.angular_velocity_covariance[1] = 0.0;
+        accelMsg.angular_velocity_covariance[2] = 0.0;
+        accelMsg.angular_velocity_covariance[3] = 0.0;
+        accelMsg.angular_velocity_covariance[4] = 0.01;
+        accelMsg.angular_velocity_covariance[5] = 0.0;
+        accelMsg.angular_velocity_covariance[6] = 0.0;
+        accelMsg.angular_velocity_covariance[7] = 0.0;
+        accelMsg.angular_velocity_covariance[8] = 0.01;
+        geometry_msgs::Quaternion odomQuat = tf::createQuaternionMsgFromYaw(0);
+        accelMsg.orientation = odomQuat;
+        accelMsg.orientation_covariance[0] = 0.01;
+        accelMsg.orientation_covariance[1] = 0.0;
+        accelMsg.orientation_covariance[2] = 0.0;
+        accelMsg.orientation_covariance[3] = 0.0;
+        accelMsg.orientation_covariance[4] = 0.01;
+        accelMsg.orientation_covariance[5] = 0.0;
+        accelMsg.orientation_covariance[6] = 0.0;
+        accelMsg.orientation_covariance[7] = 0.0;
+        accelMsg.orientation_covariance[8] = 0.01;
+        accelPublisher.publish(accelMsg);
+    }
+    
+    if(enabledSensors[FLOOR]) {
+        std::stringstream ss;
+        ss << elisa3Name << "/base_link";
+        floorMsg.header.frame_id = ss.str();
+        floorMsg.header.stamp = ros::Time::now();
+        floorMsg.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+        floorMsg.pose.position.x = 0.15;
+        floorMsg.pose.position.y = 0;
+        floorMsg.pose.position.z = 0.13;
+        geometry_msgs::Quaternion odomQuat = tf::createQuaternionMsgFromYaw(0);
+        floorMsg.pose.orientation = odomQuat;
+        floorMsg.scale.z = 0.01;
+        floorMsg.color.a = 1.0;
+        floorMsg.color.r = 1.0;
+        floorMsg.color.g = 1.0;
+        floorMsg.color.b = 1.0;
+        ss.str("");
+        ss << "floor: [" << floorData[0] << ", " << floorData[1] << ", " << floorData[2] << ", " << floorData[3] << "]";
+        floorMsg.text = ss.str();
+        floorPublisher.publish(floorMsg);
+    }
+
+    
 }
 
+void handlerVelocity(const geometry_msgs::Twist::ConstPtr& msg) {
+    // Controls the velocity of each wheel based on linear and angular velocities.
+    double linear = msg->linear.x;		// Expect the linear speed to be given in cm/s.
+    double angular = msg->angular.z;	// Expect the angular speed to be given in rad/s.
 
+		if(DEBUG_SPEED_RECEIVED)std::cout << "[" << elisa3Name << "] " << "linear: " << linear << ", angular: " << angular << std::endl;
 
+    // Kinematic model for differential robot.
+    double wl = (linear - ((WHEEL_DISTANCE*100.0) / 2.0) * angular);	// Result is cm/s.
+    double wr = (linear + ((WHEEL_DISTANCE*100.0) / 2.0) * angular);	// Result is cm/s.
 
+		if(DEBUG_SPEED_RECEIVED)std::cout << "[" << elisa3Name << "] " << "kinematic: " << wl << ", " << wr << std::endl;
+
+    // At input 1000, angular velocity is 1 cycle / s or  2*pi/s.
+    speedLeft = int(wl * 10.0 / 5.0);		// Transform the speed to mm/s and then divide by 5 to get the correct value to send to the elisa robot, 
+    speedRight = int(wr * 10.0 / 5.0);	// that is 1/5 of mm/s (a value of 10 means 50 mm/s).
+		if(speedLeft > 127) {
+			speedLeft = 127;
+		}
+		if(speedLeft < -127) {
+			speedLeft = -127;
+		}
+		if(speedRight > 127) {
+			speedRight = 127;
+		}
+		if(speedRight < -127) {
+			speedRight = -127;
+		}
+    changedActuators[MOTORS] = true;
+
+    if(DEBUG_SPEED_RECEIVED)std::cout << "[" << elisa3Name << "] " << "new speed: " << speedLeft << ", " << speedRight << std::endl;
+    
+}
 
 int main(int argc,char *argv[]) {
-//		double init_xpos, init_ypos, init_theta;
+		double init_xpos, init_ypos, init_theta;   
 		unsigned char sensorsEnabled = 0;
 		int i = 0;
    
@@ -611,126 +656,124 @@ int main(int argc,char *argv[]) {
     */
     ros::NodeHandle np("~"); // Private.
     ros::NodeHandle n; // Public.
-    XmlRpc::XmlRpcValue body_list;
-
-	np.param<std::string>("base_tag", baseTag, "elisa3");
-	np.param<std::string>("name", nodeName, "elisa3");
-    np.param("rigid_bodies", body_list, body_list);
+    
+    np.param("elisa3_address", robotAddress[0], 1111);
+    np.param<std::string>("elisa3_name", elisa3Name, "elisa3");
+    np.param("xpos", init_xpos, 0.0);
+    np.param("ypos", init_ypos, 0.0);
+    np.param("theta", init_theta, 0.0);
     np.param("accelerometer", enabledSensors[ACCELEROMETER], false);
     np.param("floor", enabledSensors[FLOOR], false);
     np.param("proximity", enabledSensors[PROXIMITY], false);
-    np.param("motor_position", enabledSensors[MOTOR_POSITION], false);
-
-	int N_robots = body_list.size();
-	int robot_addresses[N_robots];
-
-    if (body_list.getType() == XmlRpc::XmlRpcValue::TypeStruct && body_list.size() > 0){
-		XmlRpc::XmlRpcValue::iterator i;
-		
-		int count = 0;
-		for (i = body_list.begin(); i != body_list.end(); ++i) {
-//		    std::cout << "[" << nodeName << "] " << "init number:: " << count << std::endl;
-			Robot class_inst;
-
-            // Camera camera_init;
-
-            // camera_init.tag = count;
-            
-            // camera_init.OptiSubscriber = n.subscribe(("Bebop"+ std::to_string(camera_init.tag) + "/ground_pose"), 10, camera_init.handlerOpti)
-
-            // cameras_dict[camera_init.tag] = camera_init;
+    np.param("motor_position", enabledSensors[MOTOR_POSITION], false); 
 
 
-
-			class_inst.speedLeft =0;
-			class_inst.speedRight = 0;
-			class_inst.greenLed = 0;
-
-            class_inst.count = count;
-            class_inst.address = (i->second)["address"];
-//            class_inst.currentTime = ros::Time::now();
-
-            class_inst.xPos = (i->second)["xPos"];
-            class_inst.yPos = (i->second)["yPos"];
-            class_inst.theta = 0.0;
-
-			class_inst.changedActuators[MOTORS] = false;
-            class_inst.tag = atoi((i->first).c_str());
-
-            class_inst.odomTrans.header.frame_id  = "elisa3_robot_"+ std::to_string(class_inst.tag) + "_init";
-            class_inst.odomTrans.child_frame_id = "elisa3_robot_"+ std::to_string(class_inst.tag);
-
-            class_inst.odomTransInit.header.frame_id  = "world";
-            class_inst.odomTransInit.child_frame_id = "elisa3_robot_"+ std::to_string(class_inst.tag) + "_init";
-            class_inst.odomTransInit.header.stamp = ros::Time::now();
-            class_inst.odomTransInit.transform.translation.x = class_inst.xPos;
-            class_inst.odomTransInit.transform.translation.y = class_inst.yPos;
-            class_inst.odomTransInit.transform.translation.z = 0.0;
-            geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(class_inst.theta);
-            class_inst.odomTransInit.transform.rotation = odomQuat_trans;
-
-
-
-            robots_dict[class_inst.tag] = class_inst;
-
-            robot_addresses[count] = class_inst.address;
-
-            std::stringstream ss;
-            ss << "elisa3_robot_" << class_inst.tag <<"/odom";
-            odomPublisher[class_inst.tag] = np.advertise<nav_msgs::Odometry>(ss.str(), 1);
-
-            std::stringstream ss1;
-            ss1 << "elisa3_robot_" << class_inst.tag <<"/accel";
-            accelPublisher[class_inst.tag] = np.advertise<sensor_msgs::Imu>(ss1.str(), 1);
-            
-            AllLedSubscriber = n.subscribe("elisa3_all_robots/leds", 10, handlerAllLeds);
-
-            AllResetSubscriber = n.subscribe("elisa3_all_robots/reset", 10, handlerAllReset);
-
-            AllAutoMotiveSubscriber = n.subscribe("elisa3_all_robots/auto_motive", 10, handlerAllAutoMove);
-
-            AllOptiSubscriber = n.subscribe("elisa3_all_robots/cams", 10, handlerAllOpti);
-
-			count += 1;
-
-		}
-	}
-
-    startCommunication(robot_addresses, N_robots);
-
-
-    std::map<int, Robot>::iterator it;
-    for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-        enableObstacleAvoidance(robots_dict[it->first].address);
-        setXpos(robots_dict[it->first].address, robots_dict[it->first].xPos);
-        setYpos(robots_dict[it->first].address, robots_dict[it->first].yPos);
-
+    if(DEBUG_ROS_PARAMS) {
+        std::cout << "[" << elisa3Name << "] " << "elisa3 address: " << robotAddress[0] << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "elisa3 name: " << elisa3Name << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "init pose: " << init_xpos << ", " << init_ypos << ", " << theta << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "accelerometer enabled: " << enabledSensors[ACCELEROMETER] << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "floor enabled: " << enabledSensors[FLOOR] << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "proximity enabled: " << enabledSensors[PROXIMITY] << std::endl;
+        std::cout << "[" << elisa3Name << "] " << "motor position enabled: " << enabledSensors[MOTOR_POSITION] << std::endl;
     }
 
-    // std::map<int, Camera>::iterator it;
-    // for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-    //     enableObstacleAvoidance(robots_dict[it->first].address);
-    //     setXpos(robots_dict[it->first].address, robots_dict[it->first].xPos);
-    //     setYpos(robots_dict[it->first].address, robots_dict[it->first].yPos);
+		startCommunication(robotAddress, 1);
+    
 
-    // }
+    if(enabledSensors[ACCELEROMETER]) {
+				sensorsEnabled++;
+        accelPublisher = n.advertise<sensor_msgs::Imu>("accel", 10);
+    }
+    if(enabledSensors[FLOOR]) {
+				sensorsEnabled++;
+        floorPublisher = n.advertise<visualization_msgs::Marker>("floor", 10);
+    }
+    if(enabledSensors[PROXIMITY]) {
+				sensorsEnabled++;
+        for(i=0; i<8; i++) {
+            /**
+            * The advertise() function is how you tell ROS that you want to
+            * publish on a given topic name. This invokes a call to the ROS
+            * master node, which keeps a registry of who is publishing and who
+            * is subscribing. After this advertise() call is made, the master
+            * node will notify anyone who is trying to subscribe to this topic name,
+            * and they will in turn negotiate a peer-to-peer connection with this
+            * node.  advertise() returns a Publisher object which allows you to
+            * publish messages on that topic through a call to publish().  Once
+            * all copies of the returned Publisher object are destroyed, the topic
+            * will be automatically unadvertised.
+            *
+            * The second parameter to advertise() is the size of the message queue
+            * used for publishing messages.  If messages are published more quickly
+            * than we can send them, the number here specifies how many messages to
+            * buffer up before throwing some away.
+            */
+            std::stringstream ss;
+            ss.str("");
+            ss << "proximity" << i;
+            proxPublisher[i] = n.advertise<sensor_msgs::Range>(ss.str(), 10);
+            //proxMsg[i] = new sensor_msgs::Range();
+            proxMsg[i].radiation_type = sensor_msgs::Range::INFRARED;
+            ss.str("");
+            ss << elisa3Name << "/base_prox" << i;
+            proxMsg[i].header.frame_id =  ss.str();
+            proxMsg[i].field_of_view = 0.26;    // About 15 degrees...to be checked!
+            proxMsg[i].min_range = 0.005;       // 0.5 cm.
+            proxMsg[i].max_range = 0.05;        // 5 cm.                    
+        }       
+        
+        laserPublisher = n.advertise<sensor_msgs::LaserScan>("scan", 10);
+    }
+    if(enabledSensors[MOTOR_POSITION]) {
+				sensorsEnabled++;
+        odomPublisher = n.advertise<nav_msgs::Odometry>("odom", 10);
+        currentTime = ros::Time::now();
+        lastTime = ros::Time::now();        
+    }
+
+    if(sensorsEnabled == 0) {
+        std::cerr << "[" << elisa3Name << "] " << "No sensors enabled!" << std::endl;
+				stopCommunication();
+        return -1;
+    }
+       
+    /**
+    * The subscribe() call is how you tell ROS that you want to receive messages
+    * on a given topic.  This invokes a call to the ROS
+    * master node, which keeps a registry of who is publishing and who
+    * is subscribing.  Messages are passed to a callback function, here
+    * called handlerVelocity.  subscribe() returns a Subscriber object that you
+    * must hold on to until you want to unsubscribe.  When all copies of the Subscriber
+    * object go out of scope, this callback will automatically be unsubscribed from
+    * this topic.
+    *
+    * The second parameter to the subscribe() function is the size of the message
+    * queue.  If messages are arriving faster than they are being processed, this
+    * is the number of messages that will be buffered up before beginning to throw
+    * away the oldest ones.
+    */
+    cmdVelSubscriber = n.subscribe("mobile_base/cmd_vel", 10, handlerVelocity);    
+    
+    theta = init_theta;
+    xPos = init_xpos;
+    yPos = init_ypos;
+
+		//enableObstacleAvoidance(robotAddress[0]);
+		//enableTVRemote(robotAddress[0]);
 
     while (ros::ok()) {
         updateSensorsData();
         updateRosInfo();
         updateActuators();
-
-        // main part
-
-        main_fuc(robots_dict, cameras_dict);
-        
-
         ros::spinOnce();
+				if(waitForUpdate(robotAddress[0], 10000000)) { // Wait for at most 10 seconds.
+						break; // We have connection problems, stop here.
+				}
     }
 
 		stopCommunication();
 }
-
 
 
 

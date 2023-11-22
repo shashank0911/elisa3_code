@@ -48,17 +48,10 @@
 #include <tf/transform_datatypes.h>
 #include "mocap_optitrack/mocap_config.h"
 
-// for unlabeled makers
-#include <std_msgs/MultiArrayLayout.h>
-#include <std_msgs/Float64MultiArray.h>
-
 const std::string POSE_TOPIC_PARAM_NAME = "pose";
 const std::string POSE2D_TOPIC_PARAM_NAME = "pose2d";
 const std::string CHILD_FRAME_ID_PARAM_NAME = "child_frame_id";
 const std::string PARENT_FRAME_ID_PARAM_NAME = "parent_frame_id";
-
-// for unlabeled makers
-const std::string MAKERS_TOPIC_PARAM_NAME = "maker";
 
 PublishedRigidBody::PublishedRigidBody(XmlRpc::XmlRpcValue &config_node)
 {
@@ -81,11 +74,6 @@ PublishedRigidBody::PublishedRigidBody(XmlRpc::XmlRpcValue &config_node)
     pose2d_pub = n.advertise<geometry_msgs::Pose2D>(pose2d_topic, 1000);
   }
 
-  // for unlabeled makers
-  makers_topic = (std::string&) config_node[MAKERS_TOPIC_PARAM_NAME];
-  // makers_pub = n.advertise<geometry_msgs::Pose2D>(makers_topic, 1000);
-  makers_pub = n.advertise<std_msgs::Float64MultiArray>(makers_topic, 1000);
-
   if (publish_tf)
   {
     child_frame_id = (std::string&) config_node[CHILD_FRAME_ID_PARAM_NAME];
@@ -93,7 +81,7 @@ PublishedRigidBody::PublishedRigidBody(XmlRpc::XmlRpcValue &config_node)
   }
 }
 
-void PublishedRigidBody::publish(RigidBody &body, ModelFrame &markerset)
+void PublishedRigidBody::publish(RigidBody &body)
 {
   // don't do anything if no new data was provided
   if (!body.has_data())
@@ -135,28 +123,6 @@ void PublishedRigidBody::publish(RigidBody &body, ModelFrame &markerset)
     pose2d.theta = tf::getYaw(q);
     pose2d_pub.publish(pose2d);
   }
-
-  // for unlabeled makers
-  // publish unlabeled makers
-  if (markerset.numOtherMarkers != 0)
-  {
-    // it would be also possible to publish the makerset (one object)
-    // msg_name = markerset.markers[i].positionX;
-
-    std_msgs::Float64MultiArray maker_msg;
-
-    maker_msg.data.push_back(markerset.numOtherMarkers);
-    maker_msg.data.push_back(3 * markerset.numOtherMarkers);
-    for (int i = 0; i < markerset.numOtherMarkers; i++)
-    {
-      maker_msg.data.push_back(markerset.otherMarkers[i].positionX);
-      maker_msg.data.push_back(markerset.otherMarkers[i].positionY);
-      maker_msg.data.push_back(markerset.otherMarkers[i].positionZ);
-    }
-
-    makers_pub.publish(maker_msg);
-  }
-  
 
   if (publish_tf)
   {

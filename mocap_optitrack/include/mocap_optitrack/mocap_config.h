@@ -58,7 +58,6 @@ class PublishedRigidBody
 
   std::string pose_topic;
   std::string pose2d_topic;
-  std::string makers_topic;
   std::string parent_frame_id;
   std::string child_frame_id;
 
@@ -70,13 +69,12 @@ class PublishedRigidBody
   tf::TransformBroadcaster tf_pub;
   ros::Publisher pose_pub;
   ros::Publisher pose2d_pub;
-  ros::Publisher makers_pub;
 
   bool validateParam(XmlRpc::XmlRpcValue &, const std::string &);
 
   public:
   PublishedRigidBody(XmlRpc::XmlRpcValue &);
-  void publish(RigidBody &, ModelFrame &);
+  void publish(RigidBody &);
 };
 
 typedef std::map<int, PublishedRigidBody> RigidBodyMap;
