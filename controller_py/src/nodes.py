@@ -672,9 +672,9 @@ class Node:
         
         print("loop fn starting", self.tag, rospy.get_time())
 
-        end_time = time.time()
-        exec_time = end_time - start_time
-        rospy.loginfo(f"Loop {i + 1} Execution Time: {exec_time} seconds")
+        # end_time = time.time()
+        # exec_time = end_time - start_time
+        # rospy.loginfo(f"Loop {i + 1} Execution Time: {exec_time} seconds")
         
         # 1. take measurement from odom and cam odom_measurement and cam_measurement via sub
         [odom_measurement, cam_measurement, accel_measurement] = self.measurement_update(cameras, camera_maker)
@@ -853,6 +853,7 @@ class Nodes:
             ToIterateOver = subset_tags
         else:
             ToIterateOver = self.nodes.keys()
+            print(self.nodes)
 
         count = 0
         for tag in ToIterateOver:
