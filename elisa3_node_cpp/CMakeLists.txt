@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(elisa3_node_cpp)
 
+## Set C++ standard to 17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
