@@ -1,10 +1,10 @@
 #include "utils.h"
 
-Eigen::MatrixXd get_domain() {
-    Eigen::MatrixXd domain(4,2);
-    domain << 0, 0, 0, 1.15, 2.4, 1.15, 2.4, 0;
-    return domain;
-}
+// Eigen::MatrixXd getDomain() {
+//     Eigen::MatrixXd domain(4,2);
+//     domain << 0, 0, 0, 1.15, 2.4, 1.15, 2.4, 0;
+//     return domain;
+// }
 
 Eigen::Vector2d cart2pol(const Eigen::Vector2d& cart) {
 
@@ -20,27 +20,27 @@ Eigen::Vector2d pol2cart (const Eigen::Vector2d& pol) {
     return Eigen::Vector2d(x, y);
 }
 
-Eigen::VectorXd renew_vec(const Eigen::VectorXd& old_vec) {
+Eigen::VectorXd renewVec(const Eigen::VectorXd& oldVec) {
 
-    Eigen::VectorXd new_vec(old_vec.size());
+    Eigen::VectorXd newVec(oldVec.size());
 
-    if(old_vec.size() > 0) {
-        new_vec.head(old_vec.size() - 1) = old_vec.tail(old_vec.size() - 1);
-        new_vec(old_vec.size() - 1) = old_vec(old_vec.size() - 1);
+    if(oldVec.size() > 0) {
+        newVec.head(oldVec.size() - 1) = oldVec.tail(oldVec.size() - 1);
+        newVec(oldVec.size() - 1) = oldVec(oldVec.size() - 1);
     }
 
-    return new_vec;
+    return newVec;
 }
 
-double yaw_from_quaternion(double x, double y, double z, double w) {
+double yawFromQuaternion(double x, double y, double z, double w) {
     double t3 = 2.0 * (w * z + x * y);
     double t4 = 1.0 - 2.0 * (y * y + z * z);
     return std::atan2(t3, t4);
 }
 
 ObstacleAvoidance::ObstacleAvoidance() {
-    ref_lines_domain = Eigen::MatrixXd(4,2);
-    ref_lines_domain << 0.0, 0.0, 
+    refLinesDomain = Eigen::MatrixXd(4,2);
+    refLinesDomain << 0.0, 0.0, 
                         0.0, 1.15, 
                         2.4, 1.15, 
                         2.4, 0.0;
@@ -56,17 +56,17 @@ double ObstacleAvoidance::det(const Eigen::Matrix2d& mat) {
     return (mat(0,0)*mat(1,1) - mat(0,1)*mat(1,0));
 }
 
-bool ObstacleAvoidance::check_direction_vectors(const Eigen::Vector2d& vector_1, const Eigen::Vector2d& vector_2) {
-    Eigen::Vector2d unit_vector_1 = vector_1.normalized();
-    Eigen::Vector2d unit_vector_2 = vector_2.normalized();
-    double dot_prod = unit_vector_1.dot(unit_vector_2);
-    return dot_prod > 0;
+bool ObstacleAvoidance::checkDirectionVectors(const Eigen::Vector2d& vector1, const Eigen::Vector2d& vector2) {
+    Eigen::Vector2d unitVector1 = vector1.normalized();
+    Eigen::Vector2d unitVector2 = vector2.normalized();
+    double dotProd = unitVector1.dot(unitVector2);
+    return dotProd > 0;
 }
 
-bool ObstacleAvoidance::check_in_domain(const Eigen::Vector2d& point) {
+bool ObstacleAvoidance::checkInDomain(const Eigen::Vector2d& point) {
 
-    if(point[0] > this->ref_lines_domain(0,0) && point[0] < this->ref_lines_domain(2,0) 
-    && point[1] > this->ref_lines_domain(0,1) && point[1] < this->ref_lines_domain(1,1)) {
+    if(point[0] > this->refLinesDomain(0,0) && point[0] < this->refLinesDomain(2,0) 
+    && point[1] > this->refLinesDomain(0,1) && point[1] < this->refLinesDomain(1,1)) {
         if(obstacles) {
             return true;
         } else {
@@ -75,65 +75,65 @@ bool ObstacleAvoidance::check_in_domain(const Eigen::Vector2d& point) {
     }
 }
 
-std::pair<int, Eigen::Vector2d> ObstacleAvoidance::line_intersection(const Eigen::Matrix2d& locations) {
+std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen::Matrix2d& locations) {
 
-    std::map<int, std::tuple<Eigen::Vector2d, double>> pot_iter;
-    Eigen::Vector2d move_vec = locations.col(1) - locations.col(0);
+    std::map<int, std::tuple<Eigen::Vector2d, double>> potIter;
+    Eigen::Vector2d moveVec = locations.col(1) - locations.col(0);
 
-    for (int count = 0; count < this->ref_lines_domain.rows(); count++) {
-        int count_plus = 0;
-        if (count + 1 > this->ref_lines_domain.rows()) {
-            count_plus = 0;
+    for (int count = 0; count < this->refLinesDomain.rows(); count++) {
+        int countPlus = 0;
+        if (count + 1 > this->refLinesDomain.rows()) {
+            countPlus = 0;
         } else {
-            count_plus = count;
+            countPlus = count;
         }
 
         Eigen::Vector2d xdiff;
-        xdiff(0) = this->ref_lines_domain(count,0) - this->ref_lines_domain(count_plus,0);
+        xdiff(0) = this->refLinesDomain(count,0) - this->refLinesDomain(countPlus,0);
         xdiff(1) = locations(0,0) - locations(1,0);
         Eigen::Vector2d ydiff;
-        ydiff(0) = this->ref_lines_domain(count,1) - this->ref_lines_domain(count_plus,1);
+        ydiff(0) = this->refLinesDomain(count,1) - this->refLinesDomain(countPlus,1);
         ydiff(1) = locations(0,1) - locations(1,1); 
         Eigen::Matrix2d diff;
         diff << xdiff, ydiff;
-        Eigen::Matrix2d ref_line_minor;
-        ref_line_minor << this->ref_lines_domain.row(count),
-                          this->ref_lines_domain.row(count+1);
+        Eigen::Matrix2d refLineMinor;
+        refLineMinor << this->refLinesDomain.row(count),
+                          this->refLinesDomain.row(count+1);
 
         double div = this->det(diff);
         if (div != 0) {
             Eigen::Vector2d d;
-            d << this->det(ref_line_minor), this->det(locations);
+            d << this->det(refLineMinor), this->det(locations);
             Eigen::Vector2d inter;
             inter << this->det(Eigen::Matrix2d(d, xdiff)) / div, this->det(Eigen::Matrix2d(d, ydiff)) / div;
-            Eigen::Vector2d inter_vec = inter - locations.col(0);
+            Eigen::Vector2d interVec = inter - locations.col(0);
 
-            if (this->check_direction_vectors(move_vec, inter_vec)) {
-                pot_iter[count] = std::make_tuple(inter, inter_vec.norm());
+            if (this->checkDirectionVectors(moveVec, interVec)) {
+                potIter[count] = std::make_tuple(inter, interVec.norm());
             }
             
         }
     }
 
-    if (!pot_iter.empty()) {
-        auto key_min = std::min_element(pot_iter.begin(), pot_iter.end(), 
+    if (!potIter.empty()) {
+        auto keyMin = std::min_element(potIter.begin(), potIter.end(), 
             [](const auto& lhs, const auto& rhs) {
                 return std::get<1>(lhs.second) < std::get<1>(rhs.second);
             });
         
-        return std::make_pair(key_min->first, std::get<0>(key_min->second));
+        return std::make_pair(keyMin->first, std::get<0>(keyMin->second));
     } else {
         return std::make_pair(-1, Eigen::Vector2d::Zero());
     }
 }
 
-std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacle_avoidance(const Eigen::Vector2d& start_point, const Eigen::Vector2d& move) {
+std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
 
-    Eigen::Vector2d no_obs_new_point = start_point + move;
+    Eigen::Vector2d no_obs_newPoint = startPoint + move;
 
-    if (!this->check_in_domain(start_point + move)) {
-        auto [index_line, inter] = this->line_intersection(Eigen::Matrix2d(start_point, start_point + move));
-        if (index_line != -1) {
+    if (!this->checkInDomain(startPoint + move)) {
+        auto [indexLine, inter] = this->lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
+        if (indexLine != -1) {
             
         }
     }
