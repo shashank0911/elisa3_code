@@ -21,16 +21,17 @@ class CameraMarker {
 
     private:
 
-        int number;
-        int currentNumber;
         ros::Subscriber listenerCameraList;
         //TODO check datatype of msmtList
         // Eigen::VectorXd measurementList;
-        std::vector<double> measurementList;
 
     public:
     
         ros::NodeHandle n;
+        int number;
+        int currentNumber;
+        std::vector<double> measurementList;
+
         CameraMarker(int N, const std::vector<std::string>& activeRobots);
         //TODO - check datatype of optiMsg
         void listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg);
@@ -73,6 +74,8 @@ class Cameras {
     public:
 
         ros::NodeHandle n;
+        //size (N, 4) N - from Cameras()
+        //measurement for one item is along the row
         Eigen::MatrixXd measurementList;
         Eigen::MatrixXd measurementListPrev;
 
@@ -85,14 +88,15 @@ class Node {
 
     private:
 
-        double t;
+        int t;
 
         std::string tag;
         double releaseTime;
         std::string address;
-        std::vector<double> startPos;
+        double startPos[2];
         double startOrien;
 
+        // robot meas pose and ribot meas orien values are found in odomVals
         // Eigen::Vector2d robot_meas_pose;
         // double robot_meas_orien;
         // double robotMeasTime;
@@ -114,7 +118,7 @@ class Node {
         Eigen::Vector3d camVals;
         double camTimer;
 
-        // accel x, y, x lowpass, xpos, ypos values
+        // accel x, y, x_lowpass, xpos, ypos values
         Eigen::VectorXd accelVals;
 
         Eigen::Vector3d camPrev;
@@ -135,36 +139,39 @@ class Node {
         // owa_w1, owa_w2, owa_w3
         Eigen::Vector3d OwaWeights;
 
+        //sizes for all three are bufferSize
         Eigen::VectorXd odomErrorBuffer;
         Eigen::VectorXd camErrorBuffer;
         Eigen::VectorXd accelErrorBuffer;
 
-        double goalX[2];
+        Eigen::Vector2d goalX;
         std::map<std::string, double> setup;
-        Eigen::VectorXd theoPos;
-        Eigen::VectorXd theoOrien;
+        //size is (2, bufferSize)
+        Eigen::MatrixXd posBuf;
+        //size is bufferSize
+        Eigen::VectorXd orienBuf;
 
         ros::Subscriber listenerRobotPose;
         ros::Subscriber listenerAccel;
 
-        bool updateAutoMotive;
-        double msgAutoMotive[4];
-        int triggerAutoMotive;
-
     public:
 
+        ros::NodeHandle n;
         bool updateLeds;
         int msgLeds[3];
         bool updateReset;
         double msgReset[4];
+        bool updateAutoMotive;
+        double msgAutoMotive[4];
+        int triggerAutoMotive;
 
         Node(double releaseTime, std::string tagExt);
         void publishGreenLed(int intensity);
         void publishRedLed(int intensity);
         void publishBlueLed(int intensity);
         void ledOff();
-        void listenRobotPoseCallback(const nav_msgs::Odometry& odomMsg);
-        void listenAccelCallback(const sensor_msgs::Imu& accelMsg);
+        void listenRobotPoseCallback(const nav_msgs::Odometry::ConstPtr& odomMsg);
+        void listenAccelCallback(const sensor_msgs::Imu::ConstPtr& accelMsg);
         void nodePrintPositionMeasures();
         void computeMove(double pol[2]);
         void nodeReset(const std::string type = "odom");
