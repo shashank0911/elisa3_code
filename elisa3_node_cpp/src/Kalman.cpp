@@ -2,74 +2,74 @@
 
 Kalman::Kalman() {
 
-    A_k_1 = Eigen::MatrixXd(3, 3);
-    A_k_1 << 1.0, 0, 0,
-             0, 1.0, 0,
-             0, 0, 1.0;
-
-    process_noise_v_k_minus_1 = Eigen::VectorXd(3);
-    process_noise_v_k_minus_1 << 0.00, 0.00, 0.00;
-
-    Q_k = Eigen::MatrixXd(3, 3);
-    Q_k << 1, 0, 0,
-           0, 1, 0,
-           0, 0, 1;
-
-    H_k = Eigen::MatrixXd(3, 3);
-    H_k << 1.0, 0, 0,
+    // Ak1 = Eigen::MatrixXd(3, 3);
+    Ak1 << 1.0, 0, 0,
            0, 1.0, 0,
            0, 0, 1.0;
 
-    R_k = Eigen::MatrixXd(3, 3);
-    R_k << 0.1, 0, 0,
+    // processNoiseVkMinus1 = Eigen::VectorXd(3);
+    processNoiseVkMinus1 << 0.00, 0.00, 0.00;
+
+    // Qk = Eigen::MatrixXd(3, 3);
+    Qk << 1, 0, 0,
+          0, 1, 0,
+          0, 0, 1;
+
+    // Hk = Eigen::MatrixXd(3, 3);
+    Hk << 1.0, 0, 0,
+          0, 1.0, 0,
+          0, 0, 1.0;
+
+    // Rk = Eigen::MatrixXd(3, 3);
+    Rk << 0.1, 0, 0,
+          0, 0.1, 0,
+          0, 0, 0.1;
+
+    // sensorNoiseWk = Eigen::VectorXd(3);
+    sensorNoiseWk << 0.00, 0.00, 0.00;
+
+    // Pk1 = Eigen::MatrixXd(3, 3);
+    Pk1 << 0.1, 0, 0,
            0, 0.1, 0,
            0, 0, 0.1;
-
-    sensor_noise_w_k = Eigen::VectorXd(3);
-    sensor_noise_w_k << 0.00, 0.00, 0.00;
-
-    P_k_1 = Eigen::MatrixXd(3, 3);
-    P_k_1 << 0.1, 0, 0,
-             0, 0.1, 0,
-             0, 0, 0.1;
 }
 
-std::tuple<Eigen::VectorXd, Eigen::MatrixXd> Kalman::sr_EKF(const Eigen::VectorXd& z_k, const Eigen::VectorXd& state_estimate_k, double dk) {
+std::pair<Eigen::Vector3d, Eigen::Matrix3d> Kalman::srEKF(const Eigen::Vector3d& Zk, const Eigen::Vector3d& stateEstimateK, double dk) {
 
-    Eigen::MatrixXd P_k = this->A_k_1 * this->P_k_1 * this->A_k_1.transpose() + this->Q_k;
-    Eigen::VectorXd measurement_residual_y_k = z_k - ((this->H_k * state_estimate_k) + this->sensor_noise_w_k);
-    Eigen::MatrixXd S_k = this->H_k * P_k * this->H_k.transpose() + this->R_k;
-    Eigen::MatrixXd K_k = P_k * this->H_k.transpose() * S_k.inverse();
+    Eigen::Matrix3d Pk = Ak1 * Pk1 * Ak1.transpose() + Qk;
+    Eigen::Vector3d measurementResidualYk = Zk - ((Hk * stateEstimateK) + sensorNoiseWk);
+    Eigen::Matrix3d Sk = Hk * Pk * Hk.transpose() + Rk;
+    Eigen::Matrix3d Kk = Pk * Hk.transpose() * Sk.inverse();
 
-    Eigen::VectorXd optimal_state_estimate_k = state_estimate_k * (K_k * measurement_residual_y_k);
-    P_k = P_k - (K_k * this->H_k * P_k);
+    Eigen::Vector3d optimalStateEstimateK = stateEstimateK * (Kk * measurementResidualYk);
+    Pk = Pk - (Kk * Hk * Pk);
 
-    return std::make_tuple(optimal_state_estimate_k, P_k);
+    return std::make_pair(optimalStateEstimateK, Pk);
 }
 
-Eigen::MatrixXd Kalman::get_B_M(int t) {
+Eigen::MatrixXd Kalman::getBm(int t) {
 
-    Eigen::MatrixXd B_M = this->H_k;
+    Eigen::Matrix3d Bm = Hk;
 
     for (int i = 0; i < t-1; i++) {
-        B_M.conservativeResize(B_M.rows(), B_M.cols() + this->H_k.cols());
-        B_M.block(0, B_M.cols() - this->H_k.cols(), this->H_k.rows(), this->H_k.cols()) = this->H_k;
+        Bm.conservativeResize(Bm.rows(), Bm.cols() + Hk.cols());
+        Bm.block(0, Bm.cols() - Hk.cols(), Hk.rows(), Hk.cols()) = Hk;
     }
 
-    return B_M;
+    return Bm;
 }
 
-std::tuple<Eigen::VectorXd, Eigen::MatrixXd> Kalman::mr_EKF(const Eigen::VectorXd& z_k_M, const Eigen::VectorXd& state_estimate_k_M, const Eigen::VectorXd& u_k_1, double dk) {
+std::pair<Eigen::Vector3d, Eigen::Matrix3d> Kalman::mrEKF(const Eigen::Vector3d& Zkm, const Eigen::Vector3d& stateEstimateKm, double dk) {
 
-    Eigen::MatrixXd B_M = this->get_B_M(5);
+    // Eigen::MatrixXd Bm = getBm(5);
 
-    Eigen::MatrixXd P_k_M = this->A_k_1 * this->P_k_1 *this->A_k_1.transpose() + 5 * this->Q_k;
-    Eigen::VectorXd measurement_residual_y_k = z_k_M - ((this->H_k * state_estimate_k_M) + this->sensor_noise_w_k);
-    Eigen::MatrixXd S_k_M = this->H_k * P_k_M * this->H_k.transpose() + this->R_k;
-    Eigen::MatrixXd K_k_M = P_k_M * this->H_k.transpose() * S_k_M.inverse();
-    Eigen::VectorXd optimal_state_estimate_k_M = state_estimate_k_M + (K_k_M * measurement_residual_y_k);
-    P_k_M = P_k_M - (K_k_M * this->H_k * P_k_M);
+    Eigen::Matrix3d Pkm = Ak1 * Pk1 *Ak1.transpose() + 5 * Qk;
+    Eigen::Vector3d measurementResidualYk = Zkm - ((Hk * stateEstimateKm) + sensorNoiseWk);
+    Eigen::Matrix3d Skm = Hk * Pkm * Hk.transpose() + Rk;
+    Eigen::Matrix3d Kkm = Pkm * Hk.transpose() * Skm.inverse();
+    Eigen::Vector3d optimalStateEstimateKm = stateEstimateKm + (Kkm * measurementResidualYk);
+    Pkm = Pkm - (Kkm * Hk * Pkm);
 
-    return std::make_tuple(optimal_state_estimate_k_M, P_k_M);
+    return std::make_pair(optimalStateEstimateKm, Pkm);
 
 }
