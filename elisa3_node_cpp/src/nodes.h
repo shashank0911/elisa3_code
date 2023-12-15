@@ -32,7 +32,7 @@ class CameraMarker {
         int currentNumber;
         std::vector<double> measurementList;
 
-        CameraMarker(int N, const std::vector<std::string>& activeRobots);
+        CameraMarker(int N);
         //TODO - check datatype of optiMsg
         void listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg);
 };
@@ -65,7 +65,6 @@ class Cameras {
 
         int number;
         std::map<int, Camera> cameras;
-        //TODO -  check datatype of msmtList
         
         //TODO - check if this publisher is necessary
         // ros::Publisher publisherCams;
@@ -96,7 +95,7 @@ class Node {
         double startPos[2];
         double startOrien;
 
-        // robot meas pose and ribot meas orien values are found in odomVals
+        // robot meas pose and robot meas orien values are found in odomVals
         // Eigen::Vector2d robot_meas_pose;
         // double robot_meas_orien;
         // double robotMeasTime;
@@ -148,8 +147,8 @@ class Node {
         std::map<std::string, double> setup;
         //size is (2, bufferSize)
         Eigen::MatrixXd posBuf;
-        //size is bufferSize
-        Eigen::VectorXd orienBuf;
+        //size is (1, bufferSize)
+        Eigen::MatrixXd orienBuf;
 
         ros::Subscriber listenerRobotPose;
         ros::Subscriber listenerAccel;
@@ -161,9 +160,9 @@ class Node {
         int msgLeds[3];
         bool updateReset;
         double msgReset[4];
-        bool updateAutoMotive;
-        double msgAutoMotive[4];
-        int triggerAutoMotive;
+        bool updateAutoMove;
+        double msgAutoMove[4];
+        int triggerAutoMove;
 
         Node(double releaseTime, std::string tagExt);
         void publishGreenLed(int intensity);
@@ -195,7 +194,7 @@ class Nodes {
         int N;
 
         //TODO - check if we need publishers
-        // ros::Publisher publisherAutoMotive;
+        // ros::Publisher publisherAutoMove;
         // ros::Publisher publisherLeds;
         // ros::Publisher publisherReset;
         // ros::Publisher publisherInput;
@@ -208,6 +207,7 @@ class Nodes {
         // std_msgs::Float64MultiArray msgReset;
         std::vector<int> msgLeds;
         std::vector<double> msgReset;
+        std::vector<double> msgAutoMove;
 
         std::map<std::string, Node> nodes;
         Cameras cameras;

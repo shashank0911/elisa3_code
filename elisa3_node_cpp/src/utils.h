@@ -11,7 +11,7 @@ const bool obstacles = false;
 
 Eigen::Vector2d cart2pol(const Eigen::Vector2d& cart);
 Eigen::Vector2d pol2cart (const Eigen::Vector2d& pol);
-Eigen::VectorXd renewVec(const Eigen::VectorXd& oldVec);
+Eigen::MatrixXd renewVec(const Eigen::MatrixXd& oldVec);
 double yawFromQuaternion(double x, double y, double z, double w);
 
 class ObstacleAvoidance {

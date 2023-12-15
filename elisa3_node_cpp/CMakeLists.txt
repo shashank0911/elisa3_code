@@ -95,6 +95,8 @@ catkin_package(
 ###########
 ## Build ##
 ###########
+# Include Eigen headers
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/eigen)
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations

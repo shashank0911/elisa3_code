@@ -26,8 +26,8 @@ ObstacleAvoidance obstacleAvoidance;
 
 
 
-//TODO - check if argument activeRobots is really necessary
-CameraMarker::CameraMarker(int N, const std::vector<std::string>& activeRobots) {
+//  TODO - check if argument activeRobots is really necessary
+CameraMarker::CameraMarker(int N) {
     number = N;
     currentNumber = N;
     listenerCameraList = n.subscribe("Bebop1/makers", 10, &CameraMarker::listenOptitrackMarkersCallback, this);
@@ -41,6 +41,7 @@ void CameraMarker::listenOptitrackMarkersCallback(const std_msgs::Float64MultiAr
     int nRobots = int(optiMsg->data[0]);
     measurementList.resize(nRobots);
     for (int i = 0; i < nRobots; i++) {
+        //TODO - check if it should be double or int
         measurementList[i] = double(optiMsg->data[i]);
     }
 }
@@ -167,11 +168,11 @@ Node::Node(double releaseTime, std::string tagExt) {
         {"ao_scaling", 0.00005}
     };
 
-    posBuf.resize(2,bufferSize);
+    posBuf.resize(2, bufferSize);
     for (int i = 0; i < bufferSize; i++) {
         posBuf.col(i) << startPos[0], startPos[1];
     }
-    orienBuf.resize(5);
+    orienBuf.resize(1, bufferSize);
     orienBuf.fill(startOrien);
 
     listenerRobotPose = n.subscribe("elisa3_robot_" + tag + "/odom", 10, listenRobotPoseCallback, this);
@@ -182,12 +183,12 @@ Node::Node(double releaseTime, std::string tagExt) {
         msgLeds[i] = 0;
     }
     updateReset = false;
-    updateAutoMotive = false;
+    updateAutoMove = false;
     for (int i = 0; i < 4; i++) {
         msgReset[i] = 0.0;
-        msgAutoMotive[i] = 0.0;
+        msgAutoMove[i] = 0.0;
     }
-    triggerAutoMotive = 103;
+    triggerAutoMove = 103;
 
 }
 
@@ -234,7 +235,7 @@ void Node::nodePrintPositionMeasures() {
         << "Estimation - Position: (" << curEst(0) << ", " << curEst(1) << "), Orientation: " << curEst(2) << "\n"
         << "Odometry - Position: (" << odomVals(0) << ", " << odomVals(1) << "), Orientation: " << odomVals(2) << "\n"
         << "Camera - Position: (" << camVals(0) << ", " << camVals(1) << "), Orientation: " << camVals(2) << "\n"
-        << "Accelerometer - Position: (" << accelVals(3) << ", " << accelVals(4) << "), Velocity: " << curEst(0) << "\n";
+        << "Accelerometer - Position: (" << accelVals(3) << ", " << accelVals(4) << "), Velocity: " << accelVals(0) << "\n";
 
     cout << msg.str() << endl;
 }
@@ -242,7 +243,7 @@ void Node::nodePrintPositionMeasures() {
 void Node::computeMove(double pol[2]) {
     nodePrintPositionMeasures();
 
-    double orienCor = orienBuf(bufferSize - 1);
+    double orienCor = orienBuf(1, bufferSize - 1);
     if (orienCor < 0.0) {
         orienCor += 2*PI;
     }
@@ -252,7 +253,7 @@ void Node::computeMove(double pol[2]) {
     }
 
     double phiCor = pol[1];
-    if (phiCor < 0) {
+    if (phiCor < 0.0) {
         phiCor += 2*PI;
     }
     phiCor = fmod(phiCor, 2*PI);
@@ -261,23 +262,23 @@ void Node::computeMove(double pol[2]) {
     }
 
     double deltaPhi = phiCor - orienCor;
-    if (deltaPhi >= 0) {
-        msgAutoMotive[0] = 1;
-        msgAutoMotive[1] = deltaPhi;
-        msgAutoMotive[2] = 0;
-        msgAutoMotive[3] = pol[0];
+    if (deltaPhi >= 0.0) {
+        msgAutoMove[0] = 1.0;
+        msgAutoMove[1] = deltaPhi;
+        msgAutoMove[2] = 0.0;
+        msgAutoMove[3] = pol[0];
     } else {
-        msgAutoMotive[0] = 0;
-        msgAutoMotive[1] = -deltaPhi;
-        msgAutoMotive[2] = 0;
-        msgAutoMotive[3] = pol[0];
+        msgAutoMove[0] = 0.0;
+        msgAutoMove[1] = -deltaPhi;
+        msgAutoMove[2] = 0.0;
+        msgAutoMove[3] = pol[0];
     }
 
-    updateAutoMotive = true;
-    if (triggerAutoMotive == 103) {
-        triggerAutoMotive = 104;
+    updateAutoMove = true;
+    if (triggerAutoMove == 103) {
+        triggerAutoMove = 104;
     } else {
-        triggerAutoMotive = 103;
+        triggerAutoMove = 103;
     }
 
     Eigen::Vector2d polVec;
@@ -289,7 +290,7 @@ void Node::computeMove(double pol[2]) {
     orienBuf = renewVec(orienBuf);
 
     posBuf.col(bufferSize - 1) << calcPoint;
-    orienBuf(bufferSize - 1) += deltaPhi; 
+    orienBuf(1, bufferSize - 1) += deltaPhi; 
 }
 
 void Node::nodeReset(const std::string type = "odom") {
@@ -298,7 +299,7 @@ void Node::nodeReset(const std::string type = "odom") {
             cout << "Robot " << tag << "'s odometry measurement outputs NaN" << endl;
         } else {
             posBuf.col(bufferSize - 1) << odomVals(0), odomVals(1);
-            orienBuf(bufferSize - 1) == odomVals(2);
+            orienBuf(1, bufferSize - 1) == odomVals(2);
         }
         updateReset = false;
     } else if (type == "theor") {
@@ -340,7 +341,7 @@ bool Node::terminate() {
 }
 
 Eigen::Vector3d Node::determineCameraMarker(CameraMarker& cameraMarker) {
-    double minDist = 1e-5;
+    double minDist = 1e5;
     int i = 0;
     Eigen::Vector2d camMarkerMeas;
     cout << "Camera marker number: " << cameraMarker.currentNumber << endl;
@@ -366,8 +367,9 @@ Eigen::Vector3d Node::determineCameraMarker(CameraMarker& cameraMarker) {
 }
 
 Eigen::Vector3d Node::determineCamera(Cameras& cameras) {
-    double minDist = 1e-5;
+    double minDist = 1e5;
     cameras.updateCamera();
+
     int idx = std::stoi(tag);
     camVals = cameras.measurementList.row(idx).head(3);
     camTimer = cameras.measurementList(idx, 3);
@@ -440,23 +442,23 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     }
 
     //fuse with odometry
-    kalmanOdom.Rk << 1.0, 0, 0,
-                     0, 1.0, 0,
-                     0, 0, 1.0;
-    kalmanOdom.Qk << 0.01, 0, 0,
-                     0, 0.01, 0,
-                     0, 0, 0.01;
+    kalmanOdom.Rk << 1.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0,
+                     0.0, 0.0, 1.0;
+    kalmanOdom.Qk << 0.01, 0.0, 0.0,
+                     0.0, 0.01, 0.0,
+                     0.0, 0.0, 0.01;
     auto [optimalStateEstimateK, covarianceEstimateK] = kalmanOdom.srEKF(measurements.row(0), curEst, 1);
     Eigen::Vector3d odomEst = optimalStateEstimateK;
     kalmanOdom.Pk1 = covarianceEstimateK;
 
     //fuse with acceleroemeter
-    kalmanAccel.Rk << 0.5, 0, 0,
-                      0, 0.5, 0,
-                      0, 0, 0.5;
-    kalmanAccel.Qk << 0.01, 0, 0,
-                      0, 0.01, 0,
-                      0, 0, 0.01;
+    kalmanAccel.Rk << 0.5, 0.0, 0.0,
+                      0.0, 0.5, 0.0,
+                      0.0, 0.0, 0.5;
+    kalmanAccel.Qk << 0.01, 0.0, 0.0,
+                      0.0, 0.01, 0.0,
+                      0.0, 0.0, 0.01;
     auto [optimalStateEstimateK, covarianceEstimateK] = kalmanAccel.srEKF(measurements.row(1), curEst, 1);
     Eigen::Vector3d accelEst = optimalStateEstimateK;
     kalmanAccel.Pk1 = covarianceEstimateK;
@@ -476,7 +478,7 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     double tempOdom = (sumOdom + sumAccel) / sumOdom;
     double tempAccel = (sumOdom + sumAccel) / sumAccel;
     double tempSum = tempOdom + tempAccel + offset;
-    OwaWeights << tempOdom/tempSum, 0, tempAccel/tempSum;
+    OwaWeights << tempOdom/tempSum, 0.0, tempAccel/tempSum;
     curEst = OwaWeights(0) * odomEst + OwaWeights(2) * accelEst;
 
     //TODO - check for datatype of t
@@ -559,7 +561,7 @@ Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
 
     activeRobots = activeRobotsExt;
     N = activeRobots.size();
-    float releaseTime = 0.0;
+    double releaseTime = 0.0;
     //TODO - check if we need publisher modules
     for (const string& tag : activeRobots) {
         bool flag = false;
@@ -580,19 +582,28 @@ Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
         }         
     }
     cameras = Cameras(N);
-    cameraMarker = CameraMarker(N, activeRobots);
+    cameraMarker = CameraMarker(N);
 
     std::vector<int> msgLeds(N*4 + 1);
     std::vector<double> msgReset(N*5 + 1);
+    std::vector<double> msgAutoMove(N*5)
     //TODO - figure out datatype/format of saved data
     // savedData = 
 }
 
 void Nodes::nodesLoopFn(const std::string moveType = "move") {
+    int i = 0;
     for (const auto& node: nodes) {
         nodes[node.first].nodeLoopFun(cameras, cameraMarker, moveType);
+        msgAutoMove[i*5 + 0] = std::stod(node.first);
+        msgAutoMove[i*5 + 1] = node.second.msgAutoMove[0];
+        msgAutoMove[i*5 + 2] = node.second.msgAutoMove[1];
+        msgAutoMove[i*5 + 3] = node.second.msgAutoMove[2];
+        msgAutoMove[i*5 + 4] = node.second.msgAutoMove[3];
+        i++;
     }
-    //TODO - publisher
+    //TODO - publisher; send msgAutoMove to elisa3 fn
+
     usleep(int(SAMPLING_TIME*1000000));
 }
 
@@ -624,6 +635,7 @@ void Nodes::printFn() {
 void Nodes::move(const std::string moveType = "move", double stepSize = 0.0, double theta = 0.0) {
     double step = 0.0;
     double omega = 0.0;
+    int i = 0;
     for (const auto& tag : nodes) {
         if (moveType == "move") {
             auto [step, omega] = nodes[tag.first].goToGoal();
@@ -633,8 +645,15 @@ void Nodes::move(const std::string moveType = "move", double stepSize = 0.0, dou
         }
         double pol[2] = {step, omega};
         nodes[tag.first].computeMove(pol);
+
+        msgAutoMove[i*5 + 0] = std::stod(tag.first);
+        msgAutoMove[i*5 + 1] = tag.second.msgAutoMove[0];
+        msgAutoMove[i*5 + 2] = tag.second.msgAutoMove[1];
+        msgAutoMove[i*5 + 3] = tag.second.msgAutoMove[2];
+        msgAutoMove[i*5 + 4] = tag.second.msgAutoMove[3];
+        i++;
     }
-    //TODO - publisher
+    //TODO - publisher for msg automotive
 
     usleep(int(SAMPLING_TIME*1000000));
 }
@@ -654,7 +673,7 @@ void Nodes::updateLeds() {
         count++;
     }
     msgLeds[0] = count;
-    //TODO - call the elisa node fn to update robot dict
+    //TODO - publisher; call the elisa node fn to update robot dict
 }
 
 void Nodes::nodesReset(const std::string type = "odom") {
@@ -677,7 +696,7 @@ void Nodes::nodesReset(const std::string type = "odom") {
         //TODO - update printed message
         cout << "Reset - theoretical" << endl;
         msgReset[0] = count;
-        //TODO - call the elisa node fn to update robot dict
+        //TODO - publisher; call the elisa node fn to update robot dict
     }
 }
 
