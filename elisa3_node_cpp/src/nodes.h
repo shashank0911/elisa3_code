@@ -5,6 +5,7 @@
 #include <Eigen/Dense>
 #include <map>
 #include <string>
+#include <boost/variant.hpp>
 #include "utils.h"
 #include "Kalman.h"
 #include <ros/ros.h>
@@ -37,7 +38,7 @@ class CameraMarker {
         void listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg);
 };
 
-class Camera {
+class CameraNode {
 
     private:
 
@@ -53,7 +54,7 @@ class Camera {
         double timer;
         ros::NodeHandle n;
 
-        Camera(int tag);
+        CameraNode(int tag);
         //TODO - check datatype of optiMsg
         void listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg);
         void listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::ConstPtr& optiMsg);
@@ -64,7 +65,7 @@ class Cameras {
     private:
 
         int number;
-        std::map<int, Camera> cameras;
+        std::map<int, CameraNode*> cameras;
         
         //TODO - check if this publisher is necessary
         // ros::Publisher publisherCams;
@@ -72,15 +73,16 @@ class Cameras {
 
     public:
 
-        ros::NodeHandle n;
+        // ros::NodeHandle n;
         //size (N, 4) N - from Cameras()
         //measurement for one item is along the row
         Eigen::MatrixXd measurementList;
-        Eigen::MatrixXd measurementListPrev;
+        // Eigen::MatrixXd measurementListPrev;
+        std::vector<double> msgCam;
 
         Cameras(int N);
         void updateCamera();
-        // void publish();
+        void publishCams();
 };
 
 class Node {
@@ -109,34 +111,14 @@ class Node {
         // x, y, phi values
         Eigen::Vector3d xyphiVals;
 
-        // odom x, y, phi, timer values
-        Eigen::Vector3d odomVals;
-        double odomTimer;
-
-        // cam x, y, phi, timer values
-        Eigen::Vector3d camVals;
-        double camTimer;
-
-        // accel x, y, x_lowpass, xpos, ypos values
-        Eigen::VectorXd accelVals;
-
         Eigen::Vector3d camPrev;
         double minDistPrev;
 
-        Eigen::Vector3d theoPosn;
         Eigen::Vector3d prevEst;
-        Eigen::Vector3d curEst;
-
-        Kalman kalmanOdom;
-        Kalman kalmanCam;
-        Kalman kalmanAccel;
 
         double threshold;
         
         int bufferSize;
-
-        // owa_w1, owa_w2, owa_w3
-        Eigen::Vector3d OwaWeights;
 
         //sizes for all three are bufferSize
         Eigen::VectorXd odomErrorBuffer;
@@ -163,6 +145,28 @@ class Node {
         bool updateAutoMove;
         double msgAutoMove[4];
         int triggerAutoMove;
+
+        // odom x, y, phi, timer values
+        Eigen::Vector3d odomVals;
+        double odomTimer;
+
+        // cam x, y, phi, timer values
+        Eigen::Vector3d camVals;
+        double camTimer;
+
+        // accel x, y, x_lowpass, xpos, ypos values
+        Eigen::VectorXd accelVals;
+
+        Eigen::Vector3d curEst;
+        Eigen::Vector3d theoPosn;
+
+        Kalman kalmanOdom;
+        Kalman kalmanCam;
+        Kalman kalmanAccel;
+
+        // owa_w1, owa_w2, owa_w3
+        Eigen::Vector3d OwaWeights;
+
 
         Node(double releaseTime, std::string tagExt);
         void publishGreenLed(int intensity);
@@ -205,17 +209,20 @@ class Nodes {
         // std_msgs::Float64MultiArray msgInputs;
         // std_msgs::Float64MultiArray msgLeds;
         // std_msgs::Float64MultiArray msgReset;
+        
+        //TODO - figure out datatype of stored data
+        using multiType = boost::variant<double, Eigen::Matrix3d, std::vector<double>>;
+        std::map<int, std::map<std::string, std::map<std::string, multiType>>> savedData;
+        
+
+    public:
+
+        std::map<std::string, Node*> nodes;
+        Cameras cameras;
+        CameraMarker cameraMarker;
         std::vector<int> msgLeds;
         std::vector<double> msgReset;
         std::vector<double> msgAutoMove;
-
-        std::map<std::string, Node> nodes;
-        Cameras cameras;
-        CameraMarker cameraMarker;
-        //TODO - figure out datatype of stored data
-        std::map<std::string, std::vector<double>> savedData;
-
-    public:
 
         Nodes(std::vector<std::string> activeRobotsExt);
         void nodesLoopFn(const std::string moveType = "move");
@@ -229,7 +236,8 @@ class Nodes {
         void turnOffLeds();
         void setLeds(const int ledIntensity[3]);
         void nodesPrintPositionMeasures();
-        void storeData(double t);
+        void storeData(int t);
+        void saveData(int t);
 
 };
 

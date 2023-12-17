@@ -49,23 +49,23 @@ void CameraMarker::listenOptitrackMarkersCallback(const std_msgs::Float64MultiAr
 
 
 
-Camera::Camera(int tag_ext) {
+CameraNode::CameraNode(int tag_ext) {
     camX = 0.0;
     camY = 0.0;
     camPhi = 0.0;
     tag = tag_ext;
     timer = 0.0;
-    listenerCamera = n.subscribe("Bebop" + std::to_string(tag + 1) + "/ground_pose", 10, &Camera::listenOptitrackCallback, this);
-    listenerCameraTimer = n.subscribe("Bebop" + std::to_string(tag + 1) + "/pose", 10, &Camera::listenOptitrackTimerCallback, this);
+    listenerCamera = n.subscribe("Bebop" + std::to_string(tag + 1) + "/ground_pose", 10, &CameraNode::listenOptitrackCallback, this);
+    listenerCameraTimer = n.subscribe("Bebop" + std::to_string(tag + 1) + "/pose", 10, &CameraNode::listenOptitrackTimerCallback, this);
 }
 
-void Camera::listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg) {
+void CameraNode::listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg) {
     camX = optiMsg->x;
     camY = optiMsg->y;
     camPhi = optiMsg->theta;
 }
 
-void Camera::listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::ConstPtr& optiMsg) {
+void CameraNode::listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::ConstPtr& optiMsg) {
     timer = optiMsg->header.stamp.toSec();
 }
 
@@ -75,29 +75,39 @@ void Camera::listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::Cons
 Cameras::Cameras(int N) {
     number = N;
     for (int tag = 0; tag < N; tag++) {
-        cameras[tag] = Camera(tag);
+        cameras[tag] = new CameraNode(tag);
     }
     measurementList = Eigen::MatrixXd(N, 4);
     //TODO - check if below variable is necessary
     // measurementListPrev = Eigen::MatrixXd(N, 4);
 
     //TODO - work on the publish part later if necessary. involves msgcam, publishercams
+    std::vector<double> msgCam(number*3 + 1);
 }
 
 void Cameras::updateCamera() {
     int i = 0;
     for (const auto& camera: cameras) {
         //TODO - what does this do??
-        measurementList(i,0) = 2.0 + camera.second.camY;
-        measurementList(i,1) = 1.0 + camera.second.camX;
-        measurementList(i,2) = camera.second.camPhi;
-        measurementList(i,3) = camera.second.timer;
+        measurementList(i,0) = 2.0 + camera.second->camY;
+        measurementList(i,1) = 1.0 + camera.second->camX;
+        measurementList(i,2) = camera.second->camPhi;
+        measurementList(i,3) = camera.second->timer;
         i++;
     }
 }
 
 //TODO
-// void Cameras::publish()
+void Cameras::publishCams() {
+    int count = 0;
+    for (int i = 0; i < number; i++) {
+        msgCam[i*3 + 1] = measurementList(i, 0);
+        msgCam[i*3 + 2] = measurementList(i, 1);
+        msgCam[i*3 + 3] = measurementList(i, 2);
+        count++;
+    }
+    msgCam[0] = number;
+}
 
 
 
@@ -175,8 +185,8 @@ Node::Node(double releaseTime, std::string tagExt) {
     orienBuf.resize(1, bufferSize);
     orienBuf.fill(startOrien);
 
-    listenerRobotPose = n.subscribe("elisa3_robot_" + tag + "/odom", 10, listenRobotPoseCallback, this);
-    listenerAccel = n.subscribe("swarm/elisa3_robot_" + tag + "/accel", 10, listenAccelCallback, this);
+    listenerRobotPose = n.subscribe("elisa3_robot_" + tag + "/odom", 10, &Node::listenRobotPoseCallback, this);
+    listenerAccel = n.subscribe("swarm/elisa3_robot_" + tag + "/accel", 10, &Node::listenAccelCallback, this);
 
     updateLeds = false;
     for (int i = 0; i < 3; i++) {
@@ -293,7 +303,7 @@ void Node::computeMove(double pol[2]) {
     orienBuf(1, bufferSize - 1) += deltaPhi; 
 }
 
-void Node::nodeReset(const std::string type = "odom") {
+void Node::nodeReset(const std::string type) {
     if (type == "odom") {
         if (odomVals.hasNaN()) {
             cout << "Robot " << tag << "'s odometry measurement outputs NaN" << endl;
@@ -324,7 +334,7 @@ std::pair<double, double> Node::goToGoal() {
     Eigen::Vector2d err;
     err << goalX - curEst.head(2);
     Eigen::Vector2d Kp(-50, -50);
-    double v = (Kp * err).norm();
+    double v = (Kp.cwiseProduct(err)).norm();
     double phi = std::atan2(err(1), err(0));
     double omega = setup["Kp"] * std::atan2( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
     return std::make_pair(v, omega);
@@ -550,7 +560,7 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
 
 
 
-Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
+Nodes::Nodes(std::vector<std::string> activeRobots) : cameras(activeRobots.size()), cameraMarker(activeRobots.size()) {
 
     std::ifstream file("mapper.json");
     Json::Value mapper;
@@ -559,7 +569,7 @@ Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
     // Json::Value addressList = mapper["address"];
     std::vector<std::string> keys = mapper.getMemberNames();
 
-    activeRobots = activeRobotsExt;
+    this->activeRobots = activeRobots;
     N = activeRobots.size();
     double releaseTime = 0.0;
     //TODO - check if we need publisher modules
@@ -573,7 +583,7 @@ Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
                 }
             }
             if (flag == true) {
-                nodes[tag] = Node(releaseTime, tag);
+                nodes[tag] = new Node(releaseTime, tag);
             } else {
                 cout << "Robot with address " << tag << " not found in mapper.json" << endl; 
             }
@@ -581,27 +591,28 @@ Nodes::Nodes(std::vector<std::string> activeRobotsExt) {
             cout << "No robots found in JSON list" << endl;
         }         
     }
-    cameras = Cameras(N);
-    cameraMarker = CameraMarker(N);
 
     std::vector<int> msgLeds(N*4 + 1);
     std::vector<double> msgReset(N*5 + 1);
-    std::vector<double> msgAutoMove(N*5)
+    std::vector<double> msgAutoMove(N*5 + 1);
     //TODO - figure out datatype/format of saved data
     // savedData = 
 }
 
-void Nodes::nodesLoopFn(const std::string moveType = "move") {
+void Nodes::nodesLoopFn(const std::string moveType) {
     int i = 0;
+    int count = 0;
     for (const auto& node: nodes) {
-        nodes[node.first].nodeLoopFun(cameras, cameraMarker, moveType);
-        msgAutoMove[i*5 + 0] = std::stod(node.first);
-        msgAutoMove[i*5 + 1] = node.second.msgAutoMove[0];
-        msgAutoMove[i*5 + 2] = node.second.msgAutoMove[1];
-        msgAutoMove[i*5 + 3] = node.second.msgAutoMove[2];
-        msgAutoMove[i*5 + 4] = node.second.msgAutoMove[3];
+        nodes[node.first]->nodeLoopFun(cameras, cameraMarker, moveType);
+        msgAutoMove[i*5 + 1] = std::stod(node.first);
+        msgAutoMove[i*5 + 2] = node.second->msgAutoMove[0];
+        msgAutoMove[i*5 + 3] = node.second->msgAutoMove[1];
+        msgAutoMove[i*5 + 4] = node.second->msgAutoMove[2];
+        msgAutoMove[i*5 + 5] = node.second->msgAutoMove[3];
         i++;
+        count++;
     }
+    msgReset[0] = count;
     //TODO - publisher; send msgAutoMove to elisa3 fn
 
     usleep(int(SAMPLING_TIME*1000000));
@@ -618,7 +629,7 @@ void Nodes::testCam() {
     }
 
     for (const auto& tag : nodes) {
-        Eigen::Vector3d camMeasurement = nodes[tag.first].determineCamera(cameras);
+        Eigen::Vector3d camMeasurement = nodes[tag.first]->determineCamera(cameras);
         cout << "Nearest camera for robot " << tag.first << endl;
         cout << "CamX: " << camMeasurement(0) << "\t";
         cout << "CamY: " << camMeasurement(1) << "\t";
@@ -628,31 +639,34 @@ void Nodes::testCam() {
 
 void Nodes::printFn() {
     for (const auto& tag : nodes) {
-        nodes[tag.first].nodePrintPositionMeasures();
+        nodes[tag.first]->nodePrintPositionMeasures();
     }
 }
 
-void Nodes::move(const std::string moveType = "move", double stepSize = 0.0, double theta = 0.0) {
+void Nodes::move(const std::string moveType, double stepSize, double theta) {
     double step = 0.0;
     double omega = 0.0;
     int i = 0;
+    int count = 0;
     for (const auto& tag : nodes) {
         if (moveType == "move") {
-            auto [step, omega] = nodes[tag.first].goToGoal();
+            auto [step, omega] = nodes[tag.first]->goToGoal();
         } else {
             step = stepSize;
             omega = theta;
         }
         double pol[2] = {step, omega};
-        nodes[tag.first].computeMove(pol);
+        nodes[tag.first]->computeMove(pol);
 
-        msgAutoMove[i*5 + 0] = std::stod(tag.first);
-        msgAutoMove[i*5 + 1] = tag.second.msgAutoMove[0];
-        msgAutoMove[i*5 + 2] = tag.second.msgAutoMove[1];
-        msgAutoMove[i*5 + 3] = tag.second.msgAutoMove[2];
-        msgAutoMove[i*5 + 4] = tag.second.msgAutoMove[3];
+        msgAutoMove[i*5 + 1] = std::stod(tag.first);
+        msgAutoMove[i*5 + 2] = tag.second->msgAutoMove[0];
+        msgAutoMove[i*5 + 3] = tag.second->msgAutoMove[1];
+        msgAutoMove[i*5 + 4] = tag.second->msgAutoMove[2];
+        msgAutoMove[i*5 + 5] = tag.second->msgAutoMove[3];
         i++;
+        count++;
     }
+    msgReset[0] = count;
     //TODO - publisher for msg automotive
 
     usleep(int(SAMPLING_TIME*1000000));
@@ -664,11 +678,11 @@ void Nodes::updateLeds() {
     // std::advance(bigIter, 1);
     int i = 0;
     for (const auto& tag : nodes) {
-        // auto smallIter = nodes[tag.first].msgLeds;
+        // auto smallIter = nodes[tag.first]->msgLeds;
         msgLeds[i*4 + 1] = std::stoi(tag.first);
-        msgLeds[i*4 + 2] = nodes[tag.first].msgLeds[0];
-        msgLeds[i*4 + 3] = nodes[tag.first].msgLeds[1];
-        msgLeds[i*4 + 4] = nodes[tag.first].msgLeds[2];
+        msgLeds[i*4 + 2] = nodes[tag.first]->msgLeds[0];
+        msgLeds[i*4 + 3] = nodes[tag.first]->msgLeds[1];
+        msgLeds[i*4 + 4] = nodes[tag.first]->msgLeds[2];
         i++;
         count++;
     }
@@ -676,17 +690,17 @@ void Nodes::updateLeds() {
     //TODO - publisher; call the elisa node fn to update robot dict
 }
 
-void Nodes::nodesReset(const std::string type = "odom") {
+void Nodes::nodesReset(const std::string type) {
     int count = 0;
     int i = 0;
     for (const auto& tag : nodes) {
-        nodes[tag.first].nodeReset(type);
-        if (nodes[tag.first].updateReset) {
+        nodes[tag.first]->nodeReset(type);
+        if (nodes[tag.first]->updateReset) {
             msgReset[i*5 + 1] = std::stod(tag.first);
-            msgReset[i*5 + 2] = nodes[tag.first].msgReset[0];
-            msgReset[i*5 + 3] = nodes[tag.first].msgReset[1];
-            msgReset[i*5 + 4] = nodes[tag.first].msgReset[2];
-            msgReset[i*5 + 5] = nodes[tag.first].msgReset[3];
+            msgReset[i*5 + 2] = nodes[tag.first]->msgReset[0];
+            msgReset[i*5 + 3] = nodes[tag.first]->msgReset[1];
+            msgReset[i*5 + 4] = nodes[tag.first]->msgReset[2];
+            msgReset[i*5 + 5] = nodes[tag.first]->msgReset[3];
             i++;
             count++;
         }
@@ -702,27 +716,70 @@ void Nodes::nodesReset(const std::string type = "odom") {
 
 void Nodes::turnOffLeds() {
     for (const auto& tag : nodes) {
-        nodes[tag.first].ledOff();
+        nodes[tag.first]->ledOff();
     }
     updateLeds();
 }
 
 void Nodes::setLeds(const int ledIntensity[3]) {
     for (const auto& tag : nodes) {
-        nodes[tag.first].publishGreenLed(ledIntensity[0]);
-        nodes[tag.first].publishRedLed(ledIntensity[1]);
-        nodes[tag.first].publishBlueLed(ledIntensity[2]);
+        nodes[tag.first]->publishGreenLed(ledIntensity[0]);
+        nodes[tag.first]->publishRedLed(ledIntensity[1]);
+        nodes[tag.first]->publishBlueLed(ledIntensity[2]);
     }
     updateLeds();
 }
 
 void Nodes::nodesPrintPositionMeasures() {
     for (const auto& tag : nodes) {
-        nodes[tag.first].nodePrintPositionMeasures();
+        nodes[tag.first]->nodePrintPositionMeasures();
     }
 }
 
-void Nodes::storeData(double t) {
+void Nodes::storeData(int t) {
     //TODO
+    savedData[t] = std::map<std::string, std::map<std::string, multiType>>();
+    for (const auto& node : nodes) {
+        savedData[t][node.first] = {
+            {"pos_x", node.second->odomVals(0)},
+            {"pos_y", node.second->odomVals(1)},
+            {"orien", node.second->odomVals(2)},
+            {"estimation_x", node.second->curEst(0)},
+            {"estimation_y", node.second->curEst(1)},
+            {"estimation_phi", node.second->curEst(2)},
+            {"cam_x", node.second->camVals(0)},
+            {"cam_y", node.second->camVals(1)},
+            {"cam_phi", node.second->camVals(2)},
+            {"x", node.second->theoPosn(0)},
+            {"y", node.second->theoPosn(1)},
+            {"phi", node.second->theoPosn(2)},
+            {"P_k_odo", node.second->kalmanOdom.Pk1},
+            {"P_k_cam", node.second->kalmanCam.Pk1},
+            {"odom_timer", node.second->odomTimer},
+            {"cam_timer", node.second->camTimer},
+            {"OWA_w1", node.second->OwaWeights(0)},
+            {"OWA_w2", node.second->OwaWeights(1)},
+            {"OWA_w3", node.second->OwaWeights(2)},
+            {"accel_x", node.second->accelVals(0)},
+            {"accel_x_lowpass", node.second->accelVals(2)},
+            {"accel_x_pos", node.second->accelVals(3)},
+            {"accel_y_pos", node.second->accelVals(4)},
+            {"full_camera", cameraMarker.measurementList}
+        };
+    }
+}
+
+void Nodes::saveData(int t) {
+    //TODO
+    std::ofstream file("./data/saved_data_for_test_1.bin", std::ios::binary);
+    if (file.is_open()) {
+        for (const auto& dataEntry : savedData) {
+            file.write(reinterpret_cast<const char*>(&dataEntry.second), sizeof(dataEntry.second));
+        }
+        file.close();
+    } else {
+        std::cerr << "Error while opening file" << endl;
+    }
+
 }
 
