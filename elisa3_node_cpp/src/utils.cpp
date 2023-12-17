@@ -106,7 +106,11 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
             Eigen::Vector2d d;
             d << det(refLineMinor), det(locations);
             Eigen::Vector2d inter;
-            inter << det(Eigen::Matrix2d(d, xdiff)) / div, det(Eigen::Matrix2d(d, ydiff)) / div;
+            Eigen::Matrix2d temp1;
+            temp1 << d, xdiff;
+            Eigen::Matrix2d temp2;
+            temp2 << d, ydiff;
+            inter << det(temp1) / div, det(temp2) / div;
             Eigen::Vector2d interVec = inter - locations.col(0);
 
             if (checkDirectionVectors(moveVec, interVec)) {
@@ -130,14 +134,15 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
 
-    Eigen::Vector2d no_obs_newPoint = startPoint + move;
+    // Eigen::Vector2d no_obs_newPoint = startPoint + move;
 
-    if (!checkInDomain(startPoint + move)) {
-        auto [indexLine, inter] = lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
-        if (indexLine != -1) {
+    // if (!checkInDomain(startPoint + move)) {
+    //     auto [indexLine, inter] = lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
+        // if (indexLine != -1) {
             
-        }
-    }
+        // }
+    // }
+    return std::make_pair(Eigen::Vector2d(0.0,0.0), false);
 }
 
 
