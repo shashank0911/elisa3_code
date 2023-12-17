@@ -15,6 +15,11 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
 )
 find_package(OpenCV REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+## Add JsonCpp library
+# find_package(jsoncpp REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -96,7 +101,7 @@ catkin_package(
 ## Build ##
 ###########
 # Include Eigen headers
-# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/eigen)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/eigen)
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -104,6 +109,7 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
+  ${JSONCPP_INCLUDE_DIRS}
 	src/pc-side-elisa3-library
 )
 
@@ -118,7 +124,7 @@ link_directories(src/pc-side-elisa3-library/linux)
 # )
 
 ## Declare a cpp executable
-add_executable(elisa3_node_cpp src/elisa3_node_cpp.cpp)
+add_executable(elisa3_node_cpp src/elisa3_node_cpp.cpp src/nodes.cpp src/utils.cpp src/Kalman.cpp)
 # add_executable(elisa3_node_cpp_1 src/elisa3_node_cpp_1.cpp)
 add_executable(elisa3_odom_filter src/elisa3_odom_filter.cpp)
 
@@ -127,11 +133,11 @@ add_executable(elisa3_odom_filter src/elisa3_odom_filter.cpp)
 # add_dependencies(epuck_driver_cpp_node epuck_driver_cpp_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(elisa3_node_cpp ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0
+target_link_libraries(elisa3_node_cpp ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0 ${JSONCPP_LIBRARIES}
 )
 # target_link_libraries(elisa3_node_cpp_1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0
 # )
-target_link_libraries(elisa3_odom_filter ${catkin_LIBRARIES} 
+target_link_libraries(elisa3_odom_filter ${catkin_LIBRARIES} ${JSONCPP_LIBRARIES}
 )
 
 #############
