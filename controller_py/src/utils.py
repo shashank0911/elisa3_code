@@ -148,6 +148,8 @@ class ObstacleAvoidance:
             index_line, inter = self.line_intersection(np.array([start_point, start_point + move]))
             if isinstance(index_line, int):
                 ref_line = self.ref_lines[index_line]
+                print("index_line: ", index_line)
+                print("ref_line: ", ref_line)
                 ref_vec = np.array([ref_line[1][0] - ref_line[0][0], ref_line[1][1] - ref_line[0][1]])
 
                 per_vec = self.perpendicular(ref_vec)
