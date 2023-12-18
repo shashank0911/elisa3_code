@@ -285,7 +285,9 @@ class Node:
                             [self.accelxPos, self.accelyPos], self.accelx)
         if(self.tag == '0'):            
             print("msg: ", msg)
-        print("msg: ", msg)
+
+        if (self.t % 5 == 0):
+            print("msg: ", msg)
 
     def compute_move(self, pol: np.array):
         """
@@ -668,13 +670,13 @@ class Node:
         # update the timer
         self.t += 1
 
-        start_time = time.time()
+        # start_time = time.time()
         
         print("loop fn starting", self.tag, rospy.get_time())
 
-        end_time = time.time()
-        exec_time = end_time - start_time
-        rospy.loginfo(f"Loop {i + 1} Execution Time: {exec_time} seconds")
+        # end_time = time.time()
+        # exec_time = end_time - start_time
+        # rospy.loginfo(f"Loop {i + 1} Execution Time: {exec_time} seconds")
         
         # 1. take measurement from odom and cam odom_measurement and cam_measurement via sub
         [odom_measurement, cam_measurement, accel_measurement] = self.measurement_update(cameras, camera_maker)
@@ -690,7 +692,7 @@ class Node:
         print("msmt fusion", self.tag, rospy.get_time())
         
         disX = self.estimation[0] - self.estimation_prev[0]
-        disY = self.estimation[0] - self.estimation_prev[1]
+        disY = self.estimation[1] - self.estimation_prev[1]
         angle = math.atan2(disY, disX)
 
         self.estimation[2] = angle*57.3; 

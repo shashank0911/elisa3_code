@@ -24,20 +24,20 @@ rigid_bodies:
 #        yPos: 0.686
     '1':
         address: 3747
-        xPos: -0.14
-        yPos: -2.78
+        xPos: -0.116
+        yPos: -0.688
     '2':
-        address: 3768
-        xPos: -0.446
-        yPos: -0.825
+        address: 3753
+        xPos: 0.293
+        yPos: -1.034
     '3':
         address: 3764
-        xPos: 0.668
-        yPos: -1.771
+        xPos: 0.420
+        yPos: 0.009
     '4':
-        address: 3799
-        xPos: 0.55
-        yPos: -0.204
+        address: 3768
+        xPos: -0.338
+        yPos: 0.86
 #    '5':
 #        address: 3810
 #        xPos: -0.194
