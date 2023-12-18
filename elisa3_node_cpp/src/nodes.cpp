@@ -46,6 +46,8 @@ void CameraMarker::listenOptitrackMarkersCallback(const std_msgs::Float64MultiAr
     }
 }
 
+CameraMarker::~CameraMarker() {}
+
 
 
 
@@ -69,6 +71,7 @@ void CameraNode::listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::
     timer = optiMsg->header.stamp.toSec();
 }
 
+CameraNode::~CameraNode() {}
 
 
 
@@ -108,6 +111,8 @@ void Cameras::publishCams() {
     }
     msgCam[0] = number;
 }
+
+Cameras::~Cameras() {}
 
 
 
@@ -553,6 +558,8 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
 
 }
 
+Node::~Node() {}
+
 
 
 
@@ -783,3 +790,5 @@ void Nodes::saveData(int t) {
 
 }
 
+
+Nodes::~Nodes() {}
