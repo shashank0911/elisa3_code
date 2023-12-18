@@ -103,7 +103,7 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
         ydiff(1) = locations(0,1) - locations(1,1); 
         Eigen::Matrix2d diff;
         diff << xdiff, ydiff;
-        Eigen::Matrix2d refLineMinor;
+        // Eigen::Matrix2d refLineMinor;
         // refLineMinor << refLinesDomain.row(count),
         //                   refLinesDomain.row(count + 1);
 
@@ -143,7 +143,9 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
     Eigen::Vector2d noObsNewPoint = startPoint + move;
 
     if (!checkInDomain(startPoint + move)) {
-        auto [indexLine, inter] = lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
+        Eigen::Matrix2d locations;
+        locations << startPoint, startPoint + move;
+        auto [indexLine, inter] = lineIntersection(locations);
         if (indexLine != -1) {
             Eigen::Matrix2d refLine = refLinesDomain[indexLine];
             Eigen::Vector2d refVec;

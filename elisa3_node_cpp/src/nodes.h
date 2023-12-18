@@ -215,7 +215,7 @@ class Nodes {
         // std_msgs::Float64MultiArray msgReset;
         
         //TODO - figure out datatype of stored data
-        using multiType = boost::variant<double, Eigen::Matrix3d, std::vector<double>>;
+        using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
         std::map<int, std::map<std::string, std::map<std::string, multiType>>> savedData;
         
 

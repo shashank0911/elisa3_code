@@ -439,7 +439,7 @@ Eigen::Matrix3d Node::measurementUpdate(Cameras& cameras, CameraMarker& cameraMa
     Eigen::Vector3d camMsmt = determineCameraMarker(cameraMarker);
 
     Eigen::Matrix3d returnVal;
-    returnVal << odomVals, accelMsmt, camMsmt;
+    returnVal << odomVals.transpose(), accelMsmt.transpose(), camMsmt.transpose();
 
     return returnVal; 
 }
