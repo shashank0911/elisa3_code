@@ -39,14 +39,19 @@ double yawFromQuaternion(double x, double y, double z, double w) {
 }
 
 ObstacleAvoidance::ObstacleAvoidance() {
-    refLinesDomain = Eigen::MatrixXd(4,2);
-    refLinesDomain << 0.0, 0.0, 
-                      0.0, 1.15, 
-                      2.4, 1.15, 
-                      2.4, 0.0;
+    std::vector<Eigen::Matrix2d> refLinesDomain(4);
+    // refLinesDomain << 0.0, 0.0, 
+    //                   0.0, 1.15, 
+    //                   2.4, 1.15, 
+    //                   2.4, 0.0;
+    refLinesDomain[0] << 0.0, 0.0, 0.0, 1.15;
+    refLinesDomain[1] << 0.0, 1.15, 2.4, 1.15;
+    refLinesDomain[2] << 2.4, 1.15, 2.4, 0.0;
+    refLinesDomain[3] << 2.4, 0.0, 0.0, 0.0;
 }
 
 Eigen::Vector2d ObstacleAvoidance::perpendicular(const Eigen::Vector2d& a) {
+
     Eigen::Vector2d b(a(1), -a(0));
     return b;
 }
@@ -64,8 +69,8 @@ bool ObstacleAvoidance::checkDirectionVectors(const Eigen::Vector2d& vector1, co
 
 bool ObstacleAvoidance::checkInDomain(const Eigen::Vector2d& point) {
 
-    if(point[0] > refLinesDomain(0,0) && point[0] < refLinesDomain(2,0) 
-    && point[1] > refLinesDomain(0,1) && point[1] < refLinesDomain(1,1)) {
+    if(point[0] > refLinesDomain[0](0,0) && point[0] < refLinesDomain[2](2,0) 
+    && point[1] > refLinesDomain[0](0,1) && point[1] < refLinesDomain[1](1,1)) {
         if(obstacles) {
             return false;
         } else {
@@ -80,31 +85,32 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 
     std::map<int, std::pair<Eigen::Vector2d, double>> potIter;
     Eigen::Vector2d moveVec = locations.col(1) - locations.col(0);
+    int count = 0;
 
-    for (int count = 0; count < refLinesDomain.rows(); count++) {
-        int countPlus = 0;
-        if (count + 1 > refLinesDomain.rows()) {
-            countPlus = 0;
-        } else {
-            countPlus = count;
-        }
+    for (const Eigen::Matrix2d& refLine : refLinesDomain) {
+        // int countPlus = 0;
+        // if (count + 1 > refLinesDomain.rows()) {
+        //     countPlus = 0;
+        // } else {
+        //     countPlus = count;
+        // }
 
         Eigen::Vector2d xdiff;
-        xdiff(0) = refLinesDomain(count,0) - refLinesDomain(countPlus,0);
+        xdiff(0) = refLine(0,0) - refLine(1,0);
         xdiff(1) = locations(0,0) - locations(1,0);
         Eigen::Vector2d ydiff;
-        ydiff(0) = refLinesDomain(count,1) - refLinesDomain(countPlus,1);
+        ydiff(0) = refLine(0,1) - refLine(1,1);
         ydiff(1) = locations(0,1) - locations(1,1); 
         Eigen::Matrix2d diff;
         diff << xdiff, ydiff;
         Eigen::Matrix2d refLineMinor;
-        refLineMinor << refLinesDomain.row(count),
-                          refLinesDomain.row(count + 1);
+        // refLineMinor << refLinesDomain.row(count),
+        //                   refLinesDomain.row(count + 1);
 
         double div = det(diff);
         if (div != 0) {
             Eigen::Vector2d d;
-            d << det(refLineMinor), det(locations);
+            d << det(refLine), det(locations);
             Eigen::Vector2d inter;
             Eigen::Matrix2d temp1;
             temp1 << d, xdiff;
@@ -134,15 +140,40 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
 
-    // Eigen::Vector2d no_obs_newPoint = startPoint + move;
+    Eigen::Vector2d noObsNewPoint = startPoint + move;
 
-    // if (!checkInDomain(startPoint + move)) {
-    //     auto [indexLine, inter] = lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
-        // if (indexLine != -1) {
-            
-        // }
-    // }
-    return std::make_pair(Eigen::Vector2d(0.0,0.0), false);
+    if (!checkInDomain(startPoint + move)) {
+        auto [indexLine, inter] = lineIntersection(Eigen::Matrix2d(startPoint, startPoint + move));
+        if (indexLine != -1) {
+            Eigen::Matrix2d refLine = refLinesDomain[indexLine];
+            Eigen::Vector2d refVec;
+            refVec << refLine(1,0) - refLine(0,0), refLine(1,1) - refLine(0,1);
+            Eigen::Vector2d perpVec = perpendicular(refVec);
+            Eigen::Vector2d newPoint;
+            //TODO - check this
+            if (!perpVec(0)) {
+                newPoint << noObsNewPoint(0), 2*inter(1) - move(1) - startPoint(1);
+            } else {
+                newPoint << 2*inter(0) - move(0) - startPoint(0), noObsNewPoint(1);
+            }
+
+            if (checkInDomain(newPoint)) {
+                return std::make_pair(newPoint, true);
+            } else {
+                Eigen::Vector2d newPointAlt = startPoint - move;
+                if (checkInDomain(newPointAlt)) {
+                    return std::make_pair(newPointAlt, true);
+                } else {
+                    return std::make_pair(startPoint, true);
+                }
+            }
+        } else {
+            return std::make_pair(startPoint, true);
+        }
+    } else {
+        return std::make_pair(startPoint + move, true);
+    }
+    // return std::make_pair(Eigen::Vector2d(0.0,0.0), false);
 }
 
 

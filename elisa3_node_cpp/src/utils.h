@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include <tuple>
 #include <map>
+#include <vector>
 
 const double stepThreshold = 1e-6;
 // Eigen::MatrixXd getDomain();
@@ -26,7 +27,7 @@ public:
     std::pair<Eigen::Vector2d, bool> obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move);
 
 private:
-    Eigen::MatrixXd refLinesDomain;
+    std::vector<Eigen::Matrix2d> refLinesDomain;
     // Eigen::VectorXd refLines;
 };
 
