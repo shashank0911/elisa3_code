@@ -34,6 +34,7 @@ class CameraMarker {
         std::vector<double> measurementList;
 
         CameraMarker(int N);
+        ~CameraMarker();
         //TODO - check datatype of optiMsg
         void listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg);
 };
@@ -55,6 +56,7 @@ class CameraNode {
         ros::NodeHandle n;
 
         CameraNode(int tag);
+        ~CameraNode();
         //TODO - check datatype of optiMsg
         void listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg);
         void listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::ConstPtr& optiMsg);
@@ -81,6 +83,7 @@ class Cameras {
         std::vector<double> msgCam;
 
         Cameras(int N);
+        ~Cameras();
         void updateCamera();
         void publishCams();
 };
@@ -169,6 +172,7 @@ class Node {
 
 
         Node(double releaseTime, std::string tagExt);
+        ~Node();
         void publishGreenLed(int intensity);
         void publishRedLed(int intensity);
         void publishBlueLed(int intensity);
@@ -225,6 +229,7 @@ class Nodes {
         std::vector<double> msgAutoMove;
 
         Nodes(std::vector<std::string> activeRobotsExt);
+        ~Nodes();
         void nodesLoopFn(const std::string moveType = "move");
         void testCam();
         void printFn();
