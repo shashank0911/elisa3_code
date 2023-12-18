@@ -857,8 +857,8 @@ int main(int argc,char *argv[]) {
     robots.setLeds(intensity);
     //TODO - elisa3_tag publisher
 
-    int i = 0;
-    while (i < 3) {
+    int j = 0;
+    while (j < 3) {
         cout << " Waiting for odometry response" << endl;
         robots.move("still", 0.0, 0.0);
         robots.nodesReset("theor");
@@ -873,7 +873,7 @@ int main(int argc,char *argv[]) {
             break;
         }
         usleep(int(0.1 * 1000000.0));
-        i++;
+        j++;
     }
 
     cout << " Start reset";
@@ -912,6 +912,10 @@ int main(int argc,char *argv[]) {
         }
         robots.saveData(0);
         
+        if (t > 100 && t <= 110) {
+            robots.move("still", 0.0, 0.0);
+            usleep(int(0.05 * 1000000.0));
+        }
 
         ros::spinOnce();
     }

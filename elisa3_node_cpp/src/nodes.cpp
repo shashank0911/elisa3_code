@@ -26,7 +26,7 @@ ObstacleAvoidance obstacleAvoidance;
 
 
 
-//  TODO - check if argument activeRobots is really necessary
+//TODO - check if argument activeRobots is really necessary
 CameraMarker::CameraMarker(int N) {
     number = N;
     currentNumber = N;
@@ -458,9 +458,9 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     kalmanOdom.Qk << 0.01, 0.0, 0.0,
                      0.0, 0.01, 0.0,
                      0.0, 0.0, 0.01;
-    auto [optimalStateEstimateK, covarianceEstimateK] = kalmanOdom.srEKF(measurements.row(0), curEst, 1);
-    Eigen::Vector3d odomEst = optimalStateEstimateK;
-    kalmanOdom.Pk1 = covarianceEstimateK;
+    auto [optimalStateEstimateOdom, covarianceEstimateOdom] = kalmanOdom.srEKF(measurements.row(0), curEst, 1);
+    Eigen::Vector3d odomEst = optimalStateEstimateOdom;
+    kalmanOdom.Pk1 = covarianceEstimateOdom;
 
     //fuse with acceleroemeter
     kalmanAccel.Rk << 0.5, 0.0, 0.0,
@@ -469,9 +469,9 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     kalmanAccel.Qk << 0.01, 0.0, 0.0,
                       0.0, 0.01, 0.0,
                       0.0, 0.0, 0.01;
-    auto [optimalStateEstimateK, covarianceEstimateK] = kalmanAccel.srEKF(measurements.row(1), curEst, 1);
-    Eigen::Vector3d accelEst = optimalStateEstimateK;
-    kalmanAccel.Pk1 = covarianceEstimateK;
+    auto [optimalStateEstimateAccel, covarianceEstimateAccel] = kalmanAccel.srEKF(measurements.row(1), curEst, 1);
+    Eigen::Vector3d accelEst = optimalStateEstimateAccel;
+    kalmanAccel.Pk1 = covarianceEstimateAccel;
 
     //fuse with camera
     double errOdom = (curEst.head(2) - odomVals.head(2)).norm();
@@ -494,13 +494,13 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     //TODO - check for datatype of t
     if (t % 1 == 0) {
         if (SR_KALMAN && !MR_KALMAN) {
-            auto[optimalStateEstimateK, covarianceEstimateK] = kalmanCam.srEKF(measurements.row(2), curEst, 1);
-            curEst = optimalStateEstimateK;
-            kalmanCam.Pk1 = covarianceEstimateK;
+            auto[optimalStateEstimateCam, covarianceEstimateCam] = kalmanCam.srEKF(measurements.row(2), curEst, 1);
+            curEst = optimalStateEstimateCam;
+            kalmanCam.Pk1 = covarianceEstimateCam;
         } else if (MR_KALMAN && !SR_KALMAN) {
-            auto[optimalStateEstimateK, covarianceEstimateK] = kalmanCam.mrEKF(measurements.row(2), curEst, 1);
-            curEst = optimalStateEstimateK;
-            kalmanCam.Pk1 = covarianceEstimateK;
+            auto[optimalStateEstimateCam, covarianceEstimateCam] = kalmanCam.mrEKF(measurements.row(2), curEst, 1);
+            curEst = optimalStateEstimateCam;
+            kalmanCam.Pk1 = covarianceEstimateCam;
         }
 
         Eigen::Vector3d camEst = curEst;
@@ -615,7 +615,7 @@ void Nodes::nodesLoopFn(const std::string moveType) {
     msgReset[0] = count;
     //TODO - publisher; send msgAutoMove to elisa3 fn
 
-    usleep(int(SAMPLING_TIME*1000000));
+    usleep(int(SAMPLING_TIME*1000000.0));
 }
 
 void Nodes::testCam() {
@@ -669,7 +669,7 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
     msgReset[0] = count;
     //TODO - publisher for msg automotive
 
-    usleep(int(SAMPLING_TIME*1000000));
+    usleep(int(SAMPLING_TIME*1000000.0));
 }
 
 void Nodes::updateLeds() {
