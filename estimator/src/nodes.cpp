@@ -85,7 +85,9 @@ Cameras::Cameras(int N) {
     // measurementListPrev = Eigen::MatrixXd(N, 4);
 
     //TODO - work on the publish part later if necessary. involves msgcam, publishercams
-    std::vector<double> msgCam(number*3 + 1);
+    publisherCams = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/cams", 1);
+    msgCam.data.resize(N*3 + 1);
+    
 }
 
 void Cameras::updateCamera() {
@@ -104,12 +106,13 @@ void Cameras::updateCamera() {
 void Cameras::publishCams() {
     int count = 0;
     for (int i = 0; i < number; i++) {
-        msgCam[i*3 + 1] = measurementList(i, 0);
-        msgCam[i*3 + 2] = measurementList(i, 1);
-        msgCam[i*3 + 3] = measurementList(i, 2);
+        msgCam.data[i*3 + 1] = measurementList(i, 0);
+        msgCam.data[i*3 + 2] = measurementList(i, 1);
+        msgCam.data[i*3 + 3] = measurementList(i, 2);
         count++;
     }
-    msgCam[0] = number;
+    msgCam.data[0] = count;
+    publisherCams.publish(msgCam);
 }
 
 Cameras::~Cameras() {}
@@ -599,9 +602,18 @@ Nodes::Nodes(std::vector<std::string> activeRobots) : cameras(activeRobots.size(
         }         
     }
 
-    std::vector<int> msgLeds(N*4 + 1);
-    std::vector<double> msgReset(N*5 + 1);
-    std::vector<double> msgAutoMove(N*5 + 1);
+    publisherAutoMove = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/auto_motive", 1);
+    publisherLeds = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/leds", 1);
+    publisherReset = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/reset", 1);
+
+    msgAutoMove.data.resize(N*5 + 1, 0.0);
+    msgLeds.data.resize(N*4 + 1, 0.0);
+    msgReset.data.resize(N*5 + 1, 0.0);
+
+
+    // std::vector<int> msgLeds(N*4 + 1);
+    // std::vector<double> msgReset(N*5 + 1);
+    // std::vector<double> msgAutoMove(N*5 + 1);
     //TODO - figure out datatype/format of saved data
     // savedData = 
 }
@@ -611,16 +623,17 @@ void Nodes::nodesLoopFn(const std::string moveType) {
     int count = 0;
     for (const auto& node: nodes) {
         nodes[node.first]->nodeLoopFun(cameras, cameraMarker, moveType);
-        msgAutoMove[i*5 + 1] = std::stod(node.first);
-        msgAutoMove[i*5 + 2] = node.second->msgAutoMove[0];
-        msgAutoMove[i*5 + 3] = node.second->msgAutoMove[1];
-        msgAutoMove[i*5 + 4] = node.second->msgAutoMove[2];
-        msgAutoMove[i*5 + 5] = node.second->msgAutoMove[3];
+        msgAutoMove.data[i*5 + 1] = std::stod(node.first);
+        msgAutoMove.data[i*5 + 2] = node.second->msgAutoMove[0];
+        msgAutoMove.data[i*5 + 3] = node.second->msgAutoMove[1];
+        msgAutoMove.data[i*5 + 4] = node.second->msgAutoMove[2];
+        msgAutoMove.data[i*5 + 5] = node.second->msgAutoMove[3];
         i++;
         count++;
     }
-    msgReset[0] = count;
+    msgReset.data[0] = double(count);
     //TODO - publisher; send msgAutoMove to elisa3 fn
+    publisherAutoMove.publish(msgAutoMove);
 
     usleep(int(SAMPLING_TIME*1000000.0));
 }
@@ -665,16 +678,17 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
         double pol[2] = {step, omega};
         nodes[tag.first]->computeMove(pol);
 
-        msgAutoMove[i*5 + 1] = std::stod(tag.first);
-        msgAutoMove[i*5 + 2] = tag.second->msgAutoMove[0];
-        msgAutoMove[i*5 + 3] = tag.second->msgAutoMove[1];
-        msgAutoMove[i*5 + 4] = tag.second->msgAutoMove[2];
-        msgAutoMove[i*5 + 5] = tag.second->msgAutoMove[3];
+        msgAutoMove.data[i*5 + 1] = std::stod(tag.first);
+        msgAutoMove.data[i*5 + 2] = tag.second->msgAutoMove[0];
+        msgAutoMove.data[i*5 + 3] = tag.second->msgAutoMove[1];
+        msgAutoMove.data[i*5 + 4] = tag.second->msgAutoMove[2];
+        msgAutoMove.data[i*5 + 5] = tag.second->msgAutoMove[3];
         i++;
         count++;
     }
-    msgReset[0] = count;
+    msgReset.data[0] = double(count);
     //TODO - publisher for msg automotive
+    publisherAutoMove.publish(msgAutoMove);
 
     usleep(int(SAMPLING_TIME*1000000.0));
 }
@@ -686,15 +700,16 @@ void Nodes::updateLeds() {
     int i = 0;
     for (const auto& tag : nodes) {
         // auto smallIter = nodes[tag.first]->msgLeds;
-        msgLeds[i*4 + 1] = std::stoi(tag.first);
-        msgLeds[i*4 + 2] = nodes[tag.first]->msgLeds[0];
-        msgLeds[i*4 + 3] = nodes[tag.first]->msgLeds[1];
-        msgLeds[i*4 + 4] = nodes[tag.first]->msgLeds[2];
+        msgLeds.data[i*4 + 1] = std::stod(tag.first);
+        msgLeds.data[i*4 + 2] = double(nodes[tag.first]->msgLeds[0]);
+        msgLeds.data[i*4 + 3] = double(nodes[tag.first]->msgLeds[1]);
+        msgLeds.data[i*4 + 4] = double(nodes[tag.first]->msgLeds[2]);
         i++;
         count++;
     }
-    msgLeds[0] = count;
+    msgLeds.data[0] = double(count);
     //TODO - publisher; call the elisa node fn to update robot dict
+    publisherLeds.publish(msgLeds);
 }
 
 void Nodes::nodesReset(const std::string type) {
@@ -703,11 +718,11 @@ void Nodes::nodesReset(const std::string type) {
     for (const auto& tag : nodes) {
         nodes[tag.first]->nodeReset(type);
         if (nodes[tag.first]->updateReset) {
-            msgReset[i*5 + 1] = std::stod(tag.first);
-            msgReset[i*5 + 2] = nodes[tag.first]->msgReset[0];
-            msgReset[i*5 + 3] = nodes[tag.first]->msgReset[1];
-            msgReset[i*5 + 4] = nodes[tag.first]->msgReset[2];
-            msgReset[i*5 + 5] = nodes[tag.first]->msgReset[3];
+            msgReset.data[i*5 + 1] = std::stod(tag.first);
+            msgReset.data[i*5 + 2] = nodes[tag.first]->msgReset[0];
+            msgReset.data[i*5 + 3] = nodes[tag.first]->msgReset[1];
+            msgReset.data[i*5 + 4] = nodes[tag.first]->msgReset[2];
+            msgReset.data[i*5 + 5] = nodes[tag.first]->msgReset[3];
             i++;
             count++;
         }
@@ -716,8 +731,9 @@ void Nodes::nodesReset(const std::string type) {
     if (count != 0) {
         //TODO - update printed message
         cout << "Reset - theoretical" << endl;
-        msgReset[0] = count;
+        msgReset.data[0] = double(count);
         //TODO - publisher; call the elisa node fn to update robot dict
+        publisherReset.publish(msgReset);
     }
 }
 

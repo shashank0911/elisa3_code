@@ -27,15 +27,6 @@
 // for the camera
 #include <geometry_msgs/Pose2D.h>
 
-// controller and estimator header files
-#include "nodes.h"
-#include <unistd.h>
-#include <Eigen/Dense>
-#include <jsoncpp/json/json.h>
-#include <jsoncpp/json/value.h>
-using std::cout;
-using std::endl;
-
 // #include "main_part.h"
 
 #include <string>
@@ -346,87 +337,40 @@ int getIdFromAddress(int address) {
     return -1;
 }
 
-// void handlerAllOpti(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-//     int nr_robots = int(msg->data[0]);
-//     int tag = 0;
-//     for(int i = 0; i < nr_robots; ++i){
-//         tag = i;
-//         cameras_dict[tag].cam_x = double(msg->data[i*3 + 1]);
-//         cameras_dict[tag].cam_y = double(msg->data[i*3 + 2]);;
-//         cameras_dict[tag].cam_phi = double(msg->data[i*3 + 3]);;
-//     }
-
-// }
-
-void handlerAllOpti(const std::vector<double>& msg) {
-    int nr_robots = int(msg[0]);
+void handlerAllOpti(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    int nr_robots = int(msg->data[0]);
     int tag = 0;
     for(int i = 0; i < nr_robots; ++i){
         tag = i;
-        cameras_dict[tag].cam_x = double(msg[i*3 + 1]);
-        cameras_dict[tag].cam_y = double(msg[i*3 + 2]);;
-        cameras_dict[tag].cam_phi = double(msg[i*3 + 3]);;
+        cameras_dict[tag].cam_x = double(msg->data[i*3 + 1]);
+        cameras_dict[tag].cam_y = double(msg->data[i*3 + 2]);;
+        cameras_dict[tag].cam_phi = double(msg->data[i*3 + 3]);;
     }
 
 }
 
-// void handlerAllReset(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-//     int nr_robots = int(msg->data[0]);
-// //    std::cout << "[" << nodeName << "] " << "nr robots resetting: " << nr_robots << std::endl;
-//     int tag;
-
-//     XmlRpc::XmlRpcValue::iterator i;
-//     for (int i=0; i < nr_robots; i++){
-//         tag = getIdFromAddress(int(msg->data[i*5+1]));
-
-//         double type;
-//         type = double(msg->data[i*5+2]);
-
-//         robots_dict[tag].odomTransInit.header.stamp = ros::Time::now();
-//         if (type == 0){
-//             robots_dict[tag].odomTransInit.transform.translation.x = double(msg->data[i*5+3]);
-//             robots_dict[tag].odomTransInit.transform.translation.y = double(msg->data[i*5+4]);
-
-//             robots_dict[tag].accelMsg.angular_velocity.x = double(msg->data[i*5+3]);
-//             robots_dict[tag].accelMsg.angular_velocity.y = double(msg->data[i*5+4]);
-
-//             robots_dict[tag].odomTransInit.transform.translation.z = 0.0;
-//             geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(double(msg->data[i*5+5]));
-//             robots_dict[tag].odomTransInit.transform.rotation = odomQuat_trans;
-
-//             robots_dict[tag].changedActuators[GREEN_LEDS_RESET] = true;
-//             if (robots_dict[tag].greenLed_reset ==101) {
-//                 robots_dict[tag].greenLed_reset = 102;
-//             } else {
-//                 robots_dict[tag].greenLed_reset = 101;
-//             }
-//             robots_dict[tag].reset = true;
-//         }
-//     }
-// }
-
-void handlerAllReset(const std::vector<double>& msg) {
-    int nr_robots = int(msg[0]);
+void handlerAllReset(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    int nr_robots = int(msg->data[0]);
 //    std::cout << "[" << nodeName << "] " << "nr robots resetting: " << nr_robots << std::endl;
     int tag;
 
     XmlRpc::XmlRpcValue::iterator i;
     for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg[i*5+1]));
+        tag = getIdFromAddress(int(msg->data[i*5+1]));
 
         double type;
-        type = double(msg[i*5+2]);
+        type = double(msg->data[i*5+2]);
 
         robots_dict[tag].odomTransInit.header.stamp = ros::Time::now();
         if (type == 0){
-            robots_dict[tag].odomTransInit.transform.translation.x = double(msg[i*5+3]);
-            robots_dict[tag].odomTransInit.transform.translation.y = double(msg[i*5+4]);
+            robots_dict[tag].odomTransInit.transform.translation.x = double(msg->data[i*5+3]);
+            robots_dict[tag].odomTransInit.transform.translation.y = double(msg->data[i*5+4]);
 
-            robots_dict[tag].accelMsg.angular_velocity.x = double(msg[i*5+3]);
-            robots_dict[tag].accelMsg.angular_velocity.y = double(msg[i*5+4]);
+            robots_dict[tag].accelMsg.angular_velocity.x = double(msg->data[i*5+3]);
+            robots_dict[tag].accelMsg.angular_velocity.y = double(msg->data[i*5+4]);
 
             robots_dict[tag].odomTransInit.transform.translation.z = 0.0;
-            geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(double(msg[i*5+5]));
+            geometry_msgs::Quaternion odomQuat_trans = tf::createQuaternionMsgFromYaw(double(msg->data[i*5+5]));
             robots_dict[tag].odomTransInit.transform.rotation = odomQuat_trans;
 
             robots_dict[tag].changedActuators[GREEN_LEDS_RESET] = true;
@@ -440,86 +384,27 @@ void handlerAllReset(const std::vector<double>& msg) {
     }
 }
 
-// void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-//     int nr_robots = int(msg->data[0]);
-// //    std::cout << "[" << nodeName << "] " << "nr robots: " << nr_robots << std::endl;
-//     int tag;
-
-//     XmlRpc::XmlRpcValue::iterator i;
-//     for (int i=0; i < nr_robots; i++){
-//         tag = getIdFromAddress(int(msg->data[i*5+1]));
-
-//         // PER ROBOT HANDLING
-//         int turn_type = int(msg->data[i*5+2]);
-//         int trans_type = int(msg->data[i*5+4]);
-//         if (turn_type==0){
-//             int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+100.0));
-//             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-//             if (prop_msg >= 175) {
-//                 prop_msg = 175;
-//             }
-//             robots_dict[tag].redLed_move = prop_msg;
-//         } else if (turn_type==1){
-//             int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+175.0));
-//             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-//             if (prop_msg >= 250) {
-//                 prop_msg = 250;
-//             } else if (prop_msg == 175){
-//                 prop_msg = 100;
-//             }
-//             robots_dict[tag].redLed_move = prop_msg;
-//         } else {
-//             robots_dict[tag].redLed_move = 100;
-//         }
-
-//         if (trans_type==0){
-//             int prop_msg = int(double(msg->data[i*5+5])*25 + 100);
-//             if (prop_msg >= 175){
-//                 prop_msg = 175;
-//             }
-//             robots_dict[tag].blueLed_move = prop_msg;
-//         } else {
-//             int prop_msg = int(double(msg->data[i*5+5])*25 + 175);
-//             if (prop_msg >= 250){
-//                 prop_msg = 250;
-//             } else if (prop_msg = 175){
-//                 prop_msg = 100;
-//             }
-//             robots_dict[tag].blueLed_move = prop_msg;
-//         }
-
-//         if (robots_dict[tag].greenLed_move ==103) {
-//             robots_dict[tag].greenLed_move = 104;
-//         } else {
-//             robots_dict[tag].greenLed_move = 103;
-//         }
-//         robots_dict[tag].changedActuators[GREEN_LEDS_MOVE] = true;
-//         robots_dict[tag].changedActuators[RED_LEDS_MOVE] = true;
-//         robots_dict[tag].changedActuators[BLUE_LEDS_MOVE] = true;
-//     }
-// }
-
-void handlerAllAutoMove(const std::vector<double>& msg) {
-    int nr_robots = int(msg[0]);
+void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    int nr_robots = int(msg->data[0]);
 //    std::cout << "[" << nodeName << "] " << "nr robots: " << nr_robots << std::endl;
     int tag;
 
     XmlRpc::XmlRpcValue::iterator i;
     for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg[i*5+1]));
+        tag = getIdFromAddress(int(msg->data[i*5+1]));
 
         // PER ROBOT HANDLING
-        int turn_type = int(msg[i*5+2]);
-        int trans_type = int(msg[i*5+4]);
+        int turn_type = int(msg->data[i*5+2]);
+        int trans_type = int(msg->data[i*5+4]);
         if (turn_type==0){
-            int prop_msg = int(double(double(msg[i*5+3])*(75.0/(2.0*M_PI))+100.0));
+            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+100.0));
             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
             if (prop_msg >= 175) {
                 prop_msg = 175;
             }
             robots_dict[tag].redLed_move = prop_msg;
         } else if (turn_type==1){
-            int prop_msg = int(double(double(msg[i*5+3])*(75.0/(2.0*M_PI))+175.0));
+            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+175.0));
             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
             if (prop_msg >= 250) {
                 prop_msg = 250;
@@ -532,13 +417,13 @@ void handlerAllAutoMove(const std::vector<double>& msg) {
         }
 
         if (trans_type==0){
-            int prop_msg = int(double(msg[i*5+5])*25 + 100);
+            int prop_msg = int(double(msg->data[i*5+5])*25 + 100);
             if (prop_msg >= 175){
                 prop_msg = 175;
             }
             robots_dict[tag].blueLed_move = prop_msg;
         } else {
-            int prop_msg = int(double(msg[i*5+5])*25 + 175);
+            int prop_msg = int(double(msg->data[i*5+5])*25 + 175);
             if (prop_msg >= 250){
                 prop_msg = 250;
             } else if (prop_msg = 175){
@@ -558,37 +443,20 @@ void handlerAllAutoMove(const std::vector<double>& msg) {
     }
 }
 
-// void handlerAllLeds(const std_msgs::Float64MultiArray::ConstPtr& msg) {
-//     int nr_robots;
-//     nr_robots = int(msg->data[0]);
-//     int tag;
-
-//     XmlRpc::XmlRpcValue::iterator i;
-//     for (int i=0; i < nr_robots; i++){
-//         tag = getIdFromAddress(int(msg->data[i*4+1]));
-//         robots_dict[tag].changedActuators[GREEN_LEDS] = true;
-//         robots_dict[tag].changedActuators[RED_LEDS] = true;
-//         robots_dict[tag].changedActuators[BLUE_LEDS] = true;
-//         robots_dict[tag].greenLed = int(msg->data[i*4+2]);
-//         robots_dict[tag].redLed = int(msg->data[i*4+3]);
-//         robots_dict[tag].blueLed = int(msg->data[i*4+4]);
-//     }
-// }
-
-void handlerAllLeds(const std::vector<int> msg) {
+void handlerAllLeds(const std_msgs::Float64MultiArray::ConstPtr& msg) {
     int nr_robots;
-    nr_robots = int(msg[0]);
+    nr_robots = int(msg->data[0]);
     int tag;
 
     XmlRpc::XmlRpcValue::iterator i;
     for (int i=0; i < nr_robots; i++){
-        tag = getIdFromAddress(int(msg[i*4+1]));
+        tag = getIdFromAddress(int(msg->data[i*4+1]));
         robots_dict[tag].changedActuators[GREEN_LEDS] = true;
         robots_dict[tag].changedActuators[RED_LEDS] = true;
         robots_dict[tag].changedActuators[BLUE_LEDS] = true;
-        robots_dict[tag].greenLed = int(msg[i*4+2]);
-        robots_dict[tag].redLed = int(msg[i*4+3]);
-        robots_dict[tag].blueLed = int(msg[i*4+4]);
+        robots_dict[tag].greenLed = int(msg->data[i*4+2]);
+        robots_dict[tag].redLed = int(msg->data[i*4+3]);
+        robots_dict[tag].blueLed = int(msg->data[i*4+4]);
     }
 }
 
@@ -814,13 +682,13 @@ int main(int argc,char *argv[]) {
             ss1 << "elisa3_robot_" << class_inst.tag <<"/accel";
             accelPublisher[class_inst.tag] = np.advertise<sensor_msgs::Imu>(ss1.str(), 1);
             
-            // AllLedSubscriber = n.subscribe("elisa3_all_robots/leds", 10, handlerAllLeds);
+            AllLedSubscriber = n.subscribe("elisa3_all_robots/leds", 10, handlerAllLeds);
 
-            // AllResetSubscriber = n.subscribe("elisa3_all_robots/reset", 10, handlerAllReset);
+            AllResetSubscriber = n.subscribe("elisa3_all_robots/reset", 10, handlerAllReset);
 
-            // AllAutoMotiveSubscriber = n.subscribe("elisa3_all_robots/auto_motive", 10, handlerAllAutoMove);
+            AllAutoMotiveSubscriber = n.subscribe("elisa3_all_robots/auto_motive", 10, handlerAllAutoMove);
 
-            // AllOptiSubscriber = n.subscribe("elisa3_all_robots/cams", 10, handlerAllOpti);
+            AllOptiSubscriber = n.subscribe("elisa3_all_robots/cams", 10, handlerAllOpti);
 
 			count += 1;
 
@@ -845,48 +713,6 @@ int main(int argc,char *argv[]) {
 
     // }
 
-    std::ifstream file("mapper.json");
-    Json::Value mapper;
-    Json::Reader reader;
-    reader.parse(file, mapper);
-    std::vector<std::string> activeRobots = mapper.getMemberNames();
-
-    cout << "Start controller code" << endl;
-    Nodes robots(activeRobots);
-    int intensity[3] = {0, 10, 0};
-    robots.setLeds(intensity);
-    //TODO - elisa3_tag publisher
-
-    int j = 0;
-    while (j < 3) {
-        cout << " Waiting for odometry response" << endl;
-        robots.move("still", 0.0, 0.0);
-        robots.nodesReset("theor");
-        cout << "Resetting odometer" << endl;
-        double err = 0;
-        for (const auto& tag : robots.nodes) {
-            err += (tag.second->odomVals.head(2) - tag.second->curEst.head(2)).norm();
-            cout << "Estimation: (" << tag.second->curEst(0) << ", " << tag.second->curEst(1) << endl;
-        }
-        if (err < 1e-6) {
-            cout << "Reset done" << endl;
-            break;
-        }
-        usleep(int(0.1 * 1000000.0));
-        j++;
-    }
-
-    cout << " Start reset";
-    while (robots.cameraMarker.measurementList.empty()) {
-        usleep(int(0.05 * 1000000.0));
-    }
-    cout << "Awake from sleep" << endl;
-    
-    int lastSavedTime = 0;
-    double stepSize = 1.0;
-    double theta = 0.0;
-    int t = 0;
-
     while (ros::ok()) {
         updateSensorsData();
         updateRosInfo();
@@ -895,27 +721,6 @@ int main(int argc,char *argv[]) {
         // main part
 
         main_fun(robots_dict, cameras_dict);
-
-        //TODO - change condition to error later
-        if (t < 100) {
-            cout << "Loop number: " << t << endl;
-            robots.storeData(t);
-            robots.nodesLoopFn("move");
-            handlerAllOpti(robots.cameras.msgCam);
-            handlerAllLeds(robots.msgLeds);
-            handlerAllReset(robots.msgReset);
-            handlerAllAutoMove(robots.msgAutoMove);
-            if (t % 3 == 0) {
-                robots.nodesReset("theor");
-            }
-            t++;
-        }
-        robots.saveData(0);
-        
-        if (t > 100 && t <= 110) {
-            robots.move("still", 0.0, 0.0);
-            usleep(int(0.05 * 1000000.0));
-        }
 
         ros::spinOnce();
     }

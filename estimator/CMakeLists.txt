@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(elisa3_node_cpp)
+cmake_minimum_required(VERSION 3.8.2)
+project(estimator)
 
 ## Set C++ standard to 17
-# set(CMAKE_CXX_STANDARD 17)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -11,12 +11,15 @@ project(elisa3_node_cpp)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  geometry_msgs
   tf
   cv_bridge
 )
-find_package(OpenCV REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+## Add JsonCpp library
+# find_package(jsoncpp REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -88,29 +91,31 @@ find_package(PkgConfig REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  # INCLUDE_DIRS include
 #  LIBRARIES epuck_driver_cpp
-#  CATKIN_DEPENDS roscpp std_msgs
+  # CATKIN_DEPENDS roscpp std_msgs
 #  DEPENDS system_lib
+
 )
 
 ###########
 ## Build ##
 ###########
 
+# Include Eigen headers
+include_directories($ENV{HOME}/eigen)
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
-  ${OpenCV_INCLUDE_DIRS}
-	src/pc-side-elisa3-library
+  ${JSONCPP_INCLUDE_DIRS}
 )
 
 # The CMake link_directories() function can be used to add additional library paths, however, this is not recommended. 
 # All catkin and CMake packages automatically have their link information added when they are find_packaged. 
 # Simply link against the libraries in target_link_libraries()
-link_directories(src/pc-side-elisa3-library/linux)
+# link_directories()
 
 ## Declare a cpp library
 # add_library(epuck_driver_cpp
@@ -118,20 +123,15 @@ link_directories(src/pc-side-elisa3-library/linux)
 # )
 
 ## Declare a cpp executable
-add_executable(elisa3_node_cpp src/elisa3_node_cpp.cpp)
-# add_executable(elisa3_node_cpp_1 src/elisa3_node_cpp_1.cpp)
-add_executable(elisa3_odom_filter src/elisa3_odom_filter.cpp)
+# add_executable(estimator src/main.cpp)
+add_executable(estimator src/main.cpp src/nodes.cpp src/Kalman.cpp src/utils.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(epuck_driver_cpp_node epuck_driver_cpp_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(elisa3_node_cpp ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0
-)
-# target_link_libraries(elisa3_node_cpp_1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0
-# )
-target_link_libraries(elisa3_odom_filter ${catkin_LIBRARIES}
+target_link_libraries(estimator ${catkin_LIBRARIES} ${JSONCPP_LIBRARIES}
 )
 
 #############

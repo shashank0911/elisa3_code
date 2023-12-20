@@ -70,8 +70,9 @@ class Cameras {
         std::map<int, CameraNode*> cameras;
         
         //TODO - check if this publisher is necessary
-        // ros::Publisher publisherCams;
-        // std_msgs::Float64MultiArray msgCam;
+        ros::NodeHandle np;
+        ros::Publisher publisherCams;
+        std_msgs::Float64MultiArray msgCam;
 
     public:
 
@@ -80,7 +81,7 @@ class Cameras {
         //measurement for one item is along the row
         Eigen::MatrixXd measurementList;
         // Eigen::MatrixXd measurementListPrev;
-        std::vector<double> msgCam;
+        // std::vector<double> msgCam;
 
         Cameras(int N);
         ~Cameras();
@@ -202,17 +203,18 @@ class Nodes {
         int N;
 
         //TODO - check if we need publishers
-        // ros::Publisher publisherAutoMove;
-        // ros::Publisher publisherLeds;
-        // ros::Publisher publisherReset;
+        ros::NodeHandle np;
+        ros::Publisher publisherAutoMove;
+        ros::Publisher publisherLeds;
+        ros::Publisher publisherReset;
         // ros::Publisher publisherInput;
         // ros::Publisher publisherInputs;
         //TODO - check if we need these
         // geometry_msgs::Twist msgInput;
         // std_msgs::Float64MultiArray msgInputs;
-        // std_msgs::Float64MultiArray msgInputs;
-        // std_msgs::Float64MultiArray msgLeds;
-        // std_msgs::Float64MultiArray msgReset;
+        std_msgs::Float64MultiArray msgAutoMove;
+        std_msgs::Float64MultiArray msgLeds;
+        std_msgs::Float64MultiArray msgReset;
         
         //TODO - figure out datatype of stored data
         using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
@@ -224,9 +226,9 @@ class Nodes {
         std::map<std::string, Node*> nodes;
         Cameras cameras;
         CameraMarker cameraMarker;
-        std::vector<int> msgLeds;
-        std::vector<double> msgReset;
-        std::vector<double> msgAutoMove;
+        // std::vector<int> msgLeds;
+        // std::vector<double> msgReset;
+        // std::vector<double> msgAutoMove;
 
         Nodes(std::vector<std::string> activeRobotsExt);
         ~Nodes();

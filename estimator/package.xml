@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package>
-  <name>elisa3_node_cpp</name>
+  <name>estimator</name>
   <version>0.0.0</version>
-  <description>The elisa3_node package</description>
+  <description>The estimator package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="stefano@gctronic.com">stefano.gctronic</maintainer>
+  <maintainer email="shashank.dilipkumar@gmail.com">shashank.dilipkumar</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -43,8 +43,9 @@
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend> 
   <build_depend>tf</build_depend>
-  <build_depend>cv_bridge</build_depend> 
   <build_depend>geometry_msgs</build_depend>
+  <build_depend>cv_bridge</build_depend> 
+  <build_depend>libjsoncpp-dev</build_depend> 
   <run_depend>roscpp</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>tf</run_depend>
