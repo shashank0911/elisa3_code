@@ -50,11 +50,13 @@ obstacle_avoidance = utils.ObstacleAvoidance()
 class Camera_marker:
     def __init__(self, N, active_robots):
         self.number = N
-        self.current_number = N
+        # self.current_number = N
+        self.current_number = 1
         self.listener_camera_list = rospy.Subscriber('Bebop1/makers', Float64MultiArray, self.listen_optitrack_makers_callback)
         # self.measurement_list = np.zeros([1, 3])
                 
-        self.measurement_list = []
+        # self.measurement_list = []
+        self.measurement_list = np.zeros(5)
         # for tag in active_robots:
         #     temp = np.zeros([1, 3])[0]
         #     temp[0] = np.array(mapper[str(tag)]['pos'])[0]
@@ -154,6 +156,7 @@ class Node:
         self.t = 0
         
         self.tag = tag
+        print("Node tag: ", tag)
         self.release_time = release_time
         self.address = mapper[str(tag)]['address']
         self.start_pos = np.array(mapper[str(tag)]['pos'])
@@ -283,9 +286,11 @@ class Node:
                             [self.odom_x, self.odom_y], self.odom_phi,
                             [self.cam_x, self.cam_y], self.cam_phi,
                             [self.accelxPos, self.accelyPos], self.accelx)
-        if(self.tag == '0'):            
+        # if(self.tag == '0'):            
+        #     print("msg: ", msg)
+
+        if (self.t % 5 == 0):
             print("msg: ", msg)
-        print("msg: ", msg)
 
     def compute_move(self, pol: np.array):
         """
@@ -668,7 +673,7 @@ class Node:
         # update the timer
         self.t += 1
 
-        start_time = time.time()
+        # start_time = time.time()
         
         print("loop fn starting", self.tag, rospy.get_time())
 
@@ -690,7 +695,7 @@ class Node:
         print("msmt fusion", self.tag, rospy.get_time())
         
         disX = self.estimation[0] - self.estimation_prev[0]
-        disY = self.estimation[0] - self.estimation_prev[1]
+        disY = self.estimation[1] - self.estimation_prev[1]
         angle = math.atan2(disY, disX)
 
         self.estimation[2] = angle*57.3; 
@@ -732,6 +737,7 @@ class Nodes:
         rospy.init_node('python_node') 
                    
         self.active_robots = active_robots
+        print("active robots in Nodes(): ", active_robots)
 
         self.N_total = len(active_robots)
 
@@ -789,6 +795,7 @@ class Nodes:
         # SEND MOVE MESSAGE
         # rospy.sleep(1)
         self.publisher_auto_motive.publish(self.msg_auto_motive)
+        print("Published auto motive from nodes loop fun")
         rospy.sleep(sampling_time)            
     
     def test_cam(self):
@@ -806,6 +813,7 @@ class Nodes:
             self.nodes[tag].print_position_measures()
 
     def move(self, move_type = 'move', step_size: float = 0., theta: float =0.0):
+        print("Nodes.move")
         for tag in self.nodes:
                              
             if(move_type == 'move'):     
@@ -827,6 +835,7 @@ class Nodes:
         # print("Sleep sampling_time", sampling_time)
         rospy.sleep(sampling_time)
         self.publisher_auto_motive.publish(self.msg_auto_motive)
+        print("Published auto motive from nodes move")
         # rospy.sleep(10)
 
     def update_leds(self, subset_tags: typing.Optional[list] = None):
@@ -845,6 +854,7 @@ class Nodes:
         self.msg_leds.data[0] = count
 
         self.publisher_leds.publish(self.msg_leds)
+        print("Published led ")
 
     def reset(self, type = 'odom', subset_tags: typing.Optional[list] = None):
         self.msg_reset.data = np.array([0])
@@ -853,7 +863,7 @@ class Nodes:
             ToIterateOver = subset_tags
         else:
             ToIterateOver = self.nodes.keys()
-            print(self.nodes)
+            # print(self.nodes)
 
         count = 0
         for tag in ToIterateOver:
@@ -869,6 +879,7 @@ class Nodes:
             print("reset")
             self.msg_reset.data[0] = count
             self.publisher_reset.publish(self.msg_reset)
+            print("Published reset")
 
     def turn_off_leds(self):
         for tag in self.nodes:

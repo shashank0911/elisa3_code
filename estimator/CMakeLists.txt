@@ -15,11 +15,9 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   cv_bridge
 )
-find_package(PkgConfig REQUIRED)
-
-## Add JsonCpp library
-# find_package(jsoncpp REQUIRED)
-pkg_check_modules(JSONCPP jsoncpp)
+# find_package(PkgConfig REQUIRED)
+find_package(nlohmann_json REQUIRED)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -103,13 +101,12 @@ catkin_package(
 ###########
 
 # Include Eigen headers
-include_directories($ENV{HOME}/eigen)
+# include_directories()
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
-  ${JSONCPP_INCLUDE_DIRS}
 )
 
 # The CMake link_directories() function can be used to add additional library paths, however, this is not recommended. 
@@ -131,7 +128,7 @@ add_executable(estimator src/main.cpp src/nodes.cpp src/Kalman.cpp src/utils.cpp
 # add_dependencies(epuck_driver_cpp_node epuck_driver_cpp_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(estimator ${catkin_LIBRARIES} ${JSONCPP_LIBRARIES}
+target_link_libraries(estimator ${catkin_LIBRARIES} nlohmann_json::nlohmann_json Eigen3::Eigen
 )
 
 #############

@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <iostream>
 
 // Eigen::MatrixXd getDomain() {
 //     Eigen::MatrixXd domain(4,2);
@@ -39,7 +40,7 @@ double yawFromQuaternion(double x, double y, double z, double w) {
 }
 
 ObstacleAvoidance::ObstacleAvoidance() {
-    std::vector<Eigen::Matrix2d> refLinesDomain(4);
+    refLinesDomain.resize(4);
     // refLinesDomain << 0.0, 0.0, 
     //                   0.0, 1.15, 
     //                   2.4, 1.15, 
@@ -48,6 +49,7 @@ ObstacleAvoidance::ObstacleAvoidance() {
     refLinesDomain[1] << 0.0, 1.15, 2.4, 1.15;
     refLinesDomain[2] << 2.4, 1.15, 2.4, 0.0;
     refLinesDomain[3] << 2.4, 0.0, 0.0, 0.0;
+    // std::cout << "Obstcale init: " << refLinesDomain[0] << std::endl;
 }
 
 Eigen::Vector2d ObstacleAvoidance::perpendicular(const Eigen::Vector2d& a) {
@@ -68,15 +70,18 @@ bool ObstacleAvoidance::checkDirectionVectors(const Eigen::Vector2d& vector1, co
 }
 
 bool ObstacleAvoidance::checkInDomain(const Eigen::Vector2d& point) {
-
-    if(point[0] > refLinesDomain[0](0,0) && point[0] < refLinesDomain[2](2,0) 
+    // std::cout << "Error location 6.3.x1" << std::endl;
+    // std::cout << "refLinesDomain[0]" << refLinesDomain[0] <<std::endl;
+    if(point[0] > refLinesDomain[0](0,0) && point[0] < refLinesDomain[2](1,0) 
     && point[1] > refLinesDomain[0](0,1) && point[1] < refLinesDomain[1](1,1)) {
+        // std::cout << "Error location 6.3.x2" << std::endl;
         if(obstacles) {
             return false;
         } else {
             return true;
         }
     } else {
+        // std::cout << "Error location 6.3.x3" << std::endl;
         return false;
     }
 }
@@ -139,18 +144,23 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 }
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
-
+    // std::cout << "Error location 6.3.0" << std::endl;
     Eigen::Vector2d noObsNewPoint = startPoint + move;
 
     if (!checkInDomain(startPoint + move)) {
+        // std::cout << "Error location 6.3.0.1" << std::endl;
         Eigen::Matrix2d locations;
         locations << startPoint, startPoint + move;
+        // std::cout << "Error location 6.3.0.2" << std::endl;
         auto [indexLine, inter] = lineIntersection(locations);
+        // std::cout << "Error location 6.3.1" << std::endl;
         if (indexLine != -1) {
             Eigen::Matrix2d refLine = refLinesDomain[indexLine];
+            // std::cout << "Error location 6.3.2" << std::endl;
             Eigen::Vector2d refVec;
             refVec << refLine(1,0) - refLine(0,0), refLine(1,1) - refLine(0,1);
             Eigen::Vector2d perpVec = perpendicular(refVec);
+            // std::cout << "Error location 6.3.3" << std::endl;
             Eigen::Vector2d newPoint;
             //TODO - check this
             if (!perpVec(0)) {
@@ -158,7 +168,7 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
             } else {
                 newPoint << 2*inter(0) - move(0) - startPoint(0), noObsNewPoint(1);
             }
-
+            // std::cout << "Error location 6.3.4" << std::endl;
             if (checkInDomain(newPoint)) {
                 return std::make_pair(newPoint, true);
             } else {
@@ -169,6 +179,7 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
                     return std::make_pair(startPoint, true);
                 }
             }
+            // std::cout << "Error location 6.3.5" << std::endl;
         } else {
             return std::make_pair(startPoint, true);
         }

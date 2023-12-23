@@ -22,13 +22,13 @@ class CameraMarker {
 
     private:
 
-        ros::Subscriber listenerCameraList;
+        // ros::Subscriber listenerCameraList;
         //TODO check datatype of msmtList
         // Eigen::VectorXd measurementList;
 
     public:
     
-        ros::NodeHandle n;
+        // ros::NodeHandle n;
         int number;
         int currentNumber;
         std::vector<double> measurementList;
@@ -44,8 +44,8 @@ class CameraNode {
     private:
 
         int tag;
-        ros::Subscriber listenerCamera;
-        ros::Subscriber listenerCameraTimer;
+        // ros::Subscriber listenerCamera;
+        // ros::Subscriber listenerCameraTimer;
 
     public:
 
@@ -53,7 +53,7 @@ class CameraNode {
         double camY;
         double camPhi;
         double timer;
-        ros::NodeHandle n;
+        // ros::NodeHandle n;
 
         CameraNode(int tag);
         ~CameraNode();
@@ -67,18 +67,17 @@ class Cameras {
     private:
 
         int number;
-        std::map<int, CameraNode*> cameras;
         
         //TODO - check if this publisher is necessary
-        ros::NodeHandle np;
-        ros::Publisher publisherCams;
+        // ros::NodeHandle np;
+        // ros::Publisher publisherCams;
         std_msgs::Float64MultiArray msgCam;
 
     public:
 
         // ros::NodeHandle n;
-        //size (N, 4) N - from Cameras()
-        //measurement for one item is along the row
+        std::map<int, CameraNode*> cameras;
+        //size (N, 4) N - from Cameras(), measurement for one camera is along the row
         Eigen::MatrixXd measurementList;
         // Eigen::MatrixXd measurementListPrev;
         // std::vector<double> msgCam;
@@ -97,7 +96,7 @@ class Node {
 
         std::string tag;
         double releaseTime;
-        std::string address;
+        
         double startPos[2];
         double startOrien;
 
@@ -136,12 +135,13 @@ class Node {
         //size is (1, bufferSize)
         Eigen::MatrixXd orienBuf;
 
-        ros::Subscriber listenerRobotPose;
-        ros::Subscriber listenerAccel;
+        // ros::Subscriber listenerRobotPose;
+        // ros::Subscriber listenerAccel;
 
     public:
 
-        ros::NodeHandle n;
+        // ros::NodeHandle n;
+        std::string address;
         bool updateLeds;
         int msgLeds[3];
         bool updateReset;
@@ -171,6 +171,7 @@ class Node {
         // owa_w1, owa_w2, owa_w3
         Eigen::Vector3d OwaWeights;
 
+        ObstacleAvoidance obstacleAvoidanceNode;
 
         Node(double releaseTime, std::string tagExt);
         ~Node();
@@ -203,18 +204,15 @@ class Nodes {
         int N;
 
         //TODO - check if we need publishers
-        ros::NodeHandle np;
-        ros::Publisher publisherAutoMove;
-        ros::Publisher publisherLeds;
-        ros::Publisher publisherReset;
+        // ros::NodeHandle np;
+        // ros::Publisher publisherAutoMove;
+        // ros::Publisher publisherLeds;
+        // ros::Publisher publisherReset;
         // ros::Publisher publisherInput;
         // ros::Publisher publisherInputs;
         //TODO - check if we need these
         // geometry_msgs::Twist msgInput;
         // std_msgs::Float64MultiArray msgInputs;
-        std_msgs::Float64MultiArray msgAutoMove;
-        std_msgs::Float64MultiArray msgLeds;
-        std_msgs::Float64MultiArray msgReset;
         
         //TODO - figure out datatype of stored data
         using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
@@ -226,6 +224,9 @@ class Nodes {
         std::map<std::string, Node*> nodes;
         Cameras cameras;
         CameraMarker cameraMarker;
+        std_msgs::Float64MultiArray msgAutoMove;
+        std_msgs::Float64MultiArray msgLeds;
+        std_msgs::Float64MultiArray msgReset;
         // std::vector<int> msgLeds;
         // std::vector<double> msgReset;
         // std::vector<double> msgAutoMove;

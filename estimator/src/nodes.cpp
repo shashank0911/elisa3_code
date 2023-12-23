@@ -1,14 +1,16 @@
 #include "nodes.h" 
+#include "utils.h"
+#include "Kalman.h"
 #include <iostream>
 #include <fstream>
-#include <jsoncpp/json/json.h>
-#include <jsoncpp/json/value.h>
+#include "nlohmann/json.hpp"
 #include <unistd.h>
 #include <cmath>
 
 using std::string;
 using std::cout;
 using std::endl;
+using json = nlohmann::json;
 
 const double WHEEL_DISTANCE = 0.041;
 const double T_DELAY = 0.5;
@@ -22,7 +24,7 @@ const string MODE = "kalman";
 const int SR_KALMAN = 0;
 const int MR_KALMAN = 1;
 
-ObstacleAvoidance obstacleAvoidance;
+// ObstacleAvoidance obstacleAvoidanceNode;
 
 
 
@@ -30,23 +32,35 @@ ObstacleAvoidance obstacleAvoidance;
 CameraMarker::CameraMarker(int N) {
     number = N;
     currentNumber = N;
-    listenerCameraList = n.subscribe("Bebop1/makers", 10, &CameraMarker::listenOptitrackMarkersCallback, this);
+    //TODO - change resize to 0 later
+    measurementList.resize(5);
+    // cout << "Reached camera marker" << endl;
+    // listenerCameraList = n.subscribe("Bebop1/makers", 10, &CameraMarker::listenOptitrackMarkersCallback, this);
 }
 
 void CameraMarker::listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg) {
+    // cout << "Reached callback fn for camera marker" << endl;
     if (optiMsg->data.empty()) {
         measurementList.resize(0);
-        return;
+        cout << "empty msmt list " << endl;
+    } else {
+        currentNumber = int(optiMsg->data[0]);
+        // cout << "Current number: " << currentNumber << endl;
+        measurementList.resize(optiMsg->data.size());
+        // cout << "Measurement List size: " << measurementList.size() << endl;
+        for (int i = 0; i < measurementList.size(); i++) {
+            //TODO - check if it should be double or int
+            measurementList[i] = double(optiMsg->data[i]);
+            // cout << "CameraMarker measurement list of " << i << ": " << measurementList[i] << endl;
+        }
     }
-    int nRobots = int(optiMsg->data[0]);
-    measurementList.resize(nRobots);
-    for (int i = 0; i < nRobots; i++) {
-        //TODO - check if it should be double or int
-        measurementList[i] = double(optiMsg->data[i]);
-    }
+    
 }
 
-CameraMarker::~CameraMarker() {}
+CameraMarker::~CameraMarker() {
+    cout << "Camera marker destroyed" << endl;
+}
+
 
 
 
@@ -57,11 +71,12 @@ CameraNode::CameraNode(int tag_ext) {
     camPhi = 0.0;
     tag = tag_ext;
     timer = 0.0;
-    listenerCamera = n.subscribe("Bebop" + std::to_string(tag + 1) + "/ground_pose", 10, &CameraNode::listenOptitrackCallback, this);
-    listenerCameraTimer = n.subscribe("Bebop" + std::to_string(tag + 1) + "/pose", 10, &CameraNode::listenOptitrackTimerCallback, this);
+    // listenerCamera = n.subscribe("Bebop" + std::to_string(tag + 1) + "/ground_pose", 10, &CameraNode::listenOptitrackCallback, this);
+    // listenerCameraTimer = n.subscribe("Bebop" + std::to_string(tag + 1) + "/pose", 10, &CameraNode::listenOptitrackTimerCallback, this);
 }
 
 void CameraNode::listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg) {
+    // cout << "optitrack callback" << endl;
     camX = optiMsg->x;
     camY = optiMsg->y;
     camPhi = optiMsg->theta;
@@ -71,7 +86,9 @@ void CameraNode::listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::
     timer = optiMsg->header.stamp.toSec();
 }
 
-CameraNode::~CameraNode() {}
+CameraNode::~CameraNode() {
+    cout << "Individual camera nodes destroyed" << endl;
+}
 
 
 
@@ -80,12 +97,12 @@ Cameras::Cameras(int N) {
     for (int tag = 0; tag < N; tag++) {
         cameras[tag] = new CameraNode(tag);
     }
-    measurementList = Eigen::MatrixXd(N, 4);
+    measurementList.resize(N, 4);
     //TODO - check if below variable is necessary
     // measurementListPrev = Eigen::MatrixXd(N, 4);
 
     //TODO - work on the publish part later if necessary. involves msgcam, publishercams
-    publisherCams = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/cams", 1);
+    // publisherCams = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/cams", 1);
     msgCam.data.resize(N*3 + 1);
     
 }
@@ -112,33 +129,37 @@ void Cameras::publishCams() {
         count++;
     }
     msgCam.data[0] = count;
-    publisherCams.publish(msgCam);
+    // publisherCams.publish(msgCam);
 }
 
-Cameras::~Cameras() {}
+Cameras::~Cameras() {
+    for (const auto& camera : cameras) {
+        delete camera.second;
+    }
+    cout << "Cameras group node deleted" << endl;
+}
+
 
 
 
 
 
 Node::Node(double releaseTime, std::string tagExt) {
-    std::ifstream file("mapper.json");
-    Json::Value mapper;
-    Json::Reader reader;
-    reader.parse(file, mapper);
+    std::ifstream file("src/estimator/src/mapper.json");
+    json mapper = json::parse(file);
     
     t = 0;
 
     tag = tagExt;
     this->releaseTime = releaseTime;
     // Json::Value addrArr = mapper[tag]["address"];
-    Json::Value posArr = mapper[tag]["pos"];
+    // Json::Value posArr = mapper[tag]["pos"];
     // Json::Value orienArr = mapper[tag]["orien"];
 
-    address = mapper[tag]["address"].asString();
-    startPos[0] = posArr[0].asDouble();
-    startPos[1] = posArr[1].asDouble();
-    startOrien = mapper[tag]["orien"].asDouble();
+    address = mapper[tag]["address"];
+    startPos[0] = mapper[tag]["pos"][0];
+    startPos[1] = mapper[tag]["pos"][1];
+    startOrien = mapper[tag]["orien"];
 
     inputV = 0.0;
     inputOmega = 0.0;
@@ -161,9 +182,9 @@ Node::Node(double releaseTime, std::string tagExt) {
     prevEst = xyphiVals;
     curEst = xyphiVals;
 
-    kalmanOdom = Kalman();
-    kalmanCam = Kalman();
-    kalmanAccel = Kalman();
+    // kalmanOdom = Kalman();
+    // kalmanCam = Kalman();
+    // kalmanAccel = Kalman();
 
     threshold = 0.02;
 
@@ -193,8 +214,8 @@ Node::Node(double releaseTime, std::string tagExt) {
     orienBuf.resize(1, bufferSize);
     orienBuf.fill(startOrien);
 
-    listenerRobotPose = n.subscribe("elisa3_robot_" + tag + "/odom", 10, &Node::listenRobotPoseCallback, this);
-    listenerAccel = n.subscribe("swarm/elisa3_robot_" + tag + "/accel", 10, &Node::listenAccelCallback, this);
+    // listenerRobotPose = n.subscribe("elisa3_robot_" + tag + "/odom", 10, &Node::listenRobotPoseCallback, this);
+    // listenerAccel = n.subscribe("swarm/elisa3_robot_" + tag + "/accel", 10, &Node::listenAccelCallback, this);
 
     updateLeds = false;
     for (int i = 0; i < 3; i++) {
@@ -207,6 +228,8 @@ Node::Node(double releaseTime, std::string tagExt) {
         msgAutoMove[i] = 0.0;
     }
     triggerAutoMove = 103;
+
+    // obstacleAvoidanceNode = ObstacleAvoidance();
 
 }
 
@@ -237,6 +260,7 @@ void Node::listenRobotPoseCallback(const nav_msgs::Odometry::ConstPtr& odomMsg) 
                 odomMsg->pose.pose.position.y,
                 odomMsg->pose.pose.position.z;
     odomTimer = odomMsg->header.stamp.toSec();
+    // cout << "Received odom msgs" << endl;
 
 }
 
@@ -244,6 +268,7 @@ void Node::listenAccelCallback(const sensor_msgs::Imu::ConstPtr& accelMsg) {
     accelVals(0) = accelMsg->linear_acceleration.x;
     accelVals(1) = accelMsg->linear_acceleration.y;
     accelVals(2) = accelMsg->angular_velocity.x;
+    // cout << "Received accel msgs" << endl;
 }
 
 void Node::nodePrintPositionMeasures() {
@@ -255,21 +280,25 @@ void Node::nodePrintPositionMeasures() {
         << "Camera - Position: (" << camVals(0) << ", " << camVals(1) << "), Orientation: " << camVals(2) << "\n"
         << "Accelerometer - Position: (" << accelVals(3) << ", " << accelVals(4) << "), Velocity: " << accelVals(0) << "\n";
 
-    cout << msg.str() << endl;
+    if (t % 5 == 0) {
+        cout << msg.str() << endl;
+    }
+    
 }
 
 void Node::computeMove(double pol[2]) {
     nodePrintPositionMeasures();
 
-    double orienCor = orienBuf(1, bufferSize - 1);
+    double orienCor = orienBuf(bufferSize - 1);
     if (orienCor < 0.0) {
         orienCor += 2*PI;
     }
+    // cout << "Error location 4" << endl;
     orienCor = fmod(orienCor, 2*PI);
     if (orienCor > PI) {
         orienCor -= 2*PI;
     }
-
+    // cout << "Error location 5" << endl;
     double phiCor = pol[1];
     if (phiCor < 0.0) {
         phiCor += 2*PI;
@@ -291,24 +320,30 @@ void Node::computeMove(double pol[2]) {
         msgAutoMove[2] = 0.0;
         msgAutoMove[3] = pol[0];
     }
-
+    // cout << "Error location 6" << endl;
     updateAutoMove = true;
     if (triggerAutoMove == 103) {
         triggerAutoMove = 104;
     } else {
         triggerAutoMove = 103;
     }
-
+    // cout << "Error location 6.1" << endl;
     Eigen::Vector2d polVec;
     polVec << pol[0], phiCor;
+    // cout << "Error location 6.2" << endl;
     Eigen::Vector2d propMoveCart = pol2cart(polVec);
-    auto [calcPoint, obsAvoidMode] = obstacleAvoidance.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
-
+    // cout << "Error location 6.3" << endl;
+    // Eigen::Matrix2d blah = obstacleAvoidanceNode.refLinesDomain[0];
+    // cout << "reflines size: " << obstacleAvoidanceNode.refLinesDomain.size() << endl;
+    // cout << "reflinesdomain: " << blah(0,0) << endl;
+    auto [calcPoint, obsAvoidMode] = obstacleAvoidanceNode.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
+    // cout << "Error location 7" << endl;
     posBuf = renewVec(posBuf);
     orienBuf = renewVec(orienBuf);
-
+    // cout << "Error location 8" << endl;
     posBuf.col(bufferSize - 1) << calcPoint;
-    orienBuf(1, bufferSize - 1) += deltaPhi; 
+    orienBuf(bufferSize - 1) += deltaPhi; 
+    // cout << "Error location 9" << endl;
 }
 
 void Node::nodeReset(const std::string type) {
@@ -317,7 +352,7 @@ void Node::nodeReset(const std::string type) {
             cout << "Robot " << tag << "'s odometry measurement outputs NaN" << endl;
         } else {
             posBuf.col(bufferSize - 1) << odomVals(0), odomVals(1);
-            orienBuf(1, bufferSize - 1) == odomVals(2);
+            orienBuf(bufferSize - 1) == odomVals(2);
         }
         updateReset = false;
     } else if (type == "theor") {
@@ -364,7 +399,7 @@ Eigen::Vector3d Node::determineCameraMarker(CameraMarker& cameraMarker) {
     Eigen::Vector2d camMarkerMeas;
     cout << "Camera marker number: " << cameraMarker.currentNumber << endl;
     for (int j = 0; j < cameraMarker.currentNumber; j++) {
-        camMarkerMeas << cameraMarker.measurementList[i*3 + 2], cameraMarker.measurementList[i*3 + 4];
+        camMarkerMeas << cameraMarker.measurementList[j*3 + 2], cameraMarker.measurementList[j*3 + 4];
         double dist = (curEst.head(2) - camMarkerMeas).norm();
         if (dist < minDist) {
             minDist = dist;
@@ -537,7 +572,7 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
 
     //TODO - profiling
     //TODO - print time 
-    cout << "Loop function starting for " << t << "th loop" << endl;
+    cout << endl << "Node Loop function starting for " << t << "th loop" << endl;
 
     Eigen::Matrix3d measurements = measurementUpdate(cameras, cameraMarker);
     //TODO - print time
@@ -561,7 +596,9 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
 
 }
 
-Node::~Node() {}
+Node::~Node() {
+    cout << "All individual nodes destroyed" << endl;
+}
 
 
 
@@ -572,12 +609,13 @@ Node::~Node() {}
 
 Nodes::Nodes(std::vector<std::string> activeRobots) : cameras(activeRobots.size()), cameraMarker(activeRobots.size()) {
 
-    std::ifstream file("mapper.json");
-    Json::Value mapper;
-    Json::Reader reader;
-    reader.parse(file, mapper);
+    std::ifstream file("src/estimator/src/mapper.json");
+    json mapper = json::parse(file);
     // Json::Value addressList = mapper["address"];
-    std::vector<std::string> keys = mapper.getMemberNames();
+    std::vector<std::string> keys;
+    for (auto it = mapper.begin(); it != mapper.end(); it++) {
+        keys.push_back(it.key());
+    }
 
     this->activeRobots = activeRobots;
     N = activeRobots.size();
@@ -602,9 +640,9 @@ Nodes::Nodes(std::vector<std::string> activeRobots) : cameras(activeRobots.size(
         }         
     }
 
-    publisherAutoMove = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/auto_motive", 1);
-    publisherLeds = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/leds", 1);
-    publisherReset = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/reset", 1);
+    // publisherAutoMove = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/auto_motive", 1);
+    // publisherLeds = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/leds", 1);
+    // publisherReset = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/reset", 1);
 
     msgAutoMove.data.resize(N*5 + 1, 0.0);
     msgLeds.data.resize(N*4 + 1, 0.0);
@@ -623,7 +661,7 @@ void Nodes::nodesLoopFn(const std::string moveType) {
     int count = 0;
     for (const auto& node: nodes) {
         nodes[node.first]->nodeLoopFun(cameras, cameraMarker, moveType);
-        msgAutoMove.data[i*5 + 1] = std::stod(node.first);
+        msgAutoMove.data[i*5 + 1] = std::stod(node.second->address);
         msgAutoMove.data[i*5 + 2] = node.second->msgAutoMove[0];
         msgAutoMove.data[i*5 + 3] = node.second->msgAutoMove[1];
         msgAutoMove.data[i*5 + 4] = node.second->msgAutoMove[2];
@@ -631,9 +669,10 @@ void Nodes::nodesLoopFn(const std::string moveType) {
         i++;
         count++;
     }
-    msgReset.data[0] = double(count);
+    msgAutoMove.data[0] = double(count);
     //TODO - publisher; send msgAutoMove to elisa3 fn
-    publisherAutoMove.publish(msgAutoMove);
+    // publisherAutoMove.publish(msgAutoMove);
+    // cout << "Published auto move msg from nodesLoopFn" << endl;
 
     usleep(int(SAMPLING_TIME*1000000.0));
 }
@@ -671,14 +710,16 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
     for (const auto& tag : nodes) {
         if (moveType == "move") {
             auto [step, omega] = nodes[tag.first]->goToGoal();
+            // cout << "Error location 1" << endl;
         } else {
             step = stepSize;
             omega = theta;
         }
         double pol[2] = {step, omega};
         nodes[tag.first]->computeMove(pol);
+        // cout << "Error location 2" << endl;
 
-        msgAutoMove.data[i*5 + 1] = std::stod(tag.first);
+        msgAutoMove.data[i*5 + 1] = std::stod(tag.second->address);
         msgAutoMove.data[i*5 + 2] = tag.second->msgAutoMove[0];
         msgAutoMove.data[i*5 + 3] = tag.second->msgAutoMove[1];
         msgAutoMove.data[i*5 + 4] = tag.second->msgAutoMove[2];
@@ -686,30 +727,33 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
         i++;
         count++;
     }
-    msgReset.data[0] = double(count);
+    msgAutoMove.data[0] = double(count);
     //TODO - publisher for msg automotive
-    publisherAutoMove.publish(msgAutoMove);
+    // publisherAutoMove.publish(msgAutoMove);
+    // cout << "Published auto move msg from Nodes::move" << endl;
+    // cout << "Error location 3" << endl;
 
     usleep(int(SAMPLING_TIME*1000000.0));
 }
 
 void Nodes::updateLeds() {
     int count = 0;
-    // auto bigIter = msgLeds.begin();
-    // std::advance(bigIter, 1);
     int i = 0;
     for (const auto& tag : nodes) {
-        // auto smallIter = nodes[tag.first]->msgLeds;
-        msgLeds.data[i*4 + 1] = std::stod(tag.first);
+        // cout << "Led update for robot " << tag.first << endl;
+        msgLeds.data[i*4 + 1] = std::stod(tag.second->address);
         msgLeds.data[i*4 + 2] = double(nodes[tag.first]->msgLeds[0]);
         msgLeds.data[i*4 + 3] = double(nodes[tag.first]->msgLeds[1]);
         msgLeds.data[i*4 + 4] = double(nodes[tag.first]->msgLeds[2]);
+        // cout << "Message: " << msgLeds.data[i*4 + 1] << ", " << msgLeds.data[i*4 + 2] << ", " << msgLeds.data[i*4 + 3] << ", " << msgLeds.data[i*4 + 4] << "\n";
         i++;
         count++;
     }
+    // cout << "No,of robots for which leds published: " << count << endl;
     msgLeds.data[0] = double(count);
     //TODO - publisher; call the elisa node fn to update robot dict
-    publisherLeds.publish(msgLeds);
+    // publisherLeds.publish(msgLeds);
+    // cout << "Published led msg" << endl;
 }
 
 void Nodes::nodesReset(const std::string type) {
@@ -718,7 +762,7 @@ void Nodes::nodesReset(const std::string type) {
     for (const auto& tag : nodes) {
         nodes[tag.first]->nodeReset(type);
         if (nodes[tag.first]->updateReset) {
-            msgReset.data[i*5 + 1] = std::stod(tag.first);
+            msgReset.data[i*5 + 1] = std::stod(tag.second->address);
             msgReset.data[i*5 + 2] = nodes[tag.first]->msgReset[0];
             msgReset.data[i*5 + 3] = nodes[tag.first]->msgReset[1];
             msgReset.data[i*5 + 4] = nodes[tag.first]->msgReset[2];
@@ -733,7 +777,8 @@ void Nodes::nodesReset(const std::string type) {
         cout << "Reset - theoretical" << endl;
         msgReset.data[0] = double(count);
         //TODO - publisher; call the elisa node fn to update robot dict
-        publisherReset.publish(msgReset);
+        // publisherReset.publish(msgReset);
+        // cout << "Published reset msg" << endl;
     }
 }
 
@@ -746,6 +791,7 @@ void Nodes::turnOffLeds() {
 
 void Nodes::setLeds(const int ledIntensity[3]) {
     for (const auto& tag : nodes) {
+        
         nodes[tag.first]->publishGreenLed(ledIntensity[0]);
         nodes[tag.first]->publishRedLed(ledIntensity[1]);
         nodes[tag.first]->publishBlueLed(ledIntensity[2]);
@@ -790,6 +836,7 @@ void Nodes::storeData(int t) {
             {"full_camera", cameraMarker.measurementList}
         };
     }
+    cout << "Saved data for time instant " << t << endl;
 }
 
 void Nodes::saveData(int t) {
@@ -807,4 +854,9 @@ void Nodes::saveData(int t) {
 }
 
 
-Nodes::~Nodes() {}
+Nodes::~Nodes() {
+    for (const auto& node : nodes) {
+        delete node.second;
+    }
+    cout << "Group of nodes deleted" << endl;
+}

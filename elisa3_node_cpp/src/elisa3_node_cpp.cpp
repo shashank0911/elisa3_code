@@ -2,6 +2,7 @@
 #include <math.h>
 #include <time.h>
 #include <sys/time.h>
+#include <unistd.h>
 // #include "elisa3-lib.h"
 #include <ros/ros.h>
 #include "pc-side-elisa3-library/elisa3-lib.h"
@@ -26,6 +27,7 @@
 
 // for the camera
 #include <geometry_msgs/Pose2D.h>
+
 
 // #include "main_part.h"
 
@@ -100,7 +102,8 @@ ros::Subscriber AllResetSubscriber;
 std::map<int, ros::Subscriber> AutoMotiveSubscribers;
 ros::Subscriber AllAutoMotiveSubscriber;
 
-
+using std::cout;
+using std::endl;
 
 
 
@@ -219,8 +222,9 @@ void Robot::updateRosInfo() {
     geometry_msgs::Quaternion odomQuat = tf::createQuaternionMsgFromYaw(theta);
     odomMsg.pose.pose.orientation = odomQuat;
 
-
-    odomPublisher[tag].publish(odomMsg);
+    // std::cout << "before odom publish" << std::endl;
+    // odomPublisher[tag].publish(odomMsg);
+    // std::cout << "after odom publish" << std::endl;
 
     
     // broadcast odom over tf
@@ -289,7 +293,12 @@ void Robot::updateRosInfo() {
     accelMsg.orientation_covariance[6] = 0.0;
     accelMsg.orientation_covariance[7] = 0.0;
     accelMsg.orientation_covariance[8] = 0.01;
+    // std::cout << "before accel publish" << std::endl;
+    // cout << "No.of subscribers for " << tag << "th robot is: " << accelPublisher[tag].getNumSubscribers() << endl;
     accelPublisher[tag].publish(accelMsg);
+    // std::cout << "after accel publish" << std::endl;
+    usleep(int(0.005 * 1000000.0));
+
 }
 
 void Robot::IIR_filter(){
@@ -307,6 +316,7 @@ void Robot::IIR_filter(){
 
 
 void updateSensorsData() {
+    // std::cout << "Reached update sensor data" << std::endl;
 	std::map<int, Robot>::iterator it;
 
 	for (it = robots_dict.begin(); it != robots_dict.end(); it++){
@@ -315,6 +325,7 @@ void updateSensorsData() {
 }
 
 void updateRosInfo() {
+    // std::cout << "Reached update ros info" << std::endl;
 	static tf2_ros::TransformBroadcaster br;
 
     std::map<int, Robot>::iterator it;
@@ -330,6 +341,7 @@ void updateRosInfo() {
 int getIdFromAddress(int address) {
     std::map<int, Robot>::iterator it;
     for (it = robots_dict.begin(); it != robots_dict.end(); it++){
+        // cout << "Robot address: " << robots_dict[it->first].address << endl;
         if(robots_dict[it->first].address == address) {
             return int(it->first);
         }
@@ -350,6 +362,7 @@ void handlerAllOpti(const std_msgs::Float64MultiArray::ConstPtr& msg) {
 }
 
 void handlerAllReset(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    // std::cout << "Reached handler reset" << std::endl;
     int nr_robots = int(msg->data[0]);
 //    std::cout << "[" << nodeName << "] " << "nr robots resetting: " << nr_robots << std::endl;
     int tag;
@@ -385,6 +398,7 @@ void handlerAllReset(const std_msgs::Float64MultiArray::ConstPtr& msg) {
 }
 
 void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    // std::cout << "Reached handler auto move" << std::endl;
     int nr_robots = int(msg->data[0]);
 //    std::cout << "[" << nodeName << "] " << "nr robots: " << nr_robots << std::endl;
     int tag;
@@ -444,19 +458,31 @@ void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
 }
 
 void handlerAllLeds(const std_msgs::Float64MultiArray::ConstPtr& msg) {
+    // std::cout << "Reached handlerLED" << std::endl;
     int nr_robots;
     nr_robots = int(msg->data[0]);
     int tag;
 
+    // for (int i=0; i <= (nr_robots)*4; i++) {
+    //     cout << msg->data[i] << ", " ;
+    // }
+    // cout << endl;
+
     XmlRpc::XmlRpcValue::iterator i;
     for (int i=0; i < nr_robots; i++){
+        // cout << "Tag as int: " << int(msg->data[i*4+1]) << endl;
         tag = getIdFromAddress(int(msg->data[i*4+1]));
+        // cout << "Tag from getID address: " << tag << endl;
         robots_dict[tag].changedActuators[GREEN_LEDS] = true;
         robots_dict[tag].changedActuators[RED_LEDS] = true;
         robots_dict[tag].changedActuators[BLUE_LEDS] = true;
         robots_dict[tag].greenLed = int(msg->data[i*4+2]);
         robots_dict[tag].redLed = int(msg->data[i*4+3]);
         robots_dict[tag].blueLed = int(msg->data[i*4+4]);
+        // cout << "Robot " << tag << ":" << endl;
+        // cout << "Green: " << robots_dict[tag].greenLed << '\t';
+        // cout << "Red: " << robots_dict[tag].redLed << '\t';
+        // cout << "Blue: " << robots_dict[tag].blueLed << '\n';
     }
 }
 
@@ -474,7 +500,7 @@ bool * get_sensors_condition(unsigned int proxData[8]){
 }
 
 void updateActuators() {
-    
+    // std::cout << "Reached update actuators" << std::endl;
     char buff[6];
 
 	std::map<int, Robot>::iterator it;
@@ -544,13 +570,13 @@ void updateActuators() {
 // }
 
 
-void main_fun(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_dict){
+void main_fuc(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_dict){
     
     
     
     std::map<int, Robot>::iterator it;
     for (it = robots_dict.begin(); it != robots_dict.end(); it++){
-        std::cout << "[" << nodeName << "] " << robots_dict[it->first].tag << " accData[0]: " << robots_dict[it->first].accData[0] << std::endl;
+        // std::cout << "[" << nodeName << "] " << robots_dict[it->first].tag << " accData[0]: " << robots_dict[it->first].accData[0] << std::endl;
         // std::cout << robots_dict[it->first].xPos << std::endl;
 
         // for each robot
@@ -682,13 +708,13 @@ int main(int argc,char *argv[]) {
             ss1 << "elisa3_robot_" << class_inst.tag <<"/accel";
             accelPublisher[class_inst.tag] = np.advertise<sensor_msgs::Imu>(ss1.str(), 1);
             
-            AllLedSubscriber = n.subscribe("elisa3_all_robots/leds", 10, handlerAllLeds);
+            AllLedSubscriber = n.subscribe("estimator/elisa3_all_robots/leds", 10, handlerAllLeds);
 
-            AllResetSubscriber = n.subscribe("elisa3_all_robots/reset", 10, handlerAllReset);
+            AllResetSubscriber = n.subscribe("estimator/elisa3_all_robots/reset", 10, handlerAllReset);
 
-            AllAutoMotiveSubscriber = n.subscribe("elisa3_all_robots/auto_motive", 10, handlerAllAutoMove);
+            AllAutoMotiveSubscriber = n.subscribe("estimator/elisa3_all_robots/auto_motive", 10, handlerAllAutoMove);
 
-            AllOptiSubscriber = n.subscribe("elisa3_all_robots/cams", 10, handlerAllOpti);
+            AllOptiSubscriber = n.subscribe("estimator/elisa3_all_robots/cams", 10, handlerAllOpti);
 
 			count += 1;
 
@@ -696,6 +722,7 @@ int main(int argc,char *argv[]) {
 	}
 
     startCommunication(robot_addresses, N_robots);
+
 
     std::map<int, Robot>::iterator it;
     for (it = robots_dict.begin(); it != robots_dict.end(); it++){
@@ -712,20 +739,24 @@ int main(int argc,char *argv[]) {
     //     setYpos(robots_dict[it->first].address, robots_dict[it->first].yPos);
 
     // }
-
+    // ros::Rate loopRate(100);
     while (ros::ok()) {
         updateSensorsData();
         updateRosInfo();
         updateActuators();
-
+        // std::cout << "Waiting for messages from elisa3 node" << std::endl;
         // main part
 
-        main_fun(robots_dict, cameras_dict);
+        main_fuc(robots_dict, cameras_dict);
+        
 
         ros::spinOnce();
+        usleep(int(0.005 * 1000000.0));
+        // loopRate.sleep();
+        
     }
 
-	stopCommunication();
+		stopCommunication();
 }
 
 

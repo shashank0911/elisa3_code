@@ -13,7 +13,7 @@ if __name__ == "__main__":
     with open('mapper.json') as json_file:
         mapper = json.load(json_file)
     active_robots = list(mapper.keys())
-
+    # print("active robots from main: ", active_robots)
     # Init phase
     print("start")   
     robots = Nodes(active_robots)
@@ -22,6 +22,8 @@ if __name__ == "__main__":
     robots.set_leds(green=0, blue=0, red=10)
     
     publisher_tag = rospy.Publisher("elisa3_tag", String, queue_size=10)
+
+    rospy.sleep(3)
     
     # Reset the robot odom in the beginning    
     i = 0
@@ -41,10 +43,10 @@ if __name__ == "__main__":
         rospy.sleep(0.1)
         i += 1
         
-    print("start reset")
-    while(len(robots.camera_makers.measurement_list) == 0):
-        rospy.sleep(0.05)
-    print("awake from sleep")
+    # print("start reset")
+    # while(len(robots.camera_makers.measurement_list) == 0):
+    #     rospy.sleep(0.05)
+    # print("awake from sleep")
     
     # Move Robots
     last_saved_time = 0

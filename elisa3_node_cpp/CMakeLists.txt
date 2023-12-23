@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(elisa3_node_cpp)
 
-## Set C++ standard to 17
-# set(CMAKE_CXX_STANDARD 17)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -15,8 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
 )
 find_package(OpenCV REQUIRED)
-find_package(PkgConfig REQUIRED)
-
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -131,7 +125,7 @@ target_link_libraries(elisa3_node_cpp ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} el
 )
 # target_link_libraries(elisa3_node_cpp_1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} elisa3 pthread usb-1.0
 # )
-target_link_libraries(elisa3_odom_filter ${catkin_LIBRARIES}
+target_link_libraries(elisa3_odom_filter ${catkin_LIBRARIES} 
 )
 
 #############
