@@ -33,7 +33,10 @@ CameraMarker::CameraMarker(int N) {
     number = N;
     currentNumber = N;
     //TODO - change resize to 0 later
-    measurementList.resize(5);
+    measurementList.resize(0);
+    // for (int i=0; i<5; i++) {
+    //     measurementList[i] = 0;
+    // }
     // cout << "Reached camera marker" << endl;
     // listenerCameraList = n.subscribe("Bebop1/makers", 10, &CameraMarker::listenOptitrackMarkersCallback, this);
 }
@@ -111,8 +114,8 @@ void Cameras::updateCamera() {
     int i = 0;
     for (const auto& camera: cameras) {
         //TODO - what does this do??
-        measurementList(i,0) = 2.0 + camera.second->camY;
-        measurementList(i,1) = 1.0 + camera.second->camX;
+        measurementList(i,0) = camera.second->camX;
+        measurementList(i,1) = camera.second->camY;
         measurementList(i,2) = camera.second->camPhi;
         measurementList(i,3) = camera.second->timer;
         i++;
@@ -186,7 +189,7 @@ Node::Node(double releaseTime, std::string tagExt) {
     // kalmanCam = Kalman();
     // kalmanAccel = Kalman();
 
-    threshold = 0.02;
+    threshold = 0.05;
 
     bufferSize = 5;
 
@@ -280,7 +283,7 @@ void Node::nodePrintPositionMeasures() {
         << "Camera - Position: (" << camVals(0) << ", " << camVals(1) << "), Orientation: " << camVals(2) << "\n"
         << "Accelerometer - Position: (" << accelVals(3) << ", " << accelVals(4) << "), Velocity: " << accelVals(0) << "\n";
 
-    if (t % 5 == 0) {
+    if (t % 10 == 0) {
         cout << msg.str() << endl;
     }
     
@@ -423,29 +426,42 @@ Eigen::Vector3d Node::determineCamera(Cameras& cameras) {
     double minDist = 1e5;
     cameras.updateCamera();
 
-    int idx = std::stoi(tag);
-    camVals = cameras.measurementList.row(idx).head(3);
-    camTimer = cameras.measurementList(idx, 3);
+    int idx_og = std::stoi(tag);
+    // cout << "\n\ndetermine camera function idx_og: " << idx_og << endl;
+    camVals << cameras.measurementList(idx_og-1, 0), cameras.measurementList(idx_og-1, 1), cameras.measurementList(idx_og-1, 2);
+    camTimer = cameras.measurementList(idx_og-1, 3);
 
-    double dist = (curEst.head(2) - camVals.head(2)).norm();
+    // cout << "Current estimation: (" << curEst(0) << ", " << curEst(1) << ")\n";
+    // cout << "Camera est for " << idx_og << " th robot: (" << camVals(0) << ", " << camVals(1) << ")\n";
+    double dist_og = (curEst.head(2) - camVals.head(2)).norm();
+    // cout << "Dist btw curEst and camEst for " << idx_og << " th robot: " << dist_og << endl;
 
-    if (dist < 0.05) {
-        return Eigen::Vector3d(camVals(0), camVals(1), odomVals(2));
-    }
+    if (dist_og < 0.05) {
+        // cout << "Cam vals is retruned" << endl;
+        Eigen::Vector3d tmp;
+        tmp << camVals(0), camVals(1), odomVals(2);
+        return tmp;
+    } 
+    // else if (dist > (curEst.head(2) - odomVals.head(2)).norm()) {
+    //     cout << "Cam vals is returned" << endl;
+    //     return camVals;
+    // }
 
-    cout << "Current estimation: (" << curEst(0) << ", " << curEst(1) << ")\n";
     int i = 0;
-    idx = 0;
-
+    int idx = 0;
+    minDist = dist_og;
+    double dist = 0;
     for (int j = 0; j < cameras.measurementList.rows(); j++) {
-        if (i == std::stoi(tag)) {
+        if (i == std::stoi(tag)-1) {
             i += 1;
             continue;
         }
-        dist = (curEst.head(2) - cameras.measurementList.row(j).head(2)).norm();
+        Eigen::Vector2d temp;
+        temp << cameras.measurementList(j,0), cameras.measurementList(j,1);
+        dist = (curEst.head(2) - temp).norm();
         //TODO - figure out what this does
-        cout << "Camera measurement: (" << cameras.measurementList(j,0) << ", " << cameras.measurementList(j,1) << ")\n";
-        cout << "Distance from camera: " << dist << endl;
+        // cout << "Cam msmt for " << j+1 << "th robot: (" << cameras.measurementList(j,0) << ", " << cameras.measurementList(j,1) << ")\n";
+        // cout << "Dist from cam btw curEst and " << j+1 << "th robot cam msmt: " << dist << endl;
 
         if (dist < minDist) {
             minDist = dist;
@@ -453,32 +469,55 @@ Eigen::Vector3d Node::determineCamera(Cameras& cameras) {
         }
         i += 1;
     }
-    camVals << cameras.measurementList.row(idx).head(3);
-    camTimer = cameras.measurementList(idx, 3);
 
-    if (minDist > threshold) {
+    if (minDist == dist_og) {
+        camVals << cameras.measurementList(idx_og-1, 0), cameras.measurementList(idx_og-1, 1),cameras.measurementList(idx_og-1, 2);
+        camTimer = cameras.measurementList(idx_og-1, 3);
+        // cout << "Camera measurement chosen is " << idx_og << ": (" << camVals(0) << ", " << camVals(1) << ")" << endl;
+    } else {
+        camVals << cameras.measurementList(idx, 0), cameras.measurementList(idx, 1), cameras.measurementList(idx, 2);
+        camTimer = cameras.measurementList(idx, 3);
+        // cout << "Camera measurement chosen is " << idx + 1 << ": (" << camVals(0) << ", " << camVals(1) << ")" << endl;
+    }
+
+    if (minDist > (curEst.head(2) - odomVals.head(2)).norm()) {
         //TODO - what is this?
-        threshold = 0.05;
+        // threshold = 0.05;
+        // cout << "odom vals is returned" << endl;
         return odomVals;
     } else {
-        threshold = 0.05;
-        return Eigen::Vector3d(camVals(0), camVals(1), odomVals(2));
+        if (t < 10) {
+            Eigen::Vector3d tmp;
+            tmp << camVals(0), camVals(1), odomVals(2);
+            return tmp;
+        } else if (minDist > 0.1) {
+            return odomVals;
+        } else {
+            // threshold = 0.05;
+            // cout << "cam vals is returned" << endl;
+            Eigen::Vector3d tmp;
+            tmp << camVals(0), camVals(1), odomVals(2);
+            return tmp;
+        }
+
     }
 }
 
 //returns odom, accel and cam values, correspondingly in each row
 Eigen::Matrix3d Node::measurementUpdate(Cameras& cameras, CameraMarker& cameraMarker) {
     //TODO - doubtful
+    // cout << "\nMeasurement update function\n";
     accelVals(3) += accelVals(0) * std::cos(curEst(2)) * SAMPLING_TIME * SAMPLING_TIME;
     accelVals(4) += accelVals(0) * std::sin(curEst(2)) * SAMPLING_TIME * SAMPLING_TIME;
     Eigen::Vector3d accelMsmt;
     accelMsmt << accelVals(3), accelVals(4), curEst(2);
 
-    Eigen::Vector3d camMsmt = determineCameraMarker(cameraMarker);
+    Eigen::Vector3d camMsmt = determineCamera(cameras);
 
     Eigen::Matrix3d returnVal;
     returnVal << odomVals.transpose(), accelMsmt.transpose(), camMsmt.transpose();
-
+    // cout << "Odom vals: (" << odomVals(0) << ", " << odomVals(1) << ", " << odomVals(2) << ")\n";
+    // cout << "Accel vals: (" << accelVals(3) << ", " << accelVals(4) << ")\n";
     return returnVal; 
 }
 
@@ -533,6 +572,13 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
     double tempSum = tempOdom + tempAccel + offset;
     OwaWeights << tempOdom/tempSum, 0.0, tempAccel/tempSum;
     curEst = OwaWeights(0) * odomEst + OwaWeights(2) * accelEst;
+    // if (t % 2 == 0) {
+    // cout << "\n\nOWA weights before cam" << endl;
+    // cout << "OWA w1: " << OwaWeights(0) << '\t';
+    // cout << "OWA w2: " << OwaWeights(1) << '\t';
+    // cout << "OWA w3: " << OwaWeights(2) << endl;
+    // }
+    
 
     //TODO - check for datatype of t
     if (t % 1 == 0) {
@@ -557,14 +603,20 @@ void Node::measurementFusionOWA(Eigen::Matrix3d measurements) {
         double sum1 = sumCam + sumOdom + sumAccel;
         tempAccel = sum1/sumAccel;
         //TODO - why??
-        // tempAccel = 0.0;
+        tempAccel = 0.0;
         tempOdom = sum1/sumOdom;
         double tempCam = sum1/sumCam;
         tempSum = tempOdom + tempAccel + tempCam + offset;
         OwaWeights << tempOdom/tempSum, (tempCam + offset)/tempSum, tempAccel/tempSum;
         curEst = OwaWeights(0) * odomEst + OwaWeights(1) * camEst + OwaWeights(2) * accelEst;
     }
-
+    // if (t % 2 == 0) {
+    // cout << "\nOWA weights after cam" << endl;
+    // cout << "OWA w1: " << OwaWeights(0) << '\t';
+    // cout << "OWA w2: " << OwaWeights(1) << '\t';
+    // cout << "OWA w3: " << OwaWeights(2) << endl;
+    // }
+    
 }
 
 void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::string moveType) {
@@ -572,16 +624,16 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
 
     //TODO - profiling
     //TODO - print time 
-    cout << endl << "Node Loop function starting for " << t << "th loop" << endl;
+    // cout << endl << "Node Loop function starting for " << t << "th loop" << endl;
 
     Eigen::Matrix3d measurements = measurementUpdate(cameras, cameraMarker);
     //TODO - print time
-    cout << "Measurement update done" << endl;
+    // cout << "Measurement update done" << endl;
 
     statesTransform();
     measurementFusionOWA(measurements);
     //TODO - print time
-    cout << "Measurement fusion done" << endl;
+    // cout << "Measurement fusion done" << endl;
 
     double distX = curEst(0) - prevEst(0);
     double distY = curEst(1) - prevEst(1);
@@ -674,7 +726,7 @@ void Nodes::nodesLoopFn(const std::string moveType) {
     // publisherAutoMove.publish(msgAutoMove);
     // cout << "Published auto move msg from nodesLoopFn" << endl;
 
-    usleep(int(SAMPLING_TIME*1000000.0));
+    // usleep(int(SAMPLING_TIME*1000000.0));
 }
 
 void Nodes::testCam() {
@@ -733,7 +785,7 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
     // cout << "Published auto move msg from Nodes::move" << endl;
     // cout << "Error location 3" << endl;
 
-    usleep(int(SAMPLING_TIME*1000000.0));
+    // usleep(int(SAMPLING_TIME*1000000.0));
 }
 
 void Nodes::updateLeds() {
@@ -807,49 +859,128 @@ void Nodes::nodesPrintPositionMeasures() {
 
 void Nodes::storeData(int t) {
     //TODO
-    savedData[t] = std::map<std::string, std::map<std::string, multiType>>();
-    for (const auto& node : nodes) {
-        savedData[t][node.first] = {
-            {"pos_x", node.second->odomVals(0)},
-            {"pos_y", node.second->odomVals(1)},
-            {"orien", node.second->odomVals(2)},
-            {"estimation_x", node.second->curEst(0)},
-            {"estimation_y", node.second->curEst(1)},
-            {"estimation_phi", node.second->curEst(2)},
-            {"cam_x", node.second->camVals(0)},
-            {"cam_y", node.second->camVals(1)},
-            {"cam_phi", node.second->camVals(2)},
-            {"x", node.second->theoPosn(0)},
-            {"y", node.second->theoPosn(1)},
-            {"phi", node.second->theoPosn(2)},
-            {"P_k_odo", node.second->kalmanOdom.Pk1},
-            {"P_k_cam", node.second->kalmanCam.Pk1},
-            {"odom_timer", node.second->odomTimer},
-            {"cam_timer", node.second->camTimer},
-            {"OWA_w1", node.second->OwaWeights(0)},
-            {"OWA_w2", node.second->OwaWeights(1)},
-            {"OWA_w3", node.second->OwaWeights(2)},
-            {"accel_x", node.second->accelVals(0)},
-            {"accel_x_lowpass", node.second->accelVals(2)},
-            {"accel_x_pos", node.second->accelVals(3)},
-            {"accel_y_pos", node.second->accelVals(4)},
-            {"full_camera", cameraMarker.measurementList}
-        };
+    std::vector<double> robotInst;
+    for (const auto& node: nodes) {
+        std::vector<double> robotInst { double(t),
+            std::stod(node.first),
+            node.second->odomVals(0),
+            node.second->odomVals(1),
+            node.second->odomVals(2),
+            node.second->curEst(0),
+            node.second->curEst(1),
+            node.second->curEst(2),
+            node.second->camVals(0),
+            node.second->camVals(1),
+            node.second->camVals(2),
+            node.second->theoPosn(0),
+            node.second->theoPosn(1),
+            node.second->theoPosn(2),
+            node.second->odomTimer,
+            node.second->camTimer,
+            node.second->OwaWeights(0),
+            node.second->OwaWeights(1),
+            node.second->OwaWeights(2),
+            node.second->accelVals(0),
+            node.second->accelVals(2),
+            node.second->accelVals(3),
+            node.second->accelVals(4) };
+        savedData.push_back(robotInst);
     }
-    cout << "Saved data for time instant " << t << endl;
+
+
+        // double nodeData[23];
+        // nodeData[0] = double(t);
+        // nodeData[1] = std::stod(node.first);
+        // nodeData[2] = node.second->odomVals(0);
+        // nodeData[3] = node.second->odomVals(1);
+        // nodeData[4] = node.second->odomVals(2);
+        // nodeData[5] = node.second->curEst(0);
+        // nodeData[6] = node.second->curEst(1);
+        // nodeData[7] = node.second->curEst(2);
+        // nodeData[8] = node.second->camVals(0);
+        // nodeData[9] = node.second->camVals(1);
+        // nodeData[10] = node.second->camVals(2);
+        // nodeData[11] = node.second->theoPosn(0);
+        // nodeData[12] = node.second->theoPosn(1);
+        // nodeData[13] = node.second->theoPosn(2);
+        // nodeData[14] = node.second->odomTimer;
+        // nodeData[15] = node.second->camTimer;
+        // nodeData[16] = node.second->OwaWeights(0);
+        // nodeData[17] = node.second->OwaWeights(1);
+        // nodeData[18] = node.second->OwaWeights(2);
+        // nodeData[19] = node.second->accelVals(0);
+        // nodeData[20] = node.second->accelVals(2);
+        // nodeData[21] = node.second->accelVals(3);
+        // nodeData[22] = node.second->accelVals(4);
+    // savedData[t] = std::map<std::string, std::map<std::string, double>>();
+    // for (const auto& node : nodes) {
+    //     if (t == 0) {
+    //         cout << "Sample address: " << node.first << endl;
+    //     }
+    //     savedData[t][node.first] = {
+    //         {"pos_x", node.second->odomVals(0)},
+    //         {"pos_y", node.second->odomVals(1)},
+    //         {"orien", node.second->odomVals(2)},
+    //         {"estimation_x", node.second->curEst(0)},
+    //         {"estimation_y", node.second->curEst(1)},
+    //         {"estimation_phi", node.second->curEst(2)},
+    //         {"cam_x", node.second->camVals(0)},
+    //         {"cam_y", node.second->camVals(1)},
+    //         {"cam_phi", node.second->camVals(2)},
+    //         {"x", node.second->theoPosn(0)},
+    //         {"y", node.second->theoPosn(1)},
+    //         {"phi", node.second->theoPosn(2)},
+    //         // {"P_k_odo", node.second->kalmanOdom.Pk1},
+    //         // {"P_k_cam", node.second->kalmanCam.Pk1},
+    //         {"odom_timer", node.second->odomTimer},
+    //         {"cam_timer", node.second->camTimer},
+    //         {"OWA_w1", node.second->OwaWeights(0)},
+    //         {"OWA_w2", node.second->OwaWeights(1)},
+    //         {"OWA_w3", node.second->OwaWeights(2)},
+    //         {"accel_x", node.second->accelVals(0)},
+    //         {"accel_x_lowpass", node.second->accelVals(2)},
+    //         {"accel_x_pos", node.second->accelVals(3)},
+    //         {"accel_y_pos", node.second->accelVals(4)},
+    //         // {"full_camera", cameraMarker.measurementList}
+    //     };
+    // }
+    // // if (t == 0) {
+    // //     for (const auto& node : nodes) {
+    // //         double val = savedData[t][node.first]["pos_x"];
+    // //         cout << "Sample data print: " << val << endl;
+    // //     }
+        
+    // // }
+    // cout << "Stored data for time instant " << t << endl;
 }
 
 void Nodes::saveData(int t) {
-    //TODO
-    std::ofstream file("./data/saved_data_for_test_1.bin", std::ios::binary);
+    std::ofstream file("src/estimator/data/saved_data_for_test_1.bin", std::ios::binary);
     if (file.is_open()) {
-        for (const auto& dataEntry : savedData) {
-            file.write(reinterpret_cast<const char*>(&dataEntry.second), sizeof(dataEntry.second));
+        for (const auto& row: savedData) {
+            size_t row_size = row.size();
+            file.write(reinterpret_cast<const char*>(&row_size), sizeof(row_size));
+            file.write(reinterpret_cast<const char*>(row.data()), row_size * sizeof(double));
         }
         file.close();
+        cout<< "All data has been saved" << endl;
     } else {
         std::cerr << "Error while opening file" << endl;
     }
+    
+    //TODO
+    // std::ofstream file("src/estimator/data/saved_data_for_test_1.bin", std::ios::binary);
+    // if (file.is_open()) {
+    //     for (const auto& dataEntry : savedData) {
+    //         file.write(reinterpret_cast<const char*>(&dataEntry.second), sizeof(dataEntry.second));
+    //         cout << "Size of data entry second: " << sizeof(dataEntry.second) << endl;
+    //     }
+    //     cout << "Save samp data: " << savedData[0]["1"]["pos_x"] << endl;
+    //     file.close();
+    //     std::cout<< "All data has been saved" << endl;
+    // } else {
+    //     std::cerr << "Error while opening file" << endl;
+    // }
 
 }
 

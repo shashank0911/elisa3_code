@@ -5,7 +5,8 @@
 #include <Eigen/Dense>
 #include <map>
 #include <string>
-#include <boost/variant.hpp>
+// #include <boost/variant.hpp>
+// #include <boost/archive/text_oarchive.hpp>
 #include "utils.h"
 #include "Kalman.h"
 #include <ros/ros.h>
@@ -215,8 +216,9 @@ class Nodes {
         // std_msgs::Float64MultiArray msgInputs;
         
         //TODO - figure out datatype of stored data
-        using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
-        std::map<int, std::map<std::string, std::map<std::string, multiType>>> savedData;
+        // using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
+        // std::map<int, std::map<std::string, std::map<std::string, double>>> savedData;
+        std::vector<std::vector<double>> savedData;
         
 
     public:
