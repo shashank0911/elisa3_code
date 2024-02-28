@@ -23,7 +23,8 @@ int main(int argc, char* argv[]) {
     ros::init(argc, argv, "estimator");
     ros::NodeHandle np("~");
     ros::NodeHandle n;
-    ros::Rate loopRate(100);
+    // 60 msec
+    ros::Rate loopRate(50/3);
 
     std::ifstream file("src/estimator/src/mapper.json");
     if (file.is_open()) {
@@ -36,6 +37,8 @@ int main(int argc, char* argv[]) {
 
         cout << "Start estimator code" << endl;
         Nodes robots(activeRobots);
+        double xFin = 0.0;
+        double yFin = 0.0;
 
         // Initialize publishers
         publisherCams = np.advertise<std_msgs::Float64MultiArray>("elisa3_all_robots/cams", 1);
@@ -48,13 +51,18 @@ int main(int argc, char* argv[]) {
         for (const auto& tag : robots.nodes) {
             listenerRobotPose[tag.first] = n.subscribe("elisa3_robot_" + tag.first + "/odom", 10, &Node::listenRobotPoseCallback, tag.second);
             listenerAccel[tag.first] = n.subscribe("swarm/elisa3_robot_" + tag.first + "/accel", 10, &Node::listenAccelCallback, tag.second);
+            xFin += tag.second->curEst(0);
+            yFin += tag.second->curEst(1);
         }
+
         for (const auto& cam : robots.cameras.cameras) {
             listenerCamera[cam.first] = n.subscribe("Bebop" + std::to_string(cam.first + 1) + "/ground_pose", 10, &CameraNode::listenOptitrackCallback, cam.second);
             listenerCameraTimer[cam.first] = n.subscribe("Bebop" + std::to_string(cam.first + 1) + "/pose", 10, &CameraNode::listenOptitrackTimerCallback, cam.second);
         }
-
-        usleep(3*1000000);
+ 
+        xFin /= double(activeRobots.size());
+        yFin /= double(activeRobots.size());
+        usleep(2*1000000);
         // Loop to check if messages are arriving
         // int temp = 0;
         // while (ros::ok()) {
@@ -130,7 +138,7 @@ int main(int argc, char* argv[]) {
         //     cout << "Sleep done" << endl;
         //     j += 1;
         // }
-        cout << "Start reset" << endl;
+        // cout << "Start reset" << endl;
         // cout << "Skipping empty camera marker loop" << endl;
         // while (ros::ok()) {    
         //     if (robots.cameraMarker.measurementList.size() != 0) {
@@ -169,7 +177,7 @@ int main(int argc, char* argv[]) {
                 publisherAutoMove.publish(robots.msgAutoMove);
                 usleep(int(0.001 * 1000000.0));
 
-                if (t > 0 && t % 3 == 0) {
+                if (t > 0 && t % 2 == 0) {
                     robots.nodesReset("theor");
                     publisherReset.publish(robots.msgReset);
                     // usleep(int(0.005 * 1000000.0));

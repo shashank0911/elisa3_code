@@ -129,7 +129,6 @@ class Node {
         Eigen::VectorXd camErrorBuffer;
         Eigen::VectorXd accelErrorBuffer;
 
-        Eigen::Vector2d goalX;
         std::map<std::string, double> setup;
         //size is (2, bufferSize)
         Eigen::MatrixXd posBuf;
@@ -143,13 +142,14 @@ class Node {
 
         // ros::NodeHandle n;
         std::string address;
+        Eigen::Vector2d goal;
         bool updateLeds;
         int msgLeds[3];
         bool updateReset;
         double msgReset[4];
-        bool updateAutoMove;
+        // bool updateAutoMove;
         double msgAutoMove[4];
-        int triggerAutoMove;
+        // int triggerAutoMove;
 
         // odom x, y, phi, timer values
         Eigen::Vector3d odomVals;

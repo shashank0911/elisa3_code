@@ -223,7 +223,7 @@ void Robot::updateRosInfo() {
     odomMsg.pose.pose.orientation = odomQuat;
 
     // std::cout << "before odom publish" << std::endl;
-    // odomPublisher[tag].publish(odomMsg);
+    odomPublisher[tag].publish(odomMsg);
     // std::cout << "after odom publish" << std::endl;
 
     
@@ -556,7 +556,7 @@ void updateActuators() {
 
         }
 
-        }
+    }
 
 
 
@@ -570,12 +570,12 @@ void updateActuators() {
 // }
 
 
-void main_fuc(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_dict){
+// void main_fuc(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_dict){
     
     
     
-    std::map<int, Robot>::iterator it;
-    for (it = robots_dict.begin(); it != robots_dict.end(); it++){
+    // std::map<int, Robot>::iterator it;
+    // for (it = robot/s_dict.begin(); it != robots_dict.end(); it++){
         // std::cout << "[" << nodeName << "] " << robots_dict[it->first].tag << " accData[0]: " << robots_dict[it->first].accData[0] << std::endl;
         // std::cout << robots_dict[it->first].xPos << std::endl;
 
@@ -601,12 +601,12 @@ void main_fuc(std::map<int, Robot> robots_dict, std::map<int, Camera> cameras_di
         // 4.execution
         
 
-    }
+    // }
     // std::map<int, Camera>::iterator it1;
     // for (it1 = cameras_dict.begin(); it1 != cameras_dict.end(); it1++){
     //     std::cout << "[" << nodeName << "] " << "camera x: " << cameras_dict[it1->first].cam_x << std::endl;
     // }
-}
+// }
 
 
 
@@ -739,24 +739,22 @@ int main(int argc,char *argv[]) {
     //     setYpos(robots_dict[it->first].address, robots_dict[it->first].yPos);
 
     // }
-    // ros::Rate loopRate(100);
+    // 20 msec
+    ros::Rate loopRate(50);
     while (ros::ok()) {
         updateSensorsData();
         updateRosInfo();
         updateActuators();
-        // std::cout << "Waiting for messages from elisa3 node" << std::endl;
-        // main part
-
-        main_fuc(robots_dict, cameras_dict);
         
 
+        loopRate.sleep();
         ros::spinOnce();
-        usleep(int(0.005 * 1000000.0));
-        // loopRate.sleep();
+        // usleep(int(0.005 * 1000000.0));
         
     }
-
-		stopCommunication();
+    setLeftSpeedForAll(0);
+    setRightSpeedForAll(0);
+	stopCommunication();
 }
 
 

@@ -45,10 +45,23 @@ ObstacleAvoidance::ObstacleAvoidance() {
     //                   0.0, 1.15, 
     //                   2.4, 1.15, 
     //                   2.4, 0.0;
-    refLinesDomain[0] << 0.0, 0.0, 0.0, 1.15;
-    refLinesDomain[1] << 0.0, 1.15, 2.4, 1.15;
-    refLinesDomain[2] << 2.4, 1.15, 2.4, 0.0;
-    refLinesDomain[3] << 2.4, 0.0, 0.0, 0.0;
+    // refLinesDomain[0] << 0.0, 0.0, 
+    //                      0.0, 1.15;
+    // refLinesDomain[1] << 0.0, 2.4, 
+    //                      1.15, 1.15;
+    // refLinesDomain[2] << 2.4, 2.4, 
+    //                      1.15, 0.0;
+    // refLinesDomain[3] << 2.4, 0.0, 
+    //                      0.0, 0.0;
+    refLinesDomain[0] << -1.0, -2.1, 
+                          1.0, -2.1;
+    refLinesDomain[1] <<  1.0, -2.1, 
+                          1.0,  2.1;
+    refLinesDomain[2] <<  1.0,  2.1, 
+                         -1.0,  2.1;
+    refLinesDomain[3] << -1.0,  2.1, 
+                         -1.0, -2.1;
+    
     // std::cout << "Obstcale init: " << refLinesDomain[0] << std::endl;
 }
 
@@ -72,8 +85,8 @@ bool ObstacleAvoidance::checkDirectionVectors(const Eigen::Vector2d& vector1, co
 bool ObstacleAvoidance::checkInDomain(const Eigen::Vector2d& point) {
     // std::cout << "Error location 6.3.x1" << std::endl;
     // std::cout << "refLinesDomain[0]" << refLinesDomain[0] <<std::endl;
-    if(point[0] > refLinesDomain[0](0,0) && point[0] < refLinesDomain[2](1,0) 
-    && point[1] > refLinesDomain[0](0,1) && point[1] < refLinesDomain[1](1,1)) {
+    if(point[0] > refLinesDomain[0](0,0) && point[0] < refLinesDomain[0](1,0) 
+    && point[1] > refLinesDomain[1](0,1) && point[1] < refLinesDomain[1](1,1)) {
         // std::cout << "Error location 6.3.x2" << std::endl;
         if(obstacles) {
             return false;
@@ -89,7 +102,7 @@ bool ObstacleAvoidance::checkInDomain(const Eigen::Vector2d& point) {
 std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen::Matrix2d& locations) {
 
     std::map<int, std::pair<Eigen::Vector2d, double>> potIter;
-    Eigen::Vector2d moveVec = locations.col(1) - locations.col(0);
+    Eigen::Vector2d moveVec = locations.row(1) - locations.row(0);
     int count = 0;
 
     for (const Eigen::Matrix2d& refLine : refLinesDomain) {
@@ -122,7 +135,7 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
             Eigen::Matrix2d temp2;
             temp2 << d, ydiff;
             inter << det(temp1) / div, det(temp2) / div;
-            Eigen::Vector2d interVec = inter - locations.col(0);
+            Eigen::Vector2d interVec = inter - locations.row(0);
 
             if (checkDirectionVectors(moveVec, interVec)) {
                 potIter[count] = std::make_pair(inter, interVec.norm());
@@ -144,23 +157,18 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 }
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
-    // std::cout << "Error location 6.3.0" << std::endl;
     Eigen::Vector2d noObsNewPoint = startPoint + move;
 
     if (!checkInDomain(startPoint + move)) {
-        // std::cout << "Error location 6.3.0.1" << std::endl;
         Eigen::Matrix2d locations;
+        // column wise stacking
         locations << startPoint, startPoint + move;
-        // std::cout << "Error location 6.3.0.2" << std::endl;
-        auto [indexLine, inter] = lineIntersection(locations);
-        // std::cout << "Error location 6.3.1" << std::endl;
+        auto [indexLine, inter] = lineIntersection(locations.transpose());
         if (indexLine != -1) {
             Eigen::Matrix2d refLine = refLinesDomain[indexLine];
-            // std::cout << "Error location 6.3.2" << std::endl;
             Eigen::Vector2d refVec;
             refVec << refLine(1,0) - refLine(0,0), refLine(1,1) - refLine(0,1);
             Eigen::Vector2d perpVec = perpendicular(refVec);
-            // std::cout << "Error location 6.3.3" << std::endl;
             Eigen::Vector2d newPoint;
             //TODO - check this
             if (!perpVec(0)) {
@@ -168,7 +176,6 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
             } else {
                 newPoint << 2*inter(0) - move(0) - startPoint(0), noObsNewPoint(1);
             }
-            // std::cout << "Error location 6.3.4" << std::endl;
             if (checkInDomain(newPoint)) {
                 return std::make_pair(newPoint, true);
             } else {
@@ -179,7 +186,6 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
                     return std::make_pair(startPoint, true);
                 }
             }
-            // std::cout << "Error location 6.3.5" << std::endl;
         } else {
             return std::make_pair(startPoint, true);
         }

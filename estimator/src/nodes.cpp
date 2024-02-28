@@ -202,7 +202,7 @@ Node::Node(double releaseTime, std::string tagExt) {
 
     OwaWeights.fill(0.0);
 
-    goalX << 0.0, 0.5;
+    goal << 0.0, 0.5;
     setup = {
         {"vMax", 0.5},
         {"gtgScaling", 0.0001},
@@ -225,12 +225,12 @@ Node::Node(double releaseTime, std::string tagExt) {
         msgLeds[i] = 0;
     }
     updateReset = false;
-    updateAutoMove = false;
+    // updateAutoMove = false;
     for (int i = 0; i < 4; i++) {
         msgReset[i] = 0.0;
         msgAutoMove[i] = 0.0;
     }
-    triggerAutoMove = 103;
+    // triggerAutoMove = 103;
 
     // obstacleAvoidanceNode = ObstacleAvoidance();
 
@@ -292,61 +292,68 @@ void Node::nodePrintPositionMeasures() {
 void Node::computeMove(double pol[2]) {
     nodePrintPositionMeasures();
 
-    double orienCor = orienBuf(bufferSize - 1);
-    if (orienCor < 0.0) {
-        orienCor += 2*PI;
-    }
-    // cout << "Error location 4" << endl;
-    orienCor = fmod(orienCor, 2*PI);
-    if (orienCor > PI) {
-        orienCor -= 2*PI;
-    }
-    // cout << "Error location 5" << endl;
-    double phiCor = pol[1];
-    if (phiCor < 0.0) {
-        phiCor += 2*PI;
-    }
-    phiCor = fmod(phiCor, 2*PI);
-    if (phiCor > PI) {
-        phiCor -= 2*PI;
-    }
+    double phiOld = orienBuf(bufferSize - 1);
+    // if (phiOld < 0.0) {
+    //     phiOld += 2*PI;
+    // }
+    // phiOld = fmod(phiOld, 2*PI);
+    // if (phiOld > PI) {
+    //     phiOld -= 2*PI;
+    // }
 
-    double deltaPhi = phiCor - orienCor;
+    double phiNew = pol[1];
+    // if (phiNew < 0.0) {
+    //     phiNew += 2*PI;
+    // }
+    // phiNew = fmod(phiNew, 2*PI);
+    // if (phiNew > PI) {
+    //     phiNew -= 2*PI;
+    // }
+
+    Eigen::Vector2d polVec;
+    polVec << pol[0], phiNew;
+    Eigen::Vector2d propMoveCart = pol2cart(polVec);
+    auto [calcPoint, obsAvoidMode] = obstacleAvoidanceNode.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
+    Eigen::Vector2d newMove = calcPoint - posBuf.col(bufferSize - 1);
+    
+    double phiFin = std::atan2(newMove(1), newMove(0));
+    // if (phiFin < 0.0) {
+    //     phiFin += 2*PI;
+    // }
+    // phiFin = fmod(phiFin, 2*PI);
+    // if (phiFin > PI) {
+    //     phiFin -= 2*PI;
+    // }
+
+
+    double deltaPhi = phiFin - phiOld;
     if (deltaPhi >= 0.0) {
         msgAutoMove[0] = 1.0;
         msgAutoMove[1] = deltaPhi;
         msgAutoMove[2] = 0.0;
-        msgAutoMove[3] = pol[0];
+        msgAutoMove[3] = newMove.norm();
     } else {
         msgAutoMove[0] = 0.0;
         msgAutoMove[1] = -deltaPhi;
         msgAutoMove[2] = 0.0;
-        msgAutoMove[3] = pol[0];
+        msgAutoMove[3] = newMove.norm();
     }
-    // cout << "Error location 6" << endl;
-    updateAutoMove = true;
-    if (triggerAutoMove == 103) {
-        triggerAutoMove = 104;
-    } else {
-        triggerAutoMove = 103;
-    }
-    // cout << "Error location 6.1" << endl;
-    Eigen::Vector2d polVec;
-    polVec << pol[0], phiCor;
-    // cout << "Error location 6.2" << endl;
-    Eigen::Vector2d propMoveCart = pol2cart(polVec);
-    // cout << "Error location 6.3" << endl;
-    // Eigen::Matrix2d blah = obstacleAvoidanceNode.refLinesDomain[0];
-    // cout << "reflines size: " << obstacleAvoidanceNode.refLinesDomain.size() << endl;
-    // cout << "reflinesdomain: " << blah(0,0) << endl;
-    auto [calcPoint, obsAvoidMode] = obstacleAvoidanceNode.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
-    // cout << "Error location 7" << endl;
-    posBuf = renewVec(posBuf);
-    orienBuf = renewVec(orienBuf);
-    // cout << "Error location 8" << endl;
-    posBuf.col(bufferSize - 1) << calcPoint;
-    orienBuf(bufferSize - 1) += deltaPhi; 
-    // cout << "Error location 9" << endl;
+    // updateAutoMove = true;
+    // if (triggerAutoMove == 103) {
+    //     triggerAutoMove = 104;
+    // } else {
+    //     triggerAutoMove = 103;
+    // }
+    // Eigen::Vector2d polVec;
+    // polVec << pol[0], phiNew;
+    // Eigen::Vector2d propMoveCart = pol2cart(polVec);
+    // auto [calcPoint, obsAvoidMode] = obstacleAvoidanceNode.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
+    // Eigen::Vector2d newMove = calcPoint - posBuf.col(bufferSize - 1);
+
+    // posBuf = renewVec(posBuf);
+    // orienBuf = renewVec(orienBuf);
+    // posBuf.col(bufferSize - 1) << calcPoint;
+    // orienBuf(bufferSize - 1) += deltaPhi; 
 }
 
 void Node::nodeReset(const std::string type) {
@@ -378,17 +385,18 @@ void Node::statesTransform() {
 
 std::pair<double, double> Node::goToGoal() {
     Eigen::Vector2d err;
-    err << goalX - curEst.head(2);
-    Eigen::Vector2d Kp(-50, -50);
-    double v = (Kp.cwiseProduct(err)).norm();
+    err << goal - curEst.head(2);
+    // Eigen::Vector2d Kp(-50, -50);
+    double Kp = 50.0;
+    double v = Kp*err.norm();
     double phi = std::atan2(err(1), err(0));
-    double omega = setup["Kp"] * std::atan2( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
-    return std::make_pair(v, omega);
+    // double omega = setup["Kp"] * std::atan( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
+    return std::make_pair(v, phi);
 }
 
 bool Node::terminate() {
     double maxLength = 0.001;
-    double distance = (goalX - curEst.head(2)).norm();
+    double distance = (goal - curEst.head(2)).norm();
     if (distance < maxLength) {
         return 0;
     } else {
@@ -639,11 +647,18 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
     double distY = curEst(1) - prevEst(1);
     curEst(2) = std::atan2(distY, distX);
     prevEst << curEst;
+    posBuf = renewVec(posBuf);
+    orienBuf = renewVec(orienBuf);
+    posBuf.col(bufferSize - 1) << curEst(0), curEst(1);
+    //TODO - check whether to change this to deltaPhi
+    orienBuf(bufferSize - 1) = curEst(2); 
 
     //TODO - check
-    inputV = 1.2;
-    inputOmega = 0.0;
-    double pol[2] = {inputV, inputOmega};
+    // inputV = 1.2;
+    // inputOmega = 0.0;
+    // double pol[2] = {inputV, inputOmega};
+    auto [step, omega] = goToGoal();
+    double pol[2] = {step, omega};
     computeMove(pol);
 
 }
@@ -762,14 +777,12 @@ void Nodes::move(const std::string moveType, double stepSize, double theta) {
     for (const auto& tag : nodes) {
         if (moveType == "move") {
             auto [step, omega] = nodes[tag.first]->goToGoal();
-            // cout << "Error location 1" << endl;
         } else {
             step = stepSize;
             omega = theta;
         }
         double pol[2] = {step, omega};
         nodes[tag.first]->computeMove(pol);
-        // cout << "Error location 2" << endl;
 
         msgAutoMove.data[i*5 + 1] = std::stod(tag.second->address);
         msgAutoMove.data[i*5 + 2] = tag.second->msgAutoMove[0];
