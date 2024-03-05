@@ -135,7 +135,9 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
             Eigen::Matrix2d temp2;
             temp2 << d, ydiff;
             inter << det(temp1) / div, det(temp2) / div;
-            Eigen::Vector2d interVec = inter - locations.row(0);
+            // Eigen::Vector2d interVec = inter - locations.row(0).transpose();
+            Eigen::Vector2d interVec;
+            interVec << inter(0) - locations(0,0), inter(1) - locations(0,1);
 
             if (checkDirectionVectors(moveVec, interVec)) {
                 potIter[count] = std::make_pair(inter, interVec.norm());
@@ -143,7 +145,7 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
             
         }
     }
-    //TODO - recheck this if construct
+    //TODO - recheck this "if" construct
     if (!potIter.empty()) {
         auto keyMin = std::min_element(potIter.begin(), potIter.end(), 
             [](const auto& lhs, const auto& rhs) {
@@ -158,6 +160,8 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
     Eigen::Vector2d noObsNewPoint = startPoint + move;
+    std::cout << "Start point: (" << startPoint(0) << ", " << startPoint(1) << ")\n";
+    std::cout << "New proposed point: (" << noObsNewPoint(0) << ", " << noObsNewPoint(1) << ")\n";
 
     if (!checkInDomain(startPoint + move)) {
         Eigen::Matrix2d locations;
@@ -167,7 +171,8 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
         if (indexLine != -1) {
             Eigen::Matrix2d refLine = refLinesDomain[indexLine];
             Eigen::Vector2d refVec;
-            refVec << refLine(1,0) - refLine(0,0), refLine(1,1) - refLine(0,1);
+            refVec << refLine(1,0) - refLine(0,0),
+                      refLine(1,1) - refLine(0,1);
             Eigen::Vector2d perpVec = perpendicular(refVec);
             Eigen::Vector2d newPoint;
             //TODO - check this
@@ -177,19 +182,24 @@ std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eige
                 newPoint << 2*inter(0) - move(0) - startPoint(0), noObsNewPoint(1);
             }
             if (checkInDomain(newPoint)) {
+                std::cout << "Move to new point" << std::endl;
                 return std::make_pair(newPoint, true);
             } else {
                 Eigen::Vector2d newPointAlt = startPoint - move;
                 if (checkInDomain(newPointAlt)) {
+                    std::cout << "Move to new point alt" << std::endl;
                     return std::make_pair(newPointAlt, true);
                 } else {
+                    std::cout << "Don't move" << std::endl;
                     return std::make_pair(startPoint, true);
                 }
             }
         } else {
+            std::cout << "Don't move" << std::endl;
             return std::make_pair(startPoint, true);
         }
     } else {
+        std::cout << "Move to start point + move" << std::endl;
         return std::make_pair(startPoint + move, true);
     }
     // return std::make_pair(Eigen::Vector2d(0.0,0.0), false);

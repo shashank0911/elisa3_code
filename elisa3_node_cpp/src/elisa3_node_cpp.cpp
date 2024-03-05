@@ -3,6 +3,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <fstream>
 // #include "elisa3-lib.h"
 #include <ros/ros.h>
 #include "pc-side-elisa3-library/elisa3-lib.h"
@@ -411,29 +412,51 @@ void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
         int turn_type = int(msg->data[i*5+2]);
         int trans_type = int(msg->data[i*5+4]);
         if (turn_type==0){
-            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+100.0));
+            //turn right
+
+            // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+100.0));
             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-            if (prop_msg >= 175) {
-                prop_msg = 175;
+            // if (prop_msg >= 175) {
+            //     prop_msg = 175;
+            // }
+
+            // int prop_msg = int(double(msg->data[i*5+3])*5.0/M_PI);
+            int prop_msg = int(double(msg->data[i*5+3])*10.0);
+            if (prop_msg > 15) {
+                prop_msg = 15;
             }
             robots_dict[tag].redLed_move = prop_msg;
         } else if (turn_type==1){
-            int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+175.0));
+            //turn left
+
+            // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))+175.0));
             // int prop_msg = int(double(double(msg->data[i*5+3])*(75.0/(2.0*M_PI))));
-            if (prop_msg >= 250) {
-                prop_msg = 250;
-            } else if (prop_msg == 175){
-                prop_msg = 100;
+            // if (prop_msg >= 250) {
+            //     prop_msg = 250;
+            // } else if (prop_msg == 175){
+            //     prop_msg = 100;
+            // }
+
+            // int prop_msg = -int(double(msg->data[i*5+3])*5.0/M_PI);
+            int prop_msg = -int(double(msg->data[i*5+3])*10.0);
+            if (prop_msg < -15) {
+                prop_msg = -15;
             }
             robots_dict[tag].redLed_move = prop_msg;
         } else {
-            robots_dict[tag].redLed_move = 100;
+            robots_dict[tag].redLed_move = 0;
         }
 
         if (trans_type==0){
-            int prop_msg = int(double(msg->data[i*5+5])*25 + 100);
-            if (prop_msg >= 175){
-                prop_msg = 175;
+            // int prop_msg = int(double(msg->data[i*5+5])*25 + 100);
+            // if (prop_msg >= 175){
+            //     prop_msg = 175;
+            // }
+            // robots_dict[tag].blueLed_move = prop_msg;
+
+            int prop_msg = int(double(msg->data[i*5+5])*50.0/30.0);
+            if (prop_msg >= 50){
+                prop_msg = 50;
             }
             robots_dict[tag].blueLed_move = prop_msg;
         } else {
@@ -505,6 +528,11 @@ void updateActuators() {
 
 	std::map<int, Robot>::iterator it;
 
+    // std::ofstream file("src/elisa3_node_cpp/speeds.csv", std::ios::app);
+    // if (!file.is_open()) {
+    //     std::cerr << "Error in opening file" << std::endl;
+    // }
+
 	for (it = robots_dict.begin(); it != robots_dict.end(); it++){
 	    bool *is_sensor_active = get_sensors_condition(robots_dict[it->first].proxData);
 
@@ -533,6 +561,24 @@ void updateActuators() {
             robots_dict[it->first].changedActuators[GREEN_LEDS_MOVE] = false;
             setAllColors(robots_dict[it->first].address, robots_dict[it->first].redLed_move,
                          robots_dict[it->first].greenLed_move, robots_dict[it->first].blueLed_move);
+            
+            if (robots_dict[it->first].blueLed_move == 0) {
+
+                setLeftSpeed(robots_dict[it->first].address, 0);
+                setRightSpeed(robots_dict[it->first].address, 0);
+
+                cout << "Left speed for robot " << robots_dict[it->first].address << ": 0\n";
+                cout << "Right speed for robot " << robots_dict[it->first].address << ": 0\n";
+            } else {
+
+                int leftSpeed = robots_dict[it->first].blueLed_move + robots_dict[it->first].redLed_move;
+                int rightSpeed = robots_dict[it->first].blueLed_move - robots_dict[it->first].redLed_move;
+                setLeftSpeed(robots_dict[it->first].address, leftSpeed);
+                setRightSpeed(robots_dict[it->first].address, rightSpeed);
+
+                cout << "Left speed for robot " << robots_dict[it->first].address << ": " << leftSpeed << endl;
+                cout << "Right speed for robot " << robots_dict[it->first].address << ": " << rightSpeed << endl;
+            }
 
             trigger_motive = true;
 
@@ -545,20 +591,31 @@ void updateActuators() {
         // std::cout << "speed: " << robots_dict[it->first].redLed_move << std::endl;
         // std::cout << "speed: " << robots_dict[it->first].speedLeft << std::endl;
         
-        if(robots_dict[it->first].redLed_move == 0){
-            setLeftSpeed(robots_dict[it->first].address, 0);
-            setRightSpeed(robots_dict[it->first].address, 0);
+        // if(robots_dict[it->first].redLed_move == 0){
+        //     setLeftSpeed(robots_dict[it->first].address, 0);
+        //     setRightSpeed(robots_dict[it->first].address, 0);
 
-        }
-        else{
-            setLeftSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
-            setRightSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
+        // }
+        // else{
+        //     setLeftSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
+        //     setRightSpeed(robots_dict[it->first].address, robots_dict[it->first].blueLed_move/30);
 
-        }
+        // }
+
+        // int leftSpeed = robots_dict[it->first].blueLed_move + robots_dict[it->first].redLed_move;
+        // int rightSpeed = robots_dict[it->first].blueLed_move - robots_dict[it->first].redLed_move;
+        // setLeftSpeed(robots_dict[it->first].address, leftSpeed);
+        // setRightSpeed(robots_dict[it->first].address, rightSpeed);
+        // if (file.is_open()) {
+        //     file << robots_dict[it->first].address << "," << leftSpeed << "," << rightSpeed << "\n";
+        // }
+
+        // cout << "Left speed for robot " << robots_dict[it->first].address << ": " << leftSpeed << endl;
+        // cout << "Right speed for robot " << robots_dict[it->first].address << ": " << rightSpeed << endl;
 
     }
 
-
+    // file.close();
 
 }
 
@@ -732,6 +789,15 @@ int main(int argc,char *argv[]) {
 
     }
 
+    // std::ofstream file("src/elisa3_node_cpp/src/speeds.csv");
+    // if (!file.is_open()) {
+    //     std::cerr << "Error in opening file" << std::endl;
+    // }
+    // if (file.is_open()) {
+    //     file << "Address" << "," << "LeftSpeed" << "," << "RightSpeed" << "\n";
+    // }
+    // file.close();
+
     // std::map<int, Camera>::iterator it;
     // for (it = robots_dict.begin(); it != robots_dict.end(); it++){
     //     enableObstacleAvoidance(robots_dict[it->first].address);
@@ -754,6 +820,7 @@ int main(int argc,char *argv[]) {
     }
     setLeftSpeedForAll(0);
     setRightSpeedForAll(0);
+    usleep(1*1000000);
 	stopCommunication();
 }
 

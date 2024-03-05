@@ -16,7 +16,7 @@ const double WHEEL_DISTANCE = 0.041;
 const double T_DELAY = 0.5;
 const int STD_VLT_TRANS = 20;
 const int STD_VLT_ROT = 10;
-const double SAMPLING_TIME = 0.005;
+const double SAMPLING_TIME = 0.06;
 const double PI = 3.14159265358979323846;
 
 const string MODE = "kalman";
@@ -202,7 +202,7 @@ Node::Node(double releaseTime, std::string tagExt) {
 
     OwaWeights.fill(0.0);
 
-    goal << 0.0, 0.5;
+    goal << 0.0, 0.0;
     setup = {
         {"vMax", 0.5},
         {"gtgScaling", 0.0001},
@@ -283,7 +283,7 @@ void Node::nodePrintPositionMeasures() {
         << "Camera - Position: (" << camVals(0) << ", " << camVals(1) << "), Orientation: " << camVals(2) << "\n"
         << "Accelerometer - Position: (" << accelVals(3) << ", " << accelVals(4) << "), Velocity: " << accelVals(0) << "\n";
 
-    if (t % 10 == 0) {
+    if (t % 4 == 0) {
         cout << msg.str() << endl;
     }
     
@@ -293,13 +293,13 @@ void Node::computeMove(double pol[2]) {
     nodePrintPositionMeasures();
 
     double phiOld = orienBuf(bufferSize - 1);
-    // if (phiOld < 0.0) {
-    //     phiOld += 2*PI;
-    // }
-    // phiOld = fmod(phiOld, 2*PI);
-    // if (phiOld > PI) {
-    //     phiOld -= 2*PI;
-    // }
+    if (phiOld < 0.0) {
+        phiOld += 2*PI;
+    }
+    phiOld = fmod(phiOld, 2*PI);
+    if (phiOld > PI) {
+        phiOld -= 2*PI;
+    }
 
     double phiNew = pol[1];
     // if (phiNew < 0.0) {
@@ -312,10 +312,12 @@ void Node::computeMove(double pol[2]) {
 
     Eigen::Vector2d polVec;
     polVec << pol[0], phiNew;
-    Eigen::Vector2d propMoveCart = pol2cart(polVec);
+    Eigen::Vector2d propMoveCart = pol2cart(polVec) * SAMPLING_TIME / 100.0;
+    cout << "Robot tag: " << address << endl;
     auto [calcPoint, obsAvoidMode] = obstacleAvoidanceNode.obstacleAvoidance(posBuf.col(bufferSize - 1), propMoveCart);
     Eigen::Vector2d newMove = calcPoint - posBuf.col(bufferSize - 1);
     
+
     double phiFin = std::atan2(newMove(1), newMove(0));
     // if (phiFin < 0.0) {
     //     phiFin += 2*PI;
@@ -325,18 +327,22 @@ void Node::computeMove(double pol[2]) {
     //     phiFin -= 2*PI;
     // }
 
-
-    double deltaPhi = phiFin - phiOld;
-    if (deltaPhi >= 0.0) {
+    // cout << "phiFin: " << phiFin << "\tphiOld: " << phiOld << endl;
+    // double deltaPhi = 0.5 * std::atan2( std::sin(phiFin - phiOld), std::cos(phiFin - phiOld));
+    if (phiFin >= 0.0) {
+        // turn left
         msgAutoMove[0] = 1.0;
-        msgAutoMove[1] = deltaPhi;
+        msgAutoMove[1] = phiFin;
         msgAutoMove[2] = 0.0;
-        msgAutoMove[3] = newMove.norm();
+        msgAutoMove[3] = newMove.norm() * 100.0 / SAMPLING_TIME;
+        cout << "Turn left with speed: " << msgAutoMove[3] << ", \tangle: " << msgAutoMove[1] << " rad, \t" << msgAutoMove[1]*57.3 << " deg" << endl;
     } else {
+        // turn right
         msgAutoMove[0] = 0.0;
-        msgAutoMove[1] = -deltaPhi;
+        msgAutoMove[1] = -phiFin;
         msgAutoMove[2] = 0.0;
-        msgAutoMove[3] = newMove.norm();
+        msgAutoMove[3] = newMove.norm() * 100.0 / SAMPLING_TIME;
+        cout << "Turn right with speed: " << msgAutoMove[3] << ", \tangle: " << msgAutoMove[1] << " rad, \t" << msgAutoMove[1]*57.3 << "deg" << endl;
     }
     // updateAutoMove = true;
     // if (triggerAutoMove == 103) {
@@ -378,8 +384,8 @@ void Node::nodeReset(const std::string type) {
 }
 
 void Node::statesTransform() {
-    curEst(0) += inputV * std::cos(curEst(2)) / 1000.0 * SAMPLING_TIME;
-    curEst(1) += inputV * std::sin(curEst(2)) / 1000.0 * SAMPLING_TIME;
+    curEst(0) += inputV * std::cos(curEst(2)) * SAMPLING_TIME / 100.0;
+    curEst(1) += inputV * std::sin(curEst(2)) * SAMPLING_TIME / 100.0;
     curEst(2) += inputOmega;
 }
 
@@ -387,20 +393,22 @@ std::pair<double, double> Node::goToGoal() {
     Eigen::Vector2d err;
     err << goal - curEst.head(2);
     // Eigen::Vector2d Kp(-50, -50);
-    double Kp = 50.0;
-    double v = Kp*err.norm();
+    double Kp1 = 25.0;    
+    double v = Kp1*err.norm();
     double phi = std::atan2(err(1), err(0));
-    // double omega = setup["Kp"] * std::atan( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
-    return std::make_pair(v, phi);
+    double Kp2 = 0.3;
+    double omega = Kp2 * std::atan2( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
+    cout << "\nDistance from goal: " << err.norm() << "\tv: " << v << "\tomega: " << omega << endl;
+    return std::make_pair(v, omega);
 }
 
 bool Node::terminate() {
-    double maxLength = 0.001;
+    double maxLength = 0.015;
     double distance = (goal - curEst.head(2)).norm();
     if (distance < maxLength) {
-        return 0;
-    } else {
         return 1;
+    } else {
+        return 0;
     }
 }
 
@@ -657,8 +665,17 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
     // inputV = 1.2;
     // inputOmega = 0.0;
     // double pol[2] = {inputV, inputOmega};
-    auto [step, omega] = goToGoal();
-    double pol[2] = {step, omega};
+    if (!terminate()) {
+        auto [step, omega] = goToGoal();
+        inputV = step;
+        inputOmega = omega;
+    } else {
+        Eigen::Vector2d err = goal - curEst.head(2);
+        cout << "Distance from goal: " << err.norm();  
+        inputV = 0.0;
+        inputOmega = 0.0;
+    }
+    double pol[2] = {inputV, inputOmega};
     computeMove(pol);
 
 }

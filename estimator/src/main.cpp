@@ -62,6 +62,11 @@ int main(int argc, char* argv[]) {
  
         xFin /= double(activeRobots.size());
         yFin /= double(activeRobots.size());
+        for (const auto& tag : robots.nodes) {
+            tag.second->goal << xFin, yFin;
+            // tag.second->goal << tag.second->curEst(0), tag.second->curEst(1) + 0.6;
+            cout << "Goal coordinates: (" << tag.second->goal(0) << ", " << tag.second->goal(1) << ")\n";
+        }
         usleep(2*1000000);
         // Loop to check if messages are arriving
         // int temp = 0;
@@ -164,7 +169,7 @@ int main(int argc, char* argv[]) {
         int t = 0;
         std::map<int, double> timeVector;
         std::map<int, double> timeVectorLoop;
-        int tFin = 100;
+        int tFin = 400;
 
 
         while (ros::ok()) {
