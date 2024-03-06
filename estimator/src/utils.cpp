@@ -160,8 +160,8 @@ std::pair<int, Eigen::Vector2d> ObstacleAvoidance::lineIntersection(const Eigen:
 
 std::pair<Eigen::Vector2d, bool> ObstacleAvoidance::obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move) {
     Eigen::Vector2d noObsNewPoint = startPoint + move;
-    std::cout << "Start point: (" << startPoint(0) << ", " << startPoint(1) << ")\n";
-    std::cout << "New proposed point: (" << noObsNewPoint(0) << ", " << noObsNewPoint(1) << ")\n";
+    // std::cout << "Start point: (" << startPoint(0) << ", " << startPoint(1) << ")\n";
+    // std::cout << "New proposed point: (" << noObsNewPoint(0) << ", " << noObsNewPoint(1) << ")\n";
 
     if (!checkInDomain(startPoint + move)) {
         Eigen::Matrix2d locations;

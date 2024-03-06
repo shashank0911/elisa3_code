@@ -63,9 +63,10 @@ int main(int argc, char* argv[]) {
         xFin /= double(activeRobots.size());
         yFin /= double(activeRobots.size());
         for (const auto& tag : robots.nodes) {
-            tag.second->goal << xFin, yFin;
-            // tag.second->goal << tag.second->curEst(0), tag.second->curEst(1) + 0.6;
-            cout << "Goal coordinates: (" << tag.second->goal(0) << ", " << tag.second->goal(1) << ")\n";
+            // tag.second->goal << xFin, yFin;
+            tag.second->goal << xFin+0.2, tag.second->curEst(1)+0.6;
+            xFin += 0.2;
+            cout << "Goal coordinates for robot " << tag.second->address << ": (" << tag.second->goal(0) << ", " << tag.second->goal(1) << ")\n";
         }
         usleep(2*1000000);
         // Loop to check if messages are arriving
@@ -208,9 +209,14 @@ int main(int argc, char* argv[]) {
             }
 
             if (t >= tFin+1) {
-                int intensity[3] = {0, 10, 0};
+                int intensity[3] = {0, 0, 0};
                 robots.setLeds(intensity);
                 publisherLeds.publish(robots.msgLeds);
+
+                for (const auto& tag : robots.nodes) {
+                    cout << "\nGoal coordinates for robot " << tag.second->address << ": (" << tag.second->goal(0) << ", " << tag.second->goal(1) << ")\n";
+                    cout << "Final coordinates of robot " << tag.second->address << ": (" << tag.second->curEst(0) << ", " << tag.second->curEst(1) << ")\n";
+                }
 
                 robots.saveData(0);
 

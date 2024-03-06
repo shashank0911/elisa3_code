@@ -820,6 +820,9 @@ int main(int argc,char *argv[]) {
     }
     setLeftSpeedForAll(0);
     setRightSpeedForAll(0);
+    setRedForAll(0);
+    setBlueForAll(0);
+    setGreenForAll(0);
     usleep(1*1000000);
 	stopCommunication();
 }

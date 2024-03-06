@@ -335,14 +335,14 @@ void Node::computeMove(double pol[2]) {
         msgAutoMove[1] = phiFin;
         msgAutoMove[2] = 0.0;
         msgAutoMove[3] = newMove.norm() * 100.0 / SAMPLING_TIME;
-        cout << "Turn left with speed: " << msgAutoMove[3] << ", \tangle: " << msgAutoMove[1] << " rad, \t" << msgAutoMove[1]*57.3 << " deg" << endl;
+        cout << "Turn left with translational speed: " << msgAutoMove[3]*50.0/30.0 << ", \tangular speed: " << msgAutoMove[1]*10.0 << " rad, \t" << msgAutoMove[1]*57.3 << " deg" << endl;
     } else {
         // turn right
         msgAutoMove[0] = 0.0;
         msgAutoMove[1] = -phiFin;
         msgAutoMove[2] = 0.0;
         msgAutoMove[3] = newMove.norm() * 100.0 / SAMPLING_TIME;
-        cout << "Turn right with speed: " << msgAutoMove[3] << ", \tangle: " << msgAutoMove[1] << " rad, \t" << msgAutoMove[1]*57.3 << "deg" << endl;
+        cout << "Turn right with translational speed: " << msgAutoMove[3]*50.0/30.0 << ", \tanglular speed: " << msgAutoMove[1]*10.0 << " rad, \t" << msgAutoMove[1]*57.3 << "deg" << endl;
     }
     // updateAutoMove = true;
     // if (triggerAutoMove == 103) {
@@ -393,12 +393,12 @@ std::pair<double, double> Node::goToGoal() {
     Eigen::Vector2d err;
     err << goal - curEst.head(2);
     // Eigen::Vector2d Kp(-50, -50);
-    double Kp1 = 25.0;    
+    double Kp1 = 37.0;    
     double v = Kp1*err.norm();
     double phi = std::atan2(err(1), err(0));
-    double Kp2 = 0.3;
+    double Kp2 = 0.32;
     double omega = Kp2 * std::atan2( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
-    cout << "\nDistance from goal: " << err.norm() << "\tv: " << v << "\tomega: " << omega << endl;
+    cout << "\nDistance from goal (" << address << "): " << err.norm() << "\tv: " << v << "\tomega: " << omega << endl;
     return std::make_pair(v, omega);
 }
 
@@ -452,11 +452,11 @@ Eigen::Vector3d Node::determineCamera(Cameras& cameras) {
     double dist_og = (curEst.head(2) - camVals.head(2)).norm();
     // cout << "Dist btw curEst and camEst for " << idx_og << " th robot: " << dist_og << endl;
 
-    if (dist_og < 0.05) {
+    if (dist_og < 0.075) {
         // cout << "Cam vals is retruned" << endl;
-        Eigen::Vector3d tmp;
-        tmp << camVals(0), camVals(1), odomVals(2);
-        return tmp;
+        // Eigen::Vector3d tmp;
+        // tmp << camVals(0), camVals(1), camVals(2);
+        return camVals;
     } 
     // else if (dist > (curEst.head(2) - odomVals.head(2)).norm()) {
     //     cout << "Cam vals is returned" << endl;
@@ -503,17 +503,17 @@ Eigen::Vector3d Node::determineCamera(Cameras& cameras) {
         return odomVals;
     } else {
         if (t < 10) {
-            Eigen::Vector3d tmp;
-            tmp << camVals(0), camVals(1), odomVals(2);
-            return tmp;
-        } else if (minDist > 0.1) {
+            // Eigen::Vector3d tmp;
+            // tmp << camVals(0), camVals(1), camVals(2);
+            return camVals;
+        } else if (minDist > 0.10) {
             return odomVals;
         } else {
             // threshold = 0.05;
             // cout << "cam vals is returned" << endl;
-            Eigen::Vector3d tmp;
-            tmp << camVals(0), camVals(1), odomVals(2);
-            return tmp;
+            // Eigen::Vector3d tmp;
+            // tmp << camVals(0), camVals(1), camVals(2);
+            return camVals;
         }
 
     }
@@ -651,9 +651,9 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
     //TODO - print time
     // cout << "Measurement fusion done" << endl;
 
-    double distX = curEst(0) - prevEst(0);
-    double distY = curEst(1) - prevEst(1);
-    curEst(2) = std::atan2(distY, distX);
+    // double distX = curEst(0) - prevEst(0);
+    // double distY = curEst(1) - prevEst(1);
+    // curEst(2) = std::atan2(distY, distX);
     prevEst << curEst;
     posBuf = renewVec(posBuf);
     orienBuf = renewVec(orienBuf);
