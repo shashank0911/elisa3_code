@@ -455,8 +455,11 @@ void handlerAllAutoMove(const std_msgs::Float64MultiArray::ConstPtr& msg) {
             // robots_dict[tag].blueLed_move = prop_msg;
 
             int prop_msg = int(double(msg->data[i*5+5])*50.0/30.0);
-            if (prop_msg >= 50){
+            if (prop_msg >= 50) {
                 prop_msg = 50;
+            }
+            if (prop_msg > 0 && prop_msg < 5) {
+                prop_msg = 5;
             }
             robots_dict[tag].blueLed_move = prop_msg;
         } else {
@@ -502,7 +505,7 @@ void handlerAllLeds(const std_msgs::Float64MultiArray::ConstPtr& msg) {
         robots_dict[tag].greenLed = int(msg->data[i*4+2]);
         robots_dict[tag].redLed = int(msg->data[i*4+3]);
         robots_dict[tag].blueLed = int(msg->data[i*4+4]);
-        // cout << "Robot " << tag << ":" << endl;
+        // cout << "Robot " << t596ag << ":" << endl;
         // cout << "Green: " << robots_dict[tag].greenLed << '\t';
         // cout << "Red: " << robots_dict[tag].redLed << '\t';
         // cout << "Blue: " << robots_dict[tag].blueLed << '\n';
@@ -562,13 +565,27 @@ void updateActuators() {
             setAllColors(robots_dict[it->first].address, robots_dict[it->first].redLed_move,
                          robots_dict[it->first].greenLed_move, robots_dict[it->first].blueLed_move);
             
-            if (robots_dict[it->first].blueLed_move == 0) {
+
+            
+            int rot_limit = 6;
+            if ((robots_dict[it->first].redLed_move > rot_limit || robots_dict[it->first].redLed_move < -rot_limit) && robots_dict[it->first].blueLed_move != 0) {
+                
+                int leftSpeed = int(robots_dict[it->first].redLed_move * 1.0);
+                int rightSpeed = -int(robots_dict[it->first].redLed_move * 1.0);
+                setLeftSpeed(robots_dict[it->first].address, leftSpeed);
+                setRightSpeed(robots_dict[it->first].address, rightSpeed);
+
+                cout << "Left speed for robot " << robots_dict[it->first].address << ": " << leftSpeed << endl;
+                cout << "Right speed for robot " << robots_dict[it->first].address << ": " << rightSpeed << endl;
+
+            } else if (robots_dict[it->first].blueLed_move == 0) {
 
                 setLeftSpeed(robots_dict[it->first].address, 0);
                 setRightSpeed(robots_dict[it->first].address, 0);
 
                 cout << "Left speed for robot " << robots_dict[it->first].address << ": 0\n";
                 cout << "Right speed for robot " << robots_dict[it->first].address << ": 0\n";
+
             } else {
 
                 int leftSpeed = robots_dict[it->first].blueLed_move + robots_dict[it->first].redLed_move;

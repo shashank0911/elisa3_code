@@ -53,14 +53,14 @@ ObstacleAvoidance::ObstacleAvoidance() {
     //                      1.15, 0.0;
     // refLinesDomain[3] << 2.4, 0.0, 
     //                      0.0, 0.0;
-    refLinesDomain[0] << -1.0, -2.1, 
-                          1.0, -2.1;
-    refLinesDomain[1] <<  1.0, -2.1, 
+    refLinesDomain[0] << -1.0, -2.8, 
+                          1.0, -2.8;
+    refLinesDomain[1] <<  1.0, -2.8, 
                           1.0,  2.1;
     refLinesDomain[2] <<  1.0,  2.1, 
                          -1.0,  2.1;
     refLinesDomain[3] << -1.0,  2.1, 
-                         -1.0, -2.1;
+                         -1.0, -2.8;
     
     // std::cout << "Obstcale init: " << refLinesDomain[0] << std::endl;
 }

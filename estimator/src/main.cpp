@@ -62,10 +62,11 @@ int main(int argc, char* argv[]) {
  
         xFin /= double(activeRobots.size());
         yFin /= double(activeRobots.size());
+        yFin -= 0.45;
         for (const auto& tag : robots.nodes) {
             // tag.second->goal << xFin, yFin;
-            tag.second->goal << xFin+0.2, tag.second->curEst(1)+0.6;
-            xFin += 0.2;
+            tag.second->goal << xFin, yFin;
+            yFin += 0.3;
             cout << "Goal coordinates for robot " << tag.second->address << ": (" << tag.second->goal(0) << ", " << tag.second->goal(1) << ")\n";
         }
         usleep(2*1000000);
@@ -83,7 +84,7 @@ int main(int argc, char* argv[]) {
         int intensity[3] = {0, 10, 0};
         robots.setLeds(intensity);
         publisherLeds.publish(robots.msgLeds);
-        usleep(int(0.001 * 1000000.0));
+        usleep(int(10.0 * 1000000.0));
 
         int j = 0;
         while (ros::ok()) {

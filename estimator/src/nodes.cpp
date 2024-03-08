@@ -393,10 +393,10 @@ std::pair<double, double> Node::goToGoal() {
     Eigen::Vector2d err;
     err << goal - curEst.head(2);
     // Eigen::Vector2d Kp(-50, -50);
-    double Kp1 = 37.0;    
+    double Kp1 = 50.0;    
     double v = Kp1*err.norm();
     double phi = std::atan2(err(1), err(0));
-    double Kp2 = 0.32;
+    double Kp2 = 0.5;
     double omega = Kp2 * std::atan2( std::sin(phi - curEst(2)), std::cos(phi - curEst(2)) );
     cout << "\nDistance from goal (" << address << "): " << err.norm() << "\tv: " << v << "\tomega: " << omega << endl;
     return std::make_pair(v, omega);
@@ -671,7 +671,8 @@ void Node::nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::
         inputOmega = omega;
     } else {
         Eigen::Vector2d err = goal - curEst.head(2);
-        cout << "Distance from goal: " << err.norm();  
+        // cout << "\nDistance from goal: " << err.norm() << endl;  
+        cout << "\nDistance from goal (" << address << "): " << err.norm() << endl;
         inputV = 0.0;
         inputOmega = 0.0;
     }
