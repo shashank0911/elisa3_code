@@ -4,6 +4,8 @@ import rospy
 import json
 from configuration import *
 import math
+import csv
+
 
 from std_msgs.msg import String
 # import string
@@ -43,25 +45,29 @@ if __name__ == "__main__":
         rospy.sleep(0.1)
         i += 1
         
-    # print("start reset")
-    # while(len(robots.camera_makers.measurement_list) == 0):
-    #     rospy.sleep(0.05)
-    # print("awake from sleep")
+    print("start reset")
+    while(len(robots.camera_makers.measurement_list) == 0):
+        rospy.sleep(0.05)
+    print("awake from sleep")
     
     # Move Robots
     last_saved_time = 0
     step_size = 1.0
     theta = 0.0
+    loop_time = []
     for t in range(last_saved_time, 50):
         print('\n')
         print("t: ", t)
         print('\n')
+        start_time = rospy.get_time()
         publisher_tag.publish("run")
         robots.store_data(t)
         robots.loop_fuc('move')
         if(t%3 == 0):
             robots.reset('theor')
             
+        end_time = rospy.get_time()
+        loop_time.append(end_time - start_time)
         # robots.move('still', step_size= 0.0, theta = 0.)       
         # robots.plot_data(t)
         
@@ -70,6 +76,11 @@ if __name__ == "__main__":
         # rospy.sleep(0.01)
 
     robots.save_data(0)
+    with open('./data/loop_time.csv', 'w') as file :
+        writer = csv.writer(file)
+        writer.writerow(['Loop number','Time taken'])
+        for i, time_taken in enumerate(loop_time):
+            writer.writerow([i,time_taken])
     
     # Stop engine
     for i in range(10):

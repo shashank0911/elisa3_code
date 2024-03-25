@@ -50,13 +50,13 @@ obstacle_avoidance = utils.ObstacleAvoidance()
 class Camera_marker:
     def __init__(self, N, active_robots):
         self.number = N
-        # self.current_number = N
-        self.current_number = 1
+        self.current_number = N
+        # self.current_number = 1
         self.listener_camera_list = rospy.Subscriber('Bebop1/makers', Float64MultiArray, self.listen_optitrack_makers_callback)
         # self.measurement_list = np.zeros([1, 3])
                 
-        # self.measurement_list = []
-        self.measurement_list = np.zeros(5)
+        self.measurement_list = []
+        # self.measurement_list = np.zeros(5)
         # for tag in active_robots:
         #     temp = np.zeros([1, 3])[0]
         #     temp[0] = np.array(mapper[str(tag)]['pos'])[0]
@@ -289,8 +289,8 @@ class Node:
         # if(self.tag == '0'):            
         #     print("msg: ", msg)
 
-        if (self.t % 5 == 0):
-            print("msg: ", msg)
+        # if (self.t < 50):
+        print("msg: ", msg)
 
     def compute_move(self, pol: np.array):
         """
@@ -609,6 +609,10 @@ class Node:
         self.OWA_w3 = w3
         # print(self.OWA_W3)
         self.estimation = w1 * odo_estimation + w3 * acc_estimation
+        print("OWA before cam")
+        print("OWA w1: ", self.OWA_w1)
+        print("OWA w2: ", self.OWA_w2)
+        print("OWA w3: ", self.OWA_w3)
         
         if (self.t % 1 == 0):
             if(sr_KALMAN and ~mr_KALMAN):
@@ -666,6 +670,10 @@ class Node:
             
             self.estimation = w1 * odo_estimation + w2 * cam_estimation + w3 * acc_estimation
         
+        print("OWa after cam")
+        print("OWA w1: ", self.OWA_w1)
+        print("OWA w2: ", self.OWA_w2)
+        print("OWA w3: ", self.OWA_w3)
         # print(self.OWA_w3)
             
     def loop_fuc(self, cameras, camera_maker, move_type):
