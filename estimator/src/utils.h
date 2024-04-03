@@ -7,7 +7,6 @@
 #include <vector>
 
 const double stepThreshold = 1e-6;
-// Eigen::MatrixXd getDomain();
 const bool obstacles = false;
 
 Eigen::Vector2d cart2pol(const Eigen::Vector2d& cart);
@@ -16,7 +15,9 @@ Eigen::MatrixXd renewVec(const Eigen::MatrixXd& oldVec);
 double yawFromQuaternion(double x, double y, double z, double w);
 
 class ObstacleAvoidance {
+
 public:
+
     ObstacleAvoidance();
     std::vector<Eigen::Matrix2d> refLinesDomain;
     
@@ -26,9 +27,6 @@ public:
     bool checkInDomain(const Eigen::Vector2d& point);
     std::pair<int, Eigen::Vector2d> lineIntersection(const Eigen::Matrix2d& locations);
     std::pair<Eigen::Vector2d, bool> obstacleAvoidance(const Eigen::Vector2d& startPoint, const Eigen::Vector2d& move);
-
-private:
-    // Eigen::VectorXd refLines;
 };
 
 #endif

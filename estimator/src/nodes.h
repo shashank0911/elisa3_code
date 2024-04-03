@@ -5,8 +5,6 @@
 #include <Eigen/Dense>
 #include <map>
 #include <string>
-// #include <boost/variant.hpp>
-// #include <boost/archive/text_oarchive.hpp>
 #include "utils.h"
 #include "Kalman.h"
 #include <ros/ros.h>
@@ -19,34 +17,11 @@
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/PoseStamped.h>
 
-class CameraMarker {
-
-    private:
-
-        // ros::Subscriber listenerCameraList;
-        //TODO check datatype of msmtList
-        // Eigen::VectorXd measurementList;
-
-    public:
-    
-        // ros::NodeHandle n;
-        int number;
-        int currentNumber;
-        std::vector<double> measurementList;
-
-        CameraMarker(int N);
-        ~CameraMarker();
-        //TODO - check datatype of optiMsg
-        void listenOptitrackMarkersCallback(const std_msgs::Float64MultiArray::ConstPtr& optiMsg);
-};
-
 class CameraNode {
 
     private:
 
         int tag;
-        // ros::Subscriber listenerCamera;
-        // ros::Subscriber listenerCameraTimer;
 
     public:
 
@@ -54,11 +29,9 @@ class CameraNode {
         double camY;
         double camPhi;
         double timer;
-        // ros::NodeHandle n;
 
         CameraNode(int tag);
         ~CameraNode();
-        //TODO - check datatype of optiMsg
         void listenOptitrackCallback(const geometry_msgs::Pose2D::ConstPtr& optiMsg);
         void listenOptitrackTimerCallback(const geometry_msgs::PoseStamped::ConstPtr& optiMsg);
 };
@@ -68,20 +41,13 @@ class Cameras {
     private:
 
         int number;
-        
-        //TODO - check if this publisher is necessary
-        // ros::NodeHandle np;
-        // ros::Publisher publisherCams;
         std_msgs::Float64MultiArray msgCam;
 
     public:
 
-        // ros::NodeHandle n;
         std::map<int, CameraNode*> cameras;
         //size (N, 4) N - from Cameras(), measurement for one camera is along the row
         Eigen::MatrixXd measurementList;
-        // Eigen::MatrixXd measurementListPrev;
-        // std::vector<double> msgCam;
 
         Cameras(int N);
         ~Cameras();
@@ -101,10 +67,6 @@ class Node {
         double startPos[2];
         double startOrien;
 
-        // robot meas pose and robot meas orien values are found in odomVals
-        // Eigen::Vector2d robot_meas_pose;
-        // double robot_meas_orien;
-        // double robotMeasTime;
         Eigen::Vector3d robotMeasVals;
         double robotMeasTime;
         double robotInput;
@@ -135,21 +97,15 @@ class Node {
         //size is (1, bufferSize)
         Eigen::MatrixXd orienBuf;
 
-        // ros::Subscriber listenerRobotPose;
-        // ros::Subscriber listenerAccel;
-
     public:
 
-        // ros::NodeHandle n;
         std::string address;
         Eigen::Vector2d goal;
         bool updateLeds;
         int msgLeds[3];
         bool updateReset;
         double msgReset[4];
-        // bool updateAutoMove;
         double msgAutoMove[4];
-        // int triggerAutoMove;
 
         // odom x, y, phi, timer values
         Eigen::Vector3d odomVals;
@@ -188,12 +144,11 @@ class Node {
         void statesTransform();
         std::pair<double, double> goToGoal();
         bool terminate();
-        Eigen::Vector3d determineCameraMarker(CameraMarker& cameraMarker);
         Eigen::Vector3d determineCamera(Cameras& cameras);
-        Eigen::Matrix3d measurementUpdate(Cameras& cameras, CameraMarker& cameraMarker);
+        Eigen::Matrix3d measurementUpdate(Cameras& cameras);
         void measurementFusion(Eigen::Matrix3d measurements);
         void measurementFusionOWA(Eigen::Matrix3d measurements);
-        void nodeLoopFun(Cameras& cameras, CameraMarker& cameraMarker, const std::string moveType);
+        void nodeLoopFun(Cameras& cameras, const std::string moveType);
 
 };
 
@@ -203,21 +158,6 @@ class Nodes {
 
         std::vector<std::string> activeRobots;
         int N;
-
-        //TODO - check if we need publishers
-        // ros::NodeHandle np;
-        // ros::Publisher publisherAutoMove;
-        // ros::Publisher publisherLeds;
-        // ros::Publisher publisherReset;
-        // ros::Publisher publisherInput;
-        // ros::Publisher publisherInputs;
-        //TODO - check if we need these
-        // geometry_msgs::Twist msgInput;
-        // std_msgs::Float64MultiArray msgInputs;
-        
-        //TODO - figure out datatype of stored data
-        // using multiType = boost::variant<double, Eigen::MatrixXd, std::vector<double>>;
-        // std::map<int, std::map<std::string, std::map<std::string, double>>> savedData;
         std::vector<std::vector<double>> savedData;
         
 
@@ -225,13 +165,9 @@ class Nodes {
 
         std::map<std::string, Node*> nodes;
         Cameras cameras;
-        CameraMarker cameraMarker;
         std_msgs::Float64MultiArray msgAutoMove;
         std_msgs::Float64MultiArray msgLeds;
         std_msgs::Float64MultiArray msgReset;
-        // std::vector<int> msgLeds;
-        // std::vector<double> msgReset;
-        // std::vector<double> msgAutoMove;
 
         Nodes(std::vector<std::string> activeRobotsExt);
         ~Nodes();
@@ -239,9 +175,7 @@ class Nodes {
         void testCam();
         void printFn();
         void move(const std::string moveType = "move", double stepSize = 0.0, double theta = 0.0);
-        //TODO - changed argument, check later
         void updateLeds();
-        //TODO - changed argument, check later
         void nodesReset(const std::string type = "odom");
         void turnOffLeds();
         void setLeds(const int ledIntensity[3]);

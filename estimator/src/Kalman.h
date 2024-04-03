@@ -14,7 +14,6 @@ class Kalman {
         Kalman();
 
         std::pair<Eigen::Vector3d, Eigen::Matrix3d> srEKF(const Eigen::Vector3d& Zk, const Eigen::Vector3d& stateEstimateK, double dk = 1);
-        // Eigen::MatrixXd getBm(int t);
         std::pair<Eigen::Vector3d, Eigen::Matrix3d> mrEKF(const Eigen::Vector3d& Zkm, const Eigen::Vector3d& stateEstimateKm, double dk = 1);
 
     private:
