@@ -1,0 +1,5010 @@
+start
+active robots in Nodes():  ['1', '2', '3', '4']
+Node tag:  1
+Node tag:  2
+Node tag:  3
+Node tag:  4
+Published led 
+wait for odom response
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.439, 0.409] - orientation: 0.0
+                Odom: position: [-0.40800000000000003, 0.32099999999999995] - orientation: 0.9075712110370502
+                Cam: position: [-0.439, 0.409] - orientation: 0.0
+                Accel: position: [-0.439, 0.409], velocity: 4.598437499999915
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.394, 0.366] - orientation: 0.0
+                Odom: position: [0.42500000000000004, 0.596] - orientation: -2.2689280275926276
+                Cam: position: [0.394, 0.366] - orientation: 0.0
+                Accel: position: [0.394, 0.366], velocity: -2.045137508401495
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.428, 0.868] - orientation: 0.0
+                Odom: position: [-9.242999999999999, -24.648] - orientation: -1.0122909661567114
+                Cam: position: [0.428, 0.868] - orientation: 0.0
+                Accel: position: [0.428, 0.868], velocity: -0.0877956834677177
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.305, 0.696] - orientation: 0.0
+                Odom: position: [0.292, -0.17400000000000004] - orientation: -1.3962634015954636
+                Cam: position: [-0.305, 0.696] - orientation: 0.0
+                Accel: position: [-0.305, 0.696], velocity: 1.2339887988712352
+                
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.439, 0.409]
+est:  [0.394, 0.366]
+est:  [0.428, 0.868]
+est:  [-0.305, 0.696]
+wait for odom response
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.439, 0.409] - orientation: 0.0
+                Odom: position: [-0.40800000000000003, 0.32099999999999995] - orientation: 0.9075712110370502
+                Cam: position: [-0.439, 0.409] - orientation: 0.0
+                Accel: position: [-0.439, 0.409], velocity: 4.598437499999956
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.394, 0.366] - orientation: 0.0
+                Odom: position: [0.42500000000000004, 0.596] - orientation: -2.2689280275926276
+                Cam: position: [0.394, 0.366] - orientation: 0.0
+                Accel: position: [0.394, 0.366], velocity: -2.1073860846308516
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.428, 0.868] - orientation: 0.0
+                Odom: position: [-9.242999999999999, -24.648] - orientation: -1.0122909661567114
+                Cam: position: [0.428, 0.868] - orientation: 0.0
+                Accel: position: [0.428, 0.868], velocity: -0.07714138616304186
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.305, 0.696] - orientation: 0.0
+                Odom: position: [0.292, -0.17400000000000004] - orientation: -1.3962634015954636
+                Cam: position: [-0.305, 0.696] - orientation: 0.0
+                Accel: position: [-0.305, 0.696], velocity: 1.2303889029971637
+                
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.439, 0.409]
+est:  [0.394, 0.366]
+est:  [0.428, 0.868]
+est:  [-0.305, 0.696]
+wait for odom response
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.439, 0.409] - orientation: 0.0
+                Odom: position: [-0.40800000000000003, 0.32099999999999995] - orientation: 0.9075712110370502
+                Cam: position: [-0.439, 0.409] - orientation: 0.0
+                Accel: position: [-0.439, 0.409], velocity: 4.598437499999977
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.394, 0.366] - orientation: 0.0
+                Odom: position: [0.42500000000000004, 0.595] - orientation: -2.2863813201125662
+                Cam: position: [0.394, 0.366] - orientation: 0.0
+                Accel: position: [0.394, 0.366], velocity: -2.149898528437408
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.428, 0.868] - orientation: 0.0
+                Odom: position: [-9.242999999999999, -24.648] - orientation: -1.0122909661567114
+                Cam: position: [0.428, 0.868] - orientation: 0.0
+                Accel: position: [0.428, 0.868], velocity: -0.1371151936640098
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.305, 0.696] - orientation: 0.0
+                Odom: position: [0.292, -0.17500000000000004] - orientation: -1.3962634015954636
+                Cam: position: [-0.305, 0.696] - orientation: 0.0
+                Accel: position: [-0.305, 0.696], velocity: 1.3105722094247672
+                
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.439, 0.409]
+est:  [0.394, 0.366]
+est:  [0.428, 0.868]
+est:  [-0.305, 0.696]
+start reset
+awake from sleep
+
+
+t:  0
+
+
+loop fn starting 1 1705496108.2270684
+1
+msmt update 1 1705496108.2270992
+OWA before cam
+OWA w1:  0.460298143560067
+OWA w2:  0
+OWA w3:  0.5397018564399331
+OWa after cam
+OWA w1:  0.6690789212383119
+OWA w2:  0.33092107876168797
+OWA w3:  0.0
+msmt fusion 1 1705496108.2277184
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.431741028365286, 0.3930836977400546] - orientation: -65.48844708506977
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.43888330122949326, 0.409], velocity: 4.667950820270377
+                
+
+loop fn starting 2 1705496108.2278562
+1
+msmt update 2 1705496108.2278779
+OWA before cam
+OWA w1:  0.45369992398222425
+OWA w2:  0
+OWA w3:  0.5463000760177757
+OWa after cam
+OWA w1:  0.6784003271171344
+OWA w2:  0.32159967288286556
+OWA w3:  0.0
+msmt fusion 2 1705496108.2288868
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.38954451688349256, 0.38476692626881687] - orientation: 103.36302883444142
+                Odom: position: [0.328, 0.644] - orientation: 1.2566370614359124
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.2566370614359124
+                Accel: position: [0.3939576524484137, 0.366], velocity: -1.693902063453982
+                
+
+loop fn starting 3 1705496108.2290123
+1
+msmt update 3 1705496108.2290368
+OWA before cam
+OWA w1:  0.0005369632058835133
+OWA w2:  0
+OWA w3:  0.9994630367941165
+OWa after cam
+OWA w1:  0.0038092218845360223
+OWA w2:  0.9961907781154641
+OWA w3:  0.0
+msmt fusion 3 1705496108.2293985
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4243374048513708, 0.8583461055710159] - orientation: -110.78442585512043
+                Odom: position: [-9.248, -24.637] - orientation: 1.1693705988362038
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1693705988362038
+                Accel: position: [0.4279613144438189, 0.868], velocity: -1.547422247243943
+                
+
+loop fn starting 4 1705496108.229498
+1
+msmt update 4 1705496108.229518
+OWA before cam
+OWA w1:  0.1384780229841418
+OWA w2:  0
+OWA w3:  0.8615219770158582
+OWa after cam
+OWA w1:  0.3779386466776926
+OWA w2:  0.6220613533223073
+OWA w3:  0.0
+msmt fusion 4 1705496108.2298033
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.28156420977693486, 0.6469467221672265] - orientation: -64.46805187189229
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.3049676656884954, 0.696], velocity: 1.2933724601827323
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  1
+
+
+loop fn starting 1 1705496108.2356813
+1
+msmt update 1 1705496108.2357554
+OWA before cam
+OWA w1:  0.4114552609195571
+OWA w2:  0
+OWA w3:  0.5885447390804429
+OWa after cam
+OWA w1:  0.7704465322957992
+OWA w2:  0.2295534677042007
+OWA w3:  0.0
+msmt fusion 1 1705496108.2361615
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.42401597284225045, 0.3761350575472471] - orientation: -65.50170302691717
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.4318432903737212, 0.39302980761231326], velocity: 4.623706606120921
+                
+
+loop fn starting 2 1705496108.236272
+1
+msmt update 2 1705496108.236294
+OWA before cam
+OWA w1:  0.39860336982931965
+OWA w2:  0
+OWA w3:  0.6013966301706802
+OWa after cam
+OWA w1:  0.7803742445856078
+OWA w2:  0.21962575541439225
+OWA w3:  0.0
+msmt fusion 2 1705496108.2365851
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3848059348395221, 0.4047107503912225] - orientation: 103.37306411871631
+                Odom: position: [0.328, 0.644] - orientation: 1.2566370614359124
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.2566370614359124
+                Accel: position: [0.3895844006851504, 0.3847541711115307], velocity: -1.6749503501064549
+                
+
+loop fn starting 3 1705496108.2368886
+1
+msmt update 3 1705496108.2369149
+OWA before cam
+OWA w1:  0.00020157268148951357
+OWA w2:  0
+OWA w3:  0.9997984273185105
+OWa after cam
+OWA w1:  0.0034591653207479223
+OWA w2:  0.9965408346792521
+OWA w3:  0.0
+msmt fusion 3 1705496108.2372046
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.42104253810327996, 0.8496611380348874] - orientation: -110.78369447462758
+                Odom: position: [-9.248, -24.637] - orientation: 1.1693705988362038
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1693705988362038
+                Accel: position: [0.42436306429381443, 0.8583181227833386], velocity: -1.5186538210975968
+                
+
+loop fn starting 4 1705496108.2373943
+1
+msmt update 4 1705496108.2374146
+OWA before cam
+OWA w1:  0.06489434534648202
+OWA w2:  0
+OWA w3:  0.935105654653518
+OWa after cam
+OWA w1:  0.37031201871297265
+OWA w2:  0.6296879812870273
+OWA w3:  0.0
+msmt fusion 4 1705496108.2376845
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.2596779004240217, 0.6011341176296361] - orientation: -64.46928449020713
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.28156632301357176, 0.646914456985817], velocity: 1.2933724601827323
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  2
+
+
+loop fn starting 1 1705496108.2432635
+1
+msmt update 1 1705496108.243299
+OWA before cam
+OWA w1:  0.3449514088407841
+OWA w2:  0
+OWA w3:  0.6550485911592158
+OWa after cam
+OWA w1:  0.83293996605637
+OWA w2:  0.16706003394362995
+OWA w3:  0.0
+msmt fusion 1 1705496108.2440064
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.41635594845712487, 0.3593289673049555] - orientation: -65.50186677063111
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.4319462577410265, 0.39297727775882607], velocity: 4.623706606120921
+                
+
+loop fn starting 2 1705496108.2442796
+1
+msmt update 2 1705496108.2443035
+OWA before cam
+OWA w1:  0.3266679069860835
+OWA w2:  0
+OWA w3:  0.6733320930139166
+OWa after cam
+OWA w1:  0.8420551708547154
+OWA w2:  0.1579448291452846
+OWA w3:  0.0
+msmt fusion 2 1705496108.2446046
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.38012080321461994, 0.42442943824439927] - orientation: 103.37317733841428
+                Odom: position: [0.328, 0.644] - orientation: 1.2566370614359124
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.2566370614359124
+                Accel: position: [0.3896244104780184, 0.38474181683507525], velocity: -1.6749503501064549
+                
+
+loop fn starting 3 1705496108.244805
+1
+msmt update 3 1705496108.2448275
+OWA before cam
+OWA w1:  8.967794361425432e-05
+OWA w2:  0
+OWA w3:  0.9999103220563859
+OWa after cam
+OWA w1:  0.0033303016807133662
+OWA w2:  0.9966696983192865
+OWA w3:  0.0
+msmt fusion 3 1705496108.2451146
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.41790259666925983, 0.8413842682850539] - orientation: -110.7830718628273
+                Odom: position: [-9.248, -24.637] - orientation: 1.1693705988362038
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1693705988362038
+                Accel: position: [0.42438874419545847, 0.8582901587699596], velocity: -1.5186538210975968
+                
+
+loop fn starting 4 1705496108.2452905
+1
+msmt update 4 1705496108.2453103
+OWA before cam
+OWA w1:  0.03256183225782412
+OWA w2:  0
+OWA w3:  0.9674381677421758
+OWa after cam
+OWA w1:  0.367022389212233
+OWA w2:  0.632977610787767
+OWA w3:  0.0
+msmt fusion 4 1705496108.2455637
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.23896655426856533, 0.5577808688625908] - orientation: -64.46932919267624
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.2815682977711756, 0.6468848654613781], velocity: 1.1862937148671169
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  3
+
+
+loop fn starting 1 1705496108.251076
+1
+msmt update 1 1705496108.251095
+OWA before cam
+OWA w1:  0.2390780786265782
+OWA w2:  0
+OWA w3:  0.7609219213734219
+OWa after cam
+OWA w1:  0.877855614151563
+OWA w2:  0.12214438584843704
+OWA w3:  0.0
+msmt fusion 1 1705496108.2514138
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.4089845520883143, 0.34315603723413046] - orientation: -65.50198653701008
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.432048966689276, 0.3929249009337286], velocity: 4.6117172259890475
+                
+
+loop fn starting 2 1705496108.2516
+1
+msmt update 2 1705496108.2516217
+OWA before cam
+OWA w1:  0.21901579966917722
+OWA w2:  0
+OWA w3:  0.7809842003308227
+OWa after cam
+OWA w1:  0.88519995158213
+OWA w2:  0.11480004841787002
+OWA w3:  0.0
+msmt fusion 2 1705496108.2518578
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.37562766813151427, 0.44333997973282696] - orientation: 103.37322856902426
+                Odom: position: [0.328, 0.644] - orientation: 1.2566370614359124
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.2566370614359124
+                Accel: position: [0.38966442166937737, 0.3847294670885956], velocity: -1.6749503501064549
+                
+
+loop fn starting 3 1705496108.252016
+1
+msmt update 3 1705496108.252033
+OWA before cam
+OWA w1:  3.376939668034363e-05
+OWA w2:  0
+OWA w3:  0.9999662306033196
+OWa after cam
+OWA w1:  0.0032573352063156465
+OWA w2:  0.9967426647936843
+OWA w3:  0.0
+msmt fusion 3 1705496108.2523067
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4148576332883124, 0.8333578186214873] - orientation: -110.78321016900676
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.42441444150284874, 0.8582622107506094], velocity: -1.5186538210975968
+                
+
+loop fn starting 4 1705496108.2525382
+1
+msmt update 4 1705496108.2525613
+OWA before cam
+OWA w1:  0.014587110879033572
+OWA w2:  0
+OWA w3:  0.9854128891209665
+OWa after cam
+OWA w1:  0.36507815008024425
+OWA w2:  0.6349218499197556
+OWA w3:  0.0
+msmt fusion 4 1705496108.2528577
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.21925230468001372, 0.51651468008545] - orientation: -64.46936970633061
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.28157027385159167, 0.6468552740252455], velocity: 1.1862937148671169
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  4
+
+
+loop fn starting 1 1705496108.2589533
+1
+msmt update 1 1705496108.2589736
+OWA before cam
+OWA w1:  0.006578509113234279
+OWA w2:  0
+OWA w3:  0.9934214908867658
+OWa after cam
+OWA w1:  0.9131495952456398
+OWA w2:  0.08685040475436041
+OWA w3:  0.0
+msmt fusion 1 1705496108.2592957
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.40200060662481507, 0.32783329321562243] - orientation: -65.50182533980464
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.4090872673088098, 0.3431036727104874], velocity: 4.6117172259890475
+                
+
+loop fn starting 2 1705496108.2595105
+1
+msmt update 2 1705496108.2595296
+OWA before cam
+OWA w1:  0.006769667506842045
+OWA w2:  0
+OWA w3:  0.9932303324931581
+OWa after cam
+OWA w1:  0.9178244862087062
+OWA w2:  0.08217551379129387
+OWA w3:  0.0
+msmt fusion 2 1705496108.2598152
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.371387349885398, 0.4611863054022034] - orientation: 103.37335105613197
+                Odom: position: [0.328, 0.644] - orientation: 1.2566370614359124
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.2566370614359124
+                Accel: position: [0.3756677112728699, 0.44332762237158535], velocity: -1.676261338329225
+                
+
+loop fn starting 3 1705496108.2599864
+1
+msmt update 3 1705496108.2600052
+OWA before cam
+OWA w1:  1.1110309720110944e-07
+OWA w2:  0
+OWA w3:  0.9999998888969027
+OWa after cam
+OWA w1:  0.003206871877750794
+OWA w2:  0.9967931281222492
+OWA w3:  0.0
+msmt fusion 3 1705496108.2602663
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.41185518025930623, 0.8254439836255193] - orientation: -110.78455102038104
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.4148827447238683, 0.8333305002055618], velocity: -1.4842533715567028
+                
+
+loop fn starting 4 1705496108.2604368
+1
+msmt update 4 1705496108.2604547
+OWA before cam
+OWA w1:  0.0013611802297290704
+OWA w2:  0
+OWA w3:  0.9986388197702709
+OWa after cam
+OWA w1:  0.36364222833712645
+OWA w2:  0.6363577716628736
+OWA w3:  0.0
+msmt fusion 4 1705496108.260702
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.20032203125906642, 0.4768896383254768] - orientation: -64.46930484548938
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.2192542819592854, 0.5164850887293998], velocity: 1.1862937148671169
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  5
+
+
+loop fn starting 1 1705496108.2664645
+1
+msmt update 1 1705496108.2664886
+OWA before cam
+OWA w1:  0.008987375271031158
+OWA w2:  0
+OWA w3:  0.9910126247289689
+OWa after cam
+OWA w1:  0.9225081386307367
+OWA w2:  0.07749186136926348
+OWA w3:  0.0
+msmt fusion 1 1705496108.266868
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.3955922334374821, 0.31377326109495207] - orientation: -65.5019653165011
+                Odom: position: [-0.33, 0.16999999999999998] - orientation: -0.558505360638184
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.558505360638184
+                Accel: position: [-0.40918997408695595, 0.34305129163011827], velocity: 4.6117172259890475
+                
+
+loop fn starting 2 1705496108.2670577
+1
+msmt update 2 1705496108.267075
+OWA before cam
+OWA w1:  0.006773680713486038
+OWA w2:  0
+OWA w3:  0.993226319286514
+OWa after cam
+OWA w1:  0.9082493517847287
+OWA w2:  0.09175064821527135
+OWA w3:  0.0
+msmt fusion 2 1705496108.2673435
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.370951507188229, 0.42943572577023764] - orientation: -90.7931417209896
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.37570775592754263, 0.443315269915205], velocity: -1.676261338329225
+                
+
+loop fn starting 3 1705496108.267598
+1
+msmt update 3 1705496108.267619
+OWA before cam
+OWA w1:  1.3031229628705015e-07
+OWA w2:  0
+OWA w3:  0.9999998696877037
+OWa after cam
+OWA w1:  0.0031716743850074844
+OWA w2:  0.9968283256149925
+OWA w3:  0.0
+msmt fusion 3 1705496108.2681582
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.408904740123436, 0.8176669960340562] - orientation: -110.78394586744277
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.41490781950692596, 0.833303148143501], velocity: -1.4842533715567028
+                
+
+loop fn starting 4 1705496108.2687047
+1
+msmt update 4 1705496108.268758
+OWA before cam
+OWA w1:  0.001693704780491628
+OWA w2:  0
+OWA w3:  0.9983062952195083
+OWa after cam
+OWA w1:  0.36297520732884064
+OWA w2:  0.6370247926711593
+OWA w3:  0.0
+msmt fusion 4 1705496108.269195
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.18218569142113758, 0.4389264102241157] - orientation: -64.46933785711923
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.21925591982649778, 0.5164605529875149], velocity: 0.9836139395886324
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  6
+
+
+loop fn starting 1 1705496108.274764
+1
+msmt update 1 1705496108.2747838
+OWA before cam
+OWA w1:  0.010846434213211204
+OWA w2:  0
+OWA w3:  0.9891535657867888
+OWa after cam
+OWA w1:  0.9019714679557322
+OWA w2:  0.0980285320442678
+OWA w3:  0.0
+msmt fusion 1 1705496108.2751105
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.41671957469479937, 0.33466078936113586] - orientation: 135.33699838397308
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.4092934566806408, 0.34299853313064094], velocity: 4.6462210817550424
+                
+
+loop fn starting 2 1705496108.2753594
+1
+msmt update 2 1705496108.2753868
+OWA before cam
+OWA w1:  0.006664717092121905
+OWA w2:  0
+OWA w3:  0.993335282907878
+OWa after cam
+OWA w1:  0.9005802895290616
+OWA w2:  0.0994197104709385
+OWA w3:  0.0
+msmt fusion 2 1705496108.2756686
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3705585363905084, 0.4007980032913161] - orientation: -90.79285872273593
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.3757476533244647, 0.44332818424367376], velocity: -1.6774180926434337
+                
+
+loop fn starting 3 1705496108.2758594
+1
+msmt update 3 1705496108.275883
+OWA before cam
+OWA w1:  2.0582956036483163e-07
+OWA w2:  0
+OWA w3:  0.9999997941704396
+OWa after cam
+OWA w1:  0.003138201957892723
+OWA w2:  0.9968617980421073
+OWA w3:  0.0
+msmt fusion 3 1705496108.2761264
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.406002207218599, 0.8100160426284618] - orientation: -110.78334174490895
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.414932910837572, 0.8332758112605264], velocity: -1.4842533715567028
+                
+
+loop fn starting 4 1705496108.2763567
+1
+msmt update 4 1705496108.276403
+OWA before cam
+OWA w1:  0.002762013949370724
+OWA w2:  0
+OWA w3:  0.9972379860506293
+OWa after cam
+OWA w1:  0.3623980276080494
+OWA w2:  0.6376019723919505
+OWA w3:  0.0
+msmt fusion 4 1705496108.2766862
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.16479043627565268, 0.4025143768841495] - orientation: -64.4693706573557
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.2192575585036741, 0.5164360172997121], velocity: 0.9836139395886324
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  7
+
+
+loop fn starting 1 1705496108.2825143
+1
+msmt update 1 1705496108.282535
+OWA before cam
+OWA w1:  0.00826545616555805
+OWA w2:  0
+OWA w3:  0.9917345438344419
+OWa after cam
+OWA w1:  0.8862348076880581
+OWA w2:  0.11376519231194215
+OWA w3:  0.0
+msmt fusion 1 1705496108.2834048
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.43562960328246436, 0.35335274055987387] - orientation: 135.342259085207
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.4168321617992213, 0.3346322192652185], velocity: 4.6462210817550424
+                
+
+loop fn starting 2 1705496108.2836537
+1
+msmt update 2 1705496108.2836764
+OWA before cam
+OWA w1:  0.0052062070817790315
+OWA w2:  0
+OWA w3:  0.994793792918221
+OWa after cam
+OWA w1:  0.8935747324940432
+OWA w2:  0.10642526750595688
+OWA w3:  0.0
+msmt fusion 2 1705496108.2839916
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.37020197695543494, 0.3749019166043315] - orientation: -90.79553500440714
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.37059843013110044, 0.40081092891016123], velocity: -1.6774180926434337
+                
+
+loop fn starting 3 1705496108.2842581
+1
+msmt update 3 1705496108.2842808
+OWA before cam
+OWA w1:  1.8287390422156632e-07
+OWA w2:  0
+OWA w3:  0.9999998171260959
+OWa after cam
+OWA w1:  0.003105668933900814
+OWA w2:  0.9968943310660991
+OWA w3:  0.0
+msmt fusion 3 1705496108.284568
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4031211757347785, 0.8024222684806226] - orientation: -110.7845990212745
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.4060271066483999, 0.8099889476964118], velocity: -1.4719331219617966
+                
+
+loop fn starting 4 1705496108.2847567
+1
+msmt update 4 1705496108.284777
+OWA before cam
+OWA w1:  0.002615168089084397
+OWA w2:  0
+OWA w3:  0.9973848319109156
+OWa after cam
+OWA w1:  0.36181786241924846
+OWA w2:  0.6381821375807515
+OWA w3:  0.0
+msmt fusion 4 1705496108.285059
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.14800368484267865, 0.36737617119991883] - orientation: -64.46930868456695
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.1647921383656643, 0.4024889042904536], velocity: 1.021175902578205
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  8
+
+
+loop fn starting 1 1705496108.2907588
+1
+msmt update 1 1705496108.2907956
+OWA before cam
+OWA w1:  0.005561780020421919
+OWA w2:  0
+OWA w3:  0.9944382199795782
+OWa after cam
+OWA w1:  0.8748482799550982
+OWA w2:  0.12515172004490174
+OWA w3:  0.0
+msmt fusion 1 1705496108.2911215
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.4526695230690677, 0.37019606790624493] - orientation: 135.34239826974272
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.41694555197880656, 0.3346028096026985], velocity: 4.685682204489743
+                
+
+loop fn starting 2 1705496108.2913156
+1
+msmt update 2 1705496108.2913365
+OWA before cam
+OWA w1:  0.002720559354430009
+OWA w2:  0
+OWA w3:  0.99727944064557
+OWa after cam
+OWA w1:  0.8865357248352321
+OWA w2:  0.11346427516476802
+OWA w3:  0.0
+msmt fusion 2 1705496108.2915776
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3698792986942213, 0.3514666584369867] - orientation: -90.79553895137495
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.3706383583213789, 0.40082374771595736], velocity: -1.6774180926434337
+                
+
+loop fn starting 3 1705496108.2917395
+1
+msmt update 3 1705496108.2917566
+OWA before cam
+OWA w1:  1.1234415612959384e-07
+OWA w2:  0
+OWA w3:  0.9999998876558439
+OWa after cam
+OWA w1:  0.00307379317768729
+OWA w2:  0.9969262068223127
+OWA w3:  0.0
+msmt fusion 3 1705496108.292005
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4002833683968069, 0.7949421848052108] - orientation: -110.78399181294634
+                Odom: position: [-9.248, -24.636000000000003] - orientation: 1.1519173063162578
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.1519173063162578
+                Accel: position: [0.4060519719927123, 0.8099618214803206], velocity: -1.4719331219617966
+                
+
+loop fn starting 4 1705496108.292212
+1
+msmt update 4 1705496108.2922401
+OWA before cam
+OWA w1:  0.001596386138431988
+OWA w2:  0
+OWA w3:  0.9984036138615681
+OWa after cam
+OWA w1:  0.36127406684656227
+OWA w2:  0.6387259331534376
+OWA w3:  0.0
+msmt fusion 4 1705496108.292542
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.1318831635126294, 0.3336324724265105] - orientation: -64.46934368322776
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.164793838877065, 0.40246343159132336], velocity: 1.021175902578205
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  9
+
+
+loop fn starting 1 1705496108.298521
+1
+msmt update 1 1705496108.2985451
+OWA before cam
+OWA w1:  0.011435884429659824
+OWA w2:  0
+OWA w3:  0.9885641155703403
+OWa after cam
+OWA w1:  0.8673911184700109
+OWA w2:  0.13260888152998915
+OWA w3:  0.0
+msmt fusion 1 1705496108.2989302
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.46811752575160226, 0.38546578027163336] - orientation: 135.34251851884991
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.4170589380639233, 0.3345733841583039], velocity: 4.685682204489743
+                
+
+loop fn starting 2 1705496108.2990992
+1
+msmt update 2 1705496108.29912
+OWA before cam
+OWA w1:  0.007725491179710568
+OWA w2:  0
+OWA w3:  0.9922745088202894
+OWa after cam
+OWA w1:  0.8790054694979862
+OWA w2:  0.1209945305020139
+OWA w3:  0.0
+msmt fusion 2 1705496108.299371
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.36958711401588695, 0.3302456503236733] - orientation: -90.79552344258005
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.37067874010622875, 0.40083671197089027], velocity: -1.6964718464500885
+                
+
+loop fn starting 3 1705496108.2995377
+1
+msmt update 3 1705496108.299553
+OWA before cam
+OWA w1:  1.818619958837577e-07
+OWA w2:  0
+OWA w3:  0.9999998181380042
+OWa after cam
+OWA w1:  0.0030378512762069968
+OWA w2:  0.9969621487237931
+OWA w3:  0.0
+msmt fusion 3 1705496108.2997763
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.40767051651460395, 0.7979412521734257] - orientation: 22.098015910935047
+                Odom: position: [25.739567481474573, 10.969337618986138] - orientation: -2.817142669477979
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.817142669477979
+                Accel: position: [0.40607651762447095, 0.8099350766670982], velocity: -1.452045769378056
+                
+
+loop fn starting 4 1705496108.299922
+1
+msmt update 4 1705496108.2999365
+OWA before cam
+OWA w1:  0.0026327046981671253
+OWA w2:  0
+OWA w3:  0.9973672953018328
+OWa after cam
+OWA w1:  0.36091451910371564
+OWA w2:  0.6390854808962843
+OWA w3:  0.0
+msmt fusion 4 1705496108.3001866
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.11638603670963193, 0.30119362015239526] - orientation: -64.46937911409003
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.16479554027997503, 0.40243795895172435], velocity: 1.021175902578205
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  10
+
+
+loop fn starting 1 1705496108.3057108
+1
+msmt update 1 1705496108.305727
+OWA before cam
+OWA w1:  0.010041948185124735
+OWA w2:  0
+OWA w3:  0.9899580518148753
+OWa after cam
+OWA w1:  0.8632828960092477
+OWA w2:  0.13671710399075235
+OWA w3:  0.0
+msmt fusion 1 1705496108.3060439
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.48220987533426823, 0.399395570651985] - orientation: 135.34234352017302
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.4682309082975158, 0.385436341192876], velocity: 4.685682204489743
+                
+
+loop fn starting 2 1705496108.30626
+1
+msmt update 2 1705496108.306278
+OWA before cam
+OWA w1:  0.008392638457081476
+OWA w2:  0
+OWA w3:  0.9916073615429186
+OWa after cam
+OWA w1:  0.8925360919526204
+OWA w2:  0.1074639080473797
+OWA w3:  0.0
+msmt fusion 2 1705496108.3065302
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3693154950530488, 0.3105205977750208] - orientation: -90.79561515218109
+                Odom: position: [0.36645968513105254, 0.09922670571119441] - orientation: -2.19451854603616
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.19451854603616
+                Accel: position: [0.36962749559967195, 0.3302586152048775], velocity: -1.6964718464500885
+                
+
+loop fn starting 3 1705496108.3066957
+1
+msmt update 3 1705496108.3067145
+OWA before cam
+OWA w1:  1.6255431042807775e-07
+OWA w2:  0
+OWA w3:  0.9999998374456895
+OWa after cam
+OWA w1:  0.003013151831689341
+OWA w2:  0.9969868481683106
+OWA w3:  0.0
+msmt fusion 3 1705496108.3069918
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.41497167205689445, 0.800872857092734] - orientation: 21.878362557005783
+                Odom: position: [25.739567481474573, 10.969337618986138] - orientation: -2.817142669477979
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.817142669477979
+                Accel: position: [0.40770661056512364, 0.7979451242000027], velocity: -1.452045769378056
+                
+
+loop fn starting 4 1705496108.3071864
+1
+msmt update 4 1705496108.3072054
+OWA before cam
+OWA w1:  0.0024990704972841
+OWA w2:  0
+OWA w3:  0.9975009295027158
+OWa after cam
+OWA w1:  0.36058366460682983
+OWA w2:  0.63941633539317
+OWA w3:  0.0
+msmt fusion 4 1705496108.3080423
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.10140235006663656, 0.26982959472266654] - orientation: -64.46931866026073
+                Odom: position: [0.318, -0.6080000000000001] - orientation: -2.44346095279206
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.44346095279206
+                Accel: position: [-0.1163880197238296, 0.30116394716562245], velocity: 1.1895669728631222
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  11
+
+
+loop fn starting 1 1705496108.313756
+1
+msmt update 1 1705496108.3137946
+OWA before cam
+OWA w1:  0.010154527961404433
+OWA w2:  0
+OWA w3:  0.9898454720385955
+OWa after cam
+OWA w1:  0.886491155713955
+OWA w2:  0.11350884428604512
+OWA w3:  0.0
+msmt fusion 1 1705496108.3142965
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.4954686043043633, 0.4125013240708801] - orientation: 135.34241433567138
+                Odom: position: [-0.6387147083493906, 0.554164401393387] - orientation: 3.0681177164386204
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 3.0681177164386204
+                Accel: position: [-0.4683407747777048, 0.38540783556060726], velocity: 4.540169959843892
+                
+
+loop fn starting 2 1705496108.3145282
+1
+msmt update 2 1705496108.3145533
+OWA before cam
+OWA w1:  0.010488709777709842
+OWA w2:  0
+OWA w3:  0.9895112902222901
+OWa after cam
+OWA w1:  0.9045117919441107
+OWA w2:  0.09548820805588934
+OWA w3:  0.0
+msmt fusion 2 1705496108.3148344
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3821958426068818, 0.29711734232381487] - orientation: -46.143138337842274
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.3696687078271145, 0.33027184260288817], velocity: -1.7313170703971372
+                
+
+loop fn starting 3 1705496108.31503
+1
+msmt update 3 1705496108.3150501
+OWA before cam
+OWA w1:  1.03465416438493e-07
+OWA w2:  0
+OWA w3:  0.9999998965345834
+OWa after cam
+OWA w1:  0.003000234289912204
+OWA w2:  0.9969997657100879
+OWA w3:  0.0
+msmt fusion 3 1705496108.3153212
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.42221134838289653, 0.8037729731878668] - orientation: 21.831977178498725
+                Odom: position: [25.73204504755137, 10.942664047513667] - orientation: -2.8172742151774877
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.8172742151774877
+                Accel: position: [0.407742681066282, 0.7979410386132744], velocity: -1.452045769378056
+                
+
+loop fn starting 4 1705496108.3155107
+1
+msmt update 4 1705496108.315531
+OWA before cam
+OWA w1:  0.0012643898168516838
+OWA w2:  0
+OWA w3:  0.9987356101831483
+OWa after cam
+OWA w1:  0.32094315004977286
+OWA w2:  0.679056849950227
+OWA w3:  0.0
+msmt fusion 4 1705496108.3158085
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.14622209066684477, 0.26104969384829174] - orientation: -168.92891728418914
+                Odom: position: [-1.561887715869803, -0.01815862272731772] - orientation: 2.184754445700348
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.184754445700348
+                Accel: position: [-0.11639000094417798, 0.30113427405902304], velocity: 1.1895669728631222
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  12
+
+
+loop fn starting 1 1705496108.3214064
+1
+msmt update 1 1705496108.3214335
+OWA before cam
+OWA w1:  0.017880946182443475
+OWA w2:  0
+OWA w3:  0.9821190538175565
+OWa after cam
+OWA w1:  0.9105970857931454
+OWA w2:  0.0894029142068547
+OWA w3:  0.0
+msmt fusion 1 1705496108.3217468
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5028547173463211, 0.4236423781035484] - orientation: 123.55202884826481
+                Odom: position: [-0.580433763262036, 0.5407231133973717] - orientation: 2.796698883964725
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.796698883964725
+                Accel: position: [-0.4684506392389778, 0.3853793221481604], velocity: 4.540169959843892
+                
+
+loop fn starting 2 1705496108.3219376
+1
+msmt update 2 1705496108.321957
+OWA before cam
+OWA w1:  0.01683451605458002
+OWA w2:  0
+OWA w3:  0.98316548394542
+OWa after cam
+OWA w1:  0.915729698669333
+OWA w2:  0.08427030133066708
+OWA w3:  0.0
+msmt fusion 2 1705496108.3222163
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.39409833751151446, 0.284730408353652] - orientation: -46.14597970125148
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.3696927903739398, 0.3303078070671176], velocity: -1.7313170703971372
+                
+
+loop fn starting 3 1705496108.3227558
+1
+msmt update 3 1705496108.322784
+OWA before cam
+OWA w1:  1.6854374852270174e-07
+OWA w2:  0
+OWA w3:  0.9999998314562515
+OWa after cam
+OWA w1:  0.0029982283337421428
+OWA w2:  0.9970017716662579
+OWA w3:  0.0
+msmt fusion 3 1705496108.3231926
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4294197951726267, 0.8066605346906571] - orientation: 21.831672608173502
+                Odom: position: [25.73204504755137, 10.942664047513667] - orientation: -2.8172742151774877
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.8172742151774877
+                Accel: position: [0.40777742248765664, 0.7979354615940499], velocity: -1.4074484729806378
+                
+
+loop fn starting 4 1705496108.3233879
+1
+msmt update 4 1705496108.3234088
+OWA before cam
+OWA w1:  0.001470168082907778
+OWA w2:  0
+OWA w3:  0.9985298319170922
+OWa after cam
+OWA w1:  0.2908301622448697
+OWA w2:  0.7091698377551302
+OWA w3:  0.0
+msmt fusion 4 1705496108.3237596
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.18396574913410446, 0.2502317743335807] - orientation: -164.0189549460073
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.11636758581549303, 0.30115381838033045], velocity: 1.2660149760556962
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  13
+
+
+loop fn starting 1 1705496108.3293998
+1
+msmt update 1 1705496108.3294253
+OWA before cam
+OWA w1:  0.019759477693653004
+OWA w2:  0
+OWA w3:  0.980240522306347
+OWa after cam
+OWA w1:  0.9307829653117129
+OWA w2:  0.06921703468828716
+OWA w3:  0.0
+msmt fusion 1 1705496108.3298414
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5097473790352706, 0.4340363454305574] - orientation: 123.55907447182771
+                Odom: position: [-0.580433763262036, 0.5407231133973717] - orientation: 2.796698883964725
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.796698883964725
+                Accel: position: [-0.5029117391224434, 0.42354744114108334], velocity: 4.429809891038729
+                
+
+loop fn starting 2 1705496108.3301013
+1
+msmt update 2 1705496108.3301232
+OWA before cam
+OWA w1:  0.01715830537180501
+OWA w2:  0
+OWA w3:  0.982841694628195
+OWa after cam
+OWA w1:  0.926140131430677
+OWA w2:  0.07385986856932318
+OWA w3:  0.0
+msmt fusion 2 1705496108.3304281
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4050788425305593, 0.2732986640279213] - orientation: -46.156814308564655
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.3941225221491017, 0.28476630424552946], velocity: -1.7313170703971372
+                
+
+loop fn starting 3 1705496108.3306527
+1
+msmt update 3 1705496108.3306715
+OWA before cam
+OWA w1:  1.5084769111381184e-07
+OWA w2:  0
+OWA w3:  0.9999998491523089
+OWa after cam
+OWA w1:  0.0030070213907069264
+OWA w2:  0.9969929786092931
+OWA w3:  0.0
+msmt fusion 3 1705496108.330954
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4366794840335198, 0.809568715258141] - orientation: 21.832301760582883
+                Odom: position: [25.73204504755137, 10.942664047513667] - orientation: -2.8172742151774877
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.8172742151774877
+                Accel: position: [0.4294545348937954, 0.8066549470904856], velocity: -1.4074484729806378
+                
+
+loop fn starting 4 1705496108.3312254
+1
+msmt update 4 1705496108.3312476
+OWA before cam
+OWA w1:  0.0011565631032266577
+OWA w2:  0
+OWA w3:  0.9988434368967734
+OWa after cam
+OWA w1:  0.26602148818219223
+OWA w2:  0.7339785118178077
+OWA w3:  0.0
+msmt fusion 4 1705496108.3315425
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.2175575512151614, 0.24054953955438282] - orientation: -163.93339646397152
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.18394067080719068, 0.2502124656899475], velocity: 1.2660149760556962
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  14
+
+
+loop fn starting 1 1705496108.3374653
+1
+msmt update 1 1705496108.3374941
+OWA before cam
+OWA w1:  0.011990813862969438
+OWA w2:  0
+OWA w3:  0.9880091861370306
+OWa after cam
+OWA w1:  0.9476938909994056
+OWA w2:  0.05230610900059449
+OWA w3:  0.0
+msmt fusion 1 1705496108.3379421
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5161374270955119, 0.4436723939954507] - orientation: 123.55904585388548
+                Odom: position: [-0.580433763262036, 0.5407231133973717] - orientation: 2.796698883964725
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.796698883964725
+                Accel: position: [-0.5029680905987021, 0.4234521047843369], velocity: 4.429809891038729
+                
+
+loop fn starting 2 1705496108.338233
+1
+msmt update 2 1705496108.3382554
+OWA before cam
+OWA w1:  0.009545264254023859
+OWA w2:  0
+OWA w3:  0.9904547357459762
+OWa after cam
+OWA w1:  0.935734477705995
+OWA w2:  0.06426552229400496
+OWA w3:  0.0
+msmt fusion 2 1705496108.3385513
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4151851555339498, 0.26277702548966625] - orientation: -46.15684365749553
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.39414753064434643, 0.28480256877515436], velocity: -1.7620628562327683
+                
+
+loop fn starting 3 1705496108.3387814
+1
+msmt update 3 1705496108.338801
+OWA before cam
+OWA w1:  9.76831880677289e-08
+OWA w2:  0
+OWA w3:  0.999999902316812
+OWa after cam
+OWA w1:  0.003031170179674769
+OWA w2:  0.9969688298203253
+OWA w3:  0.0
+msmt fusion 3 1705496108.3391936
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4439729651420484, 0.8124903832338545] - orientation: 21.831966446904648
+                Odom: position: [25.73204504755137, 10.942664047513667] - orientation: -2.8172742151774877
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.8172742151774877
+                Accel: position: [0.4294892781235405, 0.8066493813479977], velocity: -1.3771144614535038
+                
+
+loop fn starting 4 1705496108.339365
+1
+msmt update 4 1705496108.3393822
+OWA before cam
+OWA w1:  0.0005512231986366246
+OWA w2:  0
+OWA w3:  0.9994487768013633
+OWa after cam
+OWA w1:  0.2457114685903016
+OWA w2:  0.7542885314096984
+OWA w3:  0.0
+msmt fusion 4 1705496108.3396342
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.2477148440808299, 0.2318572591236845] - orientation: -163.93342915454147
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.18391403421071148, 0.2501953707220402], velocity: 1.2660149760556962
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  15
+
+
+loop fn starting 1 1705496108.345222
+1
+msmt update 1 1705496108.3452466
+OWA before cam
+OWA w1:  0.020877908101784436
+OWA w2:  0
+OWA w3:  0.9791220918982156
+OWa after cam
+OWA w1:  0.9618756370507713
+OWA w2:  0.03812436294922869
+OWA w3:  0.0
+msmt fusion 1 1705496108.3455741
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5220339669158072, 0.45256423816729063] - orientation: 123.5590609362831
+                Odom: position: [-0.580433763262036, 0.5407231133973717] - orientation: 2.796698883964725
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.796698883964725
+                Accel: position: [-0.503024444803268, 0.4233567700402929], velocity: 4.429809891038729
+                
+
+loop fn starting 2 1705496108.34575
+1
+msmt update 2 1705496108.3457685
+OWA before cam
+OWA w1:  0.016756022893388844
+OWA w2:  0
+OWA w3:  0.9832439771066112
+OWa after cam
+OWA w1:  0.9445338626638851
+OWA w2:  0.05546613733611492
+OWA w3:  0.0
+msmt fusion 2 1705496108.3460054
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.42447091987018, 0.2531096598872164] - orientation: -46.1568339296125
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.3941725402039056, 0.28483883257079107], velocity: -1.7620628562327683
+                
+
+loop fn starting 3 1705496108.3461545
+1
+msmt update 3 1705496108.34617
+OWA before cam
+OWA w1:  1.6312717264113625e-07
+OWA w2:  0
+OWA w3:  0.9999998368728273
+OWa after cam
+OWA w1:  0.0030554518361909097
+OWA w2:  0.9969445481638091
+OWA w3:  0.0
+msmt fusion 3 1705496108.3463898
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4513011651904931, 0.8154259112460934] - orientation: 21.831643754478648
+                Odom: position: [25.73204504755137, 10.942664047513667] - orientation: -2.8172742151774877
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.8172742151774877
+                Accel: position: [0.4295232707224039, 0.8066439241625991], velocity: -1.3771144614535038
+                
+
+loop fn starting 4 1705496108.3465388
+1
+msmt update 4 1705496108.346554
+OWA before cam
+OWA w1:  0.0009677322111477163
+OWA w2:  0
+OWA w3:  0.9990322677888522
+OWa after cam
+OWA w1:  0.2293366629714184
+OWA w2:  0.7706633370285816
+OWA w3:  0.0
+msmt fusion 4 1705496108.3467774
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.275126425221039, 0.22395631924855477] - orientation: -163.93331348344958
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.18388901421214365, 0.2501793121075806], velocity: 1.1892043906373788
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  16
+
+
+loop fn starting 1 1705496108.3529751
+1
+msmt update 1 1705496108.3530102
+OWA before cam
+OWA w1:  0.025467373153981464
+OWA w2:  0
+OWA w3:  0.9745326268460185
+OWa after cam
+OWA w1:  0.9737522205893864
+OWA w2:  0.026247779410613438
+OWA w3:  0.0
+msmt fusion 1 1705496108.3534896
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5274552479329515, 0.46073944154222546] - orientation: 123.55893708137623
+                Odom: position: [-0.580433763262036, 0.5407231133973717] - orientation: 2.796698883964725
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.796698883964725
+                Accel: position: [-0.5220928660899339, 0.4524645946523154], velocity: 4.629979315622408
+                
+
+loop fn starting 2 1705496108.3537927
+1
+msmt update 2 1705496108.3538184
+OWA before cam
+OWA w1:  0.017353887735699815
+OWA w2:  0
+OWA w3:  0.9826461122643002
+OWa after cam
+OWA w1:  0.9529801399134026
+OWA w2:  0.04701986008659749
+OWA w3:  0.0
+msmt fusion 2 1705496108.3541448
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.43299597966842424, 0.24423423978666653] - orientation: -46.15689978230559
+                Odom: position: [0.5183860471076254, 0.15541539958614664] - orientation: -1.5541868678585835
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5541868678585835
+                Accel: position: [0.424495929076968, 0.25314592392614144], velocity: -1.7620628562327683
+                
+
+loop fn starting 3 1705496108.354403
+1
+msmt update 3 1705496108.3544264
+OWA before cam
+OWA w1:  1.468178477541252e-07
+OWA w2:  0
+OWA w3:  0.9999998531821522
+OWa after cam
+OWA w1:  0.0030784952798898185
+OWA w2:  0.9969215047201102
+OWA w3:  0.0
+msmt fusion 3 1705496108.3547554
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.45331245743179394, 0.8231619880651926] - orientation: 75.43194844158707
+                Odom: position: [7.30811049689009, 27.1885251804846] - orientation: -1.8828080114670411
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.8828080114670411
+                Accel: position: [0.45133515602659435, 0.8154204430918249], velocity: -1.3771144614535038
+                
+
+loop fn starting 4 1705496108.355006
+1
+msmt update 4 1705496108.3550274
+OWA before cam
+OWA w1:  0.0008960274076231321
+OWA w2:  0
+OWA w3:  0.9991039725923768
+OWa after cam
+OWA w1:  0.23600730923450972
+OWA w2:  0.7639926907654903
+OWA w3:  0.0
+msmt fusion 4 1705496108.3553624
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.30283691941955326, 0.21596932999479276] - orientation: -163.9335185711694
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.27510140336512107, 0.2239402635282932], velocity: 1.1892043906373788
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  17
+
+
+loop fn starting 1 1705496108.3610818
+1
+msmt update 1 1705496108.3611069
+OWA before cam
+OWA w1:  0.007147161397041321
+OWA w2:  0
+OWA w3:  0.9928528386029587
+OWa after cam
+OWA w1:  0.9648649166328036
+OWA w2:  0.03513508336719645
+OWA w3:  0.0
+msmt fusion 1 1705496108.3615003
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5491852326400783, 0.46004707102543974] - orientation: -178.18815821303454
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.5221517776049471, 0.4523649584330562], velocity: 4.629979315622408
+                
+
+loop fn starting 2 1705496108.3616955
+1
+msmt update 2 1705496108.3617146
+OWA before cam
+OWA w1:  0.009965592427189895
+OWA w2:  0
+OWA w3:  0.9900344075728101
+OWa after cam
+OWA w1:  0.9545301689829014
+OWA w2:  0.045469831017098575
+OWA w3:  0.0
+msmt fusion 2 1705496108.362348
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.44063638638411584, 0.22961797593109787] - orientation: -62.4070330140738
+                Odom: position: [0.517068952781057, 0.08351886370648329] - orientation: -1.5393854955900337
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.5393854955900337
+                Accel: position: [0.4245214537343939, 0.25318293016816623], velocity: -1.798208034911266
+                
+
+loop fn starting 3 1705496108.3626285
+1
+msmt update 3 1705496108.3626518
+OWA before cam
+OWA w1:  9.885943600861993e-08
+OWA w2:  0
+OWA w3:  0.999999901140564
+OWa after cam
+OWA w1:  0.003103683043538106
+OWA w2:  0.9968963169564619
+OWA w3:  0.0
+msmt fusion 3 1705496108.362928
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4553340392193241, 0.8309370894796492] - orientation: 75.43095720635895
+                Odom: position: [7.30811049689009, 27.1885251804846] - orientation: -1.8828080114670411
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.8828080114670411
+                Accel: position: [0.45129848778319426, 0.8154192059952409], velocity: -1.4675642306942682
+                
+
+loop fn starting 4 1705496108.363112
+1
+msmt update 4 1705496108.363131
+OWA before cam
+OWA w1:  0.0007485711716715724
+OWA w2:  0
+OWA w3:  0.9992514288283284
+OWa after cam
+OWA w1:  0.24141678630481478
+OWA w2:  0.7585832136951852
+OWA w3:  0.0
+msmt fusion 4 1705496108.363376
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.33048297850831193, 0.20800087061568795] - orientation: -163.93343773495576
+                Odom: position: [-1.5073593236809617, -0.13116062460314337] - orientation: 2.1847534763164496
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1847534763164496
+                Accel: position: [-0.2750763848025604, 0.2239242026766939], velocity: 1.1892043906373788
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  18
+
+
+loop fn starting 1 1705496108.368994
+1
+msmt update 1 1705496108.3690271
+OWA before cam
+OWA w1:  0.011242185210866408
+OWA w2:  0
+OWA w3:  0.9887578147891336
+OWa after cam
+OWA w1:  0.9580718581467751
+OWA w2:  0.041928141853224896
+OWA w3:  0.0
+msmt fusion 1 1705496108.3695557
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.568772624116774, 0.4594232911412099] - orientation: -178.18910029170547
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.5222252932585376, 0.4522755526644135], velocity: 4.629979315622408
+                
+
+loop fn starting 2 1705496108.369749
+1
+msmt update 2 1705496108.3697684
+OWA before cam
+OWA w1:  0.013959492131500528
+OWA w2:  0
+OWA w3:  0.9860405078684995
+OWa after cam
+OWA w1:  0.9479246165906765
+OWA w2:  0.05207538340932345
+OWA w3:  0.0
+msmt fusion 2 1705496108.370037
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4606790301561342, 0.225340983171464] - orientation: -12.046822150187918
+                Odom: position: [0.6626285324887946, 0.18218239113989781] - orientation: -0.8546986179517353
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8546986179517353
+                Accel: position: [0.42448049447041064, 0.2531644015746022], velocity: -1.798208034911266
+                
+
+loop fn starting 3 1705496108.3702862
+1
+msmt update 3 1705496108.370309
+OWA before cam
+OWA w1:  1.6827587894578118e-07
+OWA w2:  0
+OWA w3:  0.999999831724121
+OWa after cam
+OWA w1:  0.0031310398535820522
+OWA w2:  0.9968689601464179
+OWA w3:  0.0
+msmt fusion 3 1705496108.3705869
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.45736716674425887, 0.8387569534316712] - orientation: 75.43159442488887
+                Odom: position: [7.30811049689009, 27.1885251804846] - orientation: -1.8828080114670411
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.8828080114670411
+                Accel: position: [0.45126181833155476, 0.8154180052461132], velocity: -1.4675642306942682
+                
+
+loop fn starting 4 1705496108.3708332
+1
+msmt update 4 1705496108.3708577
+OWA before cam
+OWA w1:  0.0011920694309786968
+OWA w2:  0
+OWA w3:  0.9988079305690213
+OWa after cam
+OWA w1:  0.2477884023649982
+OWA w2:  0.7522115976350018
+OWA w3:  0.0
+msmt fusion 4 1705496108.3711898
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.3570288044776423, 0.1976609138890734] - orientation: -158.73010781643828
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.27505279085074164, 0.2239090590576151], velocity: 1.1214303446800402
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  19
+
+
+loop fn starting 1 1705496108.377253
+1
+msmt update 1 1705496108.3772857
+OWA before cam
+OWA w1:  0.008836350724103596
+OWA w2:  0
+OWA w3:  0.9911636492758964
+OWa after cam
+OWA w1:  0.9528083223449816
+OWA w2:  0.047191677655018464
+OWA w3:  0.0
+msmt fusion 1 1705496108.377902
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5864743004930345, 0.4588604582538286] - orientation: -178.19199294484014
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.5688507515460144, 0.4593284590319014], velocity: 4.914797925549184
+                
+
+loop fn starting 2 1705496108.3781118
+1
+msmt update 2 1705496108.378135
+OWA before cam
+OWA w1:  0.011184088557074819
+OWA w2:  0
+OWA w3:  0.9888159114429251
+OWa after cam
+OWA w1:  0.9426799710275529
+OWA w2:  0.05732002897244724
+OWA w3:  0.0
+msmt fusion 2 1705496108.3784297
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4788096264172186, 0.22146978625128694] - orientation: -12.053547163741529
+                Odom: position: [0.6626285324887946, 0.18218239113989781] - orientation: -0.8546986179517353
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8546986179517353
+                Accel: position: [0.46063911931114787, 0.2253181556678341], velocity: -1.8391173837452344
+                
+
+loop fn starting 3 1705496108.3786128
+1
+msmt update 3 1705496108.378631
+OWA before cam
+OWA w1:  1.5212296947422652e-07
+OWA w2:  0
+OWA w3:  0.9999998478770306
+OWa after cam
+OWA w1:  0.003160659354738259
+OWA w2:  0.9968393406452617
+OWA w3:  0.0
+msmt fusion 3 1705496108.3788807
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4594288114149138, 0.8466864911807668] - orientation: 75.43157764656088
+                Odom: position: [7.30811049689009, 27.1885251804846] - orientation: -1.8828080114670411
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.8828080114670411
+                Accel: position: [0.4573304980652037, 0.8387557293163349], velocity: -1.4675642306942682
+                
+
+loop fn starting 4 1705496108.3790483
+1
+msmt update 4 1705496108.3790653
+OWA before cam
+OWA w1:  0.0010967383095074857
+OWA w2:  0
+OWA w3:  0.9989032616904925
+OWa after cam
+OWA w1:  0.2544226758783177
+OWA w2:  0.7455773241216823
+OWA w3:  0.0
+msmt fusion 4 1705496108.3793042
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.3837464647835968, 0.1872649660502545] - orientation: -158.75048355236862
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.35703103597059593, 0.19763296707887207], velocity: 1.1214303446800402
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  20
+
+
+loop fn starting 1 1705496108.3848128
+1
+msmt update 1 1705496108.3848395
+OWA before cam
+OWA w1:  0.006486114010449598
+OWA w2:  0
+OWA w3:  0.9935138859895504
+OWa after cam
+OWA w1:  0.9486880233517365
+OWA w2:  0.051311976648263403
+OWA w3:  0.0
+msmt fusion 1 1705496108.385305
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6024955212274333, 0.4583510520936121] - orientation: -178.191978197064
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.5689291529644074, 0.45923385331458166], velocity: 4.914797925549184
+                
+
+loop fn starting 2 1705496108.3855731
+1
+msmt update 2 1705496108.3855958
+OWA before cam
+OWA w1:  0.007215949530047808
+OWA w2:  0
+OWA w3:  0.9927840504699522
+OWa after cam
+OWA w1:  0.938590864893766
+OWA w2:  0.0614091351062341
+OWA w3:  0.0
+msmt fusion 2 1705496108.3858957
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.49523571606608874, 0.21796250062381903] - orientation: -12.053648743081313
+                Odom: position: [0.6626285324887946, 0.18218239113989781] - orientation: -0.8546986179517353
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8546986179517353
+                Accel: position: [0.4605990558545441, 0.2252955970793488], velocity: -1.8391173837452344
+                
+
+loop fn starting 3 1705496108.3862295
+1
+msmt update 3 1705496108.386269
+OWA before cam
+OWA w1:  1.0490519827527e-07
+OWA w2:  0
+OWA w3:  0.9999998950948018
+OWa after cam
+OWA w1:  0.0031925716737644626
+OWA w2:  0.9968074283262355
+OWA w3:  0.0
+msmt fusion 3 1705496108.386653
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4615049851476617, 0.8546722839205642] - orientation: 75.43222948509326
+                Odom: position: [7.30811049689009, 27.1885251804846] - orientation: -1.8828080114670411
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.8828080114670411
+                Accel: position: [0.4572918352598396, 0.8387544392802375], velocity: -1.5473728506125894
+                
+
+loop fn starting 4 1705496108.3870895
+1
+msmt update 4 1705496108.3871288
+OWA before cam
+OWA w1:  0.0006707931261298033
+OWA w2:  0
+OWA w3:  0.9993292068738703
+OWa after cam
+OWA w1:  0.26144944419099475
+OWA w2:  0.7385505558090053
+OWA w3:  0.0
+msmt fusion 4 1705496108.3877406
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.41048175288989075, 0.17686213000343076] - orientation: -158.7504292720601
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.357033709580141, 0.1976063347874611], velocity: 1.0706462600118
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  21
+
+
+loop fn starting 1 1705496108.3934991
+1
+msmt update 1 1705496108.3935304
+OWA before cam
+OWA w1:  0.011577238461867293
+OWA w2:  0
+OWA w3:  0.9884227615381328
+OWa after cam
+OWA w1:  0.9454384772324282
+OWA w2:  0.05456152276757174
+OWA w3:  0.0
+msmt fusion 1 1705496108.3938973
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6170156981239815, 0.457889357584695] - orientation: -178.19191862969734
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.5690086852430023, 0.45913788012578244], velocity: 4.985777581366928
+                
+
+loop fn starting 2 1705496108.3941476
+1
+msmt update 2 1705496108.39417
+OWA before cam
+OWA w1:  0.01322956339220376
+OWA w2:  0
+OWA w3:  0.9867704366077963
+OWa after cam
+OWA w1:  0.9354947218103753
+OWA w2:  0.06450527818962479
+OWA w3:  0.0
+msmt fusion 2 1705496108.3944428
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.5101400744684885, 0.2147801286818366] - orientation: -12.05366772587959
+                Odom: position: [0.6626285324887946, 0.18218239113989781] - orientation: -0.8546986179517353
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8546986179517353
+                Accel: position: [0.46055899010666046, 0.22527304256059932], velocity: -1.8391173837452344
+                
+
+loop fn starting 3 1705496108.3946073
+1
+msmt update 3 1705496108.3946252
+OWA before cam
+OWA w1:  1.781610402210659e-07
+OWA w2:  0
+OWA w3:  0.9999998218389599
+OWa after cam
+OWA w1:  0.0032261519576803383
+OWA w2:  0.9967738480423197
+OWA w3:  0.0
+msmt fusion 3 1705496108.3948636
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4656686738752167, 0.8618803200977829] - orientation: 59.9917393289355
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.4572531733035844, 0.8387531240425097], velocity: -1.5473728506125894
+                
+
+loop fn starting 4 1705496108.3950195
+1
+msmt update 4 1705496108.3950365
+OWA before cam
+OWA w1:  0.0011724022534806485
+OWA w2:  0
+OWA w3:  0.9988275977465194
+OWa after cam
+OWA w1:  0.2690529073507405
+OWA w2:  0.7309470926492595
+OWA w3:  0.0
+msmt fusion 4 1705496108.3952665
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4372592595424194, 0.16644282560830498] - orientation: -158.75035326395806
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.3570363817440732, 0.197579702350965], velocity: 1.0706462600118
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  22
+
+
+loop fn starting 1 1705496108.400958
+1
+msmt update 1 1705496108.4009807
+OWA before cam
+OWA w1:  0.013393326436465961
+OWA w2:  0
+OWA w3:  0.986606673563534
+OWa after cam
+OWA w1:  0.9548513677714424
+OWA w2:  0.04514863222855764
+OWA w3:  0.0
+msmt fusion 1 1705496108.4013038
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6303638794177465, 0.4574649566404171] - orientation: -178.19203830764624
+                Odom: position: [-0.7638609411943471, 0.4532633822413031] - orientation: -2.7749156205506527
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.7749156205506527
+                Accel: position: [-0.6170952246855651, 0.45779337965853767], velocity: 4.985777581366928
+                
+
+loop fn starting 2 1705496108.4015214
+1
+msmt update 2 1705496108.4015443
+OWA before cam
+OWA w1:  0.013033542859385341
+OWA w2:  0
+OWA w3:  0.9869664571406146
+OWa after cam
+OWA w1:  0.9386692449076021
+OWA w2:  0.06133075509239805
+OWA w3:  0.0
+msmt fusion 2 1705496108.402222
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.5237674220390467, 0.21187043394469482] - orientation: -12.053625810368665
+                Odom: position: [0.6626285324887946, 0.18218239113989781] - orientation: -0.8546986179517353
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8546986179517353
+                Accel: position: [0.5100992219108524, 0.21475713225947726], velocity: -1.875213868010501
+                
+
+loop fn starting 3 1705496108.4026167
+1
+msmt update 3 1705496108.402643
+OWA before cam
+OWA w1:  1.6091865505823265e-07
+OWA w2:  0
+OWA w3:  0.9999998390813449
+OWa after cam
+OWA w1:  0.00326026712650558
+OWA w2:  0.9967397328734944
+OWA w3:  0.0
+msmt fusion 3 1705496108.4029489
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4698853601585051, 0.8692021998641549] - orientation: 60.06669172435435
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.4657064335668118, 0.8618920617540061], velocity: -1.5817260446581671
+                
+
+loop fn starting 4 1705496108.4031413
+1
+msmt update 4 1705496108.4031608
+OWA before cam
+OWA w1:  0.0011122300119282482
+OWA w2:  0
+OWA w3:  0.9988877699880717
+OWa after cam
+OWA w1:  0.27721205921317543
+OWA w2:  0.7227879407868244
+OWA w3:  0.0
+msmt fusion 4 1705496108.4034145
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4642410617842725, 0.15594413379340358] - orientation: -158.75054755561797
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.4372619296820629, 0.1664161929687797], velocity: 1.0706462600118
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  23
+
+
+loop fn starting 1 1705496108.408903
+1
+msmt update 1 1705496108.4089231
+OWA before cam
+OWA w1:  0.009948125908460729
+OWA w2:  0
+OWA w3:  0.9900518740915393
+OWa after cam
+OWA w1:  0.9562395046791737
+OWA w2:  0.043760495320826286
+OWA w3:  0.0
+msmt fusion 1 1705496108.409244
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6479367193550308, 0.4639987619726414] - orientation: 159.61598239555607
+                Odom: position: [-0.82345035473707, 0.5293082687858517] - orientation: -2.9056813608024066
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9056813608024066
+                Accel: position: [-0.6171747627330205, 0.4576974112506434], velocity: 4.985777581366928
+                
+
+loop fn starting 2 1705496108.4094281
+1
+msmt update 2 1705496108.4094467
+OWA before cam
+OWA w1:  0.007181033625882151
+OWA w2:  0
+OWA w3:  0.9928189663741178
+OWa after cam
+OWA w1:  0.9199366138634358
+OWA w2:  0.08006338613656418
+OWA w3:  0.0
+msmt fusion 2 1705496108.409684
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.5011385466634297, 0.2315084977884996] - orientation: 139.05774946353384
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.5100583703171591, 0.2147341341247823], velocity: -1.875213868010501
+                
+
+loop fn starting 3 1705496108.4098432
+1
+msmt update 3 1705496108.4098597
+OWA before cam
+OWA w1:  1.1044790098224031e-07
+OWA w2:  0
+OWA w3:  0.9999998895520991
+OWa after cam
+OWA w1:  0.0032949460204767258
+OWA w2:  0.9967050539795232
+OWA w3:  0.0
+msmt fusion 3 1705496108.410084
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.47413462255527183, 0.8765805069286465] - orientation: 60.06622803162428
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.4657432080022144, 0.8619065979743208], velocity: -1.5817260446581671
+                
+
+loop fn starting 4 1705496108.4104018
+1
+msmt update 4 1705496108.4104235
+OWA before cam
+OWA w1:  0.0007782779906254578
+OWA w2:  0
+OWA w3:  0.9992217220093745
+OWa after cam
+OWA w1:  0.285136231914
+OWA w2:  0.7148637680859999
+OWA w3:  0.0
+msmt fusion 4 1705496108.410699
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4912100552076601, 0.1454503876113809] - orientation: -158.75047685757715
+                Odom: position: [-1.4598900332654352, -0.23140661570803311] - orientation: 2.2021983120933593
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2021983120933593
+                Accel: position: [-0.4372644029053168, 0.16639157261513685], velocity: 0.9897705970692353
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  24
+
+
+loop fn starting 1 1705496108.4163492
+1
+msmt update 1 1705496108.416377
+OWA before cam
+OWA w1:  0.016225973477520316
+OWA w2:  0
+OWA w3:  0.9837740265224797
+OWa after cam
+OWA w1:  0.9575367458251743
+OWA w2:  0.042463254174825604
+OWA w3:  0.0
+msmt fusion 1 1705496108.4173563
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6639301386769556, 0.4699519103643763] - orientation: 159.59523715879507
+                Odom: position: [-0.82345035473707, 0.5293082687858517] - orientation: -2.9056813608024066
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9056813608024066
+                Accel: position: [-0.6172752167221599, 0.4577669114927407], velocity: 4.886108895323759
+                
+
+loop fn starting 2 1705496108.417763
+1
+msmt update 2 1705496108.4177918
+OWA before cam
+OWA w1:  0.007066543856655158
+OWA w2:  0
+OWA w3:  0.9929334561433447
+OWa after cam
+OWA w1:  0.9053172565193989
+OWA w2:  0.09468274348060113
+OWA w3:  0.0
+msmt fusion 2 1705496108.4184418
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.48082422448455286, 0.24913792207630922] - orientation: 139.05774311705335
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.5100267228001966, 0.21469969099020078], velocity: -1.870997530597501
+                
+
+loop fn starting 3 1705496108.4186513
+1
+msmt update 3 1705496108.4186726
+OWA before cam
+OWA w1:  1.8724884630838633e-07
+OWA w2:  0
+OWA w3:  0.9999998127511537
+OWa after cam
+OWA w1:  0.0033301607987507517
+OWA w2:  0.9966698392012492
+OWA w3:  0.0
+msmt fusion 3 1705496108.4189425
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4784170998280792, 0.8840163642761382] - orientation: 60.065817621375345
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.46577998917400304, 0.861921117141035], velocity: -1.5817260446581671
+                
+
+loop fn starting 4 1705496108.419118
+1
+msmt update 4 1705496108.419136
+OWA before cam
+OWA w1:  0.0012202237326852524
+OWA w2:  0
+OWA w3:  0.9987797762673148
+OWa after cam
+OWA w1:  0.2735142807976371
+OWA w2:  0.7264857192023628
+OWA w3:  0.0
+msmt fusion 4 1705496108.419393
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.490240735289047, 0.11019179827633739] - orientation: -88.43174959065607
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.4372668743879538, 0.16636695208670346], velocity: 0.9897705970692353
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  25
+
+
+loop fn starting 1 1705496108.4250083
+1
+msmt update 1 1705496108.4250326
+OWA before cam
+OWA w1:  0.01308307771618368
+OWA w2:  0
+OWA w3:  0.9869169222838164
+OWa after cam
+OWA w1:  0.9543359089974351
+OWA w2:  0.04566409100256482
+OWA w3:  0.0
+msmt fusion 1 1705496108.425401
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6827828163437591, 0.47527086966699617] - orientation: 164.25659686426502
+                Odom: position: [-0.8714955710825792, 0.5284924760288354] - orientation: -2.9259551219695368
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9259551219695368
+                Accel: position: [-0.6640291293553745, 0.47002347944409495], velocity: 4.886108895323759
+                
+
+loop fn starting 2 1705496108.4256
+1
+msmt update 2 1705496108.4256186
+OWA before cam
+OWA w1:  0.0051610252621378475
+OWA w2:  0
+OWA w3:  0.9948389747378622
+OWa after cam
+OWA w1:  0.8936651163096039
+OWA w2:  0.10633488369039622
+OWA w3:  0.0
+msmt fusion 2 1705496108.4258718
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4624979551706387, 0.26504417591576784] - orientation: 139.05395171711683
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.48079257674899833, 0.24910347914257877], velocity: -1.870997530597501
+                
+
+loop fn starting 3 1705496108.4261348
+1
+msmt update 3 1705496108.4261563
+OWA before cam
+OWA w1:  1.690631356689937e-07
+OWA w2:  0
+OWA w3:  0.9999998309368643
+OWa after cam
+OWA w1:  0.0033659814150772223
+OWA w2:  0.9966340185849227
+OWA w3:  0.0
+msmt fusion 3 1705496108.4266763
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4827654470453576, 0.8915668502427129] - orientation: 60.06665677748739
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.47845647925851165, 0.8840318904141947], velocity: -1.693186583521912
+                
+
+loop fn starting 4 1705496108.4269218
+1
+msmt update 4 1705496108.426943
+OWA before cam
+OWA w1:  0.0010366928697999427
+OWA w2:  0
+OWA w3:  0.9989633071302001
+OWa after cam
+OWA w1:  0.261100981415584
+OWA w2:  0.738899018584416
+OWA w3:  0.0
+msmt fusion 4 1705496108.427371
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4894327811865693, 0.07737572504123562] - orientation: -88.59614940333388
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.49021902759975755, 0.11018084908451246], velocity: 0.9725089827081489
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  26
+
+
+loop fn starting 1 1705496108.4329183
+1
+msmt update 1 1705496108.432943
+OWA before cam
+OWA w1:  0.00826827709726204
+OWA w2:  0
+OWA w3:  0.991731722902738
+OWa after cam
+OWA w1:  0.9520144961129909
+OWA w2:  0.04798550388700918
+OWA w3:  0.0
+msmt fusion 1 1705496108.4333851
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6998711958215419, 0.48009517547490793] - orientation: 164.24692873961294
+                Odom: position: [-0.8714955710825792, 0.5284924760288354] - orientation: -2.9259551219695368
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9259551219695368
+                Accel: position: [-0.6639534166899768, 0.4701176798548053], velocity: 4.834232113520964
+                
+
+loop fn starting 2 1705496108.4336405
+1
+msmt update 2 1705496108.4336627
+OWA before cam
+OWA w1:  0.0029421699592385264
+OWA w2:  0
+OWA w3:  0.9970578300407614
+OWa after cam
+OWA w1:  0.8842231730761183
+OWA w2:  0.1157768269238817
+OWA w3:  0.0
+msmt fusion 2 1705496108.4339328
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4459134808222079, 0.27943862306155254] - orientation: 139.05398868050017
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.48076079865428323, 0.24906915644533678], velocity: -1.870997530597501
+                
+
+loop fn starting 3 1705496108.4341228
+1
+msmt update 3 1705496108.4341424
+OWA before cam
+OWA w1:  1.1600289370406701e-07
+OWA w2:  0
+OWA w3:  0.9999998839971064
+OWa after cam
+OWA w1:  0.0034038856751886933
+OWA w2:  0.9965961143248113
+OWA w3:  0.0
+msmt fusion 3 1705496108.434405
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.48715024228812603, 0.8991804912345579] - orientation: 60.066222404151254
+                Odom: position: [14.055256593794825, 24.458846415484842] - orientation: -2.1491801663360453
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.1491801663360453
+                Accel: position: [0.4784958456462268, 0.8840474495922706], velocity: -1.693186583521912
+                
+
+loop fn starting 4 1705496108.4345858
+1
+msmt update 4 1705496108.4346054
+OWA before cam
+OWA w1:  0.000692579133357922
+OWA w2:  0
+OWA w3:  0.999307420866642
+OWa after cam
+OWA w1:  0.24778264832413013
+OWA w2:  0.7522173516758699
+OWA w3:  0.0
+msmt fusion 4 1705496108.4348736
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4886867558761364, 0.04707161279554108] - orientation: -88.59630549038512
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.49019940454809885, 0.11016649483707469], velocity: 0.9725089827081489
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  27
+
+
+loop fn starting 1 1705496108.4405887
+1
+msmt update 1 1705496108.440609
+OWA before cam
+OWA w1:  0.014846278560606514
+OWA w2:  0
+OWA w3:  0.9851537214393935
+OWa after cam
+OWA w1:  0.9504190596958861
+OWA w2:  0.04958094030411391
+OWA w3:  0.0
+msmt fusion 1 1705496108.4409587
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7153828815303969, 0.48447435161653696] - orientation: 164.24694710860464
+                Odom: position: [-0.8714955710825792, 0.5284924760288354] - orientation: -2.9259551219695368
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9259551219695368
+                Accel: position: [-0.6638767968359578, 0.47021114387488644], velocity: 4.834232113520964
+                
+
+loop fn starting 2 1705496108.4412255
+1
+msmt update 2 1705496108.441248
+OWA before cam
+OWA w1:  0.00772987663175451
+OWA w2:  0
+OWA w3:  0.9922701233682456
+OWa after cam
+OWA w1:  0.8764862698406232
+OWA w2:  0.12351373015937686
+OWA w3:  0.0
+msmt fusion 2 1705496108.4417758
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4308631199141356, 0.29250152082044095] - orientation: 139.05403212569053
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.4807296975575815, 0.24903556246533817], velocity: -1.8312110564095596
+                
+
+loop fn starting 3 1705496108.4421628
+1
+msmt update 3 1705496108.4421878
+OWA before cam
+OWA w1:  1.9768861895822726e-07
+OWA w2:  0
+OWA w3:  0.9999998023113811
+OWa after cam
+OWA w1:  0.0034398415505865047
+OWA w2:  0.9965601584494136
+OWA w3:  0.0
+msmt fusion 3 1705496108.4425344
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.48766618330224143, 0.9080403440844125] - orientation: 86.67360916528682
+                Odom: position: [2.130460240396055, 28.087549893504917] - orientation: -1.6008868301152774
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.6008868301152774
+                Accel: position: [0.47853666707138426, 0.8840635633614229], velocity: -1.7554679413428635
+                
+
+loop fn starting 4 1705496108.4427779
+1
+msmt update 4 1705496108.4427996
+OWA before cam
+OWA w1:  0.0011584390734303495
+OWA w2:  0
+OWA w3:  0.9988415609265697
+OWa after cam
+OWA w1:  0.23346060040721026
+OWA w2:  0.7665393995927897
+OWA w3:  0.0
+msmt fusion 4 1705496108.4431949
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4880019463659442, 0.0192560739015927] - orientation: -88.59620710317444
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.49017978373719134, 0.11015213752690751], velocity: 0.9725089827081489
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  28
+
+
+loop fn starting 1 1705496108.448893
+1
+msmt update 1 1705496108.448912
+OWA before cam
+OWA w1:  0.01522226767210361
+OWA w2:  0
+OWA w3:  0.9847777323278964
+OWa after cam
+OWA w1:  0.9551937764412124
+OWA w2:  0.04480622355878766
+OWA w3:  0.0
+msmt fusion 1 1705496108.4492238
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7295667569759936, 0.4884786455270415] - orientation: 164.24702919792006
+                Odom: position: [-0.8714955710825792, 0.5284924760288354] - orientation: -2.9259551219695368
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9259551219695368
+                Accel: position: [-0.7153062633932306, 0.4845678170440318], velocity: 4.834232113520964
+                
+
+loop fn starting 2 1705496108.44942
+1
+msmt update 2 1705496108.449442
+OWA before cam
+OWA w1:  0.008683957778382803
+OWA w2:  0
+OWA w3:  0.9913160422216172
+OWa after cam
+OWA w1:  0.8944299189016486
+OWA w2:  0.10557008109835155
+OWA w3:  0.0
+msmt fusion 2 1705496108.4496834
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.41677487280631265, 0.3047293958922449] - orientation: 139.05393943236044
+                Odom: position: [0.26526954965264077, 0.43615273898027695] - orientation: 1.8283931409355088
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 1.8283931409355088
+                Accel: position: [0.4308320202769601, 0.29246792548928097], velocity: -1.8312110564095596
+                
+
+loop fn starting 3 1705496108.4498456
+1
+msmt update 3 1705496108.4498625
+OWA before cam
+OWA w1:  1.7868577266152758e-07
+OWA w2:  0
+OWA w3:  0.9999998213142273
+OWa after cam
+OWA w1:  0.0034760339791645367
+OWA w2:  0.9965239660208355
+OWA w3:  0.0
+msmt fusion 3 1705496108.4500957
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.488209470604395, 0.9170288176964708] - orientation: 86.54747317075027
+                Odom: position: [2.130460240396055, 28.087549893504917] - orientation: -1.6008868301152774
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.6008868301152774
+                Accel: position: [0.4876540629288981, 0.9080825239238882], velocity: -1.7554679413428635
+                
+
+loop fn starting 4 1705496108.4502935
+1
+msmt update 4 1705496108.450312
+OWA before cam
+OWA w1:  0.0010066870376974181
+OWA w2:  0
+OWA w3:  0.9989933129623025
+OWa after cam
+OWA w1:  0.21795729328471677
+OWA w2:  0.7820427067152831
+OWA w3:  0.0
+msmt fusion 4 1705496108.450567
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.48737408838576024, -0.006248883553870745] - orientation: -88.59635476810637
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.48798263145372284, 0.01924194334703899], velocity: 0.9572781465071902
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  29
+
+
+loop fn starting 1 1705496108.4563053
+1
+msmt update 1 1705496108.4563236
+OWA before cam
+OWA w1:  0.011955538806502516
+OWA w2:  0
+OWA w3:  0.9880444611934975
+OWa after cam
+OWA w1:  0.9591367896770604
+OWA w2:  0.040863210322939596
+OWA w3:  0.0
+msmt fusion 1 1705496108.4571772
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7425129972826193, 0.4921335494495618] - orientation: 164.2469856213394
+                Odom: position: [-0.8714955710825792, 0.5284924760288354] - orientation: -2.9259551219695368
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.9259551219695368
+                Accel: position: [-0.7152293780987765, 0.48466162407834673], velocity: 4.851574291342027
+                
+
+loop fn starting 2 1705496108.4575691
+1
+msmt update 2 1705496108.4576
+OWA before cam
+OWA w1:  0.010231449129958308
+OWA w2:  0
+OWA w3:  0.9897685508700417
+OWa after cam
+OWA w1:  0.9094338474320038
+OWA w2:  0.09056615256799626
+OWA w3:  0.0
+msmt fusion 2 1705496108.457958
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.4006153018758035, 0.31222910795829284] - orientation: 155.115249640147
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.4308013606451277, 0.2924348116308528], velocity: -1.8051218880084348
+                
+
+loop fn starting 3 1705496108.4581702
+1
+msmt update 3 1705496108.4581923
+OWA before cam
+OWA w1:  1.2330476541922196e-07
+OWA w2:  0
+OWA w3:  0.9999998766952346
+OWa after cam
+OWA w1:  0.003512472317587004
+OWA w2:  0.996487527682413
+OWA w3:  0.0
+msmt fusion 3 1705496108.4584918
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.488756852091119, 0.9260856566753826] - orientation: 86.54771271333009
+                Odom: position: [2.130460240396055, 28.087549893504917] - orientation: -1.6008868301152774
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.6008868301152774
+                Accel: position: [0.48764734514615393, 0.9081258934258819], velocity: -1.7554679413428635
+                
+
+loop fn starting 4 1705496108.4586701
+1
+msmt update 4 1705496108.4586895
+OWA before cam
+OWA w1:  0.0007171655731519148
+OWA w2:  0
+OWA w3:  0.9992828344268481
+OWa after cam
+OWA w1:  0.21416019486890436
+OWA w2:  0.7858398051310955
+OWA w3:  0.0
+msmt fusion 4 1705496108.458955
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4867711993936891, -0.03073792452622665] - orientation: -88.59626140672273
+                Odom: position: [-0.4577768188877229, -1.2105867244389283] - orientation: -2.979051510972795
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.979051510972795
+                Accel: position: [-0.48796331862829945, 0.01922780994050415], velocity: 0.9572781465071902
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  30
+
+
+loop fn starting 1 1705496108.4645562
+1
+msmt update 1 1705496108.464577
+OWA before cam
+OWA w1:  0.013543615557512606
+OWA w2:  0
+OWA w3:  0.9864563844424873
+OWa after cam
+OWA w1:  0.950943687945912
+OWA w2:  0.04905631205408802
+OWA w3:  0.0
+msmt fusion 1 1705496108.4649148
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7169959310127247, 0.4851780210273173] - orientation: -15.248568418228654
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.7151524887166056, 0.4847554277621744], velocity: 4.851574291342027
+                
+
+loop fn starting 2 1705496108.4651325
+1
+msmt update 2 1705496108.4651546
+OWA before cam
+OWA w1:  0.01711665266918787
+OWA w2:  0
+OWA w3:  0.9828833473308122
+OWa after cam
+OWA w1:  0.9223204312460301
+OWA w2:  0.07767956875396981
+OWA w3:  0.0
+msmt fusion 2 1705496108.4654293
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3856422235933438, 0.3191676006682282] - orientation: 155.14852135705635
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.43081866740220376, 0.29247648916441243], velocity: -1.8051218880084348
+                
+
+loop fn starting 3 1705496108.4656093
+1
+msmt update 3 1705496108.4656274
+OWA before cam
+OWA w1:  2.102394688010257e-07
+OWA w2:  0
+OWA w3:  0.9999997897605312
+OWa after cam
+OWA w1:  0.0035491075843970365
+OWA w2:  0.996450892415603
+OWA w3:  0.0
+msmt fusion 3 1705496108.4662578
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4893083612103137, 0.9352111620610176] - orientation: 86.54785322913445
+                Odom: position: [2.130460240396055, 28.087549893504917] - orientation: -1.6008868301152774
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.6008868301152774
+                Accel: position: [0.4876408210442133, 0.9081679459434076], velocity: -1.7022235511848796
+                
+
+loop fn starting 4 1705496108.4664981
+1
+msmt update 4 1705496108.4665205
+OWA before cam
+OWA w1:  0.001036147516367839
+OWA w2:  0
+OWA w3:  0.9989638524836322
+OWa after cam
+OWA w1:  0.20489105360799809
+OWA w2:  0.7951089463920019
+OWA w3:  0.0
+msmt fusion 4 1705496108.466806
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.48751491940125463, -0.05606471263445867] - orientation: -91.6887580905544
+                Odom: position: [-0.5248511417331077, -1.3350886944290388] - orientation: -2.840820570411661
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.840820570411661
+                Accel: position: [-0.4879440044834459, 0.019213678337103003], velocity: 0.9572781465071902
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  31
+
+
+loop fn starting 1 1705496108.4724457
+1
+msmt update 1 1705496108.472463
+OWA before cam
+OWA w1:  0.010135975627307451
+OWA w2:  0
+OWA w3:  0.9898640243726926
+OWa after cam
+OWA w1:  0.9441411731393886
+OWA w2:  0.05585882686061141
+OWA w3:  0.0
+msmt fusion 1 1705496108.472891
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6939650546698073, 0.47889178155196555] - orientation: -15.268031972841472
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.7171046452093712, 0.48512424062533127], velocity: 4.911958933537083
+                
+
+loop fn starting 2 1705496108.4731958
+1
+msmt update 2 1705496108.4732242
+OWA before cam
+OWA w1:  0.017504993249722742
+OWA w2:  0
+OWA w3:  0.9824950067502772
+OWa after cam
+OWA w1:  0.9333891276225343
+OWA w2:  0.06661087237746569
+OWA w3:  0.0
+msmt fusion 2 1705496108.473575
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3718136147632862, 0.3255768962708296] - orientation: 155.14460687956463
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.3856581343446841, 0.3192098308545395], velocity: -1.8051218880084348
+                
+
+loop fn starting 3 1705496108.473788
+1
+msmt update 3 1705496108.473808
+OWA before cam
+OWA w1:  1.9006113748244873e-07
+OWA w2:  0
+OWA w3:  0.9999998099388625
+OWa after cam
+OWA w1:  0.003585998059977851
+OWA w2:  0.996414001940022
+OWA w3:  0.0
+msmt fusion 3 1705496108.474073
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.48986823635295956, 0.9444740774925517] - orientation: 86.5474741233007
+                Odom: position: [2.130460240396055, 28.087549893504917] - orientation: -1.6008868301152774
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.6008868301152774
+                Accel: position: [0.48930183119939413, 0.9352532136613887], velocity: -1.7022235511848796
+                
+
+loop fn starting 4 1705496108.4742491
+1
+msmt update 4 1705496108.4742668
+OWA before cam
+OWA w1:  0.0009029424609100327
+OWA w2:  0
+OWA w3:  0.9990970575390901
+OWa after cam
+OWA w1:  0.1958759054816973
+OWA w2:  0.8041240945183026
+OWA w3:  0.0
+msmt fusion 4 1705496108.4745212
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4882116963572973, -0.07989938771977663] - orientation: -91.68124651558477
+                Odom: position: [-0.5248511417331077, -1.3350886944290388] - orientation: -2.840820570411661
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.840820570411661
+                Accel: position: [-0.4875346232436737, -0.05605173076884969], velocity: 0.9438391733886972
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  32
+
+
+loop fn starting 1 1705496108.4800556
+1
+msmt update 1 1705496108.4800816
+OWA before cam
+OWA w1:  0.006059525449609822
+OWA w2:  0
+OWA w3:  0.9939404745503901
+OWa after cam
+OWA w1:  0.9382227985111484
+OWA w2:  0.061777201488851574
+OWA w3:  0.0
+msmt fusion 1 1705496108.4806585
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6731382542690314, 0.473207203834219] - orientation: -15.267870950042898
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.7172157513780831, 0.4850719433297308], velocity: 4.911958933537083
+                
+
+loop fn starting 2 1705496108.4810998
+1
+msmt update 2 1705496108.4811277
+OWA before cam
+OWA w1:  0.010360164084023717
+OWA w2:  0
+OWA w3:  0.9896398359159764
+OWa after cam
+OWA w1:  0.942917283934739
+OWA w2:  0.057082716065261184
+OWA w3:  0.0
+msmt fusion 2 1705496108.4816515
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.359086639538167, 0.3314756109977051] - orientation: 155.1445875261317
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.38567408557303634, 0.31925167131837023], velocity: -1.7911185776545013
+                
+
+loop fn starting 3 1705496108.4819164
+1
+msmt update 3 1705496108.4819384
+OWA before cam
+OWA w1:  1.3112389571605245e-07
+OWA w2:  0
+OWA w3:  0.9999998688761043
+OWa after cam
+OWA w1:  0.003621497042409378
+OWA w2:  0.9963785029575907
+OWA w3:  0.0
+msmt fusion 3 1705496108.4822178
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4805014088865663, 0.9452152155196015] - orientation: 175.48889712696737
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.4892953171309505, 0.9352952677343032], velocity: -1.7022235511848796
+                
+
+loop fn starting 4 1705496108.482404
+1
+msmt update 4 1705496108.482424
+OWA before cam
+OWA w1:  0.0004712665557582579
+OWA w2:  0
+OWA w3:  0.9995287334442416
+OWa after cam
+OWA w1:  0.18714994294261017
+OWA w2:  0.8128500570573899
+OWA w3:  0.0
+msmt fusion 4 1705496108.4827197
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4888636120281331, -0.10219771258533915] - orientation: -91.68138001181863
+                Odom: position: [-0.5248511417331077, -1.3350886944290388] - orientation: -2.840820570411661
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.840820570411661
+                Accel: position: [-0.4875544240435527, -0.056038897274979495], velocity: 0.9438391733886972
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  33
+
+
+loop fn starting 1 1705496108.4883652
+1
+msmt update 1 1705496108.4883897
+OWA before cam
+OWA w1:  0.012794986889142516
+OWA w2:  0
+OWA w3:  0.9872050131108575
+OWa after cam
+OWA w1:  0.932847081664726
+OWA w2:  0.06715291833527401
+OWA w3:  0.0
+msmt fusion 1 1705496108.4888053
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6542829048977751, 0.46806070731154614] - orientation: -15.267919422205535
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.7173268491242978, 0.48501962814418215], velocity: 4.911958933537083
+                
+
+loop fn starting 2 1705496108.4890082
+1
+msmt update 2 1705496108.489029
+OWA before cam
+OWA w1:  0.017694734556992477
+OWA w2:  0
+OWA w3:  0.9823052654430076
+OWa after cam
+OWA w1:  0.9511492168745425
+OWA w2:  0.048850783125457695
+OWA w3:  0.0
+msmt fusion 2 1705496108.4892986
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3474014733606496, 0.3368914713777521] - orientation: 155.144568793691
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.3856900376111422, 0.31929351147348206], velocity: -1.7911185776545013
+                
+
+loop fn starting 3 1705496108.4894757
+1
+msmt update 3 1705496108.4894938
+OWA before cam
+OWA w1:  1.7813442126969213e-07
+OWA w2:  0
+OWA w3:  0.9999998218655788
+OWa after cam
+OWA w1:  0.0036472030427174094
+OWA w2:  0.9963527969572826
+OWA w3:  0.0
+msmt fusion 3 1705496108.489738
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.47109512503090545, 0.9459597529152669] - orientation: 175.4872176134702
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.48925849441491703, 0.935312616265411], velocity: -1.6281935745748937
+                
+
+loop fn starting 4 1705496108.4899518
+1
+msmt update 4 1705496108.4899766
+OWA before cam
+OWA w1:  0.0007408573419145846
+OWA w2:  0
+OWA w3:  0.9992591426580854
+OWa after cam
+OWA w1:  0.17875590985665954
+OWA w2:  0.8212440901433404
+OWA w3:  0.0
+msmt fusion 4 1705496108.4902406
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.48947382652562954, -0.12306787958781348] - orientation: -91.68152421672687
+                Odom: position: [-0.5248511417331077, -1.3350886944290388] - orientation: -2.840820570411661
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.840820570411661
+                Accel: position: [-0.48757529837616786, -0.05602536403467835], velocity: 0.9950970647547328
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  34
+
+
+loop fn starting 1 1705496108.496251
+1
+msmt update 1 1705496108.496276
+OWA before cam
+OWA w1:  0.011312798831200947
+OWA w2:  0
+OWA w3:  0.9886872011687992
+OWa after cam
+OWA w1:  0.9277272714119841
+OWA w2:  0.07227272858801599
+OWA w3:  0.0
+msmt fusion 1 1705496108.49664
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6371879688834114, 0.4633947351935698] - orientation: -15.267837642069885
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.6543952102968442, 0.4680078301009658], velocity: 4.965239500179779
+                
+
+loop fn starting 2 1705496108.4968395
+1
+msmt update 2 1705496108.496859
+OWA before cam
+OWA w1:  0.01856595628892754
+OWA w2:  0
+OWA w3:  0.9814340437110726
+OWa after cam
+OWA w1:  0.9588701387236771
+OWA w2:  0.041129861276322906
+OWA w3:  0.0
+msmt fusion 2 1705496108.497139
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.33668423492093685, 0.34185870267764323] - orientation: 155.1446229800884
+                Odom: position: [0.22993143697911844, 0.39139929018306774] - orientation: 2.1715632931067286
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1715632931067286
+                Accel: position: [0.34741742618252086, 0.33693331123403597], velocity: -1.7911185776545013
+                
+
+loop fn starting 3 1705496108.497324
+1
+msmt update 3 1705496108.4973435
+OWA before cam
+OWA w1:  1.5662379688185523e-07
+OWA w2:  0
+OWA w3:  0.9999998433762032
+OWa after cam
+OWA w1:  0.0036630760177634304
+OWA w2:  0.9963369239822365
+OWA w3:  0.0
+msmt fusion 3 1705496108.4976268
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.46162896980652407, 0.9467324289274776] - orientation: 175.3464859633324
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.47105833150388454, 0.9459771632661261], velocity: -1.6281935745748937
+                
+
+loop fn starting 4 1705496108.4978223
+1
+msmt update 4 1705496108.497843
+OWA before cam
+OWA w1:  0.0006570586441708627
+OWA w2:  0
+OWA w3:  0.9993429413558291
+OWa after cam
+OWA w1:  0.17064292418434215
+OWA w2:  0.8293570758156578
+OWA w3:  0.0
+msmt fusion 4 1705496108.498217
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.49004903753120155, -0.14274341118966316] - orientation: -91.68130882634289
+                Odom: position: [-0.5248511417331077, -1.3350886944290388] - orientation: -2.840820570411661
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.840820570411661
+                Accel: position: [-0.489494698906468, -0.12305434333747184], velocity: 0.9950970647547328
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  35
+
+
+loop fn starting 1 1705496108.5037053
+1
+msmt update 1 1705496108.503723
+OWA before cam
+OWA w1:  0.01174583802474441
+OWA w2:  0
+OWA w3:  0.9882541619752555
+OWa after cam
+OWA w1:  0.9377541501443255
+OWA w2:  0.06224584985567451
+OWA w3:  0.0
+msmt fusion 1 1705496108.5039883
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6214361401479103, 0.45909534668711366] - orientation: -15.267872839845396
+                Odom: position: [-0.4605327556007916, 0.4152162627149758] - orientation: 0.20346628852052726
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20346628852052726
+                Accel: position: [-0.6545075113712324, 0.46795494370621155], velocity: 4.965239500179779
+                
+
+loop fn starting 2 1705496108.5041585
+1
+msmt update 2 1705496108.5041764
+OWA before cam
+OWA w1:  0.009739945659248914
+OWA w2:  0
+OWA w3:  0.990260054340751
+OWa after cam
+OWA w1:  0.9592699842593193
+OWA w2:  0.04073001574068076
+OWA w3:  0.0
+msmt fusion 2 1705496108.5048625
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3223588595496743, 0.3506070082499888] - orientation: 148.5991188714231
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.3474332667038249, 0.3369748633204309], velocity: -1.778762715577501
+                
+
+loop fn starting 3 1705496108.5050507
+1
+msmt update 3 1705496108.50507
+OWA before cam
+OWA w1:  9.36943262543934e-08
+OWA w2:  0
+OWA w3:  0.9999999063056738
+OWa after cam
+OWA w1:  0.003669077878158567
+OWA w2:  0.9963309221218414
+OWA w3:  0.0
+msmt fusion 3 1705496108.5053525
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4521745116175949, 0.9475041810204494] - orientation: 175.34630021450354
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.471026648447973, 0.9459980436052999], velocity: -1.5177902863896122
+                
+
+loop fn starting 4 1705496108.5055878
+1
+msmt update 4 1705496108.5056098
+OWA before cam
+OWA w1:  0.0003930902970954387
+OWA w2:  0
+OWA w3:  0.9996069097029047
+OWa after cam
+OWA w1:  0.16404682520390063
+OWA w2:  0.8359531747960994
+OWA w3:  0.0
+msmt fusion 4 1705496108.5059388
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.49424192972802083, -0.16233551490309012] - orientation: -102.08713290197026
+                Odom: position: [-0.7587386677073543, -1.4008628041214068] - orientation: -3.005260585372513
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -3.005260585372513
+                Accel: position: [-0.48951557420240044, -0.12304081158315427], velocity: 0.9950970647547328
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  36
+
+
+loop fn starting 1 1705496108.511803
+1
+msmt update 1 1705496108.5118296
+OWA before cam
+OWA w1:  0.019577713278730726
+OWA w2:  0
+OWA w3:  0.9804222867212693
+OWa after cam
+OWA w1:  0.9465720623644893
+OWA w2:  0.05342793763551066
+OWA w3:  0.0
+msmt fusion 1 1705496108.5121965
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6069564318775837, 0.45514278782623885] - orientation: -15.269308155432855
+                Odom: position: [-0.4605343255078702, 0.4152124321135874] - orientation: 0.20345071365760556
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20345071365760556
+                Accel: position: [-0.6546198143070345, 0.46790206126423806], velocity: 4.965239500179779
+                
+
+loop fn starting 2 1705496108.5124528
+1
+msmt update 2 1705496108.5124762
+OWA before cam
+OWA w1:  0.01629611715364225
+OWA w2:  0
+OWA w3:  0.9837038828463578
+OWa after cam
+OWA w1:  0.9597087964248043
+OWA w2:  0.04029120357519561
+OWA w3:  0.0
+msmt fusion 2 1705496108.5127685
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3093350289960343, 0.35856039642981613] - orientation: 148.59938244395582
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.3474593406580634, 0.3370108861869094], velocity: -1.778762715577501
+                
+
+loop fn starting 3 1705496108.5129585
+1
+msmt update 3 1705496108.5129788
+OWA before cam
+OWA w1:  1.8954945141135294e-07
+OWA w2:  0
+OWA w3:  0.9999998104505485
+OWa after cam
+OWA w1:  0.003665113547743266
+OWA w2:  0.9963348864522568
+OWA w3:  0.0
+msmt fusion 3 1705496108.5132468
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.44275745034365677, 0.9482729267044764] - orientation: 175.34602071679487
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.4709949692711065, 0.9460189298292041], velocity: -1.5177902863896122
+                
+
+loop fn starting 4 1705496108.513446
+1
+msmt update 4 1705496108.5134654
+OWA before cam
+OWA w1:  0.0005944797593406413
+OWA w2:  0
+OWA w3:  0.9994055202406593
+OWa after cam
+OWA w1:  0.15789592419380388
+OWA w2:  0.8421040758061961
+OWA w3:  0.0
+msmt fusion 4 1705496108.5137372
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4982048934354554, -0.18085686085067929] - orientation: -102.0848361618228
+                Odom: position: [-0.7587386677073543, -1.4008628041214068] - orientation: -3.005260585372513
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -3.005260585372513
+                Accel: position: [-0.48951518057118554, -0.12306771847382814], velocity: 1.0763907924306464
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  37
+
+
+loop fn starting 1 1705496108.519407
+1
+msmt update 1 1705496108.51943
+OWA before cam
+OWA w1:  0.02030150832595836
+OWA w2:  0
+OWA w3:  0.9796984916740417
+OWa after cam
+OWA w1:  0.9542891053478135
+OWA w2:  0.04571089465218649
+OWA w3:  0.0
+msmt fusion 1 1705496108.5198138
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5936688445475967, 0.4515156755516589] - orientation: -15.269185249484595
+                Odom: position: [-0.4605343255078702, 0.4152124321135874] - orientation: 0.20345071365760556
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20345071365760556
+                Accel: position: [-0.6070684461276754, 0.45509023761719064], velocity: 4.949135956040981
+                
+
+loop fn starting 2 1705496108.520056
+1
+msmt update 2 1705496108.5200782
+OWA before cam
+OWA w1:  0.014633007894862396
+OWA w2:  0
+OWA w3:  0.9853669921051376
+OWa after cam
+OWA w1:  0.9601447590931167
+OWA w2:  0.039855240906883284
+OWA w3:  0.0
+msmt fusion 2 1705496108.5203917
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.2974924127139944, 0.3657922719945571] - orientation: 148.5999784106447
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.3093609337028108, 0.3585962053372187], velocity: -1.767860484333089
+                
+
+loop fn starting 3 1705496108.520635
+1
+msmt update 3 1705496108.5206573
+OWA before cam
+OWA w1:  1.669238121517065e-07
+OWA w2:  0
+OWA w3:  0.9999998330761879
+OWa after cam
+OWA w1:  0.0036554789572968457
+OWA w2:  0.9963445210427031
+OWA w3:  0.0
+msmt fusion 3 1705496108.5211682
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4333209806260688, 0.9490431740626155] - orientation: 175.34651956852372
+                Odom: position: [-26.694163946355086, 3.1633443479873633] - orientation: -0.03436807101827811
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.03436807101827811
+                Accel: position: [0.4427257770056793, 0.948293821781822], velocity: -1.5177902863896122
+                
+
+loop fn starting 4 1705496108.5214152
+1
+msmt update 4 1705496108.5214367
+OWA before cam
+OWA w1:  0.0004683632223987527
+OWA w2:  0
+OWA w3:  0.9995316367776013
+OWa after cam
+OWA w1:  0.13985262610063318
+OWA w2:  0.8601473738993668
+OWA w3:  0.0
+msmt fusion 4 1705496108.5218961
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.49538467904215816, -0.16013833049268889] - orientation: 82.25457563601734
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.498204438007197, -0.18088376676631823], velocity: 1.0763907924306464
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  38
+
+
+loop fn starting 1 1705496108.5275662
+1
+msmt update 1 1705496108.5275986
+OWA before cam
+OWA w1:  0.0116454270367493
+OWA w2:  0
+OWA w3:  0.9883545729632507
+OWa after cam
+OWA w1:  0.9610260055007149
+OWA w2:  0.038973994499285076
+OWA w3:  0.0
+msmt fusion 1 1705496108.5280962
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5815037019430622, 0.44819495016307903] - orientation: -15.269215117375072
+                Odom: position: [-0.4605343255078702, 0.4152124321135874] - orientation: 0.20345071365760556
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20345071365760556
+                Accel: position: [-0.6071804539181878, 0.45503767364132175], velocity: 4.949135956040981
+                
+
+loop fn starting 2 1705496108.5283198
+1
+msmt update 2 1705496108.5283415
+OWA before cam
+OWA w1:  0.009414405576348135
+OWA w2:  0
+OWA w3:  0.9905855944236518
+OWa after cam
+OWA w1:  0.9605635258478455
+OWA w2:  0.03943647415215441
+OWA w3:  0.0
+msmt fusion 2 1705496108.5286741
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.28672804539209007, 0.37236570306353123] - orientation: 148.599959814088
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.30938681706407223, 0.3586320296766034], velocity: -1.767860484333089
+                
+
+loop fn starting 3 1705496108.5288692
+1
+msmt update 3 1705496108.5288901
+OWA before cam
+OWA w1:  1.4378449319088396e-07
+OWA w2:  0
+OWA w3:  0.9999998562155069
+OWa after cam
+OWA w1:  0.0036460092033196853
+OWA w2:  0.9963539907966803
+OWA w3:  0.0
+msmt fusion 3 1705496108.529164
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.42410872636931346, 0.9509950471794432] - orientation: 168.0495863834566
+                Odom: position: [-26.196261472157897, 6.582245284455917] - orientation: -0.22991586699627914
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.22991586699627914
+                Accel: position: [0.442697444309635, 0.9483124927407512], velocity: -1.3572598115202463
+                
+
+loop fn starting 4 1705496108.5293872
+1
+msmt update 4 1705496108.5294104
+OWA before cam
+OWA w1:  0.0002488720097603327
+OWA w2:  0
+OWA w3:  0.9997511279902396
+OWa after cam
+OWA w1:  0.12663943353257004
+OWA w2:  0.8733605664674299
+OWA w3:  0.0
+msmt fusion 4 1705496108.529696
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.49287051212186406, -0.14167202701033543] - orientation: 82.25297158791992
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.4981803220813008, -0.1808682012557394], velocity: 1.148120552144688
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  39
+
+
+loop fn starting 1 1705496108.5354111
+1
+msmt update 1 1705496108.5354521
+OWA before cam
+OWA w1:  0.019783064562148858
+OWA w2:  0
+OWA w3:  0.9802169354378512
+OWa after cam
+OWA w1:  0.9669028672579493
+OWA w2:  0.033097132742050735
+OWA w3:  0.0
+msmt fusion 1 1705496108.5361543
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5703838987040604, 0.4451595680771179] - orientation: -15.26923206970614
+                Odom: position: [-0.4605343255078702, 0.4152124321135874] - orientation: 0.20345071365760556
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20345071365760556
+                Accel: position: [-0.6072907132552824, 0.45498593421308525], velocity: 4.871811137683219
+                
+
+loop fn starting 2 1705496108.536433
+1
+msmt update 2 1705496108.5364583
+OWA before cam
+OWA w1:  0.015219887314348304
+OWA w2:  0
+OWA w3:  0.9847801126856517
+OWa after cam
+OWA w1:  0.9609630602504037
+OWA w2:  0.039036939749596336
+OWA w3:  0.0
+msmt fusion 2 1705496108.5367684
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.276944240764841, 0.37834034294513047] - orientation: 148.5999388137419
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.30941270109153857, 0.35866785353464053], velocity: -1.767860484333089
+                
+
+loop fn starting 3 1705496108.537042
+1
+msmt update 3 1705496108.5370653
+OWA before cam
+OWA w1:  2.389954527849985e-07
+OWA w2:  0
+OWA w3:  0.9999997610045472
+OWa after cam
+OWA w1:  0.003637801201620169
+OWA w2:  0.9963621987983798
+OWA w3:  0.0
+msmt fusion 3 1705496108.5373862
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4149436503450402, 0.9529369419418943] - orientation: 168.0494806534455
+                Odom: position: [-26.196261472157897, 6.582245284455917] - orientation: -0.22991586699627914
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.22991586699627914
+                Accel: position: [0.44269831355924133, 0.9483464131000889], velocity: -1.3572598115202463
+                
+
+loop fn starting 4 1705496108.5376046
+1
+msmt update 4 1705496108.5376256
+OWA before cam
+OWA w1:  0.00037711464834539534
+OWA w2:  0
+OWA w3:  0.9996228853516546
+OWa after cam
+OWA w1:  0.11724231524172406
+OWA w2:  0.8827576847582759
+OWA w3:  0.0
+msmt fusion 4 1705496108.5380335
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4905769940201438, -0.1248268130726834] - orientation: 82.25276873416641
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.49815618121861244, -0.18085267444827383], velocity: 1.148120552144688
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  40
+
+
+loop fn starting 1 1705496108.544241
+1
+msmt update 1 1705496108.5442655
+OWA before cam
+OWA w1:  0.020702914672929007
+OWA w2:  0
+OWA w3:  0.979297085327071
+OWa after cam
+OWA w1:  0.9720081511590821
+OWA w2:  0.027991848840917707
+OWA w3:  0.0
+msmt fusion 1 1705496108.5446792
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5602314966723388, 0.442388273551981] - orientation: -15.269152041860602
+                Odom: position: [-0.4605343255078702, 0.4152124321135874] - orientation: 0.20345071365760556
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.20345071365760556
+                Accel: position: [-0.5704941589182431, 0.4451078305180416], velocity: 4.871811137683219
+                
+
+loop fn starting 2 1705496108.544918
+1
+msmt update 2 1705496108.54494
+OWA before cam
+OWA w1:  0.017012199157570764
+OWA w2:  0
+OWA w3:  0.9829878008424292
+OWa after cam
+OWA w1:  0.9675783679922063
+OWA w2:  0.032421632007793744
+OWA w3:  0.0
+msmt fusion 2 1705496108.5454264
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.2679914313285998, 0.3838075117969757] - orientation: 148.5999866520826
+                Odom: position: [0.17971008198854133, 0.4377845258167066] - orientation: 2.2376720618550334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.2376720618550334
+                Accel: position: [0.27696998469547063, 0.3783759713310129], velocity: -1.7582408685291961
+                
+
+loop fn starting 3 1705496108.5456698
+1
+msmt update 3 1705496108.5456915
+OWA before cam
+OWA w1:  2.1506751399872205e-07
+OWA w2:  0
+OWA w3:  0.999999784932486
+OWa after cam
+OWA w1:  0.0036286862849974942
+OWA w2:  0.9963713137150025
+OWA w3:  0.0
+msmt fusion 3 1705496108.546325
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.40817883113076103, 0.9464057517048003] - orientation: -136.01667965064635
+                Odom: position: [-19.1827931428708, -17.967879197472577] - orientation: 0.7448336445018916
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.7448336445018916
+                Accel: position: [0.4149445231810417, 0.9529708622091366], velocity: -1.269714539576688
+                
+
+loop fn starting 4 1705496108.546586
+1
+msmt update 4 1705496108.546615
+OWA before cam
+OWA w1:  0.0003205091264621366
+OWA w2:  0
+OWA w3:  0.9996794908735379
+OWa after cam
+OWA w1:  0.11273596509731312
+OWA w2:  0.8872640349026869
+OWA w3:  0.0
+msmt fusion 4 1705496108.5469518
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4883848203099085, -0.10872555792280925] - orientation: 82.25295229893402
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.490552850008281, -0.12481129116260187], velocity: 1.148120552144688
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  41
+
+
+loop fn starting 1 1705496108.55252
+1
+msmt update 1 1705496108.552541
+OWA before cam
+OWA w1:  0.006081351986829332
+OWA w2:  0
+OWA w3:  0.9939186480131708
+OWa after cam
+OWA w1:  0.9531478613299253
+OWA w2:  0.04685213867007473
+OWA w3:  0.0
+msmt fusion 1 1705496108.552887
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.5826149158123026, 0.4593690887005709] - orientation: 142.82534186091453
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.5706044149916273, 0.4450560841352436], velocity: 4.871811137683219
+                
+
+loop fn starting 2 1705496108.5531235
+1
+msmt update 2 1705496108.5531447
+OWA before cam
+OWA w1:  0.00537910289844248
+OWA w2:  0
+OWA w3:  0.9946208971015574
+OWa after cam
+OWA w1:  0.9412514482387926
+OWA w2:  0.05874855176120734
+OWA w3:  0.0
+msmt fusion 2 1705496108.5534108
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.2956533527024979, 0.37128047549654475] - orientation: -24.365765797063087
+                Odom: position: [0.5769503685503357, 0.24395536400311235] - orientation: -0.8007985964557646
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8007985964557646
+                Accel: position: [0.27699572692166796, 0.37841160094840154], velocity: -1.7582408685291961
+                
+
+loop fn starting 3 1705496108.553654
+1
+msmt update 3 1705496108.5536778
+OWA before cam
+OWA w1:  1.429252029724364e-07
+OWA w2:  0
+OWA w3:  0.9999998570747971
+OWa after cam
+OWA w1:  0.0036146128881977975
+OWA w2:  0.9963853871118021
+OWA w3:  0.0
+msmt fusion 3 1705496108.5540018
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.4014596606486465, 0.9399188042985963] - orientation: -136.01743271922072
+                Odom: position: [-19.1827931428708, -17.967879197472577] - orientation: 0.7448336445018916
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.7448336445018916
+                Accel: position: [0.41496354602822105, 0.9529454507812409], velocity: -1.269714539576688
+                
+
+loop fn starting 4 1705496108.5541842
+1
+msmt update 4 1705496108.5542026
+OWA before cam
+OWA w1:  0.00019240356775853686
+OWA w2:  0
+OWA w3:  0.9998075964322414
+OWa after cam
+OWA w1:  0.11019149470816796
+OWA w2:  0.8898085052918321
+OWA w3:  0.0
+msmt fusion 4 1705496108.5545638
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.48627003215793885, -0.09319309701980331] - orientation: 82.25275183269946
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.4905273780473144, -0.12479490892012389], velocity: 1.2114115165982542
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  42
+
+
+loop fn starting 1 1705496108.5601733
+1
+msmt update 1 1705496108.5602021
+OWA before cam
+OWA w1:  0.006113722461359226
+OWA w2:  0
+OWA w3:  0.9938862775386407
+OWa after cam
+OWA w1:  0.9384105368910195
+OWA w2:  0.061589463108980516
+OWA w3:  0.0
+msmt fusion 1 1705496108.5608523
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6026470418661085, 0.47456606144008756] - orientation: 142.825473184
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.5706184218722871, 0.4449370411740075], velocity: 4.794566812661664
+                
+
+loop fn starting 2 1705496108.5610995
+1
+msmt update 2 1705496108.561121
+OWA before cam
+OWA w1:  0.0054136372616749966
+OWA w2:  0
+OWA w3:  0.994586362738325
+OWa after cam
+OWA w1:  0.9208149263197732
+OWA w2:  0.07918507368022684
+OWA w3:  0.0
+msmt fusion 2 1705496108.5615995
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.32029316934727814, 0.36013244683965334] - orientation: -24.345672240464626
+                Odom: position: [0.5769503685503357, 0.24395536400311235] - orientation: -0.8007985964557646
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8007985964557646
+                Accel: position: [0.27696423080425386, 0.37838124445399374], velocity: -1.7497529722316436
+                
+
+loop fn starting 3 1705496108.561961
+1
+msmt update 3 1705496108.5619845
+OWA before cam
+OWA w1:  2.3788449585519968e-07
+OWA w2:  0
+OWA w3:  0.9999997621155042
+OWa after cam
+OWA w1:  0.0035956347769305237
+OWA w2:  0.9964043652230694
+OWA w3:  0.0
+msmt fusion 3 1705496108.5622828
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.39479518725614127, 0.9334845535835282] - orientation: -136.01694322818878
+                Odom: position: [-19.1827931428708, -17.967879197472577] - orientation: 0.7448336445018916
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.7448336445018916
+                Accel: position: [0.4149825497334604, 0.9529200250350437], velocity: -1.269714539576688
+                
+
+loop fn starting 4 1705496108.5624838
+1
+msmt update 4 1705496108.5625055
+OWA before cam
+OWA w1:  0.0002852573134747046
+OWA w2:  0
+OWA w3:  0.9997147426865253
+OWa after cam
+OWA w1:  0.11627232543960744
+OWA w2:  0.8837276745603925
+OWA w3:  0.0
+msmt fusion 4 1705496108.5627651
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.48406629464044676, -0.07700763592750143] - orientation: 82.25260739052142
+                Odom: position: [-0.28623223135402154, 1.3764635690611238] - orientation: 0.18541674232963334
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.18541674232963334
+                Accel: position: [-0.49050190280277317, -0.12477853178424315], velocity: 1.2114115165982542
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  43
+
+
+loop fn starting 1 1705496108.5684316
+1
+msmt update 1 1705496108.5684536
+OWA before cam
+OWA w1:  0.004343971669805703
+OWA w2:  0
+OWA w3:  0.9956560283301943
+OWa after cam
+OWA w1:  0.9272554760874959
+OWA w2:  0.07274452391250415
+OWA w3:  0.0
+msmt fusion 1 1705496108.5688155
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6206758669120116, 0.4882440625957783] - orientation: 142.823874019425
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.6026610331135586, 0.4744470166404512], velocity: 4.794566812661664
+                
+
+loop fn starting 2 1705496108.5690696
+1
+msmt update 2 1705496108.5690925
+OWA before cam
+OWA w1:  0.003792423423104054
+OWA w2:  0
+OWA w3:  0.9962075765768958
+OWa after cam
+OWA w1:  0.9046446409302901
+OWA w2:  0.09535535906971003
+OWA w3:  0.0
+msmt fusion 2 1705496108.569394
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3423834158686611, 0.3501382405388734] - orientation: -24.34503515687789
+                Odom: position: [0.5769503685503357, 0.24395536400311235] - orientation: -0.8007985964557646
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8007985964557646
+                Accel: position: [0.32026228951683816, 0.36010146364684026], velocity: -1.7497529722316436
+                
+
+loop fn starting 3 1705496108.5697954
+1
+msmt update 3 1705496108.5698216
+OWA before cam
+OWA w1:  2.140623282338274e-07
+OWA w2:  0
+OWA w3:  0.9999997859376717
+OWa after cam
+OWA w1:  0.0035717955201188586
+OWA w2:  0.9964282044798811
+OWA w3:  0.0
+msmt fusion 3 1705496108.5701756
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.3881432889850906, 0.9270624774712943] - orientation: -136.01709430581894
+                Odom: position: [-19.1827931428708, -17.967879197472577] - orientation: 0.7448336445018916
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.7448336445018916
+                Accel: position: [0.39481304651627724, 0.93346068340664], velocity: -1.1924687113911954
+                
+
+loop fn starting 4 1705496108.5708048
+1
+msmt update 4 1705496108.5708406
+OWA before cam
+OWA w1:  0.0002500519391055595
+OWA w2:  0
+OWA w3:  0.9997499480608945
+OWa after cam
+OWA w1:  0.12127344926954783
+OWA w2:  0.8787265507304522
+OWA w3:  0.0
+msmt fusion 4 1705496108.5712218
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.4991840630945453, -0.08561171771182505] - orientation: -150.36526857940368
+                Odom: position: [-1.7945419399457643, -0.8228522256935337] - orientation: 2.3730924670696476
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.3730924670696476
+                Accel: position: [-0.484039832166014, -0.0769906295378116], velocity: 1.2582399411161067
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  44
+
+
+loop fn starting 1 1705496108.5768118
+1
+msmt update 1 1705496108.5768363
+OWA before cam
+OWA w1:  0.0031759498679978944
+OWA w2:  0
+OWA w3:  0.9968240501320021
+OWa after cam
+OWA w1:  0.9191726070630785
+OWA w2:  0.08082739293692162
+OWA w3:  0.0
+msmt fusion 1 1705496108.5772576
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6369674275687295, 0.500604011138342] - orientation: 142.82395272295835
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.6026751197961909, 0.47432879099693964], velocity: 4.762476231760292
+                
+
+loop fn starting 2 1705496108.5774727
+1
+msmt update 2 1705496108.577494
+OWA before cam
+OWA w1:  0.0029707190026534544
+OWA w2:  0
+OWA w3:  0.9970292809973466
+OWa after cam
+OWA w1:  0.8916759827244113
+OWA w2:  0.10832401727558888
+OWA w3:  0.0
+msmt fusion 2 1705496108.577761
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3622771468140879, 0.3411377841637548] - orientation: -24.345062103884878
+                Odom: position: [0.5769503685503357, 0.24395536400311235] - orientation: -0.8007985964557646
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8007985964557646
+                Accel: position: [0.32023142943154714, 0.360070460787283], velocity: -1.7497529722316436
+                
+
+loop fn starting 3 1705496108.5779347
+1
+msmt update 3 1705496108.5779555
+OWA before cam
+OWA w1:  1.4196168384292494e-07
+OWA w2:  0
+OWA w3:  0.9999998580383163
+OWa after cam
+OWA w1:  0.0035420632001166943
+OWA w2:  0.9964579367998833
+OWA w3:  0.0
+msmt fusion 3 1705496108.5782275
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.38156586352306177, 0.9207121975713357] - orientation: -136.01662731582874
+                Odom: position: [-19.1827931428708, -17.967879197472577] - orientation: 0.7448336445018916
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 0.7448336445018916
+                Accel: position: [0.39483090216995964, 0.9334368105318895], velocity: -1.1924687113911954
+                
+
+loop fn starting 4 1705496108.5784123
+1
+msmt update 4 1705496108.578432
+OWA before cam
+OWA w1:  0.00014087645373867655
+OWA w2:  0
+OWA w3:  0.9998591235462614
+OWa after cam
+OWA w1:  0.1255483088305732
+OWA w2:  0.8744516911694269
+OWA w3:  0.0
+msmt fusion 4 1705496108.578686
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5146202870929192, -0.09439717545665462] - orientation: -150.36490094444832
+                Odom: position: [-1.7945419399457643, -0.8228522256935337] - orientation: 2.3730924670696476
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.3730924670696476
+                Accel: position: [-0.4840112552182064, -0.07697748275503444], velocity: 1.2582399411161067
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  45
+
+
+loop fn starting 1 1705496108.5847087
+1
+msmt update 1 1705496108.5847301
+OWA before cam
+OWA w1:  0.008291633214962478
+OWA w2:  0
+OWA w3:  0.9917083667850375
+OWa after cam
+OWA w1:  0.9136865247365957
+OWA w2:  0.08631347526340426
+OWA w3:  0.0
+msmt fusion 1 1705496108.5854113
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.651742108004937, 0.5118131134116564] - orientation: 142.82403133932178
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.6026891971740038, 0.4742105642451226], velocity: 4.762476231760292
+                
+
+loop fn starting 2 1705496108.5856965
+1
+msmt update 2 1705496108.5857239
+OWA before cam
+OWA w1:  0.007781067630139735
+OWA w2:  0
+OWA w3:  0.9922189323698603
+OWa after cam
+OWA w1:  0.8811871539334672
+OWA w2:  0.11881284606653286
+OWA w3:  0.0
+msmt fusion 2 1705496108.5860236
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3802629334376452, 0.3330005180518312] - orientation: -24.345101290527076
+                Odom: position: [0.5769503685503357, 0.24395536400311235] - orientation: -0.8007985964557646
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.8007985964557646
+                Accel: position: [0.3202007006022325, 0.3600395914546929], velocity: -1.7422636519690973
+                
+
+loop fn starting 3 1705496108.5862777
+1
+msmt update 3 1705496108.5862994
+OWA before cam
+OWA w1:  2.3305064169210759e-07
+OWA w2:  0
+OWA w3:  0.9999997669493583
+OWa after cam
+OWA w1:  0.0035053631351682542
+OWA w2:  0.9964946368648318
+OWA w3:  0.0
+msmt fusion 3 1705496108.5866094
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.37319227368671304, 0.9241988369461754] - orientation: 157.40546860703154
+                Odom: position: [-24.830860674921755, 11.280472030591145] - orientation: -0.4096872946549893
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3948478828503462, 0.9334141295807941], velocity: -1.1333271718157607
+                
+
+loop fn starting 4 1705496108.586847
+1
+msmt update 4 1705496108.586867
+OWA before cam
+OWA w1:  0.00025423785470846284
+OWA w2:  0
+OWA w3:  0.9997457621452915
+OWa after cam
+OWA w1:  0.12922905718633343
+OWA w2:  0.8707709428136666
+OWA w3:  0.0
+msmt fusion 4 1705496108.587151
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5302865087873122, -0.10331354148938511] - orientation: -150.36488401091557
+                Odom: position: [-1.7945419399457643, -0.8228522256935337] - orientation: 2.3730924670696476
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.3730924670696476
+                Accel: position: [-0.4839826831055468, -0.076964325467261], velocity: 1.2582399411161067
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  46
+
+
+loop fn starting 1 1705496108.5931983
+1
+msmt update 1 1705496108.593225
+OWA before cam
+OWA w1:  0.009573876201562876
+OWA w2:  0
+OWA w3:  0.9904261237984371
+OWa after cam
+OWA w1:  0.9292480830697444
+OWA w2:  0.07075191693025576
+OWA w3:  0.0
+msmt fusion 1 1705496108.5936086
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.665469935947545, 0.5222280651539315] - orientation: 142.8238598603502
+                Odom: position: [-0.807034071197317, 0.6296912879950317] - orientation: 2.8646627870422785
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.8646627870422785
+                Accel: position: [-0.6517561760881492, 0.5116948855534924], velocity: 4.762476231760292
+                
+
+loop fn starting 2 1705496108.5938437
+1
+msmt update 2 1705496108.5938656
+OWA before cam
+OWA w1:  0.007305348989240532
+OWA w2:  0
+OWA w3:  0.9926946510107595
+OWa after cam
+OWA w1:  0.8783923240566373
+OWA w2:  0.12160767594336279
+OWA w3:  0.0
+msmt fusion 2 1705496108.594147
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.35467229844826675, 0.3482359472941828] - orientation: 149.24346520091473
+                Odom: position: [0.07396430956599909, 0.5152915339525839] - orientation: 2.183304828698377
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.183304828698377
+                Accel: position: [0.3802322033986887, 0.33296964992342437], velocity: -1.7422636519690973
+                
+
+loop fn starting 3 1705496108.5943305
+1
+msmt update 3 1705496108.5943518
+OWA before cam
+OWA w1:  2.0904170534814678e-07
+OWA w2:  0
+OWA w3:  0.9999997909582947
+OWa after cam
+OWA w1:  0.003476449954867985
+OWA w2:  0.9965235500451319
+OWA w3:  0.0
+msmt fusion 3 1705496108.5946503
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.3648573686597309, 0.9276236590164556] - orientation: 157.67379661195525
+                Odom: position: [-24.830860674921755, 11.280472030591145] - orientation: -0.4096872946549893
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3731654313008164, 0.9241897674716394], velocity: -1.1333271718157607
+                
+
+loop fn starting 4 1705496108.5950735
+1
+msmt update 4 1705496108.595099
+OWA before cam
+OWA w1:  0.00023332438746846948
+OWA w2:  0
+OWA w3:  0.9997666756125315
+OWa after cam
+OWA w1:  0.13239563027014645
+OWA w2:  0.8676043697298537
+OWA w3:  0.0
+msmt fusion 4 1705496108.5958664
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5462084357389583, -0.112375437977496] - orientation: -150.36489256384627
+                Odom: position: [-1.7945419399457643, -0.8228522256935337] - orientation: 2.3730924670696476
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.3730924670696476
+                Accel: position: [-0.5302567938823318, -0.10329985734266724], velocity: 1.308575683337741
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  47
+
+
+loop fn starting 1 1705496108.6020443
+1
+msmt update 1 1705496108.6020775
+OWA before cam
+OWA w1:  0.010381257639047821
+OWA w2:  0
+OWA w3:  0.9896187423609523
+OWa after cam
+OWA w1:  0.9372670792075024
+OWA w2:  0.06273292079249758
+OWA w3:  0.0
+msmt fusion 1 1705496108.6025445
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.6824984173661114, 0.5110268057838668] - orientation: -146.67406237070844
+                Odom: position: [-0.8564775022351271, 0.39667114168397416] - orientation: -2.4034150763480904
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.4034150763480904
+                Accel: position: [-0.6517703140463686, 0.5115762438668686], velocity: 4.77924373390614
+                
+
+loop fn starting 2 1705496108.6027308
+1
+msmt update 2 1705496108.6027493
+OWA before cam
+OWA w1:  0.008213839098947165
+OWA w2:  0
+OWA w3:  0.9917861609010529
+OWa after cam
+OWA w1:  0.8758484519412917
+OWA w2:  0.12415154805870822
+OWA w3:  0.0
+msmt fusion 2 1705496108.6029952
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.3312925676773336, 0.36214502654288744] - orientation: 149.26171602467517
+                Odom: position: [0.07396430956599909, 0.5152915339525839] - orientation: 2.183304828698377
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.183304828698377
+                Accel: position: [0.3802314304586836, 0.3330130344243108], velocity: -1.735655428208027
+                
+
+loop fn starting 3 1705496108.6031566
+1
+msmt update 3 1705496108.6031728
+OWA before cam
+OWA w1:  1.3579709845765147e-07
+OWA w2:  0
+OWA w3:  0.9999998642029015
+OWa after cam
+OWA w1:  0.003455263703494252
+OWA w2:  0.9965447362965058
+OWA w3:  0.0
+msmt fusion 3 1705496108.6034033
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.35659699073331397, 0.9310178161446848] - orientation: 157.67404391567027
+                Odom: position: [-24.830860674921755, 11.280472030591145] - orientation: -0.4096872946549893
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.37314195395153354, 0.9241739060997052], velocity: -1.1333271718157607
+                
+
+loop fn starting 4 1705496108.603555
+1
+msmt update 4 1705496108.6035707
+OWA before cam
+OWA w1:  0.00017376495235104993
+OWA w2:  0
+OWA w3:  0.999826235047649
+OWa after cam
+OWA w1:  0.1351145914893051
+OWA w2:  0.864885408510695
+OWA w3:  0.0
+msmt fusion 4 1705496108.603793
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5622175920733802, -0.12148698741001748] - orientation: -150.3648744099093
+                Odom: position: [-1.7945419399457643, -0.8228522256935337] - orientation: 2.3730924670696476
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.3730924670696476
+                Accel: position: [-0.530227078860313, -0.10328617345009938], velocity: 1.308575683337741
+                
+
+Published auto motive from nodes loop fun
+
+
+t:  48
+
+
+loop fn starting 1 1705496108.6093051
+1
+msmt update 1 1705496108.6093278
+OWA before cam
+OWA w1:  0.014526813404669842
+OWA w2:  0
+OWA w3:  0.9854731865953301
+OWa after cam
+OWA w1:  0.9407782191432927
+OWA w2:  0.059221780856707235
+OWA w3:  0.0
+msmt fusion 1 1705496108.6100197
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7024701785352143, 0.504153818622557] - orientation: -161.02171381216448
+                Odom: position: [-0.905682246040407, 0.43427462110387083] - orientation: -2.404815704939574
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.6518367890647021, 0.5114769624305116], velocity: 4.77924373390614
+                
+
+loop fn starting 2 1705496108.610265
+1
+msmt update 2 1705496108.6102877
+OWA before cam
+OWA w1:  0.01639965246648768
+OWA w2:  0
+OWA w3:  0.9836003475335123
+OWa after cam
+OWA w1:  0.8821125149984982
+OWA w2:  0.11788748500150191
+OWA w3:  0.0
+msmt fusion 2 1705496108.6108446
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.31473803463398853, 0.3726937899788061] - orientation: 147.50504822768465
+                Odom: position: [0.13384086921350666, 0.48801233624792445] - orientation: 2.1839033323050905
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.3802298658884821, 0.33305639759386174], velocity: -1.735655428208027
+                
+
+loop fn starting 3 1705496108.6114354
+1
+msmt update 3 1705496108.6114688
+OWA before cam
+OWA w1:  2.2200983154067927e-07
+OWA w2:  0
+OWA w3:  0.9999997779901686
+OWa after cam
+OWA w1:  0.003441788455283888
+OWA w2:  0.9965582115447161
+OWA w3:  0.0
+msmt fusion 3 1705496108.6118078
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.3483924249494722, 0.9343889761500767] - orientation: 157.6744271047722
+                Odom: position: [-24.830860674921755, 11.280472030591145] - orientation: -0.4096872946549893
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3731186276009756, 0.9241581383398326], velocity: -1.1262261810139065
+                
+
+loop fn starting 4 1705496108.6120532
+1
+msmt update 4 1705496108.6120768
+OWA before cam
+OWA w1:  0.00030021971531491224
+OWA w2:  0
+OWA w3:  0.9996997802846851
+OWa after cam
+OWA w1:  0.13644914866999094
+OWA w2:  0.863550851330009
+OWA w3:  0.0
+msmt fusion 4 1705496108.612376
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5452010201552699, -0.1307975182367591] - orientation: -28.68716283987922
+                Odom: position: [0.7432868732805008, -0.8418705077920716] - orientation: -1.7675427976307185
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.530196355548418, -0.10327202455977127], velocity: 1.352989573533301
+                
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  49
+
+
+loop fn starting 1 1705496108.618034
+1
+msmt update 1 1705496108.6180587
+OWA before cam
+OWA w1:  0.012925610807951566
+OWA w2:  0
+OWA w3:  0.9870743891920484
+OWa after cam
+OWA w1:  0.9435439224071481
+OWA w2:  0.05645607759285181
+OWA w3:  0.0
+msmt fusion 1 1705496108.6184316
+Moving to compute move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.905682246040407, 0.43427462110387083] - orientation: -2.404815704939574
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.794038588740712
+                
+
+loop fn starting 2 1705496108.6186454
+1
+msmt update 2 1705496108.6186676
+OWA before cam
+OWA w1:  0.0157758188901576
+OWA w2:  0
+OWA w3:  0.9842241811098423
+OWa after cam
+OWA w1:  0.8874116712991291
+OWA w2:  0.11258832870087083
+OWA w3:  0.0
+msmt fusion 2 1705496108.6189454
+Moving to compute move
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.13384086921350666, 0.48801233624792445] - orientation: 2.1839033323050905
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.735655428208027
+                
+
+loop fn starting 3 1705496108.6191108
+1
+msmt update 3 1705496108.619129
+OWA before cam
+OWA w1:  1.9894731997465406e-07
+OWA w2:  0
+OWA w3:  0.9999998010526799
+OWa after cam
+OWA w1:  0.0034359463877400537
+OWA w2:  0.99656405361226
+OWA w3:  0.0
+msmt fusion 3 1705496108.6193793
+Moving to compute move
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [-24.830860674921755, 11.280472030591145] - orientation: -0.4096872946549893
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -1.1262261810139065
+                
+
+loop fn starting 4 1705496108.6199698
+1
+msmt update 4 1705496108.620003
+OWA before cam
+OWA w1:  0.0002734271744131031
+OWA w2:  0
+OWA w3:  0.999726572825587
+OWa after cam
+OWA w1:  0.1365111782864077
+OWA w2:  0.8634888217135923
+OWA w3:  0.0
+msmt fusion 4 1705496108.6204824
+Moving to compute move
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [0.7432868732805008, -0.8418705077920716] - orientation: -1.7675427976307185
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.352989573533301
+                
+
+Published auto motive from nodes loop fun
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.905682246040407, 0.43427462110387083] - orientation: -2.404815704939574
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.794038588740712
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.13384086921350666, 0.48801233624792445] - orientation: 2.1839033323050905
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.7298246425364945
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [-0.630008943928853, -26.336449292546785] - orientation: 1.3905035180276142
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -1.0838944244240352
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [0.7432868732805008, -0.8418705077920716] - orientation: -1.7675427976307185
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.3290624913529125
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.6004583960400891, 0.7508416328389529] - orientation: 1.6430173519871494
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.857852302462834
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.33563059185938193, 0.08232212229830427] - orientation: -1.8951532072145771
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.7570992544902644
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624585055415091, -25.612904218736976] - orientation: 1.6768935410586103
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.7066151844455768
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [0.5790842536973889, -1.0324645041128506] - orientation: -1.889724543757958
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.1954438730256238
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.6004483357617829, 0.7508369019442822] - orientation: 1.6604257662269803
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 5.0215875207738785
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.33563514377951986, 0.08232280170800843] - orientation: -1.8951357430299576
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.8878716510084756
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624717872048412, -25.612872518815806] - orientation: 1.6768985615190335
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.4504205588244109
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5900603967725817, 1.3146313580243685] - orientation: 0.49474225346597006
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.2311388999005661
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.60258008463849, 0.7501618858506535] - orientation: 1.7127856437868105
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.852369111563575
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3337508630408208, 0.07653924863936906] - orientation: -1.930042328069849
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -2.080799728293796
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624717872048412, -25.612872518815806] - orientation: 1.6768985615190335
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.2893879144173391
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5891444072669944, 1.3142301557989837] - orientation: 0.512195545985914
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.3945893623375554
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.6032977809704471, 0.7494655296378605] - orientation: 1.6429724737070384
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.336291371459531
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3337508630408208, 0.07653924863936906] - orientation: -1.930042328069849
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -2.0852169668209974
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.623621683129137, -25.614821459516097] - orientation: 1.5721788063993698
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.29772828310777927
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5891444072669944, 1.3142301557989837] - orientation: 0.5820087160656865
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 0.9101890782900974
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.6032977809704471, 0.7494655296378605] - orientation: 1.6429724737070384
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.4188234220284786
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3336016162472112, 0.07555044866232757] - orientation: -1.930042328069849
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.9122883956891645
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.623621683129137, -25.614821459516097] - orientation: 1.5721788063993698
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.47259014255795967
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5878272155360222, 1.3147449430791862] - orientation: 0.5994620085856287
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 0.8878948273884841
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.60258008463849, 0.7501618858506535] - orientation: 1.6429724737070384
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.435147405983334
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3334523694536016, 0.07456164868528609] - orientation: -1.9474956205897807
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.8282522111766852
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624449946836905, -25.61426112101984] - orientation: 1.5023656363195974
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -0.6320832828481812
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5874260133106375, 1.3156609325847737] - orientation: 0.6169153011055728
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.1666590000887715
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.60258008463849, 0.7501618858506535] - orientation: 1.6429724737070384
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.480325078187716
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3334523694536016, 0.07456164868528609] - orientation: -1.9474956205897807
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.7357656905600067
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624449946836905, -25.61426112101984] - orientation: 1.5023656363195974
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -1.016199779587342
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5874260133106375, 1.3156609325847737] - orientation: 0.6343685936255169
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.1033849099938131
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.6018623883065329, 0.7508582420634463] - orientation: 1.6604257662269803
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.552305226212812
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3334523694536016, 0.07456164868528609] - orientation: -1.9649489131097266
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.8360895492855733
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624449946836905, -25.61426112101984] - orientation: 1.5023656363195974
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -1.16397784700942
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5861088215796653, 1.3161757198649764] - orientation: 0.7041817637052891
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 1.1157430095107543
+                
+
+Published auto motive from nodes move
+Nodes.move
+msg:   
+                ID: 1
+                Estimation: position: [-0.7207132805358919, 0.4978854284137001] - orientation: -161.04897134722063
+                Odom: position: [-0.60116603209374, 0.7501405457314892] - orientation: 1.6604257662269803
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -2.404815704939574
+                Accel: position: [-0.7025536374991053, 0.504239835220317], velocity: 4.597758716867137
+                
+
+msg:   
+                ID: 2
+                Estimation: position: [0.299462220618414, 0.38242951710988493] - orientation: 147.5002996288661
+                Odom: position: [0.3323143226829505, 0.0737220955018541] - orientation: -1.9649489131097266
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: 2.1839033323050905
+                Accel: position: [0.31478094003517765, 0.3726873139536193], velocity: -1.9850642512393257
+                
+
+msg:   
+                ID: 3
+                Estimation: position: [0.34016274517457107, 0.9377705707106008] - orientation: 157.67373902440153
+                Odom: position: [6.624449946836905, -25.61426112101984] - orientation: 1.5023656363195974
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -0.4096872946549893
+                Accel: position: [0.3483691046426604, 0.9343731994529586], velocity: -1.2095913168758459
+                
+
+msg:   
+                ID: 4
+                Estimation: position: [-0.5284694432860406, -0.14003120496924418] - orientation: -28.895199108566903
+                Odom: position: [-0.5857076193542805, 1.3170917093705639] - orientation: 0.7041817637052891
+                Cam: position: [-0.14421509206295013, -0.5912362337112427] - orientation: -1.7675427976307185
+                Accel: position: [-0.5452320032615331, -0.13078394767606352], velocity: 0.9896926523201297
+                
+
+Published auto motive from nodes move
+done

@@ -1,0 +1,3244 @@
+start
+active robots in Nodes():  ['1', '2', '3', '4']
+Node tag:  1
+Node tag:  2
+Node tag:  3
+Node tag:  4
+Published led 
+wait for odom response
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.554, 0.281]
+est:  [0.139, 0.421]
+est:  [0.314, 0.968]
+est:  [-0.479, 0.854]
+wait for odom response
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.554, 0.281]
+est:  [0.139, 0.421]
+est:  [0.314, 0.968]
+est:  [-0.479, 0.854]
+wait for odom response
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+reset
+Published reset
+reseting
+est:  [-0.554, 0.281]
+est:  [0.139, 0.421]
+est:  [0.314, 0.968]
+est:  [-0.479, 0.854]
+
+
+t:  0
+
+
+loop fn starting 1 1705495506.0356588
+1
+msmt update 1 1705495506.0356874
+OWA before cam
+OWA w1:  0.48995291139319047
+OWA w2:  0
+OWA w3:  0.5100470886068095
+OWa after cam
+OWA w1:  0.5669345973253243
+OWA w2:  0.4330654026746758
+OWA w3:  0.0
+msmt fusion 1 1705495506.0362117
+Moving to compute move
+
+loop fn starting 2 1705495506.0364997
+1
+msmt update 2 1705495506.036528
+OWA before cam
+OWA w1:  0.46336143345254655
+OWA w2:  0
+OWA w3:  0.5366385665474535
+OWa after cam
+OWA w1:  0.48500007135249457
+OWA w2:  0.5149999286475053
+OWA w3:  0.0
+msmt fusion 2 1705495506.0368516
+Moving to compute move
+
+loop fn starting 3 1705495506.036937
+1
+msmt update 3 1705495506.0369663
+OWA before cam
+OWA w1:  0.000332637977499654
+OWA w2:  0
+OWA w3:  0.9996673620225003
+OWa after cam
+OWA w1:  0.0011915413287086258
+OWA w2:  0.9988084586712913
+OWA w3:  0.0
+msmt fusion 3 1705495506.0377364
+Moving to compute move
+
+loop fn starting 4 1705495506.037876
+1
+msmt update 4 1705495506.0379155
+OWA before cam
+OWA w1:  0.17786236155088908
+OWA w2:  0
+OWA w3:  0.8221376384491109
+OWa after cam
+OWA w1:  0.3542495781906819
+OWA w2:  0.645750421809318
+OWA w3:  0.0
+msmt fusion 4 1705495506.0383158
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  1
+
+
+loop fn starting 1 1705495506.0440404
+1
+msmt update 1 1705495506.0440774
+OWA before cam
+OWA w1:  0.47543100111081643
+OWA w2:  0
+OWA w3:  0.5245689988891835
+OWa after cam
+OWA w1:  0.6723604972589167
+OWA w2:  0.3276395027410834
+OWA w3:  0.0
+msmt fusion 1 1705495506.0447102
+Moving to compute move
+
+loop fn starting 2 1705495506.0448806
+1
+msmt update 2 1705495506.0449197
+OWA before cam
+OWA w1:  0.41636444034488473
+OWA w2:  0
+OWA w3:  0.5836355596551153
+OWa after cam
+OWA w1:  0.5368927700500555
+OWA w2:  0.46310722994994435
+OWA w3:  0.0
+msmt fusion 2 1705495506.0454714
+Moving to compute move
+
+loop fn starting 3 1705495506.045723
+1
+msmt update 3 1705495506.045752
+OWA before cam
+OWA w1:  0.00012480595599921409
+OWA w2:  0
+OWA w3:  0.9998751940440007
+OWa after cam
+OWA w1:  0.0009839719374190523
+OWA w2:  0.9990160280625809
+OWA w3:  0.0
+msmt fusion 3 1705495506.0460753
+Moving to compute move
+
+loop fn starting 4 1705495506.04628
+1
+msmt update 4 1705495506.0463092
+OWA before cam
+OWA w1:  0.08830568334745653
+OWA w2:  0
+OWA w3:  0.9116943166525435
+OWa after cam
+OWA w1:  0.3387171915743447
+OWA w2:  0.6612828084256551
+OWA w3:  0.0
+msmt fusion 4 1705495506.0465934
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  2
+
+
+loop fn starting 1 1705495506.0520306
+1
+msmt update 1 1705495506.0520608
+OWA before cam
+OWA w1:  0.45080335122741433
+OWA w2:  0
+OWA w3:  0.5491966487725857
+OWa after cam
+OWA w1:  0.7652327762603449
+OWA w2:  0.23476722373965492
+OWA w3:  0.0
+msmt fusion 1 1705495506.053276
+Moving to compute move
+
+loop fn starting 2 1705495506.053736
+1
+msmt update 2 1705495506.0537665
+OWA before cam
+OWA w1:  0.34992268007048066
+OWA w2:  0
+OWA w3:  0.6500773199295194
+OWa after cam
+OWA w1:  0.591303582313065
+OWA w2:  0.40869641768693493
+OWA w3:  0.0
+msmt fusion 2 1705495506.0542128
+Moving to compute move
+
+loop fn starting 3 1705495506.0544784
+1
+msmt update 3 1705495506.0545077
+OWA before cam
+OWA w1:  5.5486017447385235e-05
+OWA w2:  0
+OWA w3:  0.9999445139825526
+OWa after cam
+OWA w1:  0.0009143564930775372
+OWA w2:  0.9990856435069224
+OWA w3:  0.0
+msmt fusion 3 1705495506.0552855
+Moving to compute move
+
+loop fn starting 4 1705495506.0555
+1
+msmt update 4 1705495506.0555286
+OWA before cam
+OWA w1:  0.04519522381497272
+OWA w2:  0
+OWA w3:  0.9548047761850273
+OWa after cam
+OWA w1:  0.33134579821017257
+OWA w2:  0.6686542017898274
+OWA w3:  0.0
+msmt fusion 4 1705495506.055799
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  3
+
+
+loop fn starting 1 1705495506.0613148
+1
+msmt update 1 1705495506.0613348
+OWA before cam
+OWA w1:  0.3933327723709152
+OWA w2:  0
+OWA w3:  0.6066672276290849
+OWa after cam
+OWA w1:  0.8525412358036186
+OWA w2:  0.1474587641963813
+OWA w3:  0.0
+msmt fusion 1 1705495506.061639
+Moving to compute move
+
+loop fn starting 2 1705495506.0618293
+1
+msmt update 2 1705495506.0618556
+OWA before cam
+OWA w1:  0.24109700516594584
+OWA w2:  0
+OWA w3:  0.7589029948340542
+OWa after cam
+OWA w1:  0.6492931786552725
+OWA w2:  0.3507068213447275
+OWA w3:  0.0
+msmt fusion 2 1705495506.0623968
+Moving to compute move
+
+loop fn starting 3 1705495506.0626607
+1
+msmt update 3 1705495506.0626895
+OWA before cam
+OWA w1:  2.0820773837705646e-05
+OWA w2:  0
+OWA w3:  0.9999791792261623
+OWa after cam
+OWA w1:  0.000879287390359245
+OWA w2:  0.9991207126096407
+OWA w3:  0.0
+msmt fusion 3 1705495506.0631087
+Moving to compute move
+
+loop fn starting 4 1705495506.063301
+1
+msmt update 4 1705495506.0633278
+OWA before cam
+OWA w1:  0.019682346169236583
+OWA w2:  0
+OWA w3:  0.9803176538307634
+OWa after cam
+OWA w1:  0.32664949685175904
+OWA w2:  0.6733505031482409
+OWA w3:  0.0
+msmt fusion 4 1705495506.0636065
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  4
+
+
+loop fn starting 1 1705495506.0692785
+1
+msmt update 1 1705495506.0693004
+OWA before cam
+OWA w1:  0.005309292249069468
+OWA w2:  0
+OWA w3:  0.9946907077509306
+OWa after cam
+OWA w1:  0.9388074558239542
+OWA w2:  0.06119254417604587
+OWA w3:  0.0
+msmt fusion 1 1705495506.0696423
+Moving to compute move
+
+loop fn starting 2 1705495506.0698795
+1
+msmt update 2 1705495506.0699067
+OWA before cam
+OWA w1:  0.0032443338743336153
+OWA w2:  0
+OWA w3:  0.9967556661256665
+OWa after cam
+OWA w1:  0.7120417710794459
+OWA w2:  0.287958228920554
+OWA w3:  0.0
+msmt fusion 2 1705495506.0702674
+Moving to compute move
+
+loop fn starting 3 1705495506.0704932
+1
+msmt update 3 1705495506.0705214
+OWA before cam
+OWA w1:  9.018222929518594e-09
+OWA w2:  0
+OWA w3:  0.999999990981777
+OWa after cam
+OWA w1:  0.000858052321448043
+OWA w2:  0.9991419476785519
+OWA w3:  0.0
+msmt fusion 3 1705495506.0708187
+Moving to compute move
+
+loop fn starting 4 1705495506.0710764
+1
+msmt update 4 1705495506.0711057
+OWA before cam
+OWA w1:  0.001124885743140844
+OWA w2:  0
+OWA w3:  0.9988751142568593
+OWa after cam
+OWA w1:  0.323091438784212
+OWA w2:  0.6769085612157879
+OWA w3:  0.0
+msmt fusion 4 1705495506.07138
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  5
+
+
+loop fn starting 1 1705495506.077026
+1
+msmt update 1 1705495506.0770564
+OWA before cam
+OWA w1:  0.00751299268967778
+OWA w2:  0
+OWA w3:  0.9924870073103221
+OWa after cam
+OWA w1:  0.9452891794759043
+OWA w2:  0.05471082052409584
+OWA w3:  0.0
+msmt fusion 1 1705495506.0778544
+Moving to compute move
+
+loop fn starting 2 1705495506.0781326
+1
+msmt update 2 1705495506.0781622
+OWA before cam
+OWA w1:  0.004479275045539801
+OWA w2:  0
+OWA w3:  0.9955207249544602
+OWa after cam
+OWA w1:  0.7436339942916186
+OWA w2:  0.25636600570838136
+OWA w3:  0.0
+msmt fusion 2 1705495506.0784745
+Moving to compute move
+
+loop fn starting 3 1705495506.0786958
+1
+msmt update 3 1705495506.0787244
+OWA before cam
+OWA w1:  1.0445109850345766e-08
+OWA w2:  0
+OWA w3:  0.9999999895548901
+OWa after cam
+OWA w1:  0.0008570003405517605
+OWA w2:  0.9991429996594483
+OWA w3:  0.0
+msmt fusion 3 1705495506.079019
+Moving to compute move
+
+loop fn starting 4 1705495506.0792446
+1
+msmt update 4 1705495506.079272
+OWA before cam
+OWA w1:  0.0013845147652851593
+OWA w2:  0
+OWA w3:  0.9986154852347148
+OWa after cam
+OWA w1:  0.3207595757773438
+OWA w2:  0.6792404242226561
+OWA w3:  0.0
+msmt fusion 4 1705495506.0795639
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  6
+
+
+loop fn starting 1 1705495506.0851989
+1
+msmt update 1 1705495506.085222
+OWA before cam
+OWA w1:  0.014653055787131636
+OWA w2:  0
+OWA w3:  0.9853469442128683
+OWa after cam
+OWA w1:  0.9517918622367304
+OWA w2:  0.048208137763269654
+OWA w3:  0.0
+msmt fusion 1 1705495506.0855606
+Moving to compute move
+
+loop fn starting 2 1705495506.0857596
+1
+msmt update 2 1705495506.0857863
+OWA before cam
+OWA w1:  0.008714529810158455
+OWA w2:  0
+OWA w3:  0.9912854701898415
+OWa after cam
+OWA w1:  0.7746863007433475
+OWA w2:  0.22531369925665246
+OWA w3:  0.0
+msmt fusion 2 1705495506.0860493
+Moving to compute move
+
+loop fn starting 3 1705495506.0862236
+1
+msmt update 3 1705495506.086248
+OWA before cam
+OWA w1:  1.6059439257627092e-08
+OWA w2:  0
+OWA w3:  0.9999999839405608
+OWa after cam
+OWA w1:  0.0008560456292976566
+OWA w2:  0.9991439543707022
+OWA w3:  0.0
+msmt fusion 3 1705495506.0864942
+Moving to compute move
+
+loop fn starting 4 1705495506.08666
+1
+msmt update 4 1705495506.086684
+OWA before cam
+OWA w1:  0.0022197221687745147
+OWA w2:  0
+OWA w3:  0.9977802778312255
+OWa after cam
+OWA w1:  0.31848227184997185
+OWA w2:  0.6815177281500281
+OWA w3:  0.0
+msmt fusion 4 1705495506.0873168
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  7
+
+
+loop fn starting 1 1705495506.093105
+1
+msmt update 1 1705495506.0931368
+OWA before cam
+OWA w1:  0.01577654420060245
+OWA w2:  0
+OWA w3:  0.9842234557993974
+OWa after cam
+OWA w1:  0.9580363721833959
+OWA w2:  0.04196362781660408
+OWA w3:  0.0
+msmt fusion 1 1705495506.093577
+Moving to compute move
+
+loop fn starting 2 1705495506.093787
+1
+msmt update 2 1705495506.0938158
+OWA before cam
+OWA w1:  0.00805529429117202
+OWA w2:  0
+OWA w3:  0.991944705708828
+OWa after cam
+OWA w1:  0.786033106089368
+OWA w2:  0.21396689391063203
+OWA w3:  0.0
+msmt fusion 2 1705495506.0941322
+Moving to compute move
+
+loop fn starting 3 1705495506.094331
+1
+msmt update 3 1705495506.0943615
+OWA before cam
+OWA w1:  1.412570860733814e-08
+OWA w2:  0
+OWA w3:  0.9999999858742914
+OWa after cam
+OWA w1:  0.0008551364494832435
+OWA w2:  0.9991448635505167
+OWA w3:  0.0
+msmt fusion 3 1705495506.094644
+Moving to compute move
+
+loop fn starting 4 1705495506.0948355
+1
+msmt update 4 1705495506.0948615
+OWA before cam
+OWA w1:  0.0020787095748878927
+OWA w2:  0
+OWA w3:  0.9979212904251121
+OWa after cam
+OWA w1:  0.3161646270808495
+OWA w2:  0.6838353729191504
+OWA w3:  0.0
+msmt fusion 4 1705495506.0951455
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  8
+
+
+loop fn starting 1 1705495506.1010647
+1
+msmt update 1 1705495506.1010897
+OWA before cam
+OWA w1:  0.009798942121699713
+OWA w2:  0
+OWA w3:  0.9902010578783003
+OWa after cam
+OWA w1:  0.9558683754270912
+OWA w2:  0.04413162457290879
+OWA w3:  0.0
+msmt fusion 1 1705495506.1015456
+Moving to compute move
+
+loop fn starting 2 1705495506.102064
+1
+msmt update 2 1705495506.1020977
+OWA before cam
+OWA w1:  0.006202667848863047
+OWA w2:  0
+OWA w3:  0.9937973321511369
+OWa after cam
+OWA w1:  0.7976726539750951
+OWA w2:  0.20232734602490482
+OWA w3:  0.0
+msmt fusion 2 1705495506.102441
+Moving to compute move
+
+loop fn starting 3 1705495506.1027265
+1
+msmt update 3 1705495506.1027546
+OWA before cam
+OWA w1:  8.432342116836263e-09
+OWA w2:  0
+OWA w3:  0.9999999915676578
+OWa after cam
+OWA w1:  0.0008542561162890925
+OWA w2:  0.9991457438837108
+OWA w3:  0.0
+msmt fusion 3 1705495506.1030405
+Moving to compute move
+
+loop fn starting 4 1705495506.1032264
+1
+msmt update 4 1705495506.1032524
+OWA before cam
+OWA w1:  0.0012371028599388245
+OWA w2:  0
+OWA w3:  0.9987628971400612
+OWa after cam
+OWA w1:  0.3138290054481146
+OWA w2:  0.6861709945518852
+OWA w3:  0.0
+msmt fusion 4 1705495506.1035056
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  9
+
+
+loop fn starting 1 1705495506.1089833
+1
+msmt update 1 1705495506.1090105
+OWA before cam
+OWA w1:  0.014712293739286538
+OWA w2:  0
+OWA w3:  0.9852877062607134
+OWa after cam
+OWA w1:  0.9540205321632852
+OWA w2:  0.04597946783671482
+OWA w3:  0.0
+msmt fusion 1 1705495506.1093931
+Moving to compute move
+
+loop fn starting 2 1705495506.1096108
+1
+msmt update 2 1705495506.1096392
+OWA before cam
+OWA w1:  0.011715392982412504
+OWA w2:  0
+OWA w3:  0.9882846070175875
+OWa after cam
+OWA w1:  0.8089950952033981
+OWA w2:  0.19100490479660187
+OWA w3:  0.0
+msmt fusion 2 1705495506.1099174
+Moving to compute move
+
+loop fn starting 3 1705495506.1100945
+1
+msmt update 3 1705495506.1101189
+OWA before cam
+OWA w1:  1.3923490866404244e-08
+OWA w2:  0
+OWA w3:  0.9999999860765091
+OWa after cam
+OWA w1:  0.0008533980161270832
+OWA w2:  0.999146601983873
+OWA w3:  0.0
+msmt fusion 3 1705495506.1103923
+Moving to compute move
+
+loop fn starting 4 1705495506.110747
+1
+msmt update 4 1705495506.1107721
+OWA before cam
+OWA w1:  0.0018533718375593582
+OWA w2:  0
+OWA w3:  0.9981466281624407
+OWa after cam
+OWA w1:  0.29640549346717615
+OWA w2:  0.7035945065328236
+OWA w3:  0.0
+msmt fusion 4 1705495506.1110344
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  10
+
+
+loop fn starting 1 1705495506.117315
+1
+msmt update 1 1705495506.117343
+OWA before cam
+OWA w1:  0.012725402559663515
+OWA w2:  0
+OWA w3:  0.9872745974403365
+OWa after cam
+OWA w1:  0.952284818791438
+OWA w2:  0.047715181208562094
+OWA w3:  0.0
+msmt fusion 1 1705495506.1177902
+Moving to compute move
+
+loop fn starting 2 1705495506.1180441
+1
+msmt update 2 1705495506.1180785
+OWA before cam
+OWA w1:  0.011007365982613922
+OWA w2:  0
+OWA w3:  0.988992634017386
+OWa after cam
+OWA w1:  0.8194026470261268
+OWA w2:  0.18059735297387322
+OWA w3:  0.0
+msmt fusion 2 1705495506.1183677
+Moving to compute move
+
+loop fn starting 3 1705495506.1185462
+1
+msmt update 3 1705495506.1185703
+OWA before cam
+OWA w1:  1.249741622636228e-08
+OWA w2:  0
+OWA w3:  0.9999999875025838
+OWa after cam
+OWA w1:  0.0008524159328977716
+OWA w2:  0.9991475840671022
+OWA w3:  0.0
+msmt fusion 3 1705495506.1188245
+Moving to compute move
+
+loop fn starting 4 1705495506.1189902
+1
+msmt update 4 1705495506.1190135
+OWA before cam
+OWA w1:  0.0016022777353065947
+OWA w2:  0
+OWA w3:  0.9983977222646935
+OWa after cam
+OWA w1:  0.2811865327950135
+OWA w2:  0.7188134672049864
+OWA w3:  0.0
+msmt fusion 4 1705495506.1192505
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  11
+
+
+loop fn starting 1 1705495506.1249285
+1
+msmt update 1 1705495506.1249535
+OWA before cam
+OWA w1:  0.007751600026363632
+OWA w2:  0
+OWA w3:  0.9922483999736365
+OWa after cam
+OWA w1:  0.9506392570955428
+OWA w2:  0.049360742904457265
+OWA w3:  0.0
+msmt fusion 1 1705495506.1253085
+Moving to compute move
+
+loop fn starting 2 1705495506.125526
+1
+msmt update 2 1705495506.1255577
+OWA before cam
+OWA w1:  0.008223132117304431
+OWA w2:  0
+OWA w3:  0.9917768678826956
+OWa after cam
+OWA w1:  0.8288371763350586
+OWA w2:  0.1711628236649414
+OWA w3:  0.0
+msmt fusion 2 1705495506.1258347
+Moving to compute move
+
+loop fn starting 3 1705495506.1260393
+1
+msmt update 3 1705495506.1260653
+OWA before cam
+OWA w1:  8.218220503577621e-09
+OWA w2:  0
+OWA w3:  0.9999999917817795
+OWa after cam
+OWA w1:  0.0008516392426042018
+OWA w2:  0.9991483607573959
+OWA w3:  0.0
+msmt fusion 3 1705495506.1263583
+Moving to compute move
+
+loop fn starting 4 1705495506.1267483
+1
+msmt update 4 1705495506.1267805
+OWA before cam
+OWA w1:  0.0009365223409004576
+OWA w2:  0
+OWA w3:  0.9990634776590994
+OWa after cam
+OWA w1:  0.2682702159217688
+OWA w2:  0.7317297840782312
+OWA w3:  0.0
+msmt fusion 4 1705495506.1271224
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  12
+
+
+loop fn starting 1 1705495506.1330006
+1
+msmt update 1 1705495506.1330304
+OWA before cam
+OWA w1:  0.013573737682502765
+OWA w2:  0
+OWA w3:  0.9864262623174973
+OWa after cam
+OWA w1:  0.9490751112056685
+OWA w2:  0.050924888794331595
+OWA w3:  0.0
+msmt fusion 1 1705495506.133477
+Moving to compute move
+
+loop fn starting 2 1705495506.1337123
+1
+msmt update 2 1705495506.1337385
+OWA before cam
+OWA w1:  0.014012675715498052
+OWA w2:  0
+OWA w3:  0.9859873242845019
+OWa after cam
+OWA w1:  0.8543895903174711
+OWA w2:  0.14561040968252886
+OWA w3:  0.0
+msmt fusion 2 1705495506.134017
+Moving to compute move
+
+loop fn starting 3 1705495506.1341991
+1
+msmt update 3 1705495506.1342251
+OWA before cam
+OWA w1:  1.3492182595751398e-08
+OWA w2:  0
+OWA w3:  0.9999999865078174
+OWa after cam
+OWA w1:  0.0008511442222885434
+OWA w2:  0.9991488557777115
+OWA w3:  0.0
+msmt fusion 3 1705495506.1345623
+Moving to compute move
+
+loop fn starting 4 1705495506.1347466
+1
+msmt update 4 1705495506.1347723
+OWA before cam
+OWA w1:  0.0014894554232212061
+OWA w2:  0
+OWA w3:  0.9985105445767788
+OWa after cam
+OWA w1:  0.2577674769794561
+OWA w2:  0.7422325230205438
+OWA w3:  0.0
+msmt fusion 4 1705495506.1350298
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  13
+
+
+loop fn starting 1 1705495506.1406562
+1
+msmt update 1 1705495506.1406825
+OWA before cam
+OWA w1:  0.015173317736863763
+OWA w2:  0
+OWA w3:  0.9848266822631363
+OWa after cam
+OWA w1:  0.9565363831012207
+OWA w2:  0.043463616898779325
+OWA w3:  0.0
+msmt fusion 1 1705495506.141077
+Moving to compute move
+
+loop fn starting 2 1705495506.141576
+1
+msmt update 2 1705495506.14161
+OWA before cam
+OWA w1:  0.013369639834544238
+OWA w2:  0
+OWA w3:  0.9866303601654557
+OWa after cam
+OWA w1:  0.8687041828204859
+OWA w2:  0.13129581717951408
+OWA w3:  0.0
+msmt fusion 2 1705495506.1421874
+Moving to compute move
+
+loop fn starting 3 1705495506.1423965
+1
+msmt update 3 1705495506.142424
+OWA before cam
+OWA w1:  1.2100194576488873e-08
+OWA w2:  0
+OWA w3:  0.9999999878998054
+OWa after cam
+OWA w1:  0.0008509296772738034
+OWA w2:  0.9991490703227263
+OWA w3:  0.0
+msmt fusion 3 1705495506.1427157
+Moving to compute move
+
+loop fn starting 4 1705495506.142901
+1
+msmt update 4 1705495506.142926
+OWA before cam
+OWA w1:  0.0013025779359183151
+OWA w2:  0
+OWA w3:  0.9986974220640817
+OWa after cam
+OWA w1:  0.24959470593873226
+OWA w2:  0.7504052940612677
+OWA w3:  0.0
+msmt fusion 4 1705495506.143188
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  14
+
+
+loop fn starting 1 1705495506.1486423
+1
+msmt update 1 1705495506.1486669
+OWA before cam
+OWA w1:  0.008065180624920433
+OWA w2:  0
+OWA w3:  0.9919348193750795
+OWa after cam
+OWA w1:  0.9437212394049306
+OWA w2:  0.0562787605950695
+OWA w3:  0.0
+msmt fusion 1 1705495506.1490245
+Moving to compute move
+
+loop fn starting 2 1705495506.1492352
+1
+msmt update 2 1705495506.14927
+OWA before cam
+OWA w1:  0.008181509208180098
+OWA w2:  0
+OWA w3:  0.9918184907918199
+OWa after cam
+OWA w1:  0.8814367362202276
+OWA w2:  0.1185632637797724
+OWA w3:  0.0
+msmt fusion 2 1705495506.1495228
+Moving to compute move
+
+loop fn starting 3 1705495506.1496873
+1
+msmt update 3 1705495506.1497104
+OWA before cam
+OWA w1:  7.892064631642919e-09
+OWA w2:  0
+OWA w3:  0.9999999921079353
+OWa after cam
+OWA w1:  0.0008509944266199591
+OWA w2:  0.99914900557338
+OWA w3:  0.0
+msmt fusion 3 1705495506.1499772
+Moving to compute move
+
+loop fn starting 4 1705495506.1501563
+1
+msmt update 4 1705495506.1501813
+OWA before cam
+OWA w1:  0.0008584450101987765
+OWA w2:  0
+OWA w3:  0.9991415549898012
+OWa after cam
+OWA w1:  0.2557974874178633
+OWA w2:  0.7442025125821368
+OWA w3:  0.0
+msmt fusion 4 1705495506.1504645
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  15
+
+
+loop fn starting 1 1705495506.1559818
+1
+msmt update 1 1705495506.1560094
+OWA before cam
+OWA w1:  0.009404203781369401
+OWA w2:  0
+OWA w3:  0.9905957962186306
+OWa after cam
+OWA w1:  0.9365854921925928
+OWA w2:  0.06341450780740726
+OWA w3:  0.0
+msmt fusion 1 1705495506.1565113
+Moving to compute move
+
+loop fn starting 2 1705495506.1569648
+1
+msmt update 2 1705495506.1569982
+OWA before cam
+OWA w1:  0.01479131351840091
+OWA w2:  0
+OWA w3:  0.985208686481599
+OWa after cam
+OWA w1:  0.8927356729103542
+OWA w2:  0.10726432708964595
+OWA w3:  0.0
+msmt fusion 2 1705495506.157297
+Moving to compute move
+
+loop fn starting 3 1705495506.1574752
+1
+msmt update 3 1705495506.1574998
+OWA before cam
+OWA w1:  1.3037353667906047e-08
+OWA w2:  0
+OWA w3:  0.9999999869626464
+OWa after cam
+OWA w1:  0.0008514778697454046
+OWA w2:  0.9991485221302545
+OWA w3:  0.0
+msmt fusion 3 1705495506.1577578
+Moving to compute move
+
+loop fn starting 4 1705495506.1579263
+1
+msmt update 4 1705495506.1579502
+OWA before cam
+OWA w1:  0.0013521290317333049
+OWA w2:  0
+OWA w3:  0.9986478709682667
+OWa after cam
+OWA w1:  0.2624492292601071
+OWA w2:  0.7375507707398928
+OWA w3:  0.0
+msmt fusion 4 1705495506.1581936
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  16
+
+
+loop fn starting 1 1705495506.1637654
+1
+msmt update 1 1705495506.1637936
+OWA before cam
+OWA w1:  0.007339140741332763
+OWA w2:  0
+OWA w3:  0.9926608592586672
+OWa after cam
+OWA w1:  0.9313616206358959
+OWA w2:  0.06863837936410426
+OWA w3:  0.0
+msmt fusion 1 1705495506.164196
+Moving to compute move
+
+loop fn starting 2 1705495506.164483
+1
+msmt update 2 1705495506.1645136
+OWA before cam
+OWA w1:  0.014315473883924235
+OWA w2:  0
+OWA w3:  0.9856845261160757
+OWa after cam
+OWA w1:  0.9026616708926645
+OWA w2:  0.09733832910733571
+OWA w3:  0.0
+msmt fusion 2 1705495506.164827
+Moving to compute move
+
+loop fn starting 3 1705495506.165043
+1
+msmt update 3 1705495506.1650681
+OWA before cam
+OWA w1:  1.17029006682893e-08
+OWA w2:  0
+OWA w3:  0.9999999882970992
+OWa after cam
+OWA w1:  0.0008520503355433833
+OWA w2:  0.9991479496644566
+OWA w3:  0.0
+msmt fusion 3 1705495506.1653788
+Moving to compute move
+
+loop fn starting 4 1705495506.1655886
+1
+msmt update 4 1705495506.165616
+OWA before cam
+OWA w1:  0.001245098286999347
+OWA w2:  0
+OWA w3:  0.9987549017130006
+OWa after cam
+OWA w1:  0.2695598805126503
+OWA w2:  0.7304401194873498
+OWA w3:  0.0
+msmt fusion 4 1705495506.1666567
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  17
+
+
+loop fn starting 1 1705495506.1723373
+1
+msmt update 1 1705495506.1723683
+OWA before cam
+OWA w1:  0.0040810776094590585
+OWA w2:  0
+OWA w3:  0.995918922390541
+OWa after cam
+OWA w1:  0.9278698748586857
+OWA w2:  0.07213012514131438
+OWA w3:  0.0
+msmt fusion 1 1705495506.1727896
+Moving to compute move
+
+loop fn starting 2 1705495506.1732502
+1
+msmt update 2 1705495506.1732805
+OWA before cam
+OWA w1:  0.010022824600380788
+OWA w2:  0
+OWA w3:  0.9899771753996193
+OWa after cam
+OWA w1:  0.9113531242709899
+OWA w2:  0.08864687572901012
+OWA w3:  0.0
+msmt fusion 2 1705495506.1735632
+Moving to compute move
+
+loop fn starting 3 1705495506.1737561
+1
+msmt update 3 1705495506.1737833
+OWA before cam
+OWA w1:  7.703615515003657e-09
+OWA w2:  0
+OWA w3:  0.9999999922963845
+OWa after cam
+OWA w1:  0.0008522706525829255
+OWA w2:  0.9991477293474171
+OWA w3:  0.0
+msmt fusion 3 1705495506.1740665
+Moving to compute move
+
+loop fn starting 4 1705495506.1742535
+1
+msmt update 4 1705495506.1742775
+OWA before cam
+OWA w1:  0.0006257871464388395
+OWA w2:  0
+OWA w3:  0.9993742128535611
+OWa after cam
+OWA w1:  0.248357418401194
+OWA w2:  0.7516425815988059
+OWA w3:  0.0
+msmt fusion 4 1705495506.1745267
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  18
+
+
+loop fn starting 1 1705495506.1800442
+1
+msmt update 1 1705495506.1800852
+OWA before cam
+OWA w1:  0.008877777241973627
+OWA w2:  0
+OWA w3:  0.9911222227580263
+OWa after cam
+OWA w1:  0.9258989905042253
+OWA w2:  0.07410100949577476
+OWA w3:  0.0
+msmt fusion 1 1705495506.1804707
+Moving to compute move
+
+loop fn starting 2 1705495506.1810808
+1
+msmt update 2 1705495506.1811159
+OWA before cam
+OWA w1:  0.013219045828145714
+OWA w2:  0
+OWA w3:  0.9867809541718543
+OWa after cam
+OWA w1:  0.9074075762112355
+OWA w2:  0.09259242378876463
+OWA w3:  0.0
+msmt fusion 2 1705495506.1816213
+Moving to compute move
+
+loop fn starting 3 1705495506.1818314
+1
+msmt update 3 1705495506.1818593
+OWA before cam
+OWA w1:  8.042829925423606e-09
+OWA w2:  0
+OWA w3:  0.99999999195717
+OWa after cam
+OWA w1:  0.0008518769530154892
+OWA w2:  0.9991481230469845
+OWA w3:  0.0
+msmt fusion 3 1705495506.1821754
+Moving to compute move
+
+loop fn starting 4 1705495506.182376
+1
+msmt update 4 1705495506.1824012
+OWA before cam
+OWA w1:  0.0006814195784643698
+OWA w2:  0
+OWA w3:  0.9993185804215355
+OWa after cam
+OWA w1:  0.23368609427843967
+OWA w2:  0.7663139057215603
+OWA w3:  0.0
+msmt fusion 4 1705495506.1826727
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  19
+
+
+loop fn starting 1 1705495506.1884625
+1
+msmt update 1 1705495506.188497
+OWA before cam
+OWA w1:  0.010420931623597203
+OWA w2:  0
+OWA w3:  0.9895790683764027
+OWa after cam
+OWA w1:  0.9421738836096504
+OWA w2:  0.05782611639034966
+OWA w3:  0.0
+msmt fusion 1 1705495506.1889687
+Moving to compute move
+
+loop fn starting 2 1705495506.189161
+1
+msmt update 2 1705495506.189186
+OWA before cam
+OWA w1:  0.010826763305994235
+OWA w2:  0
+OWA w3:  0.9891732366940058
+OWa after cam
+OWA w1:  0.9050283245232732
+OWA w2:  0.09497167547672677
+OWA w3:  0.0
+msmt fusion 2 1705495506.189441
+Moving to compute move
+
+loop fn starting 3 1705495506.1896179
+1
+msmt update 3 1705495506.1896417
+OWA before cam
+OWA w1:  6.760801177646587e-09
+OWA w2:  0
+OWA w3:  0.9999999932391989
+OWa after cam
+OWA w1:  0.0008508690450380032
+OWA w2:  0.999149130954962
+OWA w3:  0.0
+msmt fusion 3 1705495506.1898959
+Moving to compute move
+
+loop fn starting 4 1705495506.1900754
+1
+msmt update 4 1705495506.1901104
+OWA before cam
+OWA w1:  0.0005355141855300838
+OWA w2:  0
+OWA w3:  0.9994644858144699
+OWa after cam
+OWA w1:  0.22393327181142356
+OWA w2:  0.7760667281885764
+OWA w3:  0.0
+msmt fusion 4 1705495506.190371
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  20
+
+
+loop fn starting 1 1705495506.1960037
+1
+msmt update 1 1705495506.1960287
+OWA before cam
+OWA w1:  0.010962887274995869
+OWA w2:  0
+OWA w3:  0.9890371127250042
+OWa after cam
+OWA w1:  0.9527212814023538
+OWA w2:  0.04727871859764623
+OWA w3:  0.0
+msmt fusion 1 1705495506.1965535
+Moving to compute move
+
+loop fn starting 2 1705495506.1967673
+1
+msmt update 2 1705495506.1967957
+OWA before cam
+OWA w1:  0.0064392294969137145
+OWA w2:  0
+OWA w3:  0.9935607705030863
+OWa after cam
+OWA w1:  0.9037831421705743
+OWA w2:  0.09621685782942575
+OWA w3:  0.0
+msmt fusion 2 1705495506.1970806
+Moving to compute move
+
+loop fn starting 3 1705495506.1972637
+1
+msmt update 3 1705495506.1972888
+OWA before cam
+OWA w1:  3.0088463257861682e-09
+OWA w2:  0
+OWA w3:  0.9999999969911537
+OWa after cam
+OWA w1:  0.0008492498346030124
+OWA w2:  0.999150750165397
+OWA w3:  0.0
+msmt fusion 3 1705495506.1976058
+Moving to compute move
+
+loop fn starting 4 1705495506.197862
+1
+msmt update 4 1705495506.1978915
+OWA before cam
+OWA w1:  0.00027603554425465366
+OWA w2:  0
+OWA w3:  0.9997239644557454
+OWa after cam
+OWA w1:  0.21795200106884108
+OWA w2:  0.7820479989311588
+OWA w3:  0.0
+msmt fusion 4 1705495506.1981692
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  21
+
+
+loop fn starting 1 1705495506.203696
+1
+msmt update 1 1705495506.203721
+OWA before cam
+OWA w1:  0.018499304699949856
+OWA w2:  0
+OWA w3:  0.9815006953000501
+OWa after cam
+OWA w1:  0.9613504522087102
+OWA w2:  0.038649547791289804
+OWA w3:  0.0
+msmt fusion 1 1705495506.2040782
+Moving to compute move
+
+loop fn starting 2 1705495506.204327
+1
+msmt update 2 1705495506.204354
+OWA before cam
+OWA w1:  0.012568415453869367
+OWA w2:  0
+OWA w3:  0.9874315845461306
+OWa after cam
+OWA w1:  0.9033874900993449
+OWA w2:  0.09661250990065517
+OWA w3:  0.0
+msmt fusion 2 1705495506.2051563
+Moving to compute move
+
+loop fn starting 3 1705495506.205397
+1
+msmt update 3 1705495506.2054398
+OWA before cam
+OWA w1:  8.45845546674615e-09
+OWA w2:  0
+OWA w3:  0.9999999915415445
+OWa after cam
+OWA w1:  0.0008470217613648364
+OWA w2:  0.9991529782386352
+OWA w3:  0.0
+msmt fusion 3 1705495506.2059336
+Moving to compute move
+
+loop fn starting 4 1705495506.2063506
+1
+msmt update 4 1705495506.2063842
+OWA before cam
+OWA w1:  0.0006089555813497516
+OWA w2:  0
+OWA w3:  0.9993910444186502
+OWa after cam
+OWA w1:  0.21724189751428122
+OWA w2:  0.7827581024857188
+OWA w3:  0.0
+msmt fusion 4 1705495506.2067046
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  22
+
+
+loop fn starting 1 1705495506.2123659
+1
+msmt update 1 1705495506.2123902
+OWA before cam
+OWA w1:  0.015476697053637876
+OWA w2:  0
+OWA w3:  0.984523302946362
+OWa after cam
+OWA w1:  0.9608831035384002
+OWA w2:  0.03911689646159981
+OWA w3:  0.0
+msmt fusion 1 1705495506.2127767
+Moving to compute move
+
+loop fn starting 2 1705495506.2130628
+1
+msmt update 2 1705495506.213095
+OWA before cam
+OWA w1:  0.011287302292845816
+OWA w2:  0
+OWA w3:  0.9887126977071542
+OWa after cam
+OWA w1:  0.9035878730335432
+OWA w2:  0.09641212696645698
+OWA w3:  0.0
+msmt fusion 2 1705495506.2134564
+Moving to compute move
+
+loop fn starting 3 1705495506.2136893
+1
+msmt update 3 1705495506.213716
+OWA before cam
+OWA w1:  7.183715738193177e-09
+OWA w2:  0
+OWA w3:  0.9999999928162843
+OWa after cam
+OWA w1:  0.0008445454441975188
+OWA w2:  0.9991554545558026
+OWA w3:  0.0
+msmt fusion 3 1705495506.2140143
+Moving to compute move
+
+loop fn starting 4 1705495506.214239
+1
+msmt update 4 1705495506.2142634
+OWA before cam
+OWA w1:  0.0005681660914785494
+OWA w2:  0
+OWA w3:  0.9994318339085214
+OWa after cam
+OWA w1:  0.23590988148020092
+OWA w2:  0.764090118519799
+OWA w3:  0.0
+msmt fusion 4 1705495506.214772
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  23
+
+
+loop fn starting 1 1705495506.2204883
+1
+msmt update 1 1705495506.2205217
+OWA before cam
+OWA w1:  0.008947382225350959
+OWA w2:  0
+OWA w3:  0.991052617774649
+OWa after cam
+OWA w1:  0.9605246033238192
+OWA w2:  0.03947539667618077
+OWA w3:  0.0
+msmt fusion 1 1705495506.221335
+Moving to compute move
+
+loop fn starting 2 1705495506.221882
+1
+msmt update 2 1705495506.2219162
+OWA before cam
+OWA w1:  0.010678892414196462
+OWA w2:  0
+OWA w3:  0.9893211075858035
+OWa after cam
+OWA w1:  0.9202901250343986
+OWA w2:  0.07970987496560146
+OWA w3:  0.0
+msmt fusion 2 1705495506.222261
+Moving to compute move
+
+loop fn starting 3 1705495506.2224772
+1
+msmt update 3 1705495506.222507
+OWA before cam
+OWA w1:  8.213039082845343e-09
+OWA w2:  0
+OWA w3:  0.9999999917869609
+OWa after cam
+OWA w1:  0.000842084382579873
+OWA w2:  0.9991579156174202
+OWA w3:  0.0
+msmt fusion 3 1705495506.2228162
+Moving to compute move
+
+loop fn starting 4 1705495506.2230585
+1
+msmt update 4 1705495506.2230864
+OWA before cam
+OWA w1:  0.0005898326962776008
+OWA w2:  0
+OWA w3:  0.9994101673037223
+OWa after cam
+OWA w1:  0.2551705048999693
+OWA w2:  0.7448294951000306
+OWA w3:  0.0
+msmt fusion 4 1705495506.223361
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  24
+
+
+loop fn starting 1 1705495506.2288847
+1
+msmt update 1 1705495506.2289095
+OWA before cam
+OWA w1:  0.017482323460466617
+OWA w2:  0
+OWA w3:  0.9825176765395334
+OWa after cam
+OWA w1:  0.9602320440173576
+OWA w2:  0.039767955982642385
+OWA w3:  0.0
+msmt fusion 1 1705495506.2292664
+Moving to compute move
+
+loop fn starting 2 1705495506.2294748
+1
+msmt update 2 1705495506.2295008
+OWA before cam
+OWA w1:  0.009389063201738011
+OWA w2:  0
+OWA w3:  0.9906109367982621
+OWa after cam
+OWA w1:  0.8820583292366366
+OWA w2:  0.1179416707633635
+OWA w3:  0.0
+msmt fusion 2 1705495506.2297506
+Moving to compute move
+
+loop fn starting 3 1705495506.2299123
+1
+msmt update 3 1705495506.2299335
+OWA before cam
+OWA w1:  1.250599240171638e-08
+OWA w2:  0
+OWA w3:  0.9999999874940075
+OWa after cam
+OWA w1:  0.0008404634226211943
+OWA w2:  0.9991595365773788
+OWA w3:  0.0
+msmt fusion 3 1705495506.2301648
+Moving to compute move
+
+loop fn starting 4 1705495506.2304401
+1
+msmt update 4 1705495506.2304633
+OWA before cam
+OWA w1:  0.0010438811401019075
+OWA w2:  0
+OWA w3:  0.9989561188598981
+OWa after cam
+OWA w1:  0.27548561838253627
+OWA w2:  0.7245143816174636
+OWA w3:  0.0
+msmt fusion 4 1705495506.2314117
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  25
+
+
+loop fn starting 1 1705495506.237216
+1
+msmt update 1 1705495506.2372506
+OWA before cam
+OWA w1:  0.015915031853817995
+OWA w2:  0
+OWA w3:  0.984084968146182
+OWa after cam
+OWA w1:  0.9599372466930953
+OWA w2:  0.04006275330690465
+OWA w3:  0.0
+msmt fusion 1 1705495506.2377357
+Moving to compute move
+
+loop fn starting 2 1705495506.2379725
+1
+msmt update 2 1705495506.2380009
+OWA before cam
+OWA w1:  0.006178959729919407
+OWA w2:  0
+OWA w3:  0.9938210402700807
+OWa after cam
+OWA w1:  0.852445402901771
+OWA w2:  0.14755459709822896
+OWA w3:  0.0
+msmt fusion 2 1705495506.238299
+Moving to compute move
+
+loop fn starting 3 1705495506.2385986
+1
+msmt update 3 1705495506.2386277
+OWA before cam
+OWA w1:  1.1117697815768218e-08
+OWA w2:  0
+OWA w3:  0.9999999888823021
+OWa after cam
+OWA w1:  0.0008396795338296146
+OWA w2:  0.9991603204661704
+OWA w3:  0.0
+msmt fusion 3 1705495506.2389617
+Moving to compute move
+
+loop fn starting 4 1705495506.2391465
+1
+msmt update 4 1705495506.239172
+OWA before cam
+OWA w1:  0.000997680280594738
+OWA w2:  0
+OWA w3:  0.9990023197194052
+OWa after cam
+OWA w1:  0.2972977602810126
+OWA w2:  0.7027022397189873
+OWA w3:  0.0
+msmt fusion 4 1705495506.2394328
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  26
+
+
+loop fn starting 1 1705495506.2449954
+1
+msmt update 1 1705495506.2450275
+OWA before cam
+OWA w1:  0.012287917579494807
+OWA w2:  0
+OWA w3:  0.9877120824205051
+OWa after cam
+OWA w1:  0.9596124779157444
+OWA w2:  0.04038752208425558
+OWA w3:  0.0
+msmt fusion 1 1705495506.2455711
+Moving to compute move
+
+loop fn starting 2 1705495506.2460914
+1
+msmt update 2 1705495506.2461236
+OWA before cam
+OWA w1:  0.0044180716107019655
+OWA w2:  0
+OWA w3:  0.995581928389298
+OWa after cam
+OWA w1:  0.836980219203133
+OWA w2:  0.16301978079686694
+OWA w3:  0.0
+msmt fusion 2 1705495506.2464256
+Moving to compute move
+
+loop fn starting 3 1705495506.2466164
+1
+msmt update 3 1705495506.2466424
+OWA before cam
+OWA w1:  7.018221036144591e-09
+OWA w2:  0
+OWA w3:  0.999999992981779
+OWa after cam
+OWA w1:  0.0008397296640043768
+OWA w2:  0.9991602703359956
+OWA w3:  0.0
+msmt fusion 3 1705495506.2469127
+Moving to compute move
+
+loop fn starting 4 1705495506.2470906
+1
+msmt update 4 1705495506.2471135
+OWA before cam
+OWA w1:  0.0007284575910025895
+OWA w2:  0
+OWA w3:  0.9992715424089975
+OWa after cam
+OWA w1:  0.31708575747122925
+OWA w2:  0.6829142425287706
+OWA w3:  0.0
+msmt fusion 4 1705495506.2473538
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  27
+
+
+loop fn starting 1 1705495506.253
+1
+msmt update 1 1705495506.2530289
+OWA before cam
+OWA w1:  0.014988999185131286
+OWA w2:  0
+OWA w3:  0.9850110008148688
+OWa after cam
+OWA w1:  0.9541702253062265
+OWA w2:  0.04582977469377343
+OWA w3:  0.0
+msmt fusion 1 1705495506.253448
+Moving to compute move
+
+loop fn starting 2 1705495506.2536454
+1
+msmt update 2 1705495506.2536716
+OWA before cam
+OWA w1:  0.009823491556785597
+OWA w2:  0
+OWA w3:  0.9901765084432144
+OWa after cam
+OWA w1:  0.8218510885397204
+OWA w2:  0.17814891146027953
+OWA w3:  0.0
+msmt fusion 2 1705495506.253946
+Moving to compute move
+
+loop fn starting 3 1705495506.2541592
+1
+msmt update 3 1705495506.2541842
+OWA before cam
+OWA w1:  1.2339687426627041e-08
+OWA w2:  0
+OWA w3:  0.9999999876603125
+OWa after cam
+OWA w1:  0.0008406145449633102
+OWA w2:  0.9991593854550367
+OWA w3:  0.0
+msmt fusion 3 1705495506.254469
+Moving to compute move
+
+loop fn starting 4 1705495506.254672
+1
+msmt update 4 1705495506.2546968
+OWA before cam
+OWA w1:  0.0013096734101188704
+OWA w2:  0
+OWA w3:  0.9986903265898812
+OWa after cam
+OWA w1:  0.32243093644819004
+OWA w2:  0.6775690635518098
+OWA w3:  0.0
+msmt fusion 4 1705495506.255055
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  28
+
+
+loop fn starting 1 1705495506.261239
+1
+msmt update 1 1705495506.2612753
+OWA before cam
+OWA w1:  0.01175798514281107
+OWA w2:  0
+OWA w3:  0.9882420148571889
+OWa after cam
+OWA w1:  0.9501019173233052
+OWA w2:  0.04989808267669487
+OWA w3:  0.0
+msmt fusion 1 1705495506.261714
+Moving to compute move
+
+loop fn starting 2 1705495506.2619722
+1
+msmt update 2 1705495506.262006
+OWA before cam
+OWA w1:  0.008742635865947741
+OWA w2:  0
+OWA w3:  0.9912573641340523
+OWa after cam
+OWA w1:  0.8061677648864113
+OWA w2:  0.1938322351135887
+OWA w3:  0.0
+msmt fusion 2 1705495506.2623227
+Moving to compute move
+
+loop fn starting 3 1705495506.2625089
+1
+msmt update 3 1705495506.2625337
+OWA before cam
+OWA w1:  1.0971353520299581e-08
+OWA w2:  0
+OWA w3:  0.9999999890286464
+OWa after cam
+OWA w1:  0.0008423355920666597
+OWA w2:  0.9991576644079333
+OWA w3:  0.0
+msmt fusion 3 1705495506.2628062
+Moving to compute move
+
+loop fn starting 4 1705495506.2629862
+1
+msmt update 4 1705495506.2630126
+OWA before cam
+OWA w1:  0.0011707309177655077
+OWA w2:  0
+OWA w3:  0.9988292690822346
+OWa after cam
+OWA w1:  0.32599727266228173
+OWA w2:  0.6740027273377183
+OWA w3:  0.0
+msmt fusion 4 1705495506.263268
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  29
+
+
+loop fn starting 1 1705495506.2688518
+1
+msmt update 1 1705495506.2688797
+OWA before cam
+OWA w1:  0.006790395053548264
+OWA w2:  0
+OWA w3:  0.9932096049464518
+OWa after cam
+OWA w1:  0.9472280437354804
+OWA w2:  0.052771956264519575
+OWA w3:  0.0
+msmt fusion 1 1705495506.2693179
+Moving to compute move
+
+loop fn starting 2 1705495506.269586
+1
+msmt update 2 1705495506.2696154
+OWA before cam
+OWA w1:  0.010021357223063472
+OWA w2:  0
+OWA w3:  0.9899786427769365
+OWa after cam
+OWA w1:  0.8333373247321986
+OWA w2:  0.16666267526780137
+OWA w3:  0.0
+msmt fusion 2 1705495506.2702537
+Moving to compute move
+
+loop fn starting 3 1705495506.2706532
+1
+msmt update 3 1705495506.2706842
+OWA before cam
+OWA w1:  8.039873870363805e-09
+OWA w2:  0
+OWA w3:  0.9999999919601261
+OWa after cam
+OWA w1:  0.0008438987364748483
+OWA w2:  0.9991561012635252
+OWA w3:  0.0
+msmt fusion 3 1705495506.2709959
+Moving to compute move
+
+loop fn starting 4 1705495506.2712162
+1
+msmt update 4 1705495506.2712436
+OWA before cam
+OWA w1:  0.0009276615144946516
+OWA w2:  0
+OWA w3:  0.9990723384855055
+OWa after cam
+OWA w1:  0.32784661834403994
+OWA w2:  0.6721533816559601
+OWA w3:  0.0
+msmt fusion 4 1705495506.2715383
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  30
+
+
+loop fn starting 1 1705495506.2772298
+1
+msmt update 1 1705495506.2772605
+OWA before cam
+OWA w1:  0.013678135623934337
+OWA w2:  0
+OWA w3:  0.9863218643760656
+OWa after cam
+OWA w1:  0.9453804726125008
+OWA w2:  0.0546195273874993
+OWA w3:  0.0
+msmt fusion 1 1705495506.2776904
+Moving to compute move
+
+loop fn starting 2 1705495506.2778578
+1
+msmt update 2 1705495506.2778804
+OWA before cam
+OWA w1:  0.017292342269684038
+OWA w2:  0
+OWA w3:  0.982707657730316
+OWa after cam
+OWA w1:  0.860569918747042
+OWA w2:  0.13943008125295786
+OWA w3:  0.0
+msmt fusion 2 1705495506.278115
+Moving to compute move
+
+loop fn starting 3 1705495506.2782903
+1
+msmt update 3 1705495506.2783155
+OWA before cam
+OWA w1:  1.210803221511263e-08
+OWA w2:  0
+OWA w3:  0.9999999878919678
+OWa after cam
+OWA w1:  0.0008460590897468239
+OWA w2:  0.9991539409102532
+OWA w3:  0.0
+msmt fusion 3 1705495506.2785747
+Moving to compute move
+
+loop fn starting 4 1705495506.2787366
+1
+msmt update 4 1705495506.2787604
+OWA before cam
+OWA w1:  0.0017179125668822966
+OWA w2:  0
+OWA w3:  0.9982820874331177
+OWa after cam
+OWA w1:  0.32794616840122276
+OWA w2:  0.6720538315987772
+OWA w3:  0.0
+msmt fusion 4 1705495506.279004
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  31
+
+
+loop fn starting 1 1705495506.2850509
+1
+msmt update 1 1705495506.2851055
+OWA before cam
+OWA w1:  0.01217787483249877
+OWA w2:  0
+OWA w3:  0.9878221251675012
+OWa after cam
+OWA w1:  0.9443773362565334
+OWA w2:  0.05562266374346664
+OWA w3:  0.0
+msmt fusion 1 1705495506.2859507
+Moving to compute move
+
+loop fn starting 2 1705495506.2863605
+1
+msmt update 2 1705495506.2863975
+OWA before cam
+OWA w1:  0.01212648944732286
+OWA w2:  0
+OWA w3:  0.9878735105526771
+OWa after cam
+OWA w1:  0.8331905961061434
+OWA w2:  0.16680940389385657
+OWA w3:  0.0
+msmt fusion 2 1705495506.2869515
+Moving to compute move
+
+loop fn starting 3 1705495506.2871935
+1
+msmt update 3 1705495506.2872274
+OWA before cam
+OWA w1:  1.0753271634593563e-08
+OWA w2:  0
+OWA w3:  0.9999999892467283
+OWa after cam
+OWA w1:  0.0008487824885841972
+OWA w2:  0.9991512175114159
+OWA w3:  0.0
+msmt fusion 3 1705495506.2875385
+Moving to compute move
+
+loop fn starting 4 1705495506.287709
+1
+msmt update 4 1705495506.287733
+OWA before cam
+OWA w1:  0.0015558623536494353
+OWA w2:  0
+OWA w3:  0.9984441376463506
+OWa after cam
+OWA w1:  0.326082856130286
+OWA w2:  0.6739171438697139
+OWA w3:  0.0
+msmt fusion 4 1705495506.2879796
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  32
+
+
+loop fn starting 1 1705495506.2934341
+1
+msmt update 1 1705495506.2934568
+OWA before cam
+OWA w1:  0.01212196449297352
+OWA w2:  0
+OWA w3:  0.9878780355070265
+OWa after cam
+OWA w1:  0.9547628835330534
+OWA w2:  0.04523711646694672
+OWA w3:  0.0
+msmt fusion 1 1705495506.2938275
+Moving to compute move
+
+loop fn starting 2 1705495506.29404
+1
+msmt update 2 1705495506.2940693
+OWA before cam
+OWA w1:  0.006167049751430815
+OWA w2:  0
+OWA w3:  0.9938329502485691
+OWa after cam
+OWA w1:  0.8123406129698653
+OWA w2:  0.18765938703013474
+OWA w3:  0.0
+msmt fusion 2 1705495506.2943654
+Moving to compute move
+
+loop fn starting 3 1705495506.294918
+1
+msmt update 3 1705495506.294952
+OWA before cam
+OWA w1:  6.798859034360038e-09
+OWA w2:  0
+OWA w3:  0.999999993201141
+OWa after cam
+OWA w1:  0.0008520819243154784
+OWA w2:  0.9991479180756846
+OWA w3:  0.0
+msmt fusion 3 1705495506.2953684
+Moving to compute move
+
+loop fn starting 4 1705495506.2955813
+1
+msmt update 4 1705495506.2956092
+OWA before cam
+OWA w1:  0.001245356471308928
+OWA w2:  0
+OWA w3:  0.9987546435286911
+OWa after cam
+OWA w1:  0.336606872978074
+OWA w2:  0.6633931270219259
+OWA w3:  0.0
+msmt fusion 4 1705495506.2958987
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  33
+
+
+loop fn starting 1 1705495506.301452
+1
+msmt update 1 1705495506.3014748
+OWA before cam
+OWA w1:  0.015083138464395242
+OWA w2:  0
+OWA w3:  0.9849168615356048
+OWa after cam
+OWA w1:  0.9509253593632008
+OWA w2:  0.04907464063679934
+OWA w3:  0.0
+msmt fusion 1 1705495506.3018148
+Moving to compute move
+
+loop fn starting 2 1705495506.302033
+1
+msmt update 2 1705495506.3020618
+OWA before cam
+OWA w1:  0.012465538335110712
+OWA w2:  0
+OWA w3:  0.9875344616648893
+OWa after cam
+OWA w1:  0.797893183349217
+OWA w2:  0.20210681665078303
+OWA w3:  0.0
+msmt fusion 2 1705495506.3023355
+Moving to compute move
+
+loop fn starting 3 1705495506.3025212
+1
+msmt update 3 1705495506.3025498
+OWA before cam
+OWA w1:  1.2221951343273712e-08
+OWA w2:  0
+OWA w3:  0.9999999877780487
+OWa after cam
+OWA w1:  0.0008559564468921953
+OWA w2:  0.9991440435531077
+OWA w3:  0.0
+msmt fusion 3 1705495506.3027875
+Moving to compute move
+
+loop fn starting 4 1705495506.3029535
+1
+msmt update 4 1705495506.3029754
+OWA before cam
+OWA w1:  0.0018683167014640172
+OWA w2:  0
+OWA w3:  0.998131683298536
+OWa after cam
+OWA w1:  0.3266726717717171
+OWA w2:  0.6733273282282828
+OWA w3:  0.0
+msmt fusion 4 1705495506.303217
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  34
+
+
+loop fn starting 1 1705495506.3087318
+1
+msmt update 1 1705495506.3087566
+OWA before cam
+OWA w1:  0.011971998020726037
+OWA w2:  0
+OWA w3:  0.988028001979274
+OWa after cam
+OWA w1:  0.9476913838852531
+OWA w2:  0.052308616114746964
+OWA w3:  0.0
+msmt fusion 1 1705495506.3091004
+Moving to compute move
+
+loop fn starting 2 1705495506.3093576
+1
+msmt update 2 1705495506.3093874
+OWA before cam
+OWA w1:  0.01085935792071564
+OWA w2:  0
+OWA w3:  0.9891406420792843
+OWa after cam
+OWA w1:  0.7891218525832215
+OWA w2:  0.21087814741677846
+OWA w3:  0.0
+msmt fusion 2 1705495506.3097417
+Moving to compute move
+
+loop fn starting 3 1705495506.3101313
+1
+msmt update 3 1705495506.3101683
+OWA before cam
+OWA w1:  1.0860467378559466e-08
+OWA w2:  0
+OWA w3:  0.9999999891395326
+OWa after cam
+OWA w1:  0.0008605876712953791
+OWA w2:  0.9991394123287046
+OWA w3:  0.0
+msmt fusion 3 1705495506.3106995
+Moving to compute move
+
+loop fn starting 4 1705495506.3109262
+1
+msmt update 4 1705495506.3109562
+OWA before cam
+OWA w1:  0.001589059490163348
+OWA w2:  0
+OWA w3:  0.9984109405098367
+OWa after cam
+OWA w1:  0.32099400050731985
+OWA w2:  0.67900599949268
+OWA w3:  0.0
+msmt fusion 4 1705495506.3112438
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  35
+
+
+loop fn starting 1 1705495506.3167887
+1
+msmt update 1 1705495506.3168144
+OWA before cam
+OWA w1:  0.006882386463918264
+OWA w2:  0
+OWA w3:  0.9931176135360817
+OWa after cam
+OWA w1:  0.9448280818125842
+OWA w2:  0.05517191818741591
+OWA w3:  0.0
+msmt fusion 1 1705495506.317138
+Moving to compute move
+
+loop fn starting 2 1705495506.3173296
+1
+msmt update 2 1705495506.317357
+OWA before cam
+OWA w1:  0.008638339588088843
+OWA w2:  0
+OWA w3:  0.9913616604119111
+OWa after cam
+OWA w1:  0.7852398601952841
+OWA w2:  0.21476013980471578
+OWA w3:  0.0
+msmt fusion 2 1705495506.3176312
+Moving to compute move
+
+loop fn starting 3 1705495506.317808
+1
+msmt update 3 1705495506.3178327
+OWA before cam
+OWA w1:  8.216999106338152e-09
+OWA w2:  0
+OWA w3:  0.9999999917830008
+OWa after cam
+OWA w1:  0.0008652226809345212
+OWA w2:  0.9991347773190654
+OWA w3:  0.0
+msmt fusion 3 1705495506.3181047
+Moving to compute move
+
+loop fn starting 4 1705495506.3182843
+1
+msmt update 4 1705495506.318308
+OWA before cam
+OWA w1:  0.0009978515349725978
+OWA w2:  0
+OWA w3:  0.9990021484650273
+OWa after cam
+OWA w1:  0.31903551843017125
+OWA w2:  0.6809644815698287
+OWA w3:  0.0
+msmt fusion 4 1705495506.3185668
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  36
+
+
+loop fn starting 1 1705495506.324228
+1
+msmt update 1 1705495506.3242505
+OWA before cam
+OWA w1:  0.013749604064882645
+OWA w2:  0
+OWA w3:  0.9862503959351174
+OWa after cam
+OWA w1:  0.9421786852143608
+OWA w2:  0.0578213147856393
+OWA w3:  0.0
+msmt fusion 1 1705495506.3246906
+Moving to compute move
+
+loop fn starting 2 1705495506.3254468
+1
+msmt update 2 1705495506.3254855
+OWA before cam
+OWA w1:  0.014064999432031908
+OWA w2:  0
+OWA w3:  0.985935000567968
+OWa after cam
+OWA w1:  0.8171867890179707
+OWA w2:  0.18281321098202916
+OWA w3:  0.0
+msmt fusion 2 1705495506.3258307
+Moving to compute move
+
+loop fn starting 3 1705495506.326105
+1
+msmt update 3 1705495506.3261354
+OWA before cam
+OWA w1:  1.3839632980955416e-08
+OWA w2:  0
+OWA w3:  0.999999986160367
+OWa after cam
+OWA w1:  0.0008699003518621747
+OWA w2:  0.9991300996481378
+OWA w3:  0.0
+msmt fusion 3 1705495506.3264558
+Moving to compute move
+
+loop fn starting 4 1705495506.3266957
+1
+msmt update 4 1705495506.3267224
+OWA before cam
+OWA w1:  0.0017442531663517855
+OWA w2:  0
+OWA w3:  0.9982557468336483
+OWa after cam
+OWA w1:  0.3203624031739868
+OWA w2:  0.6796375968260131
+OWA w3:  0.0
+msmt fusion 4 1705495506.3270152
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  37
+
+
+loop fn starting 1 1705495506.3330832
+1
+msmt update 1 1705495506.333111
+OWA before cam
+OWA w1:  0.012294442906153457
+OWA w2:  0
+OWA w3:  0.9877055570938466
+OWa after cam
+OWA w1:  0.9396049247085495
+OWA w2:  0.0603950752914506
+OWA w3:  0.0
+msmt fusion 1 1705495506.333487
+Moving to compute move
+
+loop fn starting 2 1705495506.333684
+1
+msmt update 2 1705495506.3337092
+OWA before cam
+OWA w1:  0.015038987928104876
+OWA w2:  0
+OWA w3:  0.9849610120718952
+OWa after cam
+OWA w1:  0.8520301989440319
+OWA w2:  0.1479698010559682
+OWA w3:  0.0
+msmt fusion 2 1705495506.3339744
+Moving to compute move
+
+loop fn starting 3 1705495506.3341765
+1
+msmt update 3 1705495506.334201
+OWA before cam
+OWA w1:  1.2474938630774472e-08
+OWA w2:  0
+OWA w3:  0.9999999875250614
+OWa after cam
+OWA w1:  0.0008746175991054663
+OWA w2:  0.9991253824008945
+OWA w3:  0.0
+msmt fusion 3 1705495506.3344998
+Moving to compute move
+
+loop fn starting 4 1705495506.335261
+1
+msmt update 4 1705495506.3353047
+OWA before cam
+OWA w1:  0.00154005395544859
+OWA w2:  0
+OWA w3:  0.9984599460445513
+OWa after cam
+OWA w1:  0.3244712890136331
+OWA w2:  0.6755287109863667
+OWA w3:  0.0
+msmt fusion 4 1705495506.335766
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  38
+
+
+loop fn starting 1 1705495506.3415542
+1
+msmt update 1 1705495506.3415797
+OWA before cam
+OWA w1:  0.012079006468784974
+OWA w2:  0
+OWA w3:  0.987920993531215
+OWa after cam
+OWA w1:  0.9487154872510594
+OWA w2:  0.05128451274894059
+OWA w3:  0.0
+msmt fusion 1 1705495506.3419318
+Moving to compute move
+
+loop fn starting 2 1705495506.3421385
+1
+msmt update 2 1705495506.342165
+OWA before cam
+OWA w1:  0.008729458707205538
+OWA w2:  0
+OWA w3:  0.9912705412927945
+OWa after cam
+OWA w1:  0.8823614065896409
+OWA w2:  0.11763859341035916
+OWA w3:  0.0
+msmt fusion 2 1705495506.3424315
+Moving to compute move
+
+loop fn starting 3 1705495506.3426082
+1
+msmt update 3 1705495506.3426337
+OWA before cam
+OWA w1:  8.518069504918194e-09
+OWA w2:  0
+OWA w3:  0.9999999914819304
+OWa after cam
+OWA w1:  0.0008793763608563462
+OWA w2:  0.9991206236391436
+OWA w3:  0.0
+msmt fusion 3 1705495506.342898
+Moving to compute move
+
+loop fn starting 4 1705495506.3431199
+1
+msmt update 4 1705495506.3431494
+OWA before cam
+OWA w1:  0.001193560787474608
+OWA w2:  0
+OWA w3:  0.9988064392125254
+OWa after cam
+OWA w1:  0.3485138149576372
+OWA w2:  0.6514861850423628
+OWA w3:  0.0
+msmt fusion 4 1705495506.343402
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  39
+
+
+loop fn starting 1 1705495506.349094
+1
+msmt update 1 1705495506.3491325
+OWA before cam
+OWA w1:  0.014990422082502649
+OWA w2:  0
+OWA w3:  0.9850095779174973
+OWa after cam
+OWA w1:  0.9422394981286822
+OWA w2:  0.05776050187131778
+OWA w3:  0.0
+msmt fusion 1 1705495506.349722
+Moving to compute move
+
+loop fn starting 2 1705495506.350601
+1
+msmt update 2 1705495506.3506527
+OWA before cam
+OWA w1:  0.014798803801446977
+OWA w2:  0
+OWA w3:  0.9852011961985531
+OWa after cam
+OWA w1:  0.9087970457892454
+OWA w2:  0.09120295421075475
+OWA w3:  0.0
+msmt fusion 2 1705495506.3510025
+Moving to compute move
+
+loop fn starting 3 1705495506.3512893
+1
+msmt update 3 1705495506.351323
+OWA before cam
+OWA w1:  1.4320028964152351e-08
+OWA w2:  0
+OWA w3:  0.9999999856799711
+OWa after cam
+OWA w1:  0.0008841707764065995
+OWA w2:  0.9991158292235933
+OWA w3:  0.0
+msmt fusion 3 1705495506.3516195
+Moving to compute move
+
+loop fn starting 4 1705495506.3518145
+1
+msmt update 4 1705495506.351841
+OWA before cam
+OWA w1:  0.0019352137718472043
+OWA w2:  0
+OWA w3:  0.9980647862281528
+OWa after cam
+OWA w1:  0.3610290713803908
+OWA w2:  0.6389709286196091
+OWA w3:  0.0
+msmt fusion 4 1705495506.352115
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  40
+
+
+loop fn starting 1 1705495506.357866
+1
+msmt update 1 1705495506.3578944
+OWA before cam
+OWA w1:  0.011877483272176187
+OWA w2:  0
+OWA w3:  0.9881225167278238
+OWa after cam
+OWA w1:  0.9366049825488358
+OWA w2:  0.06339501745116413
+OWA w3:  0.0
+msmt fusion 1 1705495506.3583002
+Moving to compute move
+
+loop fn starting 2 1705495506.35852
+1
+msmt update 2 1705495506.3585453
+OWA before cam
+OWA w1:  0.01680393532505461
+OWA w2:  0
+OWA w3:  0.9831960646749454
+OWa after cam
+OWA w1:  0.9317528121959557
+OWA w2:  0.0682471878040444
+OWA w3:  0.0
+msmt fusion 2 1705495506.3588498
+Moving to compute move
+
+loop fn starting 3 1705495506.359089
+1
+msmt update 3 1705495506.3591173
+OWA before cam
+OWA w1:  1.2897591187462663e-08
+OWA w2:  0
+OWA w3:  0.9999999871024088
+OWa after cam
+OWA w1:  0.0008890082790839536
+OWA w2:  0.999110991720916
+OWA w3:  0.0
+msmt fusion 3 1705495506.359442
+Moving to compute move
+
+loop fn starting 4 1705495506.359971
+1
+msmt update 4 1705495506.3600008
+OWA before cam
+OWA w1:  0.0017315939138766695
+OWA w2:  0
+OWA w3:  0.9982684060861233
+OWa after cam
+OWA w1:  0.3718625368220796
+OWA w2:  0.6281374631779203
+OWA w3:  0.0
+msmt fusion 4 1705495506.3605146
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  41
+
+
+loop fn starting 1 1705495506.3661213
+1
+msmt update 1 1705495506.3661537
+OWA before cam
+OWA w1:  0.0069846423867477355
+OWA w2:  0
+OWA w3:  0.9930153576132523
+OWa after cam
+OWA w1:  0.9346341086233961
+OWA w2:  0.06536589137660398
+OWA w3:  0.0
+msmt fusion 1 1705495506.3667002
+Moving to compute move
+
+loop fn starting 2 1705495506.3669548
+1
+msmt update 2 1705495506.3669856
+OWA before cam
+OWA w1:  0.009848434914230205
+OWA w2:  0
+OWA w3:  0.9901515650857697
+OWa after cam
+OWA w1:  0.9516443807476813
+OWA w2:  0.04835561925231883
+OWA w3:  0.0
+msmt fusion 2 1705495506.3673053
+Moving to compute move
+
+loop fn starting 3 1705495506.3675802
+1
+msmt update 3 1705495506.3676095
+OWA before cam
+OWA w1:  8.784401743190695e-09
+OWA w2:  0
+OWA w3:  0.9999999912155982
+OWa after cam
+OWA w1:  0.0008936598257367858
+OWA w2:  0.9991063401742631
+OWA w3:  0.0
+msmt fusion 3 1705495506.3678865
+Moving to compute move
+
+loop fn starting 4 1705495506.3680687
+1
+msmt update 4 1705495506.3680937
+OWA before cam
+OWA w1:  0.0011897146348710662
+OWA w2:  0
+OWA w3:  0.998810285365129
+OWa after cam
+OWA w1:  0.38141186209521954
+OWA w2:  0.6185881379047804
+OWA w3:  0.0
+msmt fusion 4 1705495506.3683717
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  42
+
+
+loop fn starting 1 1705495506.3743105
+1
+msmt update 1 1705495506.374348
+OWA before cam
+OWA w1:  0.013294140581365027
+OWA w2:  0
+OWA w3:  0.9867058594186351
+OWa after cam
+OWA w1:  0.932661446050172
+OWA w2:  0.06733855394982814
+OWA w3:  0.0
+msmt fusion 1 1705495506.375019
+Moving to compute move
+
+loop fn starting 2 1705495506.375259
+1
+msmt update 2 1705495506.375291
+OWA before cam
+OWA w1:  0.01726502354562074
+OWA w2:  0
+OWA w3:  0.9827349764543792
+OWa after cam
+OWA w1:  0.9601115449214879
+OWA w2:  0.03988845507851221
+OWA w3:  0.0
+msmt fusion 2 1705495506.3756082
+Moving to compute move
+
+loop fn starting 3 1705495506.3758018
+1
+msmt update 3 1705495506.3758283
+OWA before cam
+OWA w1:  1.36585401379576e-08
+OWA w2:  0
+OWA w3:  0.9999999863414598
+OWa after cam
+OWA w1:  0.0008982575379956763
+OWA w2:  0.9991017424620043
+OWA w3:  0.0
+msmt fusion 3 1705495506.3760965
+Moving to compute move
+
+loop fn starting 4 1705495506.3762767
+1
+msmt update 4 1705495506.3763008
+OWA before cam
+OWA w1:  0.0022423504403341083
+OWA w2:  0
+OWA w3:  0.997757649559666
+OWa after cam
+OWA w1:  0.38998016817147435
+OWA w2:  0.6100198318285256
+OWA w3:  0.0
+msmt fusion 4 1705495506.3765802
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  43
+
+
+loop fn starting 1 1705495506.382244
+1
+msmt update 1 1705495506.3822722
+OWA before cam
+OWA w1:  0.012119653864111657
+OWA w2:  0
+OWA w3:  0.9878803461358884
+OWa after cam
+OWA w1:  0.9306349438934465
+OWA w2:  0.06936505610655369
+OWA w3:  0.0
+msmt fusion 1 1705495506.3827155
+Moving to compute move
+
+loop fn starting 2 1705495506.3829916
+1
+msmt update 2 1705495506.3830278
+OWA before cam
+OWA w1:  0.008138663101949077
+OWA w2:  0
+OWA w3:  0.9918613368980509
+OWa after cam
+OWA w1:  0.9297133286354763
+OWA w2:  0.07028667136452381
+OWA w3:  0.0
+msmt fusion 2 1705495506.3833232
+Moving to compute move
+
+loop fn starting 3 1705495506.3834944
+1
+msmt update 3 1705495506.3835354
+OWA before cam
+OWA w1:  1.218853065507022e-08
+OWA w2:  0
+OWA w3:  0.9999999878114693
+OWa after cam
+OWA w1:  0.0009028081458799642
+OWA w2:  0.9990971918541199
+OWA w3:  0.0
+msmt fusion 3 1705495506.3841152
+Moving to compute move
+
+loop fn starting 4 1705495506.3843422
+1
+msmt update 4 1705495506.3843713
+OWA before cam
+OWA w1:  0.002080431948736406
+OWA w2:  0
+OWA w3:  0.9979195680512636
+OWa after cam
+OWA w1:  0.3976152498739507
+OWA w2:  0.6023847501260492
+OWA w3:  0.0
+msmt fusion 4 1705495506.3847258
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  44
+
+
+loop fn starting 1 1705495506.3902783
+1
+msmt update 1 1705495506.3903096
+OWA before cam
+OWA w1:  0.011828002134298656
+OWA w2:  0
+OWA w3:  0.9881719978657014
+OWa after cam
+OWA w1:  0.9436550903533563
+OWA w2:  0.05634490964664386
+OWA w3:  0.0
+msmt fusion 1 1705495506.3906891
+Moving to compute move
+
+loop fn starting 2 1705495506.3909051
+1
+msmt update 2 1705495506.3909335
+OWA before cam
+OWA w1:  0.0061935005686870525
+OWA w2:  0
+OWA w3:  0.9938064994313129
+OWa after cam
+OWA w1:  0.9063589839689206
+OWA w2:  0.09364101603107951
+OWA w3:  0.0
+msmt fusion 2 1705495506.391205
+Moving to compute move
+
+loop fn starting 3 1705495506.3913739
+1
+msmt update 3 1705495506.391399
+OWA before cam
+OWA w1:  7.782032813570787e-09
+OWA w2:  0
+OWA w3:  0.9999999922179671
+OWa after cam
+OWA w1:  0.0009073116182088111
+OWA w2:  0.9990926883817913
+OWA w3:  0.0
+msmt fusion 3 1705495506.3916478
+Moving to compute move
+
+loop fn starting 4 1705495506.3918095
+1
+msmt update 4 1705495506.3918319
+OWA before cam
+OWA w1:  0.0016862000320124993
+OWA w2:  0
+OWA w3:  0.9983137999679875
+OWa after cam
+OWA w1:  0.41718174084596993
+OWA w2:  0.5828182591540301
+OWA w3:  0.0
+msmt fusion 4 1705495506.39208
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  45
+
+
+loop fn starting 1 1705495506.397807
+1
+msmt update 1 1705495506.3978505
+OWA before cam
+OWA w1:  0.020606590377220887
+OWA w2:  0
+OWA w3:  0.9793934096227792
+OWa after cam
+OWA w1:  0.9551944500586566
+OWA w2:  0.04480554994134346
+OWA w3:  0.0
+msmt fusion 1 1705495506.3983436
+Moving to compute move
+
+loop fn starting 2 1705495506.398526
+1
+msmt update 2 1705495506.3986022
+OWA before cam
+OWA w1:  0.014858488118118823
+OWA w2:  0
+OWA w3:  0.9851415118818811
+OWa after cam
+OWA w1:  0.8871159819210751
+OWA w2:  0.11288401807892492
+OWA w3:  0.0
+msmt fusion 2 1705495506.3990605
+Moving to compute move
+
+loop fn starting 3 1705495506.3994915
+1
+msmt update 3 1705495506.3995233
+OWA before cam
+OWA w1:  1.3456486644338472e-08
+OWA w2:  0
+OWA w3:  0.9999999865435133
+OWa after cam
+OWA w1:  0.0009117603059406064
+OWA w2:  0.9990882396940595
+OWA w3:  0.0
+msmt fusion 3 1705495506.3998134
+Moving to compute move
+
+loop fn starting 4 1705495506.3999984
+1
+msmt update 4 1705495506.4000256
+OWA before cam
+OWA w1:  0.002960004472365811
+OWA w2:  0
+OWA w3:  0.9970399955276342
+OWa after cam
+OWA w1:  0.43797419593171216
+OWA w2:  0.5620258040682877
+OWA w3:  0.0
+msmt fusion 4 1705495506.4003258
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  46
+
+
+loop fn starting 1 1705495506.4063914
+1
+msmt update 1 1705495506.4064114
+OWA before cam
+OWA w1:  0.01573530709697837
+OWA w2:  0
+OWA w3:  0.9842646929030215
+OWa after cam
+OWA w1:  0.9497923093972149
+OWA w2:  0.05020769060278504
+OWA w3:  0.0
+msmt fusion 1 1705495506.406726
+Moving to compute move
+
+loop fn starting 2 1705495506.406946
+1
+msmt update 2 1705495506.4069703
+OWA before cam
+OWA w1:  0.01244747097625525
+OWA w2:  0
+OWA w3:  0.9875525290237448
+OWa after cam
+OWA w1:  0.8701719865210282
+OWA w2:  0.12982801347897172
+OWA w3:  0.0
+msmt fusion 2 1705495506.4072459
+Moving to compute move
+
+loop fn starting 3 1705495506.4074478
+1
+msmt update 3 1705495506.40747
+OWA before cam
+OWA w1:  1.1946556153395245e-08
+OWA w2:  0
+OWA w3:  0.9999999880534438
+OWa after cam
+OWA w1:  0.0009163956742186914
+OWA w2:  0.9990836043257814
+OWA w3:  0.0
+msmt fusion 3 1705495506.407753
+Moving to compute move
+
+loop fn starting 4 1705495506.4079714
+1
+msmt update 4 1705495506.4079971
+OWA before cam
+OWA w1:  0.0026212704048309337
+OWA w2:  0
+OWA w3:  0.9973787295951692
+OWa after cam
+OWA w1:  0.44107289561534546
+OWA w2:  0.5589271043846545
+OWA w3:  0.0
+msmt fusion 4 1705495506.4083004
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  47
+
+
+loop fn starting 1 1705495506.414567
+1
+msmt update 1 1705495506.4145925
+OWA before cam
+OWA w1:  0.008350581237366456
+OWA w2:  0
+OWA w3:  0.9916494187626336
+OWa after cam
+OWA w1:  0.9450414776137293
+OWA w2:  0.05495852238627073
+OWA w3:  0.0
+msmt fusion 1 1705495506.4149647
+Moving to compute move
+
+loop fn starting 2 1705495506.4151633
+1
+msmt update 2 1705495506.4151895
+OWA before cam
+OWA w1:  0.010914225675445512
+OWA w2:  0
+OWA w3:  0.9890857743245545
+OWa after cam
+OWA w1:  0.8544132747811538
+OWA w2:  0.14558672521884625
+OWA w3:  0.0
+msmt fusion 2 1705495506.4154587
+Moving to compute move
+
+loop fn starting 3 1705495506.4156313
+1
+msmt update 3 1705495506.415655
+OWA before cam
+OWA w1:  8.508115012807197e-09
+OWA w2:  0
+OWA w3:  0.9999999914918849
+OWa after cam
+OWA w1:  0.000920950317991904
+OWA w2:  0.999079049682008
+OWA w3:  0.0
+msmt fusion 3 1705495506.4159093
+Moving to compute move
+
+loop fn starting 4 1705495506.4160762
+1
+msmt update 4 1705495506.416099
+OWA before cam
+OWA w1:  0.0018200656171972092
+OWA w2:  0
+OWA w3:  0.9981799343828028
+OWa after cam
+OWA w1:  0.4407876770766062
+OWA w2:  0.5592123229233936
+OWA w3:  0.0
+msmt fusion 4 1705495506.4163482
+Moving to compute move
+
+Published auto motive from nodes loop fun
+
+
+t:  48
+
+
+loop fn starting 1 1705495506.421923
+1
+msmt update 1 1705495506.4219458
+OWA before cam
+OWA w1:  0.016778262824734
+OWA w2:  0
+OWA w3:  0.9832217371752661
+OWa after cam
+OWA w1:  0.940816868806098
+OWA w2:  0.05918313119390201
+OWA w3:  0.0
+msmt fusion 1 1705495506.4222605
+Moving to compute move
+
+loop fn starting 2 1705495506.422459
+1
+msmt update 2 1705495506.4224863
+OWA before cam
+OWA w1:  0.01764897912879836
+OWA w2:  0
+OWA w3:  0.9823510208712016
+OWa after cam
+OWA w1:  0.8703224287077109
+OWA w2:  0.1296775712922891
+OWA w3:  0.0
+msmt fusion 2 1705495506.4227948
+Moving to compute move
+
+loop fn starting 3 1705495506.4229994
+1
+msmt update 3 1705495506.423024
+OWA before cam
+OWA w1:  1.4356757287701376e-08
+OWA w2:  0
+OWA w3:  0.9999999856432427
+OWa after cam
+OWA w1:  0.0009255384624182692
+OWA w2:  0.9990744615375817
+OWA w3:  0.0
+msmt fusion 3 1705495506.4235241
+Moving to compute move
+
+loop fn starting 4 1705495506.4240153
+1
+msmt update 4 1705495506.4240487
+OWA before cam
+OWA w1:  0.0033978666053208696
+OWA w2:  0
+OWA w3:  0.9966021333946791
+OWa after cam
+OWA w1:  0.4373050199843128
+OWA w2:  0.5626949800156871
+OWA w3:  0.0
+msmt fusion 4 1705495506.4246697
+Moving to compute move
+
+Published auto motive from nodes loop fun
+reset
+Published reset
+
+
+t:  49
+
+
+loop fn starting 1 1705495506.4304545
+1
+msmt update 1 1705495506.4304898
+OWA before cam
+OWA w1:  0.014975884420026625
+OWA w2:  0
+OWA w3:  0.9850241155799733
+OWa after cam
+OWA w1:  0.9369828434975717
+OWA w2:  0.06301715650242844
+OWA w3:  0.0
+msmt fusion 1 1705495506.4310284
+Moving to compute move
+
+loop fn starting 2 1705495506.4312892
+1
+msmt update 2 1705495506.4313145
+OWA before cam
+OWA w1:  0.018299016733915912
+OWA w2:  0
+OWA w3:  0.9817009832660841
+OWa after cam
+OWA w1:  0.8865855218431936
+OWA w2:  0.11341447815680661
+OWA w3:  0.0
+msmt fusion 2 1705495506.4316792
+Moving to compute move
+
+loop fn starting 3 1705495506.4318569
+1
+msmt update 3 1705495506.431881
+OWA before cam
+OWA w1:  1.2963004002570245e-08
+OWA w2:  0
+OWA w3:  0.999999987036996
+OWa after cam
+OWA w1:  0.0009301670518555667
+OWA w2:  0.9990698329481444
+OWA w3:  0.0
+msmt fusion 3 1705495506.432139
+Moving to compute move
+
+loop fn starting 4 1705495506.432322
+1
+msmt update 4 1705495506.4323494
+OWA before cam
+OWA w1:  0.003111557891218622
+OWA w2:  0
+OWA w3:  0.9968884421087815
+OWa after cam
+OWA w1:  0.43035364745995747
+OWA w2:  0.5696463525400424
+OWA w3:  0.0
+msmt fusion 4 1705495506.4325893
+Moving to compute move
+
+Published auto motive from nodes loop fun
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+Nodes.move
+
+
+
+
+Published auto motive from nodes move
+done
