@@ -5,6 +5,7 @@
 #include <tuple>
 
 class Kalman {
+    
     public:
 
         Eigen::Matrix3d Qk;
@@ -20,12 +21,8 @@ class Kalman {
     
         Eigen::Matrix3d Ak1;
         Eigen::Vector3d processNoiseVkMinus1;
-        
         Eigen::Matrix3d Hk;
-        
         Eigen::Vector3d sensorNoiseWk;
-        
-
 };
 
 #endif

@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
     // 60 msec
     ros::Rate loopRate(50/3);
 
+    // Open mapper.json to obtain information on all robots
     std::ifstream file("src/estimator/src/mapper.json");
     if (file.is_open()) {
         json mapper = json::parse(file);
@@ -59,6 +60,7 @@ int main(int argc, char* argv[]) {
             listenerCameraTimer[cam.first] = n.subscribe("Bebop" + std::to_string(cam.first + 1) + "/pose", 10, &CameraNode::listenOptitrackTimerCallback, cam.second);
         }
  
+        // Define destination or goal coordinates
         xFin /= double(activeRobots.size());
         yFin /= double(activeRobots.size());
         yFin -= 0.45;
@@ -70,6 +72,7 @@ int main(int argc, char* argv[]) {
         }
         usleep(2*1000000);
 
+        // Initialize LEDs
         int intensity[3] = {0, 10, 0};
         robots.setLeds(intensity);
         publisherLeds.publish(robots.msgLeds);
@@ -113,7 +116,7 @@ int main(int argc, char* argv[]) {
         std::map<int, double> timeVectorLoop;
         int tFin = 400;
 
-
+        // Main loop starts
         while (ros::ok()) {
             auto startTimeLoop = std::chrono::high_resolution_clock::now();
             if (t < tFin) {
@@ -136,7 +139,7 @@ int main(int argc, char* argv[]) {
             }
 
             
-                
+            // TO stop the robot    
             if (t >= tFin && t < tFin+1) {
                 cout << "Sub loop number: " << t << endl;
                 robots.move("still", 0.0, 0.0);
@@ -146,6 +149,7 @@ int main(int argc, char* argv[]) {
                 t += 1;
             }
 
+            // To store data to a file
             if (t >= tFin+1) {
                 int intensity[3] = {0, 0, 0};
                 robots.setLeds(intensity);

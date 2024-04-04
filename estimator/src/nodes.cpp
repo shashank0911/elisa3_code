@@ -121,13 +121,10 @@ Node::Node(double releaseTime, std::string tagExt) {
     accelVals << 0.0, 0.0, 0.0, xyphiVals(0), xyphiVals(1);
 
     camPrev = xyphiVals;
-    minDistPrev = 0.0;
 
     theoPosn = xyphiVals;
     prevEst = xyphiVals;
     curEst = xyphiVals;
-
-    threshold = 0.05;
 
     bufferSize = 5;
 
@@ -141,12 +138,6 @@ Node::Node(double releaseTime, std::string tagExt) {
     OwaWeights.fill(0.0);
 
     goal << 0.0, 0.0;
-    setup = {
-        {"vMax", 0.5},
-        {"gtgScaling", 0.0001},
-        {"Kp", 0.01},
-        {"ao_scaling", 0.00005}
-    };
 
     posBuf.resize(2, bufferSize);
     for (int i = 0; i < bufferSize; i++) {
@@ -167,25 +158,25 @@ Node::Node(double releaseTime, std::string tagExt) {
     }
 }
 
-void Node::publishGreenLed(int intensity) {
+void Node::greenLed(int intensity) {
     updateLeds = true;
     msgLeds[0] = intensity;
 }
 
-void Node::publishRedLed(int intensity) {
+void Node::redLed(int intensity) {
     updateLeds = true;
     msgLeds[1] = intensity;
 }
 
-void Node::publishBlueLed(int intensity) {
+void Node::blueLed(int intensity) {
     updateLeds = true;
     msgLeds[2] = intensity;
 }
 
 void Node::ledOff() {
-    publishGreenLed(0);
-    publishRedLed(0);
-    publishBlueLed(0);
+    greenLed(0);
+    redLed(0);
+    blueLed(0);
 }
 
 void Node::listenRobotPoseCallback(const nav_msgs::Odometry::ConstPtr& odomMsg) {
@@ -204,7 +195,7 @@ void Node::listenAccelCallback(const sensor_msgs::Imu::ConstPtr& accelMsg) {
     // cout << "Received accel msgs" << endl;
 }
 
-void Node::nodePrintPositionMeasures() {
+void Node::nodePrintPose() {
     std::stringstream msg;
 
     msg << "\nID: " << tag << "\n"
@@ -220,7 +211,7 @@ void Node::nodePrintPositionMeasures() {
 }
 
 void Node::computeMove(double pol[2]) {
-    nodePrintPositionMeasures();
+    nodePrintPose();
 
     double phiOld = orienBuf(bufferSize - 1);
     if (phiOld < 0.0) {
@@ -551,28 +542,28 @@ void Nodes::nodesLoopFn(const std::string moveType) {
     msgAutoMove.data[0] = double(count);
 }
 
-void Nodes::testCam() {
-    cameras.updateCamera();
-    for (int i = 0; i < N; i++) {
-        cout << "Camera " << i + 1 << " data" << endl;
-        cout << "CamY: " << cameras.measurementList(i,0) << "\t";
-        cout << "CamX: " << cameras.measurementList(i,1) << "\t";
-        cout << "CamPhi: " << cameras.measurementList(i,2) << "\t";
-        cout << "CamTimer: " << cameras.measurementList(i,3) << "\n";
-    }
+// void Nodes::testCam() {
+//     cameras.updateCamera();
+//     for (int i = 0; i < N; i++) {
+//         cout << "Camera " << i + 1 << " data" << endl;
+//         cout << "CamY: " << cameras.measurementList(i,0) << "\t";
+//         cout << "CamX: " << cameras.measurementList(i,1) << "\t";
+//         cout << "CamPhi: " << cameras.measurementList(i,2) << "\t";
+//         cout << "CamTimer: " << cameras.measurementList(i,3) << "\n";
+//     }
 
-    for (const auto& tag : nodes) {
-        Eigen::Vector3d camMeasurement = nodes[tag.first]->determineCamera(cameras);
-        cout << "Nearest camera for robot " << tag.first << endl;
-        cout << "CamX: " << camMeasurement(0) << "\t";
-        cout << "CamY: " << camMeasurement(1) << "\t";
-        cout << "CamPhi: " << camMeasurement(2) << "\n";
-    }
-}
+//     for (const auto& tag : nodes) {
+//         Eigen::Vector3d camMeasurement = nodes[tag.first]->determineCamera(cameras);
+//         cout << "Nearest camera for robot " << tag.first << endl;
+//         cout << "CamX: " << camMeasurement(0) << "\t";
+//         cout << "CamY: " << camMeasurement(1) << "\t";
+//         cout << "CamPhi: " << camMeasurement(2) << "\n";
+//     }
+// }
 
 void Nodes::printFn() {
     for (const auto& tag : nodes) {
-        nodes[tag.first]->nodePrintPositionMeasures();
+        nodes[tag.first]->nodePrintPose();
     }
 }
 
@@ -648,16 +639,16 @@ void Nodes::turnOffLeds() {
 void Nodes::setLeds(const int ledIntensity[3]) {
     for (const auto& tag : nodes) {
         
-        nodes[tag.first]->publishGreenLed(ledIntensity[0]);
-        nodes[tag.first]->publishRedLed(ledIntensity[1]);
-        nodes[tag.first]->publishBlueLed(ledIntensity[2]);
+        nodes[tag.first]->greenLed(ledIntensity[0]);
+        nodes[tag.first]->redLed(ledIntensity[1]);
+        nodes[tag.first]->blueLed(ledIntensity[2]);
     }
     updateLeds();
 }
 
 void Nodes::nodesPrintPositionMeasures() {
     for (const auto& tag : nodes) {
-        nodes[tag.first]->nodePrintPositionMeasures();
+        nodes[tag.first]->nodePrintPose();
     }
 }
 
