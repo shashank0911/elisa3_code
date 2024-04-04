@@ -646,12 +646,6 @@ void Nodes::setLeds(const int ledIntensity[3]) {
     updateLeds();
 }
 
-void Nodes::nodesPrintPositionMeasures() {
-    for (const auto& tag : nodes) {
-        nodes[tag.first]->nodePrintPose();
-    }
-}
-
 void Nodes::storeData(int t) {
     std::vector<double> robotInst;
     for (const auto& node: nodes) {
