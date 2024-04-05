@@ -7,7 +7,7 @@ This code-base is an improved version of the original code, which you can find [
 Please follow the instructions from the [GCtronic](https://www.gctronic.com/doc/index.php/Elisa-3) website to find all the information related to testing and calibrating the Elisa3 robots.
 
 Some important sections:
-- Navigate to the [software](https://www.gctronic.com/doc/index.php/Elisa-3#Software) section to upload the advanced demo firmware to the Elisa3 robots
+- Navigate to the [software](https://www.gctronic.com/doc/index.php/Elisa-3#Software) section to upload the advanced demo firmware to the Elisa3 robots. In the same section, you can find the Elisa3_remote_monitor in (section 4.3) to test the robots in an interactive GUI
 - Navigate to the [odometry](https://www.gctronic.com/doc/index.php/Elisa-3#Odometry) section to calibrate the robots for odometry
 - Navigate to the [ROS](https://www.gctronic.com/doc/index.php/Elisa-3#ROS) section to find the ROS-based Elisa3 code
 

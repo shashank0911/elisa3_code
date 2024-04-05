@@ -1,3 +1,5 @@
+// To run this file, run in terminal: g++ -std=c++17 -I {path to gnuplot-iostream folder} path_plotter_2_bots.cpp -o path2
+
 #include <iostream>
 #include <vector>
 #include <fstream>
